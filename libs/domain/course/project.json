@@ -1,0 +1,17 @@
+{
+  "name": "domain-course",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/domain/course/src",
+  "projectType": "library",
+  "tags": ["scope:domain", "type:lib"],
+  "targets": {
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{workspaceRoot}/coverage/libs/domain/course"],
+      "options": {
+        "configFile": "libs/domain/course/vitest.config.mts",
+        "reportsDirectory": "../../../coverage/libs/domain/course"
+      }
+    }
+  }
+}
