@@ -50,6 +50,11 @@ export class DrillSequenceGuard {
       }
 
       // Redirect to the first unanswered drill
+      // V1 ACCEPTED LIMITATION: quiz-route detection uses URL-string inspection
+      // (`url.includes('/quiz')`) rather than route data or config-driven metadata.
+      // A cleaner approach would be to attach `{ isQuizRoute: true }` to the quiz
+      // route's `data` property and read `route.data['isQuizRoute']` here.
+      // That refactor is deferred to v2 when additional guard complexity justifies it.
       const url = this.router.getCurrentNavigation()?.finalUrl?.toString() ?? '';
       const isQuizRoute = url.includes('/quiz');
       const drillIndexParam = route.paramMap.get('drillIndex');
