@@ -14,12 +14,13 @@ import type { DrillAnswer } from 'domain-drill';
 import { BreadcrumbComponent } from '../../shared/breadcrumb.component';
 import type { BreadcrumbItem } from '../../shared/breadcrumb.component';
 import { RuleRefChipComponent } from '../lesson/rule-ref-chip.component';
+import { BoardSnippetComponent } from 'ui-board-renderer';
 
 @Component({
   standalone: true,
   selector: 'app-drill',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, BreadcrumbComponent, RuleRefChipComponent],
+  imports: [RouterLink, BreadcrumbComponent, RuleRefChipComponent, BoardSnippetComponent],
   providers: [DrillStore],
   template: `
     <div class="drill">
@@ -60,6 +61,28 @@ import { RuleRefChipComponent } from '../lesson/rule-ref-chip.component';
             }
           </div>
 
+          <!-- Board snippet (shown for interactive-select drills) -->
+          @if (drill()!.boardSnippet) {
+            <div class="drill__board-section">
+              <ddob-board-snippet
+                [snippet]="boardSnippetWithHighlights()"
+                [interactive]="drill()!.type === 'interactive-select' && !isAnswered()"
+                [selectedHexIds]="selectedUnitHexIds()"
+                (hexSelected)="onBoardHexSelected($event)" />
+
+              @if (drill()!.type === 'interactive-select' && !isAnswered()) {
+                <p class="drill__board-hint" role="note">
+                  Selecciona la(s) unidad(es) afectadas en el tablero.
+                  @if (selectedUnitIds().length > 0) {
+                    <span class="drill__selected-count">
+                      {{ selectedUnitIds().length }} unidad{{ selectedUnitIds().length !== 1 ? 'es' : '' }} seleccionada{{ selectedUnitIds().length !== 1 ? 's' : '' }}
+                    </span>
+                  }
+                </p>
+              }
+            </div>
+          }
+
           <!-- Multiple-choice answers -->
           @if (drill()!.type === 'multiple-choice' && drill()!.choices) {
             <fieldset class="drill__choices"
@@ -97,7 +120,7 @@ import { RuleRefChipComponent } from '../lesson/rule-ref-chip.component';
           @if (!store.answered() && !store.isRevealed()) {
             <button type="button"
                     class="btn btn--primary"
-                    [disabled]="!selectedChoiceId() || store.submitting()"
+                    [disabled]="!canSubmit() || store.submitting()"
                     (click)="submitAnswer()"
                     aria-label="Comprobar respuesta">
               Comprobar respuesta
@@ -336,6 +359,32 @@ import { RuleRefChipComponent } from '../lesson/rule-ref-chip.component';
       border-top: 1px solid var(--color-border);
     }
 
+    /* Board section for interactive-select drills */
+    .drill__board-section {
+      margin-bottom: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-3);
+    }
+
+    .drill__board-hint {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .drill__selected-count {
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-accent);
+      background: rgba(200, 160, 74, 0.1);
+      padding: 2px var(--space-2);
+      border-radius: var(--radius-sm);
+    }
+
     /* Buttons */
     .btn {
       display: inline-flex;
@@ -411,6 +460,49 @@ export class DrillComponent implements OnInit {
   readonly drill = signal<DrillScenario | null>(null);
   readonly selectedChoiceId = signal<string | null>(null);
 
+  // ---- Interactive-select (board) state ----
+
+  /**
+   * Tracks which unit IDs the user has selected for an interactive-select drill.
+   * Selection is toggled: clicking the same unit deselects it.
+   */
+  readonly selectedUnitIds = signal<string[]>([]);
+
+  /**
+   * Maps the selectedUnitIds to the hex IDs those units occupy.
+   * Used to show the selected state highlight on the board.
+   */
+  readonly selectedUnitHexIds = computed<string[]>(() => {
+    const d = this.drill();
+    if (!d?.boardSnippet) return [];
+    const ids = this.selectedUnitIds();
+    return d.boardSnippet.units
+      .filter((u) => ids.includes(u.id) && u.hexId !== null)
+      .map((u) => u.hexId as string);
+  });
+
+  /**
+   * Board snippet with highlights applied after answer submission.
+   * Shows correct/incorrect overlays post-answer.
+   */
+  readonly boardSnippetWithHighlights = computed(() => {
+    const d = this.drill();
+    if (!d?.boardSnippet) return null;
+    const result = this.store.lastResult();
+    if (!result) return d.boardSnippet;
+
+    // Apply highlights based on correct/incorrect unit IDs
+    const correctIds = d.correctAnswer.split(',').map((s) => s.trim());
+    const highlights = d.boardSnippet.units.flatMap((u) => {
+      if (!u.hexId) return [];
+      const isCorrect = correctIds.includes(u.id);
+      const style: 'correct' | 'incorrect' = isCorrect ? 'correct' : 'incorrect';
+      return [{ hexId: u.hexId, style }];
+    });
+
+    return { ...d.boardSnippet, highlights };
+  });
+
   readonly totalDrills = computed<number>(() => {
     const id = this.moduleId();
     const mod = ALL_MODULES.find((m) => m.id === id);
@@ -445,6 +537,16 @@ export class DrillComponent implements OnInit {
     ];
   });
 
+  /** True when the user has made a valid selection and can submit */
+  readonly canSubmit = computed<boolean>(() => {
+    const d = this.drill();
+    if (!d) return false;
+    if (d.type === 'interactive-select') {
+      return this.selectedUnitIds().length > 0;
+    }
+    return this.selectedChoiceId() !== null;
+  });
+
   ngOnInit(): void {
     const modId = this.route.parent?.snapshot.paramMap.get('moduleId') ?? '';
     const indexStr = this.route.snapshot.paramMap.get('drillIndex') ?? '0';
@@ -468,11 +570,46 @@ export class DrillComponent implements OnInit {
     }
   }
 
-  async submitAnswer(): Promise<void> {
-    const choiceId = this.selectedChoiceId();
-    if (!choiceId) return;
+  /**
+   * Called when the user clicks a hex in the board snippet.
+   * Finds the unit in that hex and toggles its selection.
+   * If no unit occupies the hex, the click is ignored.
+   */
+  onBoardHexSelected(hexId: string): void {
+    if (this.store.answered() || this.store.isRevealed()) return;
+    const d = this.drill();
+    if (!d?.boardSnippet) return;
 
-    const answer: DrillAnswer = { kind: 'choice', optionId: choiceId };
+    // Find the unit(s) in this hex
+    const unitsInHex = d.boardSnippet.units.filter((u) => u.hexId === hexId);
+    if (unitsInHex.length === 0) return; // no unit to select in empty hex
+
+    // Toggle selection: select first unit in hex (drills have ≤1 unit per hex)
+    const unitId = unitsInHex[0].id;
+    const current = this.selectedUnitIds();
+    if (current.includes(unitId)) {
+      this.selectedUnitIds.set(current.filter((id) => id !== unitId));
+    } else {
+      this.selectedUnitIds.set([...current, unitId]);
+    }
+  }
+
+  async submitAnswer(): Promise<void> {
+    const d = this.drill();
+    if (!d) return;
+
+    let answer: DrillAnswer;
+
+    if (d.type === 'interactive-select') {
+      const ids = this.selectedUnitIds();
+      if (ids.length === 0) return;
+      answer = { kind: 'board', selectedHexIds: ids };
+    } else {
+      const choiceId = this.selectedChoiceId();
+      if (!choiceId) return;
+      answer = { kind: 'choice', optionId: choiceId };
+    }
+
     await this.store.submit(answer);
   }
 
