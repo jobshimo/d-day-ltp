@@ -29,6 +29,16 @@ export const MODULE_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
       <app-breadcrumb [items]="breadcrumbs()" />
 
       @if (module()) {
+        <!-- Preview mode banner for modules without required prior module (e.g., Module 4) -->
+        @if (isPreviewModule()) {
+          <div class="module-home__preview-banner" role="note" aria-live="polite">
+            <span class="module-home__preview-badge" aria-label="Vista previa — contenido de avance">
+              Vista previa
+            </span>
+            Este módulo está disponible como avance sin necesidad de completar los módulos anteriores.
+          </div>
+        }
+
         <header class="module-home__header">
           <span class="module-home__label">Módulo {{ module()!.order }}</span>
           <h1 class="module-home__title">{{ module()!.titleEs }}</h1>
@@ -238,6 +248,33 @@ export const MODULE_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
       border-radius: var(--radius-md);
     }
 
+    .module-home__preview-banner {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-4);
+      margin-bottom: var(--space-6);
+      background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+      border: 1px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
+      border-radius: var(--radius-md);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .module-home__preview-badge {
+      display: inline-block;
+      padding: 2px var(--space-2);
+      background: var(--color-accent);
+      color: var(--color-bg);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
     .module-home__back {
       margin-top: var(--space-8);
       padding-top: var(--space-6);
@@ -292,6 +329,16 @@ export class ModuleHomeComponent implements OnInit {
 
   readonly quizPassed = computed<boolean>(() => {
     return this._progress()?.quizResult?.passed ?? false;
+  });
+
+  /**
+   * True when this module is available without requiring prior modules to be completed.
+   * Module 1 is always unlocked (normal start), so it is excluded from "preview" labeling.
+   * Module 4 is a preview module (requiredPriorModuleId: undefined, order > 1).
+   */
+  readonly isPreviewModule = computed<boolean>(() => {
+    const mod = this.module();
+    return !!mod && mod.requiredPriorModuleId === undefined && mod.order > 1;
   });
 
   private readonly progressRepo = inject<ProgressRepository>(MODULE_PROGRESS_REPO);
