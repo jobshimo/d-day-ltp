@@ -1,0 +1,16 @@
+{
+  "name": "content-schema",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/content-schema/src",
+  "projectType": "library",
+  "tags": ["scope:shared", "type:lib"],
+  "targets": {
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{workspaceRoot}/coverage/libs/shared/content-schema"],
+      "options": {
+        "reportsDirectory": "../../../coverage/libs/shared/content-schema"
+      }
+    }
+  }
+}
