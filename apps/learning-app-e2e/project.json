@@ -1,0 +1,17 @@
+{
+  "name": "learning-app-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/learning-app-e2e/src",
+  "projectType": "application",
+  "tags": ["scope:e2e"],
+  "implicitDependencies": ["learning-app"],
+  "targets": {
+    "e2e": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx playwright test --config=apps/learning-app-e2e/playwright.config.ts",
+        "cwd": "{workspaceRoot}"
+      }
+    }
+  }
+}
