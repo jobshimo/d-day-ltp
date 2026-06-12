@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["vitest/globals", "node"],
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "emitDecoratorMetadata": false
+  },
+  "include": [
+    "src/**/*.spec.ts",
+    "src/test-setup.ts"
+  ]
+}

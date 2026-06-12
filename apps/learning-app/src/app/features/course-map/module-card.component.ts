@@ -1,4 +1,4 @@
-import { Component, input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, signal, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgTemplateOutlet } from '@angular/common';
 import type { ModuleListEntry } from 'application-course-store';
@@ -10,9 +10,9 @@ import type { ModuleListEntry } from 'application-course-store';
   imports: [RouterLink, NgTemplateOutlet],
   template: `
     @if (isAccessible()) {
-      <a [routerLink]="['/modules', mod().moduleId]"
+      <a [routerLink]="['/modules', modState().moduleId]"
          class="card card--link"
-         [class.card--preview]="mod().isPreview"
+         [class.card--preview]="modState().isPreview"
          [attr.aria-label]="ariaLabel()">
         <ng-container *ngTemplateOutlet="body" />
       </a>
@@ -27,33 +27,33 @@ import type { ModuleListEntry } from 'application-course-store';
 
     <ng-template #body>
       <div class="card__header">
-        <span class="card__order">Módulo {{ mod().order }}</span>
+        <span class="card__order">Módulo {{ modState().order }}</span>
         <span class="card__icon" aria-hidden="true">
-          @if (mod().isPreview) { 👁 }
-          @else if (mod().isUnlocked && mod().completionPercent === 100) { ✓ }
-          @else if (mod().isUnlocked) { ● }
+          @if (modState().isPreview) { 👁 }
+          @else if (modState().isUnlocked && modState().completionPercent === 100) { ✓ }
+          @else if (modState().isUnlocked) { ● }
           @else { 🔒 }
         </span>
       </div>
 
-      <h2 class="card__title">{{ mod().titleEs }}</h2>
-      <p class="card__desc">{{ mod().descriptionEs }}</p>
+      <h2 class="card__title">{{ modState().titleEs }}</h2>
+      <p class="card__desc">{{ modState().descriptionEs }}</p>
 
-      @if (mod().isPreview) {
+      @if (modState().isPreview) {
         <span class="card__badge">Avance</span>
-      } @else if (!mod().isUnlocked) {
+      } @else if (!modState().isUnlocked) {
         <p class="card__locked">Completa el módulo anterior para desbloquear</p>
       } @else {
         <div class="card__progress"
              role="progressbar"
-             [attr.aria-valuenow]="mod().completionPercent"
+             [attr.aria-valuenow]="modState().completionPercent"
              aria-valuemin="0"
              aria-valuemax="100"
-             [attr.aria-label]="'Progreso: ' + mod().completionPercent + '%'">
+             [attr.aria-label]="'Progreso: ' + modState().completionPercent + '%'">
           <div class="card__bar">
-            <div class="card__fill" [style.width.%]="mod().completionPercent"></div>
+            <div class="card__fill" [style.width.%]="modState().completionPercent"></div>
           </div>
-          <span class="card__pct">{{ mod().completionPercent }}%</span>
+          <span class="card__pct">{{ modState().completionPercent }}%</span>
         </div>
       }
     </ng-template>
@@ -179,14 +179,30 @@ import type { ModuleListEntry } from 'application-course-store';
   `],
 })
 export class ModuleCardComponent {
-  readonly mod = input.required<ModuleListEntry>();
+  // @Input() with WritableSignal mirror for JIT/AOT test compatibility.
+  // input.required() is AOT-only; @Input() works in both JIT (TestBed) and AOT.
+  @Input({ required: true })
+  set mod(value: ModuleListEntry) {
+    this.modState.set(value);
+  }
+
+  readonly modState = signal<ModuleListEntry>({
+    moduleId: '',
+    order: 0,
+    titleEs: '',
+    descriptionEs: '',
+    isUnlocked: false,
+    isPreview: false,
+    completionPercent: 0,
+  });
 
   isAccessible(): boolean {
-    return this.mod().isUnlocked || this.mod().isPreview;
+    return this.modState().isUnlocked || this.modState().isPreview;
   }
 
   ariaLabel(): string {
-    const m = this.mod();
+    const m = this.modState();
+    if (!m.moduleId) return '';
     if (m.isPreview) return `Módulo ${m.order}: ${m.titleEs} (Avance)`;
     if (!m.isUnlocked) return `Módulo ${m.order}: ${m.titleEs} — bloqueado`;
     return `Módulo ${m.order}: ${m.titleEs} — ${m.completionPercent}% completado`;
