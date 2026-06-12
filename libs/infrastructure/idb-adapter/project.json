@@ -1,0 +1,20 @@
+{
+  "name": "infrastructure-idb-adapter",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/infrastructure/idb-adapter/src",
+  "projectType": "library",
+  "tags": ["scope:infrastructure", "type:lib"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{workspaceRoot}/coverage/libs/infrastructure/idb-adapter"],
+      "options": {
+        "configFile": "libs/infrastructure/idb-adapter/vitest.config.mts",
+        "reportsDirectory": "../../../coverage/libs/infrastructure/idb-adapter"
+      }
+    }
+  }
+}

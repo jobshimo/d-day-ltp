@@ -18,7 +18,11 @@
       "content-schema": ["libs/shared/content-schema/src/index.ts"],
       "domain-course": ["libs/domain/course/src/index.ts"],
       "domain-drill": ["libs/domain/drill/src/index.ts"],
-      "domain-progress": ["libs/domain/progress/src/index.ts"]
+      "domain-progress": ["libs/domain/progress/src/index.ts"],
+      "infrastructure-idb-adapter": ["libs/infrastructure/idb-adapter/src/index.ts"],
+      "application-course-store": ["libs/application/course-store/src/index.ts"],
+      "application-drill-store": ["libs/application/drill-store/src/index.ts"],
+      "content": ["libs/content/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp", "d-day"]
