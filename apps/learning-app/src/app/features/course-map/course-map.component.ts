@@ -4,7 +4,6 @@ import {
   inject,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { CourseStore } from 'application-course-store';
 import { ModuleCardComponent } from './module-card.component';
 
@@ -12,7 +11,7 @@ import { ModuleCardComponent } from './module-card.component';
   standalone: true,
   selector: 'app-course-map',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, ModuleCardComponent],
+  imports: [ModuleCardComponent],
   providers: [CourseStore],
   template: `
     <div class="course-map">

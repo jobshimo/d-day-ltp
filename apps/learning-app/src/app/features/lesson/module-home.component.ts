@@ -172,20 +172,20 @@ export const MODULE_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
       text-decoration: none;
       color: var(--color-text-primary);
       transition: background var(--transition-fast), border-color var(--transition-fast);
+    }
 
-      &:hover {
-        background: var(--color-surface-alt);
-        border-color: var(--color-accent-dim);
-      }
+    .lesson-item:hover {
+      background: var(--color-surface-alt);
+      border-color: var(--color-accent-dim);
+    }
 
-      &:focus-visible {
-        outline: 2px solid var(--color-accent);
-        outline-offset: 2px;
-      }
+    .lesson-item:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
 
-      &--done {
-        border-left: 3px solid var(--color-success);
-      }
+    .lesson-item--done {
+      border-left: 3px solid var(--color-success);
     }
 
     .lesson-item__num {
@@ -222,21 +222,21 @@ export const MODULE_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
       font-weight: var(--font-weight-semibold);
       text-decoration: none;
       transition: background var(--transition-fast), transform var(--transition-fast);
+    }
 
-      &:hover {
-        background: #d4b060;
-        transform: translateY(-1px);
-      }
+    .module-home__action-link:hover {
+      background: #d4b060;
+      transform: translateY(-1px);
+    }
 
-      &:focus-visible {
-        outline: 2px solid var(--color-accent);
-        outline-offset: 3px;
-      }
+    .module-home__action-link:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+    }
 
-      &--done {
-        background: var(--color-success);
-        color: white;
-      }
+    .module-home__action-link--done {
+      background: var(--color-success);
+      color: white;
     }
 
     .module-home__locked-msg {
@@ -290,9 +290,9 @@ export const MODULE_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
       color: var(--color-accent);
       text-decoration: none;
       font-size: var(--font-size-sm);
-
-      &:hover { text-decoration: underline; }
     }
+
+    .back-link:hover { text-decoration: underline; }
   `],
 })
 export class ModuleHomeComponent implements OnInit {

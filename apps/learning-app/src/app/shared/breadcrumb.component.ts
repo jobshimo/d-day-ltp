@@ -1,6 +1,5 @@
 import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { NgFor, NgIf } from '@angular/common';
 
 export interface BreadcrumbItem {
   label: string;
@@ -10,7 +9,7 @@ export interface BreadcrumbItem {
 @Component({
   standalone: true,
   selector: 'app-breadcrumb',
-  imports: [RouterLink, NgFor, NgIf],
+  imports: [RouterLink],
   template: `
     <nav class="breadcrumb" aria-label="Navegación estructural">
       <ol class="breadcrumb__list">
@@ -61,11 +60,11 @@ export interface BreadcrumbItem {
       color: var(--color-accent);
       text-decoration: none;
       transition: color var(--transition-fast);
+    }
 
-      &:hover {
-        color: #d4b060;
-        text-decoration: underline;
-      }
+    .breadcrumb__link:hover {
+      color: #d4b060;
+      text-decoration: underline;
     }
 
     .breadcrumb__sep {

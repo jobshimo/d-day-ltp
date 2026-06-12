@@ -74,25 +74,26 @@ import type { ModuleListEntry } from 'application-course-store';
       transition: background var(--transition-fast), border-color var(--transition-fast),
                   transform var(--transition-fast), box-shadow var(--transition-fast);
 
-      &--link:hover {
-        background: var(--color-surface-alt);
-        border-color: var(--color-accent-dim);
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-md);
-      }
+    }
 
-      &--link:focus-visible {
-        outline: 2px solid var(--color-accent);
-        outline-offset: 2px;
-      }
+    .card--link:hover {
+      background: var(--color-surface-alt);
+      border-color: var(--color-accent-dim);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
 
-      &--preview { border-color: var(--color-accent-dim); }
+    .card--link:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
 
-      &--disabled {
-        cursor: not-allowed;
-        opacity: 0.55;
-        border-color: var(--color-locked);
-      }
+    .card--preview { border-color: var(--color-accent-dim); }
+
+    .card--disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+      border-color: var(--color-locked);
     }
 
     .card__header {

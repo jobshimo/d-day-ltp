@@ -258,23 +258,23 @@ interface QuizAnswer {
       border-radius: var(--radius-md);
       cursor: pointer;
       transition: border-color var(--transition-fast), background var(--transition-fast);
+    }
 
-      &:hover {
-        border-color: var(--color-accent-dim);
-        background: var(--color-surface-alt);
-      }
+    .choice-option:hover {
+      border-color: var(--color-accent-dim);
+      background: var(--color-surface-alt);
+    }
 
-      &--selected {
-        border-color: var(--color-accent);
-        background: rgba(200, 160, 74, 0.08);
-      }
+    .choice-option--selected {
+      border-color: var(--color-accent);
+      background: rgba(200, 160, 74, 0.08);
+    }
 
-      input[type="radio"] {
-        width: 18px;
-        height: 18px;
-        accent-color: var(--color-accent);
-        flex-shrink: 0;
-      }
+    .choice-option input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--color-accent);
+      flex-shrink: 0;
     }
 
     .choice-option__label {
@@ -288,21 +288,21 @@ interface QuizAnswer {
       padding: var(--space-4) var(--space-5);
       border-radius: var(--radius-md);
       margin-bottom: var(--space-5);
-
-      &--correct {
-        background: var(--color-success-bg);
-        border: 1px solid var(--color-success);
-
-        .feedback__verdict { color: var(--color-success); }
-      }
-
-      &--incorrect {
-        background: var(--color-error-bg);
-        border: 1px solid var(--color-error);
-
-        .feedback__verdict { color: var(--color-error); }
-      }
     }
+
+    .feedback--correct {
+      background: var(--color-success-bg);
+      border: 1px solid var(--color-success);
+    }
+
+    .feedback--correct .feedback__verdict { color: var(--color-success); }
+
+    .feedback--incorrect {
+      background: var(--color-error-bg);
+      border: 1px solid var(--color-error);
+    }
+
+    .feedback--incorrect .feedback__verdict { color: var(--color-error); }
 
     .feedback__verdict {
       font-size: var(--font-size-base);
@@ -338,21 +338,21 @@ interface QuizAnswer {
       border-radius: 50%;
       border: 4px solid;
       margin: 0 auto var(--space-6);
-
-      &--pass {
-        border-color: var(--color-success);
-        background: var(--color-success-bg);
-
-        .quiz-result__score-num { color: var(--color-success); }
-      }
-
-      &--fail {
-        border-color: var(--color-error);
-        background: var(--color-error-bg);
-
-        .quiz-result__score-num { color: var(--color-error); }
-      }
     }
+
+    .quiz-result__score-circle--pass {
+      border-color: var(--color-success);
+      background: var(--color-success-bg);
+    }
+
+    .quiz-result__score-circle--pass .quiz-result__score-num { color: var(--color-success); }
+
+    .quiz-result__score-circle--fail {
+      border-color: var(--color-error);
+      background: var(--color-error-bg);
+    }
+
+    .quiz-result__score-circle--fail .quiz-result__score-num { color: var(--color-error); }
 
     .quiz-result__score-num {
       font-size: var(--font-size-2xl);
@@ -435,37 +435,37 @@ interface QuizAnswer {
       cursor: pointer;
       text-decoration: none;
       transition: background var(--transition-fast), transform var(--transition-fast);
+    }
 
-      &:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-        transform: none !important;
-      }
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+    }
 
-      &:focus-visible {
-        outline: 2px solid var(--color-accent);
-        outline-offset: 3px;
-      }
+    .btn:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+    }
 
-      &--primary {
-        background: var(--color-accent);
-        color: var(--color-bg);
+    .btn--primary {
+      background: var(--color-accent);
+      color: var(--color-bg);
+    }
 
-        &:hover:not(:disabled) {
-          background: #d4b060;
-          transform: translateY(-1px);
-        }
-      }
+    .btn--primary:hover:not(:disabled) {
+      background: #d4b060;
+      transform: translateY(-1px);
+    }
 
-      &--secondary {
-        background: var(--color-surface-alt);
-        color: var(--color-text-primary);
-        border: 1px solid var(--color-border);
+    .btn--secondary {
+      background: var(--color-surface-alt);
+      color: var(--color-text-primary);
+      border: 1px solid var(--color-border);
+    }
 
-        &:hover:not(:disabled) {
-          background: var(--color-border);
-        }
-      }
+    .btn--secondary:hover:not(:disabled) {
+      background: var(--color-border);
     }
 
     .sr-only {

@@ -164,9 +164,9 @@ export const SETTINGS_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
       color: var(--color-accent);
       text-decoration: none;
       font-size: var(--font-size-sm);
-
-      &:hover { text-decoration: underline; }
     }
+
+    .back-link:hover { text-decoration: underline; }
 
     /* Buttons */
     .btn {
@@ -179,32 +179,32 @@ export const SETTINGS_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
       font-weight: var(--font-weight-semibold);
       cursor: pointer;
       transition: background var(--transition-fast), transform var(--transition-fast);
-
-      &:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-      }
-
-      &:focus-visible {
-        outline: 2px solid var(--color-accent);
-        outline-offset: 3px;
-      }
-
-      &--danger {
-        background: var(--color-error);
-        color: white;
-
-        &:hover:not(:disabled) { background: #c44; }
-      }
-
-      &--secondary {
-        background: var(--color-surface-alt);
-        color: var(--color-text-primary);
-        border: 1px solid var(--color-border);
-
-        &:hover:not(:disabled) { background: var(--color-border); }
-      }
     }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+    }
+
+    .btn--danger {
+      background: var(--color-error);
+      color: white;
+    }
+
+    .btn--danger:hover:not(:disabled) { background: #c44; }
+
+    .btn--secondary {
+      background: var(--color-surface-alt);
+      color: var(--color-text-primary);
+      border: 1px solid var(--color-border);
+    }
+
+    .btn--secondary:hover:not(:disabled) { background: var(--color-border); }
   `],
 })
 export class SettingsComponent {

@@ -202,36 +202,35 @@ export const LESSON_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
       margin-bottom: var(--space-8);
     }
 
-    .lesson-block {
-      &--prose {
-        font-size: var(--font-size-base);
-        line-height: var(--line-height-relaxed);
-        color: var(--color-text-primary);
-      }
+    .lesson-block--prose {
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-relaxed);
+      color: var(--color-text-primary);
+    }
 
-      &--rule-callout {
-        border-left: 3px solid var(--color-accent);
-        background: var(--color-surface-alt);
-        border-radius: 0 var(--radius-md) var(--radius-md) 0;
-        padding: var(--space-4) var(--space-5);
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-2);
-      }
+    .lesson-block--rule-callout {
+      border-left: 3px solid var(--color-accent);
+      background: var(--color-surface-alt);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: var(--space-4) var(--space-5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
 
-      &--image, &--svg {
-        text-align: center;
-        background: var(--color-surface);
-        border: 1px solid var(--color-border);
-        border-radius: var(--radius-md);
-        padding: var(--space-4);
+    .lesson-block--image,
+    .lesson-block--svg {
+      text-align: center;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
 
-        figcaption {
-          margin-top: var(--space-2);
-          font-size: var(--font-size-sm);
-          color: var(--color-text-secondary);
-          font-style: italic;
-        }
+      figcaption {
+        margin-top: var(--space-2);
+        font-size: var(--font-size-sm);
+        color: var(--color-text-secondary);
+        font-style: italic;
       }
     }
 
@@ -303,10 +302,10 @@ export const LESSON_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
       border-radius: 50%;
       background: var(--color-border);
       transition: background var(--transition-fast);
-
-      &--active { background: var(--color-accent); }
-      &--done { background: var(--color-success); }
     }
+
+    .step-dot--active { background: var(--color-accent); }
+    .step-dot--done { background: var(--color-success); }
 
     .step-description {
       font-size: var(--font-size-base);
@@ -331,47 +330,47 @@ export const LESSON_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
       font-weight: var(--font-weight-semibold);
       cursor: pointer;
       transition: background var(--transition-fast), transform var(--transition-fast);
+    }
 
-      &:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-        transform: none !important;
-      }
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+    }
 
-      &:focus-visible {
-        outline: 2px solid var(--color-accent);
-        outline-offset: 3px;
-      }
+    .btn:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+    }
 
-      &--primary {
-        background: var(--color-accent);
-        color: var(--color-bg);
+    .btn--primary {
+      background: var(--color-accent);
+      color: var(--color-bg);
+    }
 
-        &:hover:not(:disabled) {
-          background: #d4b060;
-          transform: translateY(-1px);
-        }
-      }
+    .btn--primary:hover:not(:disabled) {
+      background: #d4b060;
+      transform: translateY(-1px);
+    }
 
-      &--secondary {
-        background: var(--color-surface-alt);
-        color: var(--color-text-primary);
-        border: 1px solid var(--color-border);
+    .btn--secondary {
+      background: var(--color-surface-alt);
+      color: var(--color-text-primary);
+      border: 1px solid var(--color-border);
+    }
 
-        &:hover:not(:disabled) {
-          background: var(--color-border);
-        }
-      }
+    .btn--secondary:hover:not(:disabled) {
+      background: var(--color-border);
+    }
 
-      &--success {
-        background: var(--color-success);
-        color: white;
+    .btn--success {
+      background: var(--color-success);
+      color: white;
+    }
 
-        &:hover:not(:disabled) {
-          background: #3d9963;
-          transform: translateY(-1px);
-        }
-      }
+    .btn--success:hover:not(:disabled) {
+      background: #3d9963;
+      transform: translateY(-1px);
     }
 
     .lesson-viewer__complete {
@@ -393,9 +392,9 @@ export const LESSON_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
       color: var(--color-accent);
       text-decoration: none;
       font-size: var(--font-size-sm);
-
-      &:hover { text-decoration: underline; }
     }
+
+    .back-link:hover { text-decoration: underline; }
   `],
 })
 export class LessonViewerComponent implements OnInit {

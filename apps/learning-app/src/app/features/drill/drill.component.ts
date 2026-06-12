@@ -265,33 +265,33 @@ import { BoardSnippetComponent } from 'ui-board-renderer';
       border-radius: var(--radius-md);
       cursor: pointer;
       transition: border-color var(--transition-fast), background var(--transition-fast);
+    }
 
-      &:hover {
-        border-color: var(--color-accent-dim);
-        background: var(--color-surface-alt);
-      }
+    .choice-option:hover {
+      border-color: var(--color-accent-dim);
+      background: var(--color-surface-alt);
+    }
 
-      &--selected {
-        border-color: var(--color-accent);
-        background: rgba(200, 160, 74, 0.08);
-      }
+    .choice-option--selected {
+      border-color: var(--color-accent);
+      background: rgba(200, 160, 74, 0.08);
+    }
 
-      &--correct {
-        border-color: var(--color-success);
-        background: var(--color-success-bg);
-      }
+    .choice-option--correct {
+      border-color: var(--color-success);
+      background: var(--color-success-bg);
+    }
 
-      &--incorrect {
-        border-color: var(--color-error);
-        background: var(--color-error-bg);
-      }
+    .choice-option--incorrect {
+      border-color: var(--color-error);
+      background: var(--color-error-bg);
+    }
 
-      input[type="radio"] {
-        width: 18px;
-        height: 18px;
-        accent-color: var(--color-accent);
-        flex-shrink: 0;
-      }
+    .choice-option input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--color-accent);
+      flex-shrink: 0;
     }
 
     .choice-option__label {
@@ -304,31 +304,31 @@ import { BoardSnippetComponent } from 'ui-board-renderer';
     .choice-option__indicator {
       font-weight: var(--font-weight-bold);
       font-size: var(--font-size-lg);
-
-      &--correct { color: var(--color-success); }
-      &--incorrect { color: var(--color-error); }
     }
+
+    .choice-option__indicator--correct { color: var(--color-success); }
+    .choice-option__indicator--incorrect { color: var(--color-error); }
 
     /* Feedback */
     .feedback {
       padding: var(--space-5);
       border-radius: var(--radius-md);
       margin-bottom: var(--space-5);
-
-      &--correct {
-        background: var(--color-success-bg);
-        border: 1px solid var(--color-success);
-
-        .feedback__verdict { color: var(--color-success); }
-      }
-
-      &--incorrect {
-        background: var(--color-error-bg);
-        border: 1px solid var(--color-error);
-
-        .feedback__verdict { color: var(--color-error); }
-      }
     }
+
+    .feedback--correct {
+      background: var(--color-success-bg);
+      border: 1px solid var(--color-success);
+    }
+
+    .feedback--correct .feedback__verdict { color: var(--color-success); }
+
+    .feedback--incorrect {
+      background: var(--color-error-bg);
+      border: 1px solid var(--color-error);
+    }
+
+    .feedback--incorrect .feedback__verdict { color: var(--color-error); }
 
     .feedback__verdict {
       font-size: var(--font-size-lg);
@@ -396,37 +396,37 @@ import { BoardSnippetComponent } from 'ui-board-renderer';
       font-weight: var(--font-weight-semibold);
       cursor: pointer;
       transition: background var(--transition-fast), transform var(--transition-fast);
+    }
 
-      &:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-        transform: none !important;
-      }
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+    }
 
-      &:focus-visible {
-        outline: 2px solid var(--color-accent);
-        outline-offset: 3px;
-      }
+    .btn:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+    }
 
-      &--primary {
-        background: var(--color-accent);
-        color: var(--color-bg);
+    .btn--primary {
+      background: var(--color-accent);
+      color: var(--color-bg);
+    }
 
-        &:hover:not(:disabled) {
-          background: #d4b060;
-          transform: translateY(-1px);
-        }
-      }
+    .btn--primary:hover:not(:disabled) {
+      background: #d4b060;
+      transform: translateY(-1px);
+    }
 
-      &--success {
-        background: var(--color-success);
-        color: white;
+    .btn--success {
+      background: var(--color-success);
+      color: white;
+    }
 
-        &:hover:not(:disabled) {
-          background: #3d9963;
-          transform: translateY(-1px);
-        }
-      }
+    .btn--success:hover:not(:disabled) {
+      background: #3d9963;
+      transform: translateY(-1px);
     }
 
     .sr-only {
@@ -445,9 +445,9 @@ import { BoardSnippetComponent } from 'ui-board-renderer';
       color: var(--color-accent);
       text-decoration: none;
       font-size: var(--font-size-sm);
-
-      &:hover { text-decoration: underline; }
     }
+
+    .back-link:hover { text-decoration: underline; }
   `],
 })
 export class DrillComponent implements OnInit {
