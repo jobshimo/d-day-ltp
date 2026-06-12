@@ -1,0 +1,16 @@
+{
+  "name": "domain-progress",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/domain/progress/src",
+  "projectType": "library",
+  "tags": ["scope:domain", "type:lib"],
+  "targets": {
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{workspaceRoot}/coverage/libs/domain/progress"],
+      "options": {
+        "reportsDirectory": "../../../coverage/libs/domain/progress"
+      }
+    }
+  }
+}
