@@ -55,6 +55,9 @@
     "@nx/angular:library": {
       "linter": "eslint",
       "unitTestRunner": "none"
+    },
+    "@nx/angular:component": {
+      "style": "none"
     }
   },
   "defaultProject": "learning-app",

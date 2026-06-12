@@ -1,0 +1,20 @@
+{
+  "name": "ui-board-renderer",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/ui/board-renderer/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["scope:ui", "type:lib"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{workspaceRoot}/coverage/libs/ui/board-renderer"],
+      "options": {
+        "reportsDirectory": "../../../coverage/libs/ui/board-renderer"
+      }
+    }
+  }
+}
