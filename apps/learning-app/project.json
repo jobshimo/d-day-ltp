@@ -7,13 +7,12 @@
   "tags": ["scope:app", "type:app"],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:browser",
+      "executor": "@angular/build:application",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/learning-app",
         "index": "apps/learning-app/src/index.html",
-        "main": "apps/learning-app/src/main.ts",
-        "polyfills": ["zone.js"],
+        "browser": "apps/learning-app/src/main.ts",
         "tsConfig": "apps/learning-app/tsconfig.app.json",
         "assets": [
           {
@@ -21,7 +20,7 @@
             "input": "apps/learning-app/public"
           }
         ],
-        "styles": ["apps/learning-app/src/styles.css"]
+        "styles": ["apps/learning-app/src/styles.scss"]
       },
       "configurations": {
         "production": {
@@ -40,10 +39,7 @@
           "outputHashing": "all"
         },
         "development": {
-          "buildOptimizer": false,
           "optimization": false,
-          "vendorChunk": true,
-          "extractLicenses": false,
           "sourceMap": true,
           "namedChunks": true
         }
@@ -52,7 +48,7 @@
     },
     "serve": {
       "continuous": true,
-      "executor": "@angular-devkit/build-angular:dev-server",
+      "executor": "@angular/build:dev-server",
       "configurations": {
         "production": {
           "buildTarget": "learning-app:build:production"
@@ -64,7 +60,7 @@
       "defaultConfiguration": "development"
     },
     "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "executor": "@angular/build:extract-i18n",
       "options": {
         "buildTarget": "learning-app:build"
       }
