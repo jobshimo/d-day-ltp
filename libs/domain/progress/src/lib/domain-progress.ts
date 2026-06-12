@@ -1,31 +1,16 @@
-// Progress domain types — framework-free
-
-export interface ModuleProgress {
-  moduleId: string;
-  lessonsCompleted: string[];
-  drillResults: Record<string, DrillResult>;
-  quizResult?: QuizResult;
-  unlockedAt?: string; // ISO date
-}
-
-export interface DrillResult {
-  answeredCorrectly: boolean;
-  attempts: number;
-  completedAt: string; // ISO date
-}
-
-export interface QuizResult {
-  score: number; // 0.0 – 1.0
-  passed: boolean;
-  completedAt: string; // ISO date
-}
+// Re-export shared progress types from content-schema
+export type { ModuleProgress, DrillResult, QuizResult } from 'content-schema';
 
 // ProgressRepository port (hexagonal port — no adapter logic here)
 export interface ProgressRepository {
-  getModuleProgress(moduleId: string): Promise<ModuleProgress>;
+  getModuleProgress(moduleId: string): Promise<import('content-schema').ModuleProgress>;
   setLessonComplete(moduleId: string, lessonId: string): Promise<void>;
-  setDrillResult(moduleId: string, drillId: string, result: DrillResult): Promise<void>;
-  setQuizResult(moduleId: string, result: QuizResult): Promise<void>;
+  setDrillResult(
+    moduleId: string,
+    drillId: string,
+    result: import('content-schema').DrillResult,
+  ): Promise<void>;
+  setQuizResult(moduleId: string, result: import('content-schema').QuizResult): Promise<void>;
   isModuleUnlocked(moduleId: string): Promise<boolean>;
   resetProgress(): Promise<void>;
 }

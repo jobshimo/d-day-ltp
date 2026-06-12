@@ -9,6 +9,7 @@
       "executor": "@nx/vite:test",
       "outputs": ["{workspaceRoot}/coverage/libs/domain/progress"],
       "options": {
+        "configFile": "libs/domain/progress/vitest.config.mts",
         "reportsDirectory": "../../../coverage/libs/domain/progress"
       }
     }

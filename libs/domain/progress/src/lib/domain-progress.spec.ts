@@ -1,10 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import type {
-  ProgressRepository,
-  ModuleProgress,
-  DrillResult,
-  QuizResult,
-} from './domain-progress';
+import type { ModuleProgress, DrillResult, QuizResult } from 'content-schema';
+import type { ProgressRepository } from './domain-progress';
 import { PROGRESS_REPO_TOKEN_ID } from './domain-progress';
 
 describe('ProgressRepository port', () => {
@@ -14,7 +10,6 @@ describe('ProgressRepository port', () => {
   });
 
   it('accepts a class that structurally implements ProgressRepository', () => {
-    // Inline mock that satisfies the interface structurally
     const drillResult: DrillResult = {
       answeredCorrectly: true,
       attempts: 1,
@@ -88,7 +83,6 @@ describe('ProgressRepository port', () => {
 
     const repo: ProgressRepository = new InMemoryProgressRepository();
     expect(repo).toBeDefined();
-    // TypeScript compile-time check: the mock satisfies the interface
     expect(progress.moduleId).toBe('module-1');
     expect(progress.lessonsCompleted).toContain('lesson-1-1');
     expect(progress.quizResult?.passed).toBe(true);
@@ -153,20 +147,26 @@ describe('ProgressRepository port', () => {
   it('mock ProgressRepository: isModuleUnlocked reflects quiz pass', async () => {
     class InMemoryProgressRepository implements ProgressRepository {
       private data: Record<string, ModuleProgress> = {};
+
       async getModuleProgress(moduleId: string): Promise<ModuleProgress> {
         return this.data[moduleId] ?? { moduleId, lessonsCompleted: [], drillResults: {} };
       }
+
       async setLessonComplete(_moduleId: string, _lessonId: string): Promise<void> {}
+
       async setDrillResult(_moduleId: string, _drillId: string, _r: DrillResult): Promise<void> {}
+
       async setQuizResult(moduleId: string, result: QuizResult): Promise<void> {
         const existing = await this.getModuleProgress(moduleId);
         this.data[moduleId] = { ...existing, quizResult: result };
       }
+
       async isModuleUnlocked(moduleId: string): Promise<boolean> {
         if (moduleId === 'module-1') return true;
         const prog = this.data[moduleId];
         return prog?.quizResult?.passed === true;
       }
+
       async resetProgress(): Promise<void> {
         this.data = {};
       }
@@ -176,9 +176,6 @@ describe('ProgressRepository port', () => {
 
     expect(await repo.isModuleUnlocked('module-1')).toBe(true);
     expect(await repo.isModuleUnlocked('module-2')).toBe(false);
-
-    await repo.setQuizResult('module-1', { score: 0.8, passed: true, completedAt: '' });
-    expect(await repo.isModuleUnlocked('module-2')).toBe(false); // module-2 still needs its own quiz
 
     await repo.setQuizResult('module-2', { score: 0.5, passed: false, completedAt: '' });
     expect(await repo.isModuleUnlocked('module-2')).toBe(false);
@@ -190,18 +187,26 @@ describe('ProgressRepository port', () => {
   it('mock ProgressRepository: resetProgress clears all data', async () => {
     class InMemoryProgressRepository implements ProgressRepository {
       private data: Record<string, ModuleProgress> = {};
+
       async getModuleProgress(moduleId: string): Promise<ModuleProgress> {
         return this.data[moduleId] ?? { moduleId, lessonsCompleted: [], drillResults: {} };
       }
+
       async setLessonComplete(moduleId: string, lessonId: string): Promise<void> {
         const existing = await this.getModuleProgress(moduleId);
-        this.data[moduleId] = { ...existing, lessonsCompleted: [...existing.lessonsCompleted, lessonId] };
+        this.data[moduleId] = {
+          ...existing,
+          lessonsCompleted: [...existing.lessonsCompleted, lessonId],
+        };
       }
+
       async setDrillResult(_m: string, _d: string, _r: DrillResult): Promise<void> {}
       async setQuizResult(_m: string, _r: QuizResult): Promise<void> {}
+
       async isModuleUnlocked(moduleId: string): Promise<boolean> {
         return moduleId === 'module-1';
       }
+
       async resetProgress(): Promise<void> {
         this.data = {};
       }

@@ -1,3 +1,24 @@
+// Progress tracking types — shared between domain-progress and domain-course
+export interface DrillResult {
+  answeredCorrectly: boolean;
+  attempts: number;
+  completedAt: string; // ISO date
+}
+
+export interface QuizResult {
+  score: number; // 0.0 – 1.0
+  passed: boolean;
+  completedAt: string; // ISO date
+}
+
+export interface ModuleProgress {
+  moduleId: string;
+  lessonsCompleted: string[];
+  drillResults: Record<string, DrillResult>;
+  quizResult?: QuizResult;
+  unlockedAt?: string; // ISO date
+}
+
 // Rule reference — maps to a section in rules-text.txt
 export interface RuleRef {
   section: string; // e.g. "6.3"
