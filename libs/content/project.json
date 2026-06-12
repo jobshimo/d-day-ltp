@@ -1,0 +1,20 @@
+{
+  "name": "content",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/content/src",
+  "projectType": "library",
+  "tags": ["scope:content", "type:lib"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{workspaceRoot}/coverage/libs/content"],
+      "options": {
+        "configFile": "libs/content/vitest.config.mts",
+        "reportsDirectory": "../../coverage/libs/content"
+      }
+    }
+  }
+}

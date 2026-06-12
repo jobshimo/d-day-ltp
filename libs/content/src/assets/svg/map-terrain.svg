@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" role="img" aria-label="Diagrama de zonas de terreno en el mapa de Omaha Beach">
+  <title>Zonas de terreno: playa, pavilion, bluff, draw y bocage</title>
+  <desc>Corte transversal esquemático que muestra las cinco zonas de terreno desde el mar hasta el interior, con su nombre en español e inglés.</desc>
+
+  <!-- ---- Sea ---- -->
+  <rect x="0" y="0" width="40" height="200" fill="#6ab4d4"/>
+  <text x="20" y="105" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white" transform="rotate(-90,20,100)">MAR</text>
+
+  <!-- ---- Beach (playa de marea) ---- -->
+  <rect x="40" y="60" width="50" height="140" fill="#e8d89a"/>
+  <text x="65" y="135" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#5a4a00" transform="rotate(-90,65,130)">PLAYA</text>
+
+  <!-- ---- Pavilion ---- -->
+  <rect x="90" y="80" width="40" height="120" fill="#c8b870"/>
+  <text x="110" y="145" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#3a2800" transform="rotate(-90,110,140)">PAVILION</text>
+
+  <!-- ---- Draw (valley through bluff) ---- -->
+  <rect x="130" y="100" width="30" height="100" fill="#9ab870"/>
+  <text x="145" y="155" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#1a3800" transform="rotate(-90,145,150)">DRAW</text>
+
+  <!-- ---- Bluff ---- -->
+  <polygon points="90,80 130,100 130,50 90,20" fill="#a08050" opacity="0.9"/>
+  <polygon points="160,100 200,60 200,40 160,60" fill="#a08050" opacity="0.9"/>
+  <text x="120" y="55" font-family="sans-serif" font-size="8" fill="white">BLUFF</text>
+  <text x="170" y="55" font-family="sans-serif" font-size="8" fill="white">BLUFF</text>
+
+  <!-- ---- Slope ---- -->
+  <rect x="200" y="40" width="30" height="160" fill="#88a860"/>
+  <text x="215" y="125" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#1a3800" transform="rotate(-90,215,120)">SLOPE</text>
+
+  <!-- ---- Bocage (interior) ---- -->
+  <rect x="230" y="0" width="90" height="200" fill="#4a7a30"/>
+  <!-- Bocage hedgerow pattern -->
+  <line x1="250" y1="0" x2="250" y2="200" stroke="#2a5a18" stroke-width="3" stroke-dasharray="6,4"/>
+  <line x1="270" y1="0" x2="270" y2="200" stroke="#2a5a18" stroke-width="3" stroke-dasharray="6,4"/>
+  <line x1="290" y1="0" x2="290" y2="200" stroke="#2a5a18" stroke-width="3" stroke-dasharray="6,4"/>
+  <line x1="310" y1="0" x2="310" y2="200" stroke="#2a5a18" stroke-width="3" stroke-dasharray="6,4"/>
+  <text x="265" y="105" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#d4f0a0" transform="rotate(-90,265,100)">BOCAGE</text>
+
+  <!-- ---- Spanish labels at bottom ---- -->
+  <text x="65" y="195" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#333">playa</text>
+  <text x="110" y="195" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#333">terraza</text>
+  <text x="145" y="195" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#333">valle</text>
+  <text x="215" y="195" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#333">ladera</text>
+  <text x="265" y="195" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#d4f0a0">bocage</text>
+
+  <!-- ---- Direction arrow ---- -->
+  <defs>
+    <marker id="arrowhead" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="#333"/>
+    </marker>
+  </defs>
+  <line x1="10" y1="10" x2="300" y2="10" stroke="#333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <text x="155" y="9" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#333">→ Del mar al interior →</text>
+</svg>
