@@ -1,7 +1,7 @@
 {
-  "name": "domain-progress",
+  "name": "domain-drill",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/domain/progress/src",
+  "sourceRoot": "libs/domain/drill/src",
   "projectType": "library",
   "tags": ["scope:domain", "type:lib"],
   "targets": {
@@ -10,10 +10,10 @@
     },
     "test": {
       "executor": "@nx/vite:test",
-      "outputs": ["{workspaceRoot}/coverage/libs/domain/progress"],
+      "outputs": ["{workspaceRoot}/coverage/libs/domain/drill"],
       "options": {
-        "configFile": "libs/domain/progress/vitest.config.mts",
-        "reportsDirectory": "../../../coverage/libs/domain/progress"
+        "configFile": "libs/domain/drill/vitest.config.mts",
+        "reportsDirectory": "../../../coverage/libs/domain/drill"
       }
     }
   }

@@ -17,6 +17,7 @@
     "paths": {
       "content-schema": ["libs/shared/content-schema/src/index.ts"],
       "domain-course": ["libs/domain/course/src/index.ts"],
+      "domain-drill": ["libs/domain/drill/src/index.ts"],
       "domain-progress": ["libs/domain/progress/src/index.ts"]
     }
   },

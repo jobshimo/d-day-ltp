@@ -5,6 +5,9 @@
   "projectType": "library",
   "tags": ["scope:domain", "type:lib"],
   "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
     "test": {
       "executor": "@nx/vite:test",
       "outputs": ["{workspaceRoot}/coverage/libs/domain/course"],

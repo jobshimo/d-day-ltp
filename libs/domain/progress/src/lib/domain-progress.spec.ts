@@ -152,9 +152,13 @@ describe('ProgressRepository port', () => {
         return this.data[moduleId] ?? { moduleId, lessonsCompleted: [], drillResults: {} };
       }
 
-      async setLessonComplete(_moduleId: string, _lessonId: string): Promise<void> {}
+      async setLessonComplete(_moduleId: string, _lessonId: string): Promise<void> {
+        return Promise.resolve();
+      }
 
-      async setDrillResult(_moduleId: string, _drillId: string, _r: DrillResult): Promise<void> {}
+      async setDrillResult(_moduleId: string, _drillId: string, _r: DrillResult): Promise<void> {
+        return Promise.resolve();
+      }
 
       async setQuizResult(moduleId: string, result: QuizResult): Promise<void> {
         const existing = await this.getModuleProgress(moduleId);
@@ -200,8 +204,12 @@ describe('ProgressRepository port', () => {
         };
       }
 
-      async setDrillResult(_m: string, _d: string, _r: DrillResult): Promise<void> {}
-      async setQuizResult(_m: string, _r: QuizResult): Promise<void> {}
+      async setDrillResult(_m: string, _d: string, _r: DrillResult): Promise<void> {
+        return Promise.resolve();
+      }
+      async setQuizResult(_m: string, _r: QuizResult): Promise<void> {
+        return Promise.resolve();
+      }
 
       async isModuleUnlocked(moduleId: string): Promise<boolean> {
         return moduleId === 'module-1';
