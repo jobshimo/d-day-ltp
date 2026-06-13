@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type { CourseModule, Lesson, DrillScenario, QuizItem } from './content-schema';
+import type { CourseModule, Lesson, DrillScenario, QuizItem, LessonBlock, CounterLessonConfig } from './content-schema';
 
 describe('content-schema type contracts', () => {
   it('constructs a minimal CourseModule literal without type errors', () => {
@@ -68,13 +68,50 @@ describe('content-schema type contracts', () => {
   });
 
   it('validates lesson block types are exhaustive', () => {
-    const blockTypes: ('prose' | 'rule-callout' | 'image' | 'svg-snippet')[] = [
+    const blockTypes: ('prose' | 'rule-callout' | 'image' | 'svg-snippet' | 'counter')[] = [
       'prose',
       'rule-callout',
       'image',
       'svg-snippet',
+      'counter',
     ];
-    expect(blockTypes).toHaveLength(4);
+    expect(blockTypes).toHaveLength(5);
+  });
+
+  it('constructs a counter LessonBlock with counterConfig without type errors', () => {
+    const counterConfig: CounterLessonConfig = {
+      unit: {
+        kind: 'us',
+        id: 'A-116',
+        type: 'infantry',
+        steps: 3,
+        targetSymbol: 'circle',
+        weapons: ['BZ'],
+        attackStrength: 3,
+        reducedAttackStrength: 2,
+        isDisrupted: false,
+        hexId: null,
+        designation: 'A/116',
+        division: '29th',
+        arrivalTurn: 1,
+        beachLandingBox: 'DW1',
+      },
+      side: 'front',
+      size: 120,
+      annotated: true,
+    };
+
+    const block: LessonBlock = {
+      type: 'counter',
+      content: 'Anatomía de una ficha de infantería de EE.UU.',
+      altText: 'Ficha de infantería A/116, 29.ª División',
+      ruleRefs: [{ section: '2.21' }],
+      counterConfig,
+    };
+
+    expect(block.type).toBe('counter');
+    expect(block.counterConfig?.side).toBe('front');
+    expect((block.counterConfig?.unit as { designation?: string }).designation).toBe('A/116');
   });
 
   it('validates drill types', () => {
