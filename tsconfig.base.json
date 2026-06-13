@@ -34,6 +34,9 @@
       "infrastructure-audio-adapter": [
         "libs/infrastructure/audio-adapter/src/index.ts"
       ],
+      "infrastructure-http-progress-adapter": [
+        "libs/infrastructure/http-progress-adapter/src/index.ts"
+      ],
       "infrastructure-idb-adapter": [
         "libs/infrastructure/idb-adapter/src/index.ts"
       ],

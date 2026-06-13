@@ -1,0 +1,20 @@
+{
+  "name": "infrastructure-http-progress-adapter",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/infrastructure/http-progress-adapter/src",
+  "projectType": "library",
+  "tags": ["scope:infrastructure", "type:lib"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{workspaceRoot}/coverage/libs/infrastructure/http-progress-adapter"],
+      "options": {
+        "configFile": "libs/infrastructure/http-progress-adapter/vitest.config.mts",
+        "reportsDirectory": "../../../coverage/libs/infrastructure/http-progress-adapter"
+      }
+    }
+  }
+}

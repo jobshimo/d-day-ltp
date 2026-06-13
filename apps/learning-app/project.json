@@ -54,6 +54,9 @@
     "serve": {
       "continuous": true,
       "executor": "@angular/build:dev-server",
+      "options": {
+        "proxyConfig": "apps/learning-app/proxy.conf.json"
+      },
       "configurations": {
         "production": {
           "buildTarget": "learning-app:build:production"

@@ -9,6 +9,7 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { appRoutes } from './app.routes';
 import { IdbProgressRepository } from 'infrastructure-idb-adapter';
+import { HttpProgressRepository } from 'infrastructure-http-progress-adapter';
 import { HtmlAudioNarrationPlayer } from 'infrastructure-audio-adapter';
 import { PROGRESS_REPO_TOKEN_ID } from 'domain-progress';
 import type { ProgressRepository } from 'domain-progress';
@@ -29,14 +30,36 @@ import { QUIZ_PROGRESS_REPO } from './features/quiz/quiz.component';
 import { SETTINGS_PROGRESS_REPO } from './features/settings/settings.component';
 
 /**
- * Root DI token for ProgressRepository — wires the IDB adapter to the port.
- * Both CourseStore and DrillStore receive the same adapter instance via
- * COURSE_PROGRESS_REPO and DRILL_PROGRESS_REPO respectively.
- *
- * Slice D will conditionally swap this to HttpProgressRepository when a JWT
- * is present in sessionStorage. Until Slice D, this stays as IdbProgressRepository.
+ * Root DI token for ProgressRepository.
+ * At bootstrap, the factory (selectProgressRepo) checks sessionStorage for a
+ * JWT token. If present, the HTTP adapter is provided; otherwise the IDB adapter
+ * is provided for guest mode. All 7 useExisting consumer tokens follow the swap.
  */
 export const PROGRESS_REPO = new InjectionToken<ProgressRepository>(PROGRESS_REPO_TOKEN_ID);
+
+/**
+ * Pure helper that decides which ProgressRepository class to use at bootstrap.
+ * Reads sessionStorage directly (same read as SessionStore.hydrateFromStorage).
+ * Exported for unit testing.
+ *
+ * @param hasToken - true if a JWT is present in sessionStorage at bootstrap time
+ * @returns the concrete ProgressRepository class to instantiate
+ */
+export function selectProgressRepo(hasToken: boolean): typeof IdbProgressRepository | typeof HttpProgressRepository {
+  return hasToken ? HttpProgressRepository : IdbProgressRepository;
+}
+
+/**
+ * Checks sessionStorage safely (SSR-compatible guard) and returns true if
+ * a JWT token is present at the moment app.config is evaluated.
+ */
+function detectToken(): boolean {
+  try {
+    return typeof sessionStorage !== 'undefined' && !!sessionStorage.getItem('auth_token');
+  } catch {
+    return false;
+  }
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -65,19 +88,17 @@ export const appConfig: ApplicationConfig = {
     },
 
     // Hydrate session state from sessionStorage before first paint.
-    // Slice D: after hydration, app.config will also check the token
-    // to decide which progress adapter to provide.
-    // NOTE: PROGRESS_REPO stays IdbProgressRepository until Slice D adds the
-    // conditional swap (hasToken ? HttpProgressRepository : IdbProgressRepository).
     provideAppInitializer(() => {
       inject(SessionStore).hydrateFromStorage();
     }),
 
-    // IndexedDB progress adapter (singleton via the root token).
-    // Slice D will add the conditional swap here; for now IDB is always active.
+    // Adapter switch (Slice D): read auth_token from sessionStorage at bootstrap.
+    // If a token exists → HttpProgressRepository (authenticated user).
+    // If not           → IdbProgressRepository (guest mode).
+    // After login/logout the app does window.location.href='/' so this runs fresh.
     {
       provide: PROGRESS_REPO,
-      useClass: IdbProgressRepository,
+      useClass: selectProgressRepo(detectToken()),
     },
 
     // Narration player: bind HTML5 Audio adapter to the domain port
