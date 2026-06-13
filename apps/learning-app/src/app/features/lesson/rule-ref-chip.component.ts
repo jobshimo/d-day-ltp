@@ -22,9 +22,10 @@ import type { RuleRef } from 'content-schema';
       </button>
 
       @if (showTooltip() && ruleRef().note) {
-        <div class="rule-chip__tooltip" role="tooltip">
-          {{ ruleRef().note }}
-        </div>
+        <span class="rule-chip__tooltip" role="tooltip">
+          <span class="rule-chip__tooltip-head">Reglamento · §{{ ruleRef().section }}</span>
+          <span class="rule-chip__tooltip-body">{{ ruleRef().note }}</span>
+        </span>
       }
     </span>
   `,
@@ -63,17 +64,32 @@ import type { RuleRef } from 'content-schema';
       top: calc(100% + var(--space-1));
       left: 0;
       z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      width: max-content;
+      max-width: 260px;
       background: var(--color-surface-alt);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-md);
       padding: var(--space-2) var(--space-3);
       font-size: var(--font-size-sm);
       color: var(--color-text-primary);
-      white-space: nowrap;
-      max-width: 260px;
       white-space: normal;
       box-shadow: var(--shadow-md);
       pointer-events: none;
+    }
+
+    .rule-chip__tooltip-head {
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-bold);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-accent);
+    }
+
+    .rule-chip__tooltip-body {
+      line-height: var(--line-height-normal);
     }
   `],
 })
