@@ -10,16 +10,21 @@ import type { UnitType, GermanUnitSymbol } from 'content-schema';
  * This component renders ONLY the glyph — no outer counter rect.
  * Callers (CounterComponent, board-renderer) provide their own background.
  *
- * Tank/armor glyph: side-view silhouette (hull + turret + gun barrel + tracks).
- * The tank silhouette is the COUNTER glyph used on the real Devir board.
- * The NATO armor oval (ellipse) is a CARD symbol only — it does not appear
- * on unit counters.
+ * Tank/armor glyph has two representations controlled by `symbolStyle`:
+ *   - 'counter' (default): side-view silhouette (hull + turret + gun barrel + tracks).
+ *     This matches the real Devir board counter glyph. No NATO box.
+ *   - 'card': NATO armor oval (ellipse cx=30 cy=28 rx=12 ry=6) inside the standard
+ *     inner box. Used on unit cards and the symbology reference page.
+ *
+ * Only `type === 'tank'` (US) and `germanSymbol === 'armor'` (German) are
+ * affected by `symbolStyle`. All other unit types ignore it.
  *
  * Board-renderer reuse contract:
- *   @Input() type: UnitType           — US glyph selector
- *   @Input() germanSymbol?: GermanUnitSymbol — when set, renders German glyph
- *   @Input() color: string            — stroke/fill color of the glyph
- *   @Input() strokeWidth: number      — line weight in 60x60 units
+ *   @Input() type: UnitType                      — US glyph selector
+ *   @Input() germanSymbol?: GermanUnitSymbol     — when set, renders German glyph
+ *   @Input() color: string                       — stroke/fill color of the glyph
+ *   @Input() strokeWidth: number                 — line weight in 60x60 units
+ *   @Input() symbolStyle: 'counter' | 'card'    — tank/armor rendering variant
  */
 /* eslint-disable @angular-eslint/component-selector -- attribute selector required: custom-element host breaks SVG render tree (getBBox=0) */
 @Component({
@@ -48,10 +53,9 @@ import type { UnitType, GermanUnitSymbol } from 'content-schema';
             aria-hidden="true" />
     }
 
-    <!-- US tank: side-view silhouette (hull + turret + gun barrel + tracks).
-         This matches the real Devir counter glyph. The NATO armor oval is a
-         card symbol only — counters use this silhouette. -->
-    @if (isUS && type === 'tank') {
+    <!-- US tank — counter style: side-view silhouette (hull + turret + gun barrel + tracks).
+         Matches the real Devir board counter glyph. No NATO box. -->
+    @if (isUS && type === 'tank' && symbolStyle === 'counter') {
       <!-- Track base (thin filled rectangle along the bottom) -->
       <svg:rect x="15" y="32" width="28" height="4" rx="2"
                 [attr.fill]="color" stroke="none"
@@ -75,6 +79,15 @@ import type { UnitType, GermanUnitSymbol } from 'content-schema';
       <svg:rect x="36" y="20" width="10" height="3" rx="1"
                 [attr.fill]="color" stroke="none"
                 aria-hidden="true" />
+    }
+
+    <!-- US tank — card style: NATO armor oval inside the standard inner box. -->
+    @if (isUS && type === 'tank' && symbolStyle === 'card') {
+      <svg:ellipse cx="30" cy="28" rx="12" ry="6"
+                   fill="none"
+                   [attr.stroke]="color"
+                   [attr.stroke-width]="strokeWidth"
+                   aria-hidden="true" />
     }
 
     <!-- US arty (artillery): filled center dot -->
@@ -142,9 +155,8 @@ import type { UnitType, GermanUnitSymbol } from 'content-schema';
             aria-hidden="true" />
     }
 
-    <!-- German armor: side-view tank silhouette (same geometry as US tank).
-         The NATO armor oval is a card symbol; counters use the silhouette. -->
-    @if (!isUS && germanSymbol === 'armor') {
+    <!-- German armor — counter style: side-view tank silhouette (same geometry as US tank). -->
+    @if (!isUS && germanSymbol === 'armor' && symbolStyle === 'counter') {
       <!-- Track base -->
       <svg:rect x="15" y="32" width="28" height="4" rx="2"
                 [attr.fill]="color" stroke="none"
@@ -168,6 +180,15 @@ import type { UnitType, GermanUnitSymbol } from 'content-schema';
       <svg:rect x="36" y="20" width="10" height="3" rx="1"
                 [attr.fill]="color" stroke="none"
                 aria-hidden="true" />
+    }
+
+    <!-- German armor — card style: NATO armor oval inside the standard inner box. -->
+    @if (!isUS && germanSymbol === 'armor' && symbolStyle === 'card') {
+      <svg:ellipse cx="30" cy="28" rx="12" ry="6"
+                   fill="none"
+                   [attr.stroke]="color"
+                   [attr.stroke-width]="strokeWidth"
+                   aria-hidden="true" />
     }
 
     <!-- German artillery: box + filled center dot -->
@@ -197,23 +218,40 @@ export class UnitSymbolComponent {
   @Input() germanSymbol?: GermanUnitSymbol;
   @Input() color = '#ffffff';
   @Input() strokeWidth = 2;
+  /**
+   * Controls the tank/armor rendering variant.
+   * - 'counter' (default): side-view silhouette — matches the real Devir counter.
+   * - 'card': NATO armor oval (ellipse) inside the standard inner box — used on
+   *   unit cards and the symbology reference page.
+   * All non-tank/armor unit types ignore this input.
+   */
+  @Input() symbolStyle: 'counter' | 'card' = 'counter';
 
   get isUS(): boolean {
     return !this.germanSymbol;
   }
 
   /**
-   * Whether to render the inner bounding box. The tank silhouette (US tank,
-   * German armor) and the general/hero glyphs stand alone with no NATO box,
-   * matching the real counters.
+   * Whether to render the inner bounding box.
+   * - The tank/armor silhouette (counter style) has no box — the silhouette stands alone.
+   * - The tank/armor card style (NATO oval) shows the box like other NATO symbols.
+   * - The general/hero glyphs have no box.
    */
   get showBox(): boolean {
-    if (!this.isUS) {
-      // German armor uses a bare silhouette; other German types keep the box.
-      return this.germanSymbol !== undefined && this.germanSymbol !== 'armor';
+    const isTankOrArmor = this.isUS
+      ? this.type === 'tank'
+      : this.germanSymbol === 'armor';
+
+    if (isTankOrArmor) {
+      // Counter style: silhouette, no box. Card style: box + NATO oval.
+      return this.symbolStyle === 'card';
     }
-    // US: tank (silhouette), general and hero have no box.
-    return this.type !== 'general' && this.type !== 'hero' && this.type !== 'tank';
+
+    if (!this.isUS) {
+      return this.germanSymbol !== undefined;
+    }
+    // US: general and hero have no box.
+    return this.type !== 'general' && this.type !== 'hero';
   }
 
   /** Generate a 5-point star polygon centered at (cx, cy) with outer radius r and inner radius ri */

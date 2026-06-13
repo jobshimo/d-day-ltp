@@ -6,7 +6,7 @@ import { TERRAIN_COLORS, GERMAN_POS_COLORS } from './terrain-palette';
 // ---------------------------------------------------------------------------
 
 export type SimbologiaRenderAs =
-  | { kind: 'unit-symbol'; type: UnitType; germanSymbol?: GermanUnitSymbol; color?: string }
+  | { kind: 'unit-symbol'; type: UnitType; germanSymbol?: GermanUnitSymbol; color?: string; symbolStyle?: 'counter' | 'card' }
   | { kind: 'target-symbol'; symbol: TargetSymbol; control: 'adjacent' | 'own' }
   | { kind: 'fire-dots'; dots: FireDotIntensity[] }
   | { kind: 'color-swatch'; color: string; label: string }
@@ -50,10 +50,17 @@ const US_UNIT_ENTRIES: SimbologiaEntry[] = [
   },
   {
     key: 'us-tank',
-    nameEs: 'Tanque (Blindado)',
-    meaningEs: 'Unidad blindada. La ficha muestra una silueta lateral de tanque (casco + torreta + cañón + orugas). El símbolo OTAN de blindado (elipse) aparece solo en las cartas, no en las fichas del tablero.',
+    nameEs: 'Tanque (en la ficha: silueta)',
+    meaningEs: 'Unidad blindada. En la ficha del tablero: silueta lateral de tanque (casco + torreta + cañón + orugas). Este es el símbolo real de la ficha Devir.',
     ruleRef: '§2.22',
-    render: { kind: 'unit-symbol', type: 'tank' as UnitType },
+    render: { kind: 'unit-symbol', type: 'tank' as UnitType, symbolStyle: 'counter' },
+  },
+  {
+    key: 'us-tank-card',
+    nameEs: 'Tanque (en las cartas: símbolo OTAN)',
+    meaningEs: 'En las cartas de unidad: símbolo OTAN de blindado, una elipse horizontal dentro de la caja rectangular. Mismo significado que la silueta; contexto de carta.',
+    ruleRef: '§2.22',
+    render: { kind: 'unit-symbol', type: 'tank' as UnitType, symbolStyle: 'card' },
   },
   {
     key: 'us-arty',
@@ -106,10 +113,17 @@ const GERMAN_UNIT_ENTRIES: SimbologiaEntry[] = [
   },
   {
     key: 'de-armor',
-    nameEs: 'Blindado alemán',
-    meaningEs: 'Unidad blindada alemana. La ficha muestra una silueta lateral de tanque (igual que el tanque aliado). El símbolo OTAN de blindado (elipse) aparece solo en las cartas, no en las fichas del tablero.',
+    nameEs: 'Blindado alemán (en la ficha: silueta)',
+    meaningEs: 'Unidad blindada alemana. En la ficha del tablero: silueta lateral de tanque (igual que el tanque aliado). Este es el símbolo real de la ficha Devir.',
     ruleRef: '§2.1',
-    render: { kind: 'unit-symbol', germanSymbol: 'armor' as GermanUnitSymbol, type: 'infantry' as UnitType, color: '#e8e8e8' },
+    render: { kind: 'unit-symbol', germanSymbol: 'armor' as GermanUnitSymbol, type: 'infantry' as UnitType, color: '#e8e8e8', symbolStyle: 'counter' },
+  },
+  {
+    key: 'de-armor-card',
+    nameEs: 'Blindado alemán (en las cartas: símbolo OTAN)',
+    meaningEs: 'En las cartas de unidad alemana: símbolo OTAN de blindado, elipse horizontal dentro de la caja rectangular. Mismo significado que la silueta; contexto de carta.',
+    ruleRef: '§2.1',
+    render: { kind: 'unit-symbol', germanSymbol: 'armor' as GermanUnitSymbol, type: 'infantry' as UnitType, color: '#e8e8e8', symbolStyle: 'card' },
   },
   {
     key: 'de-artillery',
