@@ -1,0 +1,30 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String           @id @default(cuid())
+  email        String           @unique
+  passwordHash String
+  createdAt    DateTime         @default(now())
+  progress     ModuleProgress[]
+}
+
+model ModuleProgress {
+  id               String    @id @default(cuid())
+  userId           String
+  moduleId         String
+  lessonsCompleted String[]
+  drillResults     Json      @default("{}")
+  quizResult       Json?
+  unlockedAt       DateTime?
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, moduleId])
+  @@index([userId])
+}
