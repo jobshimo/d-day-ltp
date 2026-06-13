@@ -1,0 +1,20 @@
+{
+  "name": "domain-narration",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/domain/narration/src",
+  "projectType": "library",
+  "tags": ["scope:domain", "type:lib"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{workspaceRoot}/coverage/libs/domain/narration"],
+      "options": {
+        "configFile": "libs/domain/narration/vitest.config.mts",
+        "reportsDirectory": "../../../coverage/libs/domain/narration"
+      }
+    }
+  }
+}

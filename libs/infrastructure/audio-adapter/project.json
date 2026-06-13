@@ -1,0 +1,20 @@
+{
+  "name": "infrastructure-audio-adapter",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/infrastructure/audio-adapter/src",
+  "projectType": "library",
+  "tags": ["scope:infrastructure", "type:lib"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{workspaceRoot}/coverage/libs/infrastructure/audio-adapter"],
+      "options": {
+        "configFile": "libs/infrastructure/audio-adapter/vitest.config.mts",
+        "reportsDirectory": "../../../coverage/libs/infrastructure/audio-adapter"
+      }
+    }
+  }
+}
