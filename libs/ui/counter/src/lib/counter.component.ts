@@ -75,7 +75,7 @@ const GERMAN_SYMBOL_ES: Record<string, string> = {
     <svg
       [attr.viewBox]="viewBox()"
       [attr.width]="size"
-      [attr.height]="size"
+      [attr.height]="heightPx()"
       role="img"
       [attr.aria-label]="ariaLabel()"
       class="ddob-counter">
@@ -391,11 +391,29 @@ export class CounterComponent implements OnChanges {
   });
 
   /**
-   * viewBox expands in annotated mode to accommodate right-side and top/bottom callout labels.
-   * Annotated viewBox: "−20 −15 160 95" — adds negative offset for left/top labels,
-   * extends right for right-side labels (need ~140px total width, ~80px total height).
+   * viewBox expands in annotated mode to fit the Spanish callout labels around the
+   * 60x60 counter. Left −95 fits "Símbolo de objetivo"; right reaches 157 to fit
+   * "Caja de desembarco"; top/bottom (−15..80) fit "Tipo de unidad"/"Escalones".
    */
+  private readonly ANNOTATED_VIEWBOX = { x: -95, y: -15, w: 252, h: 95 };
+
   readonly viewBox = computed(() => {
-    return this.annotated && this.variant === 'full' ? '-20 -15 160 95' : '0 0 60 60';
+    if (this.annotated && this.variant === 'full') {
+      const v = this.ANNOTATED_VIEWBOX;
+      return `${v.x} ${v.y} ${v.w} ${v.h}`;
+    }
+    return '0 0 60 60';
+  });
+
+  /**
+   * Render height in px. Square for the plain counter; for annotated mode the height
+   * follows the wide viewBox aspect so the label area is not letterboxed.
+   */
+  readonly heightPx = computed(() => {
+    if (this.annotated && this.variant === 'full') {
+      const v = this.ANNOTATED_VIEWBOX;
+      return Math.round(this.size * (v.h / v.w));
+    }
+    return this.size;
   });
 }

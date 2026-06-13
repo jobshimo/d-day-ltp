@@ -122,9 +122,10 @@ export const MODULE_1_LESSONS: Lesson[] = [
             unitFireDots: ['steady', 'sporadic'],
           },
           side: 'front',
-          // size=440: annotated viewBox is "-20 -15 160 95" (width=160).
-          // scale = 440/160 = 2.75 → counter body = 165px, label text ≈22px.
-          size: 440,
+          // size=720: annotated viewBox is "-95 -15 252 95" (width=252), wide enough
+          // for the Spanish labels. scale = 720/252 ≈ 2.86 → counter body ≈171px,
+          // label text ≈23px; height auto-follows the viewBox aspect.
+          size: 720,
           annotated: true,
         },
       },
