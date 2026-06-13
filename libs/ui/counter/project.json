@@ -1,0 +1,20 @@
+{
+  "name": "ui-counter",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/ui/counter/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["scope:ui", "type:lib"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{workspaceRoot}/coverage/libs/ui/counter"],
+      "options": {
+        "reportsDirectory": "../../../coverage/libs/ui/counter"
+      }
+    }
+  }
+}

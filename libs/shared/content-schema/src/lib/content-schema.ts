@@ -32,12 +32,26 @@ export interface TermEntry {
   devir: boolean; // true = confirmed from Devir manual; false = placeholder
 }
 
+// Division types for counter color differentiation
+export type USDivision = '1st' | '29th';
+export type GermanDivision = '352nd' | '716th';
+export type GermanUnitSymbol = 'infantry' | 'armor' | 'artillery' | 'artillery-88';
+
+// Counter lesson configuration
+export interface CounterLessonConfig {
+  unit: USUnitState | GermanUnitState;
+  side: 'front' | 'back';
+  size?: number;       // px, default 120
+  annotated?: boolean; // default true in lesson context
+}
+
 // Micro-lesson content block
 export interface LessonBlock {
-  type: 'prose' | 'rule-callout' | 'image' | 'svg-snippet';
+  type: 'prose' | 'rule-callout' | 'image' | 'svg-snippet' | 'counter';
   content: string; // Spanish prose OR asset path
   ruleRefs?: RuleRef[];
   altText?: string; // for image/SVG, in Spanish
+  counterConfig?: CounterLessonConfig; // present only when type === 'counter'
 }
 
 export interface WorkedExampleStep {
@@ -153,6 +167,14 @@ export interface USUnitState {
   attackStrength: number;
   isDisrupted: boolean;
   hexId: string | null;
+  // Counter rendering fields (optional, back-compat)
+  designation?: string;               // e.g. "A/116"
+  reducedAttackStrength?: number;     // back-face strength
+  arrivalTurn?: number | null;        // null = setup placement
+  beachLandingBox?: string | null;    // e.g. "DW1"
+  range?: number | 'U' | null;        // 'U' = unlimited; null = adjacent only
+  division?: USDivision;              // color tier
+  unitFireDots?: FireDotIntensity[];  // per-counter fire-susceptibility dots
 }
 
 export interface GermanUnitState {
@@ -167,6 +189,9 @@ export interface GermanUnitState {
   depthMarkerType?: 'WN' | 'building' | 'mobile';
   isDisrupted: boolean;
   hexId: string;
+  // Counter rendering fields (optional, back-compat)
+  germanDivision?: GermanDivision;
+  germanUnitSymbol?: GermanUnitSymbol;
 }
 
 export interface BoardSnippet {
