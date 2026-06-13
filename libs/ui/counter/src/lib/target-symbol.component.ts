@@ -15,7 +15,7 @@ import type { TargetSymbol } from 'content-schema';
   schemas: [NO_ERRORS_SCHEMA],
   template: `
     @if (symbol === 'circle') {
-      <circle
+      <svg:circle
         [attr.cx]="cx"
         [attr.cy]="cy"
         [attr.r]="size / 2"
@@ -24,14 +24,14 @@ import type { TargetSymbol } from 'content-schema';
         stroke-width="1"
         aria-hidden="true" />
     } @else if (symbol === 'diamond') {
-      <polygon
+      <svg:polygon
         [attr.points]="diamondPoints"
         [attr.fill]="fill"
         stroke="#111"
         stroke-width="1"
         aria-hidden="true" />
     } @else if (symbol === 'triangle') {
-      <polygon
+      <svg:polygon
         [attr.points]="trianglePoints"
         [attr.fill]="fill"
         stroke="#111"
