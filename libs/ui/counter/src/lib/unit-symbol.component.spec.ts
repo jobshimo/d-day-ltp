@@ -9,7 +9,7 @@ import { UnitSymbolComponent } from './unit-symbol.component';
   imports: [UnitSymbolComponent],
   template: `
     <svg>
-      <svg:g ddobUnitSymbol [type]="type" [germanSymbol]="germanSymbol" [color]="color" />
+      <svg:g ddobUnitSymbol [type]="type" [germanSymbol]="germanSymbol" [color]="color" [symbolStyle]="symbolStyle" />
     </svg>
   `,
 })
@@ -17,21 +17,24 @@ class HostComponent {
   @Input() type: UnitType = 'infantry';
   @Input() germanSymbol?: GermanUnitSymbol;
   @Input() color = '#ffffff';
+  @Input() symbolStyle: 'counter' | 'card' = 'counter';
 }
 
-function setupUS(type: UnitType, color = '#ffffff') {
+function setupUS(type: UnitType, color = '#ffffff', symbolStyle: 'counter' | 'card' = 'counter') {
   const fixture = TestBed.createComponent(HostComponent);
   fixture.componentRef.setInput('type', type);
   fixture.componentRef.setInput('color', color);
+  fixture.componentRef.setInput('symbolStyle', symbolStyle);
   fixture.detectChanges();
   return fixture.nativeElement as HTMLElement;
 }
 
-function setupGerman(germanSymbol: GermanUnitSymbol, color = '#e8e8e8') {
+function setupGerman(germanSymbol: GermanUnitSymbol, color = '#e8e8e8', symbolStyle: 'counter' | 'card' = 'counter') {
   const fixture = TestBed.createComponent(HostComponent);
   fixture.componentRef.setInput('type', 'infantry'); // required input, ignored when germanSymbol set
   fixture.componentRef.setInput('germanSymbol', germanSymbol);
   fixture.componentRef.setInput('color', color);
+  fixture.componentRef.setInput('symbolStyle', symbolStyle);
   fixture.detectChanges();
   return fixture.nativeElement as HTMLElement;
 }
@@ -49,15 +52,25 @@ describe('UnitSymbolComponent — US types', () => {
     expect(lines.length).toBeGreaterThanOrEqual(2);
   });
 
-  it('tank renders a silhouette (rect elements for hull/turret/tracks, no ellipse)', () => {
+  it('tank default (symbolStyle=counter) renders a silhouette — no ellipse', () => {
     const el = setupUS('tank');
     // Silhouette uses filled rects and circles — no NATO armor ellipse
     const ellipse = el.querySelector('[ddobUnitSymbol] ellipse');
     expect(ellipse).toBeNull();
     // Hull, turret, tracks, barrel are all <rect> or <circle> elements
     const rects = el.querySelectorAll('[ddobUnitSymbol] rect');
-    // At least 4 rects: outer box + track base + hull + turret + barrel
+    // At least 4 rects: track base + hull + turret + barrel (no outer box)
     expect(rects.length).toBeGreaterThanOrEqual(4);
+  });
+
+  it('tank with symbolStyle=card renders NATO armor oval (ellipse) inside the inner box', () => {
+    const el = setupUS('tank', '#ffffff', 'card');
+    const ellipse = el.querySelector('[ddobUnitSymbol] ellipse');
+    expect(ellipse).toBeTruthy();
+    // Should have the inner box rect (no silhouette rects)
+    const rects = el.querySelectorAll('[ddobUnitSymbol] rect');
+    // Only 1 rect: the inner bounding box
+    expect(rects.length).toBe(1);
   });
 
   it('arty renders a filled <circle> (artillery dot)', () => {
@@ -110,7 +123,7 @@ describe('UnitSymbolComponent — German types', () => {
     expect(lines.length).toBeGreaterThanOrEqual(2);
   });
 
-  it('german armor renders a silhouette (rect elements for hull/turret/tracks, no ellipse)', () => {
+  it('german armor default (symbolStyle=counter) renders a silhouette — no ellipse', () => {
     const el = setupGerman('armor');
     // Silhouette uses filled rects and circles — no NATO armor ellipse
     const ellipse = el.querySelector('[ddobUnitSymbol] ellipse');
@@ -118,6 +131,15 @@ describe('UnitSymbolComponent — German types', () => {
     // Hull, turret, tracks, barrel are rect/circle elements
     const rects = el.querySelectorAll('[ddobUnitSymbol] rect');
     expect(rects.length).toBeGreaterThanOrEqual(4);
+  });
+
+  it('german armor with symbolStyle=card renders NATO armor oval (ellipse) inside the inner box', () => {
+    const el = setupGerman('armor', '#e8e8e8', 'card');
+    const ellipse = el.querySelector('[ddobUnitSymbol] ellipse');
+    expect(ellipse).toBeTruthy();
+    // Should have the inner box rect only
+    const rects = el.querySelectorAll('[ddobUnitSymbol] rect');
+    expect(rects.length).toBe(1);
   });
 
   it('german artillery renders a filled circle dot', () => {

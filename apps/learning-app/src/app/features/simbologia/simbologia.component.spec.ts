@@ -134,7 +134,7 @@ describe('SimbologiaComponent', () => {
     }
   });
 
-  it('fire-dots entries render an <svg> wrapper with width >= 64', () => {
+  it('fire-dots entries render an <svg> wrapper that is legible (width >= 56, height >= 56)', () => {
     const fixture = TestBed.createComponent(SimbologiaComponent);
     fixture.detectChanges();
     const svgs: SVGElement[] = Array.from(
@@ -146,7 +146,10 @@ describe('SimbologiaComponent', () => {
     expect(fireDotSvgs.length).toBeGreaterThan(0);
     for (const svg of fireDotSvgs) {
       const w = Number(svg.getAttribute('width'));
-      expect(w).toBeGreaterThanOrEqual(64);
+      const h = Number(svg.getAttribute('height'));
+      // 56×56 px gives ×4 zoom on the 14×14 viewBox — dot radius ≈ 12 px, clearly legible
+      expect(w).toBeGreaterThanOrEqual(56);
+      expect(h).toBeGreaterThanOrEqual(56);
     }
   });
 

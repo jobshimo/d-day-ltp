@@ -149,14 +149,14 @@ describe('SYMBOLOGY', () => {
     expect(ids).toContain('us-divisions');
   });
 
-  it('us-units category has 8 entries', () => {
+  it('us-units category has 9 entries (8 unit types + tank card-style NATO oval)', () => {
     const cat = SYMBOLOGY.find((c) => c.id === 'us-units')!;
-    expect(cat.entries).toHaveLength(8);
+    expect(cat.entries).toHaveLength(9);
   });
 
-  it('german-units category has 4 entries including artillery-88', () => {
+  it('german-units category has 5 entries including artillery-88 and armor card-style NATO oval', () => {
     const cat = SYMBOLOGY.find((c) => c.id === 'german-units')!;
-    expect(cat.entries).toHaveLength(4);
+    expect(cat.entries).toHaveLength(5);
     const has88 = cat.entries.some(
       (e) => e.render.kind === 'unit-symbol' && e.render.germanSymbol === 'artillery-88',
     );

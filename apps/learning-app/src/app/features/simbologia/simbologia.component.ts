@@ -65,6 +65,8 @@ import type { SimbologiaCategory, SimbologiaRenderAs } from 'content';
                         We show the full 60×60 space at 64×64 px so every glyph
                         is clearly legible without clipping.
                         Host is <svg:g ddobUnitSymbol> so the SVG render tree is unbroken.
+                        symbolStyle controls tank/armor rendering: 'counter' (silhouette)
+                        or 'card' (NATO oval). Defaults to 'counter' when not set.
                       -->
                       <svg viewBox="0 0 60 60" width="64" height="64"
                            role="img"
@@ -76,6 +78,7 @@ import type { SimbologiaCategory, SimbologiaRenderAs } from 'content';
                           [type]="entry.render.type"
                           [germanSymbol]="entry.render.germanSymbol"
                           [color]="entry.render.color ?? '#ffffff'"
+                          [symbolStyle]="entry.render.symbolStyle ?? 'counter'"
                           [strokeWidth]="2" />
                       </svg>
                     }
@@ -103,16 +106,18 @@ import type { SimbologiaCategory, SimbologiaRenderAs } from 'content';
 
                     @case ('fire-dots') {
                       <!--
-                        Fire dots live at y=5 in 60×60 space (translate(x, 5)).
-                        We frame just the top band (y=0..16) but display it at a
-                        legible size: viewBox "0 0 60 16" → 64×18 px.
+                        Fire dots live at translate(5, 5) in 60×60 space (r=3).
+                        For the symbology legend we crop to just the first dot area:
+                        viewBox "0 0 14 14" at 56×56 px → scale ×4 → dot radius 12 px.
+                        This makes intense/steady/sporadic clearly legible (color + pattern).
+                        Counter rendering is NOT affected — only this legend display.
                         Host is <svg:g ddobFireDots> so the SVG render tree is unbroken.
                       -->
-                      <svg viewBox="0 0 60 16" width="64" height="18"
+                      <svg viewBox="0 0 14 14" width="56" height="56"
                            role="img"
                            [attr.aria-label]="'Punto de fuego: ' + entry.nameEs">
-                        <rect width="60" height="16"
-                              fill="#2a2c30" rx="4" aria-hidden="true" />
+                        <rect width="14" height="14"
+                              fill="#2a2c30" rx="2" aria-hidden="true" />
                         <svg:g ddobFireDots [dots]="entry.render.dots" />
                       </svg>
                     }
