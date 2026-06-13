@@ -17,23 +17,23 @@ import { BreadcrumbComponent } from '../../shared/breadcrumb.component';
 // ---- Stubs ----
 
 const noopNarrationPlayer = {
-  play: async () => {},
-  pause: () => {},
-  stop: () => {},
+  play: vi.fn().mockResolvedValue(undefined),
+  pause: vi.fn(),
+  stop: vi.fn(),
 };
 
 const noopProgressRepo: ProgressRepository = {
-  getModuleProgress: async () => ({
+  getModuleProgress: vi.fn().mockResolvedValue({
     moduleId: 'module-1',
     lessonsCompleted: [],
     drillResults: [],
     quizResult: null,
   }),
-  setLessonComplete: async () => {},
-  setDrillResult: async () => {},
-  setQuizResult: async () => {},
-  isModuleUnlocked: async () => true,
-  resetProgress: async () => {},
+  setLessonComplete: vi.fn().mockResolvedValue(undefined),
+  setDrillResult: vi.fn().mockResolvedValue(undefined),
+  setQuizResult: vi.fn().mockResolvedValue(undefined),
+  isModuleUnlocked: vi.fn().mockResolvedValue(true),
+  resetProgress: vi.fn().mockResolvedValue(undefined),
 };
 
 /**

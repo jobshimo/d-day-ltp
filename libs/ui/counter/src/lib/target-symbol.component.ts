@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, NO_ERRORS_SCHEMA } from '@angular/core';
 import type { TargetSymbol } from 'content-schema';
 
 /**
@@ -12,6 +12,7 @@ import type { TargetSymbol } from 'content-schema';
   standalone: true,
   selector: 'ddob-target-symbol',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  schemas: [NO_ERRORS_SCHEMA],
   template: `
     @if (symbol === 'circle') {
       <circle
