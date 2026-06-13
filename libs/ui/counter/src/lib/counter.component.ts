@@ -98,9 +98,9 @@ const GERMAN_SYMBOL_ES: Record<string, string> = {
 
       <!-- Fire dots (top-left, only when present) — compact also shows them -->
       @if (hasFireDots()) {
-        <g transform="translate(2, 0)" aria-hidden="true">
-          <ddob-fire-dots [dots]="fireDots()" />
-        </g>
+        <svg:g transform="translate(2, 0)" aria-hidden="true">
+          <svg:g ddobFireDots [dots]="fireDots()" />
+        </svg:g>
       }
 
       <!-- 2. Designation text (full mode only, top centered) -->
@@ -132,13 +132,13 @@ const GERMAN_SYMBOL_ES: Record<string, string> = {
 
       <!-- 4. Unit symbol glyph (upper-center; inner box x=14 y=16 w=32 h=20, center 30,26) -->
       @if (isUS()) {
-        <ddob-unit-symbol
+        <svg:g ddobUnitSymbol
           [type]="usUnit()!.type"
           color="#ffffff"
           [strokeWidth]="2"
           aria-hidden="true" />
       } @else {
-        <ddob-unit-symbol
+        <svg:g ddobUnitSymbol
           [type]="'infantry'"
           [germanSymbol]="germanUnit()?.germanUnitSymbol"
           [color]="germanGlyphColor()"
@@ -173,7 +173,7 @@ const GERMAN_SYMBOL_ES: Record<string, string> = {
 
       <!-- 7. Target symbol: BOTTOM-LEFT (full mode only for US) -->
       @if (variant === 'full' && isUS()) {
-        <ddob-target-symbol
+        <svg:g ddobTargetSymbol
           [symbol]="usUnit()!.targetSymbol"
           [control]="targetControl()"
           [size]="12"

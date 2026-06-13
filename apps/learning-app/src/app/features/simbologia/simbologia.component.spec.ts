@@ -109,7 +109,7 @@ describe('SimbologiaComponent', () => {
     );
     // Filter to those that wrap unit-symbol (they have role=img and a ddob-unit-symbol inside)
     const unitSymbolSvgs = svgs.filter((svg) =>
-      svg.querySelector('ddob-unit-symbol') !== null
+      svg.querySelector('[ddobUnitSymbol]') !== null
     );
     expect(unitSymbolSvgs.length).toBeGreaterThan(0);
     for (const svg of unitSymbolSvgs) {
@@ -125,7 +125,7 @@ describe('SimbologiaComponent', () => {
       fixture.nativeElement.querySelectorAll('.simbologia__symbol svg')
     );
     const targetSymbolSvgs = svgs.filter((svg) =>
-      svg.querySelector('ddob-target-symbol') !== null
+      svg.querySelector('[ddobTargetSymbol]') !== null
     );
     expect(targetSymbolSvgs.length).toBeGreaterThan(0);
     for (const svg of targetSymbolSvgs) {
@@ -141,7 +141,7 @@ describe('SimbologiaComponent', () => {
       fixture.nativeElement.querySelectorAll('.simbologia__symbol svg')
     );
     const fireDotSvgs = svgs.filter((svg) =>
-      svg.querySelector('ddob-fire-dots') !== null
+      svg.querySelector('[ddobFireDots]') !== null
     );
     expect(fireDotSvgs.length).toBeGreaterThan(0);
     for (const svg of fireDotSvgs) {
@@ -157,7 +157,7 @@ describe('SimbologiaComponent', () => {
       fixture.nativeElement.querySelectorAll('.simbologia__symbol svg')
     );
     const unitSymbolSvgs = svgs.filter((svg) =>
-      svg.querySelector('ddob-unit-symbol') !== null
+      svg.querySelector('[ddobUnitSymbol]') !== null
     );
     for (const svg of unitSymbolSvgs) {
       expect(svg.getAttribute('viewBox')).toBe('0 0 60 60');

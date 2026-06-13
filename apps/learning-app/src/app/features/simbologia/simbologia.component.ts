@@ -64,6 +64,7 @@ import type { SimbologiaCategory, SimbologiaRenderAs } from 'content';
                         Inner box: x=14 y=18 w=32 h=20.
                         We show the full 60×60 space at 64×64 px so every glyph
                         is clearly legible without clipping.
+                        Host is <svg:g ddobUnitSymbol> so the SVG render tree is unbroken.
                       -->
                       <svg viewBox="0 0 60 60" width="64" height="64"
                            role="img"
@@ -71,7 +72,7 @@ import type { SimbologiaCategory, SimbologiaRenderAs } from 'content';
                         <rect width="60" height="60"
                               [attr.fill]="unitSymbolBg(entry.render)"
                               rx="4" aria-hidden="true" />
-                        <ddob-unit-symbol
+                        <svg:g ddobUnitSymbol
                           [type]="entry.render.type"
                           [germanSymbol]="entry.render.germanSymbol"
                           [color]="entry.render.color ?? '#ffffff'"
@@ -84,13 +85,14 @@ import type { SimbologiaCategory, SimbologiaRenderAs } from 'content';
                         Target symbols (circle/diamond/triangle) are rendered at
                         cx=30 cy=30 size=24 inside a 60×60 viewBox.
                         Displayed at 64×64 px for clear legibility.
+                        Host is <svg:g ddobTargetSymbol> so the SVG render tree is unbroken.
                       -->
                       <svg viewBox="0 0 60 60" width="64" height="64"
                            role="img"
                            [attr.aria-label]="'Símbolo de objetivo: ' + entry.nameEs">
                         <rect width="60" height="60"
                               fill="#2a2c30" rx="4" aria-hidden="true" />
-                        <ddob-target-symbol
+                        <svg:g ddobTargetSymbol
                           [symbol]="entry.render.symbol"
                           [control]="entry.render.control"
                           [size]="24"
@@ -104,13 +106,14 @@ import type { SimbologiaCategory, SimbologiaRenderAs } from 'content';
                         Fire dots live at y=5 in 60×60 space (translate(x, 5)).
                         We frame just the top band (y=0..16) but display it at a
                         legible size: viewBox "0 0 60 16" → 64×18 px.
+                        Host is <svg:g ddobFireDots> so the SVG render tree is unbroken.
                       -->
                       <svg viewBox="0 0 60 16" width="64" height="18"
                            role="img"
                            [attr.aria-label]="'Punto de fuego: ' + entry.nameEs">
                         <rect width="60" height="16"
                               fill="#2a2c30" rx="4" aria-hidden="true" />
-                        <ddob-fire-dots [dots]="entry.render.dots" />
+                        <svg:g ddobFireDots [dots]="entry.render.dots" />
                       </svg>
                     }
 

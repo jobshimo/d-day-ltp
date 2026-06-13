@@ -17,9 +17,10 @@ const FIRE_DOT_COLORS: Record<FireDotIntensity, string> = {
  * - steady: filled disc + white center dot
  * - sporadic: dashed outer ring
  */
+/* eslint-disable @angular-eslint/component-selector -- attribute selector required: custom-element host breaks SVG render tree (getBBox=0) */
 @Component({
   standalone: true,
-  selector: 'ddob-fire-dots',
+  selector: '[ddobFireDots]',
   changeDetection: ChangeDetectionStrategy.OnPush,
   schemas: [NO_ERRORS_SCHEMA],
   template: `

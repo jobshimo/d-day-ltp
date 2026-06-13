@@ -16,9 +16,10 @@ import type { UnitType, GermanUnitSymbol } from 'content-schema';
  *   @Input() color: string            — stroke/fill color of the glyph
  *   @Input() strokeWidth: number      — line weight in 60x60 units
  */
+/* eslint-disable @angular-eslint/component-selector -- attribute selector required: custom-element host breaks SVG render tree (getBBox=0) */
 @Component({
   standalone: true,
-  selector: 'ddob-unit-symbol',
+  selector: '[ddobUnitSymbol]',
   changeDetection: ChangeDetectionStrategy.OnPush,
   schemas: [NO_ERRORS_SCHEMA],
   template: `

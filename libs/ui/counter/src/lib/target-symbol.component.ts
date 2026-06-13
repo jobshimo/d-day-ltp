@@ -8,9 +8,10 @@ import type { TargetSymbol } from 'content-schema';
  * - control='adjacent' → black fill (unit controls adjacent hexes)
  * - control='own' → white fill with black outline (controls only own hex)
  */
+/* eslint-disable @angular-eslint/component-selector -- attribute selector required: custom-element host breaks SVG render tree (getBBox=0) */
 @Component({
   standalone: true,
-  selector: 'ddob-target-symbol',
+  selector: '[ddobTargetSymbol]',
   changeDetection: ChangeDetectionStrategy.OnPush,
   schemas: [NO_ERRORS_SCHEMA],
   template: `
