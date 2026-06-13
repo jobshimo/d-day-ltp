@@ -88,8 +88,22 @@ by hand when desired.
 - espeak-ng is **bundled** via `espeakng-loader` — no system-level espeak package
   is required.
 - German proper nouns (Widerstandsnest, Kampfgruppe, etc.) are phonetized with
-  Spanish phonetics under `lang_code='e'`. This is acceptable for v1; a
-  pronunciation dictionary can be added in future iterations.
+  Spanish phonetics under `lang_code='e'`. Recurring ones can be tuned in
+  `pronunciation.json` (see below).
+
+### Spoken-form normalization (`pronunciation.json`)
+
+The on-screen lesson text is the *written* form and is **never modified**. Before
+synthesis, `extract-narration.mjs` rewrites a *spoken* form using the ordered rules
+in `pronunciation.json`, so abbreviations expand and foreign tokens are spoken
+naturally in Spanish. The manifest stores both `text` (written) and `spoken`
+(what Kokoro reads); the content hash is computed over `spoken`, so changing a
+rule regenerates the affected audio.
+
+Current rules cover, e.g.: `EE.UU.` → "Estados Unidos", `D-Day at Omaha Beach` →
+"Día D en la playa de Omaha", `WN` → "uve doble ene", `§6.31` → "sección 6.31",
+`Omaha` → "Ómaja". Rules apply top-to-bottom; place the most specific phrases
+first (the full title before the bare `Omaha`).
 
 ---
 
@@ -98,6 +112,7 @@ by hand when desired.
 | File | Role |
 |------|------|
 | `narration.config.json` | Single source of truth for voice / lang / sampleRate |
+| `pronunciation.json` | Ordered spoken-form normalization rules (written ≠ spoken) |
 | `extract-narration.mjs` | Node ESM script — reads content, writes manifest + TS |
 | `generate.py` | Python script — reads manifest, calls Kokoro, writes MP3s |
 | `requirements.txt` | Python dependencies for the `.venv` |

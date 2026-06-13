@@ -31,6 +31,27 @@ const configPath = resolve(__dirname, 'narration.config.json');
 const config = JSON.parse(readFileSync(configPath, 'utf8'));
 const { voice } = config;
 
+// Load spoken-form normalization rules (display text is never altered; only the
+// text handed to the TTS engine is rewritten so abbreviations expand and foreign
+// tokens are spoken naturally in Spanish).
+const pronPath = resolve(__dirname, 'pronunciation.json');
+const pron = JSON.parse(readFileSync(pronPath, 'utf8'));
+/** @type {Array<{find: string, replace: string, regex?: boolean, flags?: string}>} */
+const pronRules = pron.rules ?? [];
+
+/** @param {string} text @returns {string} */
+function toSpokenForm(text) {
+  let out = text;
+  for (const rule of pronRules) {
+    if (rule.regex) {
+      out = out.replace(new RegExp(rule.find, rule.flags ?? 'g'), rule.replace);
+    } else {
+      out = out.split(rule.find).join(rule.replace);
+    }
+  }
+  return out;
+}
+
 // Use createRequire to load the content lib (compiled via tsconfigPaths at runtime)
 // We load via the direct file path to avoid needing the full Nx build pipeline.
 const require = createRequire(import.meta.url);
@@ -78,11 +99,15 @@ for (const mod of ALL_MODULES) {
       const text = block.content.trim();
       if (!text) continue;
 
+      // `spoken` is what the TTS engine reads; `text` is the on-screen form.
+      const spoken = toSpokenForm(text);
+
       const key = `${lesson.id}#${i}`;
-      const hash = computeHash(text, voice);
+      // Hash over the spoken form so changing a pronunciation rule regenerates audio.
+      const hash = computeHash(spoken, voice);
       const file = `${hash}.mp3`;
 
-      manifest.push({ key, lessonId: lesson.id, blockIndex: i, text, file, voice });
+      manifest.push({ key, lessonId: lesson.id, blockIndex: i, text, spoken, file, voice });
     }
   }
 }

@@ -1,0 +1,14 @@
+{
+  "_comment": "Spoken-form normalization for TTS only. The on-screen lesson text is NEVER changed by this; these rules rewrite ONLY the text sent to Kokoro so abbreviations expand and foreign tokens are spoken naturally in Spanish. Rules apply IN ORDER (top to bottom). Longest/most-specific phrases must come before their fragments.",
+  "rules": [
+    { "find": "D-Day at Omaha Beach", "replace": "Día D en la playa de Omaha", "regex": false },
+    { "find": "EE\\.?\\s?UU\\.?", "replace": "Estados Unidos", "regex": true, "flags": "g" },
+    { "find": "\\bEUA\\b", "replace": "Estados Unidos", "regex": true, "flags": "g" },
+    { "find": "D-Day", "replace": "Día D", "regex": false },
+    { "find": "\\bHQ\\b", "replace": "cuartel general", "regex": true, "flags": "g" },
+    { "find": "\\bWN\\b", "replace": "uve doble ene", "regex": true, "flags": "g" },
+    { "find": "§\\s*", "replace": "sección ", "regex": true, "flags": "g" },
+    { "find": "\\s—\\s", "replace": ". ", "regex": true, "flags": "g" },
+    { "find": "Omaha", "replace": "Ómaja", "regex": false }
+  ]
+}

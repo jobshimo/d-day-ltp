@@ -77,7 +77,8 @@ skipped = 0
 total = len(manifest)
 
 for entry in manifest:
-    text = entry['text'].strip()
+    # Prefer the normalized spoken form; fall back to the raw text for older manifests.
+    text = (entry.get('spoken') or entry['text']).strip()
     if not text:
         skipped += 1
         continue

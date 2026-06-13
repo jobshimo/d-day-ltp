@@ -42,3 +42,14 @@ test-output/
 test-results/
 
 .angular
+
+# TTS tooling (local Python venv + scratch audio); generated narration assets
+# live under libs/content/src/assets/audio and ARE committed.
+tools/tts/.venv/
+tools/tts/*.wav
+tools/tts/smoke_es.wav
+tools/tts/sample_*.wav
+# scratch audition helpers (one-off; the real pipeline is extract-narration.mjs + generate.py)
+tools/tts/smoke_test.py
+tools/tts/verify_accents.py
+tools/tts/audition.py
