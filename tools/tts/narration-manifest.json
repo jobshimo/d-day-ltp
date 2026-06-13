@@ -1,0 +1,218 @@
+[
+  {
+    "key": "lesson-1-1#0",
+    "lessonId": "lesson-1-1",
+    "blockIndex": 0,
+    "text": "D-Day at Omaha Beach es un juego solitario que simula las doce horas más cruciales del 6 de junio de 1944: el asalto anfibio de las fuerzas estadounidenses a las playas normandas en lo que pasaría a la historia como Omaha Beach. De las cinco playas asaltadas por los Aliados ese día, Omaha fue la más sangrienta y la más difícil de conquistar. Durante varias horas, el destino de la invasión permaneció en la balanza.",
+    "file": "ae549e2e3789.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-1-1#1",
+    "lessonId": "lesson-1-1",
+    "blockIndex": 1,
+    "text": "En este juego, tú controlas las fuerzas estadounidenses que intentan establecer una cabeza de playa, mientras el sistema de juego dirige las fuerzas alemanas que se oponen a tu avance. No hay dados: las cartas determinan los resultados, lo que genera situaciones distintas en cada partida.",
+    "file": "a9a98e865538.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-1-1#2",
+    "lessonId": "lesson-1-1",
+    "blockIndex": 2,
+    "text": "El juego es solitario: tú diriges las tropas de EE.UU. y el sistema de juego controla a los alemanes. También existe una variante para dos jugadores donde cada uno dirige una división.",
+    "file": "c548caeb335c.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-1-1#3",
+    "lessonId": "lesson-1-1",
+    "blockIndex": 3,
+    "text": "Históricamente, el plan de invasión aliado fracasó en gran medida: el apoyo de aviación y artillería naval fue insuficiente, los blindados anfibios se hundieron antes de llegar a la orilla. Sin embargo, el valor e iniciativa del soldado estadounidense logró establecer una cabeza de playa viable, a un coste terrible en vidas. El juego captura esta tensión: tus recursos son limitados, las bajas son costosas y las fuerzas alemanas responden de forma impredecible pero coherente.",
+    "file": "04d91079d65e.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-1-1#4",
+    "lessonId": "lesson-1-1",
+    "blockIndex": 4,
+    "text": "§1 — Escala de tiempo: cada turno (turnos 1–16) representa 15 minutos. A partir del turno 17, cada turno equivale a 30 minutos.",
+    "file": "3ef0065dc0e9.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-1-2#0",
+    "lessonId": "lesson-1-2",
+    "blockIndex": 0,
+    "text": "El juego incluye: un tablero montado de 22″ × 34″, 352 fichas troqueladas, una baraja de 55 cartas de eventos, tres cartas de referencia y un reglamento. No se usan dados en ningún momento.",
+    "file": "5d2025076c9e.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-1-2#1",
+    "lessonId": "lesson-1-2",
+    "blockIndex": 1,
+    "text": "§2.1 — El mapa representa los nueve kilómetros de la costa de Calvados donde ocurrió la batalla. Incluye la playa de marea, el \"pavilion\" (superficie dura justo encima de la playa), bluffs (acantilados), cuatro \"draws\" (valles que penetran los bluffs) y el terreno interior.",
+    "file": "4a9829d8e65a.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-1-2#3",
+    "lessonId": "lesson-1-2",
+    "blockIndex": 3,
+    "text": "Las posiciones alemanas son fundamentales: cada hex con una posición contiene un Widerstandsnest (WN) o una posición de refuerzo, identificados por uno de seis colores. Ese color determina cuándo y cómo dispara cada posición durante la fase de fuego alemán. Los hexes que rodean a cada posición contienen \"fire dots\" (puntos de fuego) del mismo color, que conforman el \"field of fire\" (campo de fuego) de esa posición.",
+    "file": "beb5c4b392a0.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-1-2#4",
+    "lessonId": "lesson-1-2",
+    "blockIndex": 4,
+    "text": "§2.1 — Las casillas de desembarco (Beach Landing Boxes) son una fila de cajas frente a la playa donde se colocan las unidades de EE.UU. que están a punto de desembarcar. Cada caja apunta hacia un hex de playa específico.",
+    "file": "17b4824141ec.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-1-2#5",
+    "lessonId": "lesson-1-2",
+    "blockIndex": 5,
+    "text": "Las fichas de EE.UU. representan compañías e batallones específicos. Cada ficha muestra: designación militar, tipo de unidad, número de escalones (steps), fuerza de ataque, armas, \"target symbol\" (símbolo de objetivo: círculo ●, diamante ◆ o triángulo ▲) y turno y casilla de llegada.",
+    "file": "4f346c02d1a9.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-1-2#7",
+    "lessonId": "lesson-1-2",
+    "blockIndex": 7,
+    "text": "§2.21 — El \"target symbol\" (símbolo de objetivo) es el selector que determina qué unidades de EE.UU. son alcanzadas por el fuego alemán o por eventos. Un símbolo negro significa que la unidad puede controlar hexes adyacentes; un símbolo blanco solo controla el hex que ocupa.",
+    "file": "89abdb6f399d.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-1-2#8",
+    "lessonId": "lesson-1-2",
+    "blockIndex": 8,
+    "text": "Las fichas alemanas tienen dos caras: la cara no revelada (boca abajo) y la cara revelada. Los WN (Widerstandsnest) comienzan no revelados; solo se revelan cuando las fuerzas de EE.UU. los atacan. Un WN puede tener un \"depth marker\" (marcador de profundidad) bajo su ficha, que representa mayor fortaleza y despliegue completo.",
+    "file": "fdf4d51fce74.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-1-2#9",
+    "lessonId": "lesson-1-2",
+    "blockIndex": 9,
+    "text": "La baraja de 55 cartas es el corazón del sistema. Cada carta tiene tres secciones independientes: resultados de desembarco, evento del turno y sección de fuego alemán. En cada fase solo se usa una de las tres secciones.",
+    "file": "1798b93b02bf.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-1-2#11",
+    "lessonId": "lesson-1-2",
+    "blockIndex": 11,
+    "text": "§2.3 — \"Fire card\" es la carta usada durante la Fase de Fuego Alemán. \"Landing card\" es la carta usada para los chequeos de desembarco. Ambas vienen de la misma baraja, pero se usan para propósitos distintos.",
+    "file": "96464f22544b.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-1-3#0",
+    "lessonId": "lesson-1-3",
+    "blockIndex": 0,
+    "text": "La preparación de la partida sigue un orden preciso. Primero se configuran los alemanes; luego se colocan las unidades de EE.UU. en el registro de turnos. La aleatorización inicial de los alemanes garantiza que cada partida sea diferente: jamás sabes con exactitud qué WN es más fuerte hasta que lo atacas.",
+    "file": "023387c07028.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-1-3#1",
+    "lessonId": "lesson-1-3",
+    "blockIndex": 1,
+    "text": "§3 — Los escenarios disponibles son: Easy Fox (introductorio, solo mitad este del mapa), The First Waves (los cuatro primeros turnos de la invasión, ~3 horas de juego), D-Day at Omaha Beach (las 12 horas completas, 6–8 horas) y Beyond the Beach (turnos 17–32 solamente).",
+    "file": "a7797eb455c7.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-1-3#2",
+    "lessonId": "lesson-1-3",
+    "blockIndex": 2,
+    "text": "Para la preparación alemana: se mezclan los 18 marcadores de profundidad WN boca abajo y se colocan en nueve posiciones WN específicas (WN 60, 61, 62N, 65N, 66N, 68N, 70, 72N, 73). Luego se mezclan los 18 WN boca abajo y se distribuyen en el mapa: 2 con símbolo de 88 en WN 61 y 72S, 6 con artillería en posiciones designadas, 1 cohete en WN 69 y los restantes en las demás posiciones. Este proceso asegura que jamás sepas de antemano la fuerza de cada posición.",
+    "file": "6e50c7d69f3a.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-1-3#3",
+    "lessonId": "lesson-1-3",
+    "blockIndex": 3,
+    "text": "§3 — Para las unidades de EE.UU.: cada ficha tiene impreso su turno de entrada y su casilla de desembarco. Se colocan en el espacio correspondiente del \"Turn Track\". Los 8 blindados sin turno de entrada se colocan directamente en sus casillas.",
+    "file": "65c05d51451d.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-1-3#4",
+    "lessonId": "lesson-1-3",
+    "blockIndex": 4,
+    "text": "La preparación termina con el marcador de turno en la posición 1 del registro, el marcador de fase al inicio del track de fases, y la baraja de cartas bien barajada boca abajo. Ahora estás listo para jugar el Turno 1.",
+    "file": "4520b1d075dc.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-1-3#5",
+    "lessonId": "lesson-1-3",
+    "blockIndex": 5,
+    "text": "§3 — Recuerda: mezcla por separado cada tipo de unidad alemana (Tácticas, División, Kampfgruppe Meyer) y los marcadores de profundidad (WN, building, mobile). Todos van boca abajo en sus cajas correspondientes. Esta separación importa: los tipos se usan en momentos distintos del juego.",
+    "file": "bf816598c330.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-4-1#0",
+    "lessonId": "lesson-4-1",
+    "blockIndex": 0,
+    "text": "El fuego alemán es la principal amenaza durante los primeros turnos de la partida. Mientras tus tropas avanzan desde el mar hacia los bluffs, las posiciones alemanas (Widerstandsnest y refuerzos) hostigaron sin cesar. Comprender cómo funciona este sistema es esencial para minimizar las bajas y avanzar.",
+    "file": "d1374d69f748.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-4-1#1",
+    "lessonId": "lesson-4-1",
+    "blockIndex": 1,
+    "text": "§6.1 — Cada \"fire card\" indica tres colores de posiciones alemanas que pueden disparar ese turno. Para cada color aparece un símbolo (simple o doble) y el \"target symbol\" de las unidades de EE.UU. que tienen mayor probabilidad de ser alcanzadas.",
+    "file": "b1baac240b14.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-4-1#2",
+    "lessonId": "lesson-4-1",
+    "blockIndex": 2,
+    "text": "Un símbolo simple en la carta significa que la posición de ese color dispara si tiene cualquier unidad alemana (con o sin marcador de profundidad). Un símbolo doble significa que la posición solo dispara si su unidad tiene un depth marker bajo ella. Este detalle es crucial: una posición con símbolo doble que perdió su marcador de profundidad NO dispara ese turno.",
+    "file": "14acc4a2d6a7.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-4-1#3",
+    "lessonId": "lesson-4-1",
+    "blockIndex": 3,
+    "text": "§6.2 — El \"field of fire\" (campo de fuego) de cada posición alemana está determinado por los \"fire dots\" (puntos de fuego) impresos en el mapa alrededor de esa posición. Hay tres intensidades: intense (intenso), steady (sostenido) y sporadic (esporádico). Una unidad de EE.UU. en un hex con fire dots es susceptible al fuego de esa posición.",
+    "file": "16b6f91b1509.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-4-1#4",
+    "lessonId": "lesson-4-1",
+    "blockIndex": 4,
+    "text": "Para resolver el fuego alemán: para cada posición que dispara, revisa cada hex de su campo de fuego que contenga unidades de EE.UU. Consulta la Tabla de Fuego Alemán (German Fire Chart) usando: la intensidad del fire dot, el tipo de posición (WN revelado, refuerzo revelado, o no revelado) y el tipo de unidad (blindada o no blindada). El resultado puede ser pérdida de escalón, desorganización, o ninguno.",
+    "file": "59be2fbe8c4c.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-4-1#5",
+    "lessonId": "lesson-4-1",
+    "blockIndex": 5,
+    "text": "§6.31 — Límite de impactos: en un solo disparo, una posición puede alcanzar tantas unidades de EE.UU. como unidades alemanas y marcadores de profundidad tenga. Un WN con 1 unidad + 1 depth marker puede alcanzar hasta 2 unidades. Si hay más unidades elegibles que el límite, se priorizan: primero las de hexes con fuego intenso, luego sostenido, luego esporádico.",
+    "file": "d10f739efe46.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-4-1#6",
+    "lessonId": "lesson-4-1",
+    "blockIndex": 6,
+    "text": "El \"target symbol\" en la fire card aumenta la probabilidad de impacto, pero no la determina en exclusiva. Cualquier unidad en un hex con fire dot puede ser alcanzada; el símbolo de objetivo simplemente ajusta las probabilidades según la German Fire Chart. Esta mecánica refleja que el fuego alemán era indiscriminado pero más letal contra ciertos tipos de formaciones.",
+    "file": "592a08c1c5a2.mp3",
+    "voice": "em_alex"
+  }
+]
