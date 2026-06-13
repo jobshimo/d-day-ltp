@@ -7,6 +7,7 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { SessionStore } from 'application-session-store';
+import { runFirstLoginMigration } from '../../shared/migrate-progress';
 
 function isValidEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -272,6 +273,8 @@ export class RegisterComponent {
     this.submitting.set(true);
     try {
       await this.store.register(this.email, this.password);
+      // Best-effort migration: copy IDB progress to server. Never blocks registration.
+      await runFirstLoginMigration(this.email);
       // Full reload so app.config re-evaluates adapter selection (design D5)
       window.location.href = '/';
     } catch (err: unknown) {
