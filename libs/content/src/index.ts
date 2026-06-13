@@ -3,3 +3,6 @@ export { TERMINOLOGY } from './terminology';
 export { PATCHES, applyPatches } from './patches/index';
 export type { PatchFn } from './patches/index';
 export { NARRATION, getBlockNarration } from './narration.generated';
+export { TERRAIN_COLORS, GERMAN_POS_COLORS } from './lib/terrain-palette';
+export { SYMBOLOGY } from './lib/symbology';
+export type { SimbologiaRenderAs, SimbologiaEntry, SimbologiaCategory } from './lib/symbology';

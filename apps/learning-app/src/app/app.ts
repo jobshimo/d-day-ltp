@@ -11,6 +11,10 @@ import { SessionStore } from 'application-session-store';
     <nav class="app-nav" aria-label="Navegación principal">
       <a routerLink="/modules" class="app-nav__brand">D-Day en Omaha Beach</a>
 
+      <a routerLink="/simbologia" class="app-nav__simbologia" aria-label="Referencia de simbología">
+        Simbología
+      </a>
+
       <div class="app-nav__end">
         @if (session.isAuthenticated()) {
           <span class="app-nav__user" aria-label="Usuario autenticado: {{ session.email() }}">
@@ -83,6 +87,23 @@ import { SessionStore } from 'application-session-store';
       letter-spacing: 0.02em;
 
       &:hover { color: #d4b060; }
+    }
+
+    .app-nav__simbologia {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      padding: var(--space-1) var(--space-2);
+      border-radius: var(--radius-sm);
+      transition: color var(--transition-fast);
+      white-space: nowrap;
+
+      &:hover { color: var(--color-text-primary); }
+      &:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 2px;
+      }
     }
 
     .app-nav__end {
