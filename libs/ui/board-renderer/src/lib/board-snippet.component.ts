@@ -69,17 +69,20 @@ function layoutHexes(hexIds: string[]): HexCoord[] {
   return coords;
 }
 
-/** Terrain → fill color using the military palette */
+/**
+ * Terrain → fill color using the real Devir board TERRAIN KEY palette.
+ * Keep in sync with libs/content/src/lib/terrain-palette.ts TERRAIN_COLORS.
+ */
 const TERRAIN_COLORS: Record<string, string> = {
-  beach:    '#c8b97a',
-  pavilion: '#7a8b6a',
-  draw:     '#5c7a6a',
-  slope:    '#8a9070',
-  bluff:    '#6b5c45',
-  bocage:   '#4a6040',
-  cliff:    '#6e6e6e',
-  building: '#8a7060',
-  rough:    '#7a7060',
+  beach:    '#e6dcc0',
+  pavilion: '#cbccba',
+  draw:     '#cbccba',
+  slope:    '#c2c79a',
+  bluff:    '#c2c79a',
+  bocage:   '#b3bd8c',
+  cliff:    '#a8a89a',
+  building: '#b0a898',
+  rough:    '#cdb98c',
 };
 
 /** Fire-dot intensity → ring color (color is supplementary; icon carries meaning) */

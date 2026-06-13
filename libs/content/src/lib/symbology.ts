@@ -24,6 +24,8 @@ export interface SimbologiaEntry {
 export interface SimbologiaCategory {
   id: string;
   titleEs: string;
+  /** Optional category-level note shown below the title in the reference UI. */
+  descriptionEs?: string;
   entries: SimbologiaEntry[];
 }
 
@@ -49,7 +51,7 @@ const US_UNIT_ENTRIES: SimbologiaEntry[] = [
   {
     key: 'us-tank',
     nameEs: 'Tanque (Blindado)',
-    meaningEs: 'Unidad blindada. Elipse horizontal dentro de caja rectangular.',
+    meaningEs: 'Unidad blindada. La ficha muestra una silueta lateral de tanque (casco + torreta + cañón + orugas). El símbolo OTAN de blindado (elipse) aparece solo en las cartas, no en las fichas del tablero.',
     ruleRef: '§2.22',
     render: { kind: 'unit-symbol', type: 'tank' as UnitType },
   },
@@ -105,7 +107,7 @@ const GERMAN_UNIT_ENTRIES: SimbologiaEntry[] = [
   {
     key: 'de-armor',
     nameEs: 'Blindado alemán',
-    meaningEs: 'Unidad blindada alemana. Elipse horizontal dentro de caja rectangular.',
+    meaningEs: 'Unidad blindada alemana. La ficha muestra una silueta lateral de tanque (igual que el tanque aliado). El símbolo OTAN de blindado (elipse) aparece solo en las cartas, no en las fichas del tablero.',
     ruleRef: '§2.1',
     render: { kind: 'unit-symbol', germanSymbol: 'armor' as GermanUnitSymbol, type: 'infantry' as UnitType, color: '#e8e8e8' },
   },
@@ -275,19 +277,24 @@ const WEAPON_CODE_ENTRIES: SimbologiaEntry[] = [
 
 // ---------------------------------------------------------------------------
 // Category 6: Terrain types (TerrainType × 9)
+// Colors sourced from the real Devir board TERRAIN KEY.
+// Hexside/edge features (Sea Wall, Slope, Bluff, Scaleable Cliff, Sheer Cliff,
+// Anti-Tank Ditch, Hedge, Wall) and road types (Primary Road, Secondary Road,
+// Trail, Mined Road) are marked on hex edges, not as hex fills; they are
+// noted here for reference.
 // ---------------------------------------------------------------------------
 
 const TERRAIN_ENTRIES: SimbologiaEntry[] = (
   [
-    ['beach',    'Playa',               '§7.3', 'Terreno de desembarco. Los aliados deben cruzarla al llegar. Zona de máximo fuego alemán.'],
-    ['pavilion', 'Pabellón',            '§7.3', 'Plataforma de suelo firme sobre la playa. Cobertura ligera para unidades en movimiento.'],
-    ['draw',     'Hondonada',           '§7.5', 'Valle entre los barrancos. Cada hondonada vale 5 PV para quien la controle al final de la partida.'],
-    ['slope',    'Pendiente',           '§7.4', 'Ladera que asciende hacia los barrancos. Ralentiza el avance aliado.'],
-    ['bluff',    'Barranco',            '§7.4', 'Línea de acantilados que requiere la acción de escalada (§7.4) para superarlos.'],
-    ['bocage',   'Bocaje',              '§7.5', 'Setos y terraplenes normandos. Duplica la fortaleza de defensa alemana; restringe el movimiento.'],
-    ['cliff',    'Acantilado',          '§7.4', 'Escalable (2 turnos de acción) o vertical (infranqueable). La Pointe du Hoc fue un acantilado real.'],
-    ['building', 'Edificio',            '§7.5', 'Construcción con cobertura sólida. Duplica tanto la fuerza alemana como la profundidad del marcador de profundidad.'],
-    ['rough',    'Terreno Accidentado', '§7.5', 'Terreno irregular. Bloquea la comunicación alemana. Solo infantería puede entrar; otros tipos de unidad no pueden.'],
+    ['beach',    'Playa (Beach)',               '§7.3', 'Zona de desembarco. Los aliados deben cruzarla al llegar. Terreno abierto: máxima exposición al fuego alemán. Color arena claro del tablero real (#e6dcc0).'],
+    ['pavilion', 'Pabellón / Plataforma',       '§7.3', 'Plataforma de suelo firme sobre la playa (Pavillion). Cobertura ligera para unidades en movimiento. Color gris-arena del tablero real (#cbccba).'],
+    ['draw',     'Hondonada (Draw)',             '§7.5', 'Valle entre los barrancos que permite el acceso al interior. Cada hondonada vale 5 PV para quien la controle al final de la partida. Mismo color que pabellón en la clave de terreno (#cbccba).'],
+    ['slope',    'Pendiente / Terreno elevado',  '§7.4', 'Ladera que asciende hacia los barrancos (High Ground). Ralentiza el avance aliado. Las posiciones alemanas aquí tienen ventaja de elevación. Color oliva apagado del tablero real (#c2c79a).'],
+    ['bluff',    'Barranco (Bluff)',             '§7.4', 'Cresta elevada sobre la playa. El hexlado de barranco bloquea el movimiento a menos que se escale (acción especial §7.4). Color oliva apagado idéntico al High Ground en el tablero (#c2c79a).'],
+    ['bocage',   'Bocaje (Bocage)',              '§7.5', 'Setos y terraplenes normandos. Duplica la fortaleza de defensa alemana; restringe el movimiento de blindados. Color verde apagado del tablero real (#b3bd8c).'],
+    ['cliff',    'Acantilado (Cliff)',           '§7.4', 'Escalable con 2 turnos de acción, o corte vertical (infranqueable según tipo). La Pointe du Hoc es el ejemplo histórico. Color roca gris del tablero (#a8a89a). (a confirmar exactitud del tipo escalable vs. corte)'],
+    ['building', 'Edificio (Building)',          '§7.5', 'Construcción con cobertura sólida. Duplica tanto la fuerza alemana como la profundidad del marcador de profundidad. Color piedra gris del tablero (#b0a898).'],
+    ['rough',    'Terreno accidentado (Rough)',  '§7.5', 'Terreno irregular. Bloquea la comunicación alemana. Solo infantería puede entrar; vehículos y blindados no pueden. Color marrón-arena del tablero real (#cdb98c).'],
   ] as [TerrainType, string, string, string][]
 ).map(([terrain, nameEs, ruleRef, meaningEs]) => ({
   key: `terrain-${terrain}`,
@@ -380,6 +387,7 @@ export const SYMBOLOGY: SimbologiaCategory[] = [
   {
     id: 'terrain',
     titleEs: 'Terreno',
+    descriptionEs: 'Colores tomados directamente de la «Leyenda de terreno (TERRAIN KEY)» del tablero Devir. Paleta apagada en tonos pergamino; no usar sustitutos más saturados. Las características de hexlado (Sea Wall, Slope, Bluff, Scaleable Cliff, Sheer Cliff, Anti-Tank Ditch, Hedge, Wall) y los tipos de camino (Primary Road, Secondary Road, Trail, Mined Road) se marcan sobre los bordes del hex, no como relleno.',
     entries: TERRAIN_ENTRIES,
   },
   {
