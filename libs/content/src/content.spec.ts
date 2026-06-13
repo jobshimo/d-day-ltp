@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { ALL_MODULES } from './lib/modules';
 import { TERMINOLOGY } from './terminology';
 import { PATCHES, applyPatches } from './patches/index';
+import { SYMBOLOGY } from './lib/symbology';
 
 describe('ALL_MODULES', () => {
   it('contains exactly 8 modules', () => {
@@ -126,6 +127,93 @@ describe('TERMINOLOGY', () => {
         (t) => t.englishTerm.toLowerCase() === term.toLowerCase(),
       );
       expect(found, `Expected term "${term}" not found in TERMINOLOGY`).toBeDefined();
+    }
+  });
+});
+
+describe('SYMBOLOGY', () => {
+  it('contains exactly 8 categories', () => {
+    expect(SYMBOLOGY).toHaveLength(8);
+  });
+
+  it('all expected category ids are present', () => {
+    const ids = SYMBOLOGY.map((c) => c.id);
+    expect(ids).toContain('us-units');
+    expect(ids).toContain('german-units');
+    expect(ids).toContain('target-symbols');
+    expect(ids).toContain('fire-dots');
+    expect(ids).toContain('weapon-codes');
+    expect(ids).toContain('terrain');
+    expect(ids).toContain('german-positions');
+    expect(ids).toContain('us-divisions');
+  });
+
+  it('us-units category has 8 entries', () => {
+    const cat = SYMBOLOGY.find((c) => c.id === 'us-units')!;
+    expect(cat.entries).toHaveLength(8);
+  });
+
+  it('german-units category has 4 entries including artillery-88', () => {
+    const cat = SYMBOLOGY.find((c) => c.id === 'german-units')!;
+    expect(cat.entries).toHaveLength(4);
+    const has88 = cat.entries.some(
+      (e) => e.render.kind === 'unit-symbol' && e.render.germanSymbol === 'artillery-88',
+    );
+    expect(has88).toBe(true);
+  });
+
+  it('target-symbols category has 6 entries (3 shapes × 2 control variants)', () => {
+    const cat = SYMBOLOGY.find((c) => c.id === 'target-symbols')!;
+    expect(cat.entries).toHaveLength(6);
+  });
+
+  it('fire-dots category has 3 entries', () => {
+    const cat = SYMBOLOGY.find((c) => c.id === 'fire-dots')!;
+    expect(cat.entries).toHaveLength(3);
+  });
+
+  it('weapon-codes category has 9 entries including NV', () => {
+    const cat = SYMBOLOGY.find((c) => c.id === 'weapon-codes')!;
+    expect(cat.entries).toHaveLength(9);
+    const nv = cat.entries.find((e) => e.key === 'wc-NV');
+    expect(nv).toBeDefined();
+    expect(nv?.note).toBeTruthy(); // NV must carry the "a confirmar" note
+  });
+
+  it('terrain category has 9 entries matching TerrainType', () => {
+    const cat = SYMBOLOGY.find((c) => c.id === 'terrain')!;
+    expect(cat.entries).toHaveLength(9);
+  });
+
+  it('german-positions category has 6 entries', () => {
+    const cat = SYMBOLOGY.find((c) => c.id === 'german-positions')!;
+    expect(cat.entries).toHaveLength(6);
+  });
+
+  it('us-divisions category has 2 entries', () => {
+    const cat = SYMBOLOGY.find((c) => c.id === 'us-divisions')!;
+    expect(cat.entries).toHaveLength(2);
+  });
+
+  it('every entry has nameEs, meaningEs, and render', () => {
+    for (const cat of SYMBOLOGY) {
+      for (const entry of cat.entries) {
+        expect(entry.nameEs, `${entry.key} missing nameEs`).toBeTruthy();
+        expect(entry.meaningEs, `${entry.key} missing meaningEs`).toBeTruthy();
+        expect(entry.render, `${entry.key} missing render`).toBeDefined();
+        expect(entry.render.kind, `${entry.key} render missing kind`).toBeTruthy();
+      }
+    }
+  });
+
+  it('color-swatch entries have non-empty color and label', () => {
+    for (const cat of SYMBOLOGY) {
+      for (const entry of cat.entries) {
+        if (entry.render.kind === 'color-swatch') {
+          expect(entry.render.color, `${entry.key} swatch missing color`).toMatch(/^#[0-9a-f]{6}$/i);
+          expect(entry.render.label, `${entry.key} swatch missing label`).toBeTruthy();
+        }
+      }
     }
   });
 });
