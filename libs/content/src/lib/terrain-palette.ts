@@ -1,20 +1,43 @@
 import type { TerrainType, GermanPositionColor } from 'content-schema';
 
 /**
- * Terrain fill colors — used by board-renderer and symbology reference.
- * Colors follow the military palette established in the board-renderer.
+ * Terrain fill colors — sourced from the real Devir "D-Day at Omaha Beach"
+ * board TERRAIN KEY.  The palette is muted/desaturated parchment tones;
+ * do not substitute with brighter military colours.
+ *
+ * Mapping notes (TerrainType enum → board terrain key entry):
+ *   beach    → Beach / sand        #e6dcc0
+ *   pavilion → Pavillion/Draw      #cbccba  (shelf/platform)
+ *   draw     → Pavillion/Draw      #cbccba  (valley between bluffs)
+ *   slope    → High Ground (slope) #c2c79a  (ascending approach)
+ *   bluff    → High Ground (bluff) #c2c79a  (top of bluff line)
+ *   bocage   → Bocage              #b3bd8c
+ *   cliff    → Rock / cliff grey   #a8a89a  (sheer/scaleable cliff)
+ *   building → Stone/building grey #b0a898
+ *   rough    → Rough               #cdb98c
  */
 export const TERRAIN_COLORS: Record<TerrainType, string> = {
-  beach:    '#c8b97a',
-  pavilion: '#7a8b6a',
-  draw:     '#5c7a6a',
-  slope:    '#8a9070',
-  bluff:    '#6b5c45',
-  bocage:   '#4a6040',
-  cliff:    '#6e6e6e',
-  building: '#8a7060',
-  rough:    '#7a7060',
+  beach:    '#e6dcc0',
+  pavilion: '#cbccba',
+  draw:     '#cbccba',
+  slope:    '#c2c79a',
+  bluff:    '#c2c79a',
+  bocage:   '#b3bd8c',
+  cliff:    '#a8a89a',
+  building: '#b0a898',
+  rough:    '#cdb98c',
 };
+
+/**
+ * Additional named palette constants for terrain types present on the board
+ * but not in the TerrainType enum (used for legend/symbology reference).
+ */
+export const TERRAIN_PALETTE_EXTRA = {
+  waterLine:  '#7cc1e4',
+  highGround: '#c2c79a',
+  woods:      '#6f8f5a',
+  shingle:    '#d8d2be',
+} as const;
 
 /**
  * German position outline colors — used by board-renderer and symbology reference.
