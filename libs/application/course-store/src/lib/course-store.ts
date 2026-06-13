@@ -1,8 +1,9 @@
 import { Injectable, Inject, InjectionToken } from '@angular/core';
 import type { Signal } from '@angular/core';
-import type { CourseModule } from 'content-schema';
+import type { CourseModule, ModuleProgress } from 'content-schema';
 import type { ProgressRepository } from 'domain-progress';
 import { PROGRESS_REPO_TOKEN_ID } from 'domain-progress';
+import { isModuleUnlocked } from 'domain-course';
 import { SignalStore } from './signal-store.base';
 
 /** Angular DI token for ProgressRepository in this application scope */
@@ -76,8 +77,21 @@ export class CourseStore extends SignalStore<CourseState> {
     this.patch({ loading: true, error: null });
 
     try {
-      const entries = await Promise.all(
-        this.content.map((mod) => this.buildModuleEntry(mod)),
+      // Fetch progress for every module once, then derive unlock state from the
+      // content graph (a module unlocks when its prior module's quiz is passed).
+      // The persistence adapter cannot know the prerequisite graph, so the
+      // unlock decision lives in the domain, not in the repository.
+      const progressPairs = await Promise.all(
+        this.content.map(
+          async (mod) =>
+            [mod.id, await this.progress.getModuleProgress(mod.id)] as const,
+        ),
+      );
+      const progressByModule: Record<string, ModuleProgress> =
+        Object.fromEntries(progressPairs);
+
+      const entries = this.content.map((mod) =>
+        this.buildModuleEntry(mod, progressByModule),
       );
 
       this.patch({ modules: entries, loading: false });
@@ -116,9 +130,12 @@ export class CourseStore extends SignalStore<CourseState> {
 
   // ---- Helpers ----
 
-  private async buildModuleEntry(mod: CourseModule): Promise<ModuleListEntry> {
-    const isUnlocked = await this.progress.isModuleUnlocked(mod.id);
-    const moduleProgress = await this.progress.getModuleProgress(mod.id);
+  private buildModuleEntry(
+    mod: CourseModule,
+    progressByModule: Record<string, ModuleProgress>,
+  ): ModuleListEntry {
+    const isUnlocked = isModuleUnlocked(this.content, mod.id, progressByModule);
+    const moduleProgress = progressByModule[mod.id];
 
     const totalItems =
       mod.lessons.length + mod.drills.length + (mod.reviewQuiz.length > 0 ? 1 : 0);

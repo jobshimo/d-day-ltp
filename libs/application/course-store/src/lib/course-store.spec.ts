@@ -137,6 +137,41 @@ describe('CourseStore', () => {
       await store.loadModules();
       expect(store.loading()).toBe(false);
     });
+
+    it('unlocks module-2 once module-1 quiz is passed', async () => {
+      // Regression: passing a module's quiz must unlock the next module. Unlock
+      // is derived from the prior module's quiz score via the domain function.
+      TestBed.resetTestingModule();
+      const repo = makeProgressRepo({
+        getModuleProgress: vi.fn().mockImplementation((id: string) =>
+          Promise.resolve({
+            ...EMPTY_PROGRESS,
+            moduleId: id,
+            quizResult:
+              id === 'module-1'
+                ? { score: 0.8, passed: true, completedAt: '2026-01-01T00:00:00.000Z' }
+                : undefined,
+          }),
+        ),
+      });
+      TestBed.configureTestingModule({
+        providers: [
+          provideZonelessChangeDetection(),
+          CourseStore,
+          {
+            provide: COURSE_CONTENT,
+            useValue: [makeModule('module-1', 1), makeModule('module-2', 2)],
+          },
+          { provide: COURSE_PROGRESS_REPO, useValue: repo },
+        ],
+      });
+      const s = TestBed.inject(CourseStore);
+
+      await s.loadModules();
+
+      const m2 = s.modules().find((m) => m.moduleId === 'module-2');
+      expect(m2?.isUnlocked).toBe(true);
+    });
   });
 
   describe('setActiveModule()', () => {
