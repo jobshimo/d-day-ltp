@@ -4,6 +4,7 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
+    "preDeployCommand": "npx prisma migrate deploy",
     "startCommand": "node dist/apps/api/main.js",
     "healthcheckPath": "/api/health",
     "restartPolicyType": "ON_FAILURE"
