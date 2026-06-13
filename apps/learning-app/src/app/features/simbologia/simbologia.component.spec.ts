@@ -97,4 +97,70 @@ describe('SimbologiaComponent', () => {
     expect(comp.unitSymbolBg(usRender)).toBe('#2a2c30');
     expect(comp.unitSymbolBg(deRender)).toBe('#3d2e1a');
   });
+
+  // ---- Symbol SVG wrapper size regression (Bug: empty boxes / tiny icons) ----
+
+  it('unit-symbol entries render an <svg> wrapper with width >= 64', () => {
+    const fixture = TestBed.createComponent(SimbologiaComponent);
+    fixture.detectChanges();
+    // Find all svg elements inside unit-symbol cases (they have a background rect + ddob-unit-symbol)
+    const svgs: SVGElement[] = Array.from(
+      fixture.nativeElement.querySelectorAll('.simbologia__symbol svg')
+    );
+    // Filter to those that wrap unit-symbol (they have role=img and a ddob-unit-symbol inside)
+    const unitSymbolSvgs = svgs.filter((svg) =>
+      svg.querySelector('ddob-unit-symbol') !== null
+    );
+    expect(unitSymbolSvgs.length).toBeGreaterThan(0);
+    for (const svg of unitSymbolSvgs) {
+      const w = Number(svg.getAttribute('width'));
+      expect(w).toBeGreaterThanOrEqual(64);
+    }
+  });
+
+  it('target-symbol entries render an <svg> wrapper with width >= 64', () => {
+    const fixture = TestBed.createComponent(SimbologiaComponent);
+    fixture.detectChanges();
+    const svgs: SVGElement[] = Array.from(
+      fixture.nativeElement.querySelectorAll('.simbologia__symbol svg')
+    );
+    const targetSymbolSvgs = svgs.filter((svg) =>
+      svg.querySelector('ddob-target-symbol') !== null
+    );
+    expect(targetSymbolSvgs.length).toBeGreaterThan(0);
+    for (const svg of targetSymbolSvgs) {
+      const w = Number(svg.getAttribute('width'));
+      expect(w).toBeGreaterThanOrEqual(64);
+    }
+  });
+
+  it('fire-dots entries render an <svg> wrapper with width >= 64', () => {
+    const fixture = TestBed.createComponent(SimbologiaComponent);
+    fixture.detectChanges();
+    const svgs: SVGElement[] = Array.from(
+      fixture.nativeElement.querySelectorAll('.simbologia__symbol svg')
+    );
+    const fireDotSvgs = svgs.filter((svg) =>
+      svg.querySelector('ddob-fire-dots') !== null
+    );
+    expect(fireDotSvgs.length).toBeGreaterThan(0);
+    for (const svg of fireDotSvgs) {
+      const w = Number(svg.getAttribute('width'));
+      expect(w).toBeGreaterThanOrEqual(64);
+    }
+  });
+
+  it('unit-symbol SVG wrappers use a square viewBox (0 0 60 60)', () => {
+    const fixture = TestBed.createComponent(SimbologiaComponent);
+    fixture.detectChanges();
+    const svgs: SVGElement[] = Array.from(
+      fixture.nativeElement.querySelectorAll('.simbologia__symbol svg')
+    );
+    const unitSymbolSvgs = svgs.filter((svg) =>
+      svg.querySelector('ddob-unit-symbol') !== null
+    );
+    for (const svg of unitSymbolSvgs) {
+      expect(svg.getAttribute('viewBox')).toBe('0 0 60 60');
+    }
+  });
 });

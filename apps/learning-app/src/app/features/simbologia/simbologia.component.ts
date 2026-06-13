@@ -59,7 +59,13 @@ import type { SimbologiaCategory, SimbologiaRenderAs } from 'content';
                   @switch (entry.render.kind) {
 
                     @case ('unit-symbol') {
-                      <svg viewBox="0 0 60 60" width="52" height="52"
+                      <!--
+                        Unit-symbol glyphs live in a 60×60 coordinate space.
+                        Inner box: x=14 y=18 w=32 h=20.
+                        We show the full 60×60 space at 64×64 px so every glyph
+                        is clearly legible without clipping.
+                      -->
+                      <svg viewBox="0 0 60 60" width="64" height="64"
                            role="img"
                            [attr.aria-label]="'Símbolo OTAN: ' + entry.nameEs">
                         <rect width="60" height="60"
@@ -74,22 +80,32 @@ import type { SimbologiaCategory, SimbologiaRenderAs } from 'content';
                     }
 
                     @case ('target-symbol') {
-                      <svg viewBox="0 0 60 28" width="52" height="24"
+                      <!--
+                        Target symbols (circle/diamond/triangle) are rendered at
+                        cx=30 cy=30 size=24 inside a 60×60 viewBox.
+                        Displayed at 64×64 px for clear legibility.
+                      -->
+                      <svg viewBox="0 0 60 60" width="64" height="64"
                            role="img"
                            [attr.aria-label]="'Símbolo de objetivo: ' + entry.nameEs">
-                        <rect width="60" height="28"
+                        <rect width="60" height="60"
                               fill="#2a2c30" rx="4" aria-hidden="true" />
                         <ddob-target-symbol
                           [symbol]="entry.render.symbol"
                           [control]="entry.render.control"
-                          [size]="18"
+                          [size]="24"
                           [cx]="30"
-                          [cy]="14" />
+                          [cy]="30" />
                       </svg>
                     }
 
                     @case ('fire-dots') {
-                      <svg viewBox="0 0 60 16" width="52" height="14"
+                      <!--
+                        Fire dots live at y=5 in 60×60 space (translate(x, 5)).
+                        We frame just the top band (y=0..16) but display it at a
+                        legible size: viewBox "0 0 60 16" → 64×18 px.
+                      -->
+                      <svg viewBox="0 0 60 16" width="64" height="18"
                            role="img"
                            [attr.aria-label]="'Punto de fuego: ' + entry.nameEs">
                         <rect width="60" height="16"
@@ -235,9 +251,10 @@ import type { SimbologiaCategory, SimbologiaRenderAs } from 'content';
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 56px;
-      height: 56px;
-      background: #2a2c30;
+      /* 68px to hold the 64px SVG with a 2px breathing margin each side */
+      width: 68px;
+      min-height: 68px;
+      background: transparent; /* SVG wrapper carries its own bg rect */
       border-radius: var(--radius-sm);
     }
 
