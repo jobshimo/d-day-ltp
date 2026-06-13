@@ -15,6 +15,10 @@ import { SessionStore } from 'application-session-store';
         Simbología
       </a>
 
+      <a routerLink="/preparacion" class="app-nav__preparacion" aria-label="Guía de preparación de la partida">
+        Preparación
+      </a>
+
       <div class="app-nav__end">
         @if (session.isAuthenticated()) {
           <span class="app-nav__user" aria-label="Usuario autenticado: {{ session.email() }}">
@@ -89,7 +93,8 @@ import { SessionStore } from 'application-session-store';
       &:hover { color: #d4b060; }
     }
 
-    .app-nav__simbologia {
+    .app-nav__simbologia,
+    .app-nav__preparacion {
       font-size: var(--font-size-sm);
       font-weight: var(--font-weight-medium);
       color: var(--color-text-secondary);
