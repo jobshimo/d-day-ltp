@@ -5,6 +5,7 @@ import {
   processAttempt,
   initialAttemptState,
   MAX_DRILL_ATTEMPTS,
+  shuffleWithSeed,
   type DrillAnswer,
 } from './domain-drill';
 
@@ -358,5 +359,37 @@ describe('processAttempt — attempt tracking', () => {
 
   it('MAX_DRILL_ATTEMPTS is 3', () => {
     expect(MAX_DRILL_ATTEMPTS).toBe(3);
+  });
+});
+
+describe('shuffleWithSeed', () => {
+  const items = ['a', 'b', 'c', 'd'];
+
+  it('is deterministic for the same seed', () => {
+    expect(shuffleWithSeed(items, 'q-1')).toEqual(shuffleWithSeed(items, 'q-1'));
+  });
+
+  it('preserves all elements (a permutation)', () => {
+    const out = shuffleWithSeed(items, 'q-1');
+    expect([...out].sort()).toEqual([...items].sort());
+    expect(out.length).toBe(items.length);
+  });
+
+  it('does not mutate the input', () => {
+    const copy = [...items];
+    shuffleWithSeed(items, 'q-2');
+    expect(items).toEqual(copy);
+  });
+
+  it('distributes a marked element away from a fixed position across seeds', () => {
+    // The bug was the correct answer always sitting at index 1. Across many
+    // question ids, the marked element should not always land on the same index.
+    const marked = 'correct';
+    const base = ['w', marked, 'x', 'y'];
+    const positions = new Set<number>();
+    for (let i = 0; i < 25; i++) {
+      positions.add(shuffleWithSeed(base, `quiz-item-${i}`).indexOf(marked));
+    }
+    expect(positions.size).toBeGreaterThan(1);
   });
 });

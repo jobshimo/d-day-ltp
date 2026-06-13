@@ -132,3 +132,44 @@ export function processAttempt(
     lastResult: result,
   };
 }
+
+// ---- Deterministic choice shuffling ----
+
+/**
+ * Deterministically shuffles an array using a seed derived from a string.
+ *
+ * The same (items, seed) pair always yields the same order, so a question's
+ * choices are stable across re-renders and revisits — while no longer leaking
+ * the correct-answer position. Authored content tended to place the correct
+ * choice second; seeding by the question id distributes it across positions.
+ */
+export function shuffleWithSeed<T>(items: readonly T[], seed: string): T[] {
+  const rng = mulberry32(hashString(seed));
+  const out = items.slice();
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}
+
+/** FNV-1a string hash → 32-bit unsigned seed. */
+function hashString(s: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+
+/** Mulberry32 PRNG — small, fast, deterministic. */
+function mulberry32(seed: number): () => number {
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}

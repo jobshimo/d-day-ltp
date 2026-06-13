@@ -9,7 +9,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DrillStore } from 'application-drill-store';
 import { ALL_MODULES } from 'content';
-import type { DrillScenario } from 'content-schema';
+import type { DrillScenario, DrillChoice } from 'content-schema';
+import { shuffleWithSeed } from 'domain-drill';
 import type { DrillAnswer } from 'domain-drill';
 import { BreadcrumbComponent } from '../../shared/breadcrumb.component';
 import type { BreadcrumbItem } from '../../shared/breadcrumb.component';
@@ -49,7 +50,7 @@ import { BoardSnippetComponent } from 'ui-board-renderer';
             </p>
 
             <!-- Attempt indicator -->
-            @if (store.attempts() > 0 && !store.answered()) {
+            @if (store.attempts() > 0 && !resolved()) {
               <p class="drill__attempts"
                  role="status"
                  aria-live="polite">
@@ -66,11 +67,11 @@ import { BoardSnippetComponent } from 'ui-board-renderer';
             <div class="drill__board-section">
               <ddob-board-snippet
                 [snippet]="boardSnippetWithHighlights()"
-                [interactive]="drill()!.type === 'interactive-select' && !isAnswered()"
+                [interactive]="drill()!.type === 'interactive-select' && !resolved()"
                 [selectedHexIds]="selectedUnitHexIds()"
                 (hexSelected)="onBoardHexSelected($event)" />
 
-              @if (drill()!.type === 'interactive-select' && !isAnswered()) {
+              @if (drill()!.type === 'interactive-select' && !resolved()) {
                 <p class="drill__board-hint" role="note">
                   Selecciona la(s) unidad(es) afectadas en el tablero.
                   @if (selectedUnitIds().length > 0) {
@@ -86,27 +87,27 @@ import { BoardSnippetComponent } from 'ui-board-renderer';
           <!-- Multiple-choice answers -->
           @if (drill()!.type === 'multiple-choice' && drill()!.choices) {
             <fieldset class="drill__choices"
-                      [disabled]="store.answered() || store.isRevealed()"
+                      [disabled]="resolved()"
                       aria-label="Opciones de respuesta">
               <legend class="sr-only">Elige una respuesta</legend>
-              @for (choice of drill()!.choices; track choice.id) {
+              @for (choice of displayChoices(); track choice.id) {
                 <label class="choice-option"
                        [class.choice-option--selected]="selectedChoiceId() === choice.id"
-                       [class.choice-option--correct]="isAnswered() && choice.isCorrect"
-                       [class.choice-option--incorrect]="isAnswered() && selectedChoiceId() === choice.id && !choice.isCorrect">
+                       [class.choice-option--correct]="resolved() && choice.isCorrect"
+                       [class.choice-option--incorrect]="resolved() && selectedChoiceId() === choice.id && !choice.isCorrect">
                   <input type="radio"
                          name="drill-answer"
                          [value]="choice.id"
                          [checked]="selectedChoiceId() === choice.id"
-                         [disabled]="store.answered() || store.isRevealed()"
+                         [disabled]="resolved()"
                          (change)="selectChoice(choice.id)"
                          [attr.aria-describedby]="'choice-desc-' + choice.id" />
                   <span class="choice-option__label">{{ choice.labelEs }}</span>
-                  @if (isAnswered() && choice.isCorrect) {
+                  @if (resolved() && choice.isCorrect) {
                     <span class="choice-option__indicator choice-option__indicator--correct"
                           [id]="'choice-desc-' + choice.id"
                           aria-label="Respuesta correcta">✓</span>
-                  } @else if (isAnswered() && selectedChoiceId() === choice.id && !choice.isCorrect) {
+                  } @else if (resolved() && selectedChoiceId() === choice.id && !choice.isCorrect) {
                     <span class="choice-option__indicator choice-option__indicator--incorrect"
                           [id]="'choice-desc-' + choice.id"
                           aria-label="Respuesta incorrecta">✗</span>
@@ -116,19 +117,19 @@ import { BoardSnippetComponent } from 'ui-board-renderer';
             </fieldset>
           }
 
-          <!-- Submit button (before answer) -->
-          @if (!store.answered() && !store.isRevealed()) {
+          <!-- Submit button (shown until the drill is resolved; stays available to retry) -->
+          @if (!resolved()) {
             <button type="button"
                     class="btn btn--primary"
                     [disabled]="!canSubmit() || store.submitting()"
                     (click)="submitAnswer()"
                     aria-label="Comprobar respuesta">
-              Comprobar respuesta
+              {{ canRetry() ? 'Volver a intentar' : 'Comprobar respuesta' }}
             </button>
           }
 
-          <!-- Feedback banner (after answer) -->
-          @if (isAnswered()) {
+          <!-- Feedback banner (after any submission) -->
+          @if (store.answered()) {
             <div class="feedback"
                  [class.feedback--correct]="store.lastResult()!.correct"
                  [class.feedback--incorrect]="!store.lastResult()!.correct"
@@ -144,20 +145,29 @@ import { BoardSnippetComponent } from 'ui-board-renderer';
                 }
               </p>
 
-              <p class="feedback__explanation">
-                {{ store.lastResult()!.explanationEs }}
-              </p>
+              @if (resolved()) {
+                <!-- Full explanation only once the drill is resolved -->
+                <p class="feedback__explanation">
+                  {{ store.lastResult()!.explanationEs }}
+                </p>
 
-              <div class="feedback__rules" aria-label="Referencias de reglas">
-                @for (ref of store.lastResult()!.ruleRefs; track ref.section) {
-                  <app-rule-ref-chip [ruleRef]="ref" />
-                }
-              </div>
+                <div class="feedback__rules" aria-label="Referencias de reglas">
+                  @for (ref of store.lastResult()!.ruleRefs; track ref.section) {
+                    <app-rule-ref-chip [ruleRef]="ref" />
+                  }
+                </div>
+              } @else {
+                <!-- Wrong but attempts remain: encourage a retry without revealing the answer -->
+                <p class="feedback__explanation">
+                  Te queda{{ attemptsLeft() === 1 ? '' : 'n' }} {{ attemptsLeft() }}
+                  intento{{ attemptsLeft() === 1 ? '' : 's' }}. Revisa tu elección y vuelve a intentarlo.
+                </p>
+              }
             </div>
           }
 
-          <!-- Navigation after answer -->
-          @if (isAnswered() || store.isRevealed()) {
+          <!-- Navigation (only once the drill is resolved) -->
+          @if (resolved()) {
             <div class="drill__nav">
               @if (hasNextDrill()) {
                 <button type="button"
@@ -498,8 +508,9 @@ export class DrillComponent {
   readonly boardSnippetWithHighlights = computed(() => {
     const d = this.drill();
     if (!d?.boardSnippet) return null;
-    const result = this.store.lastResult();
-    if (!result) return d.boardSnippet;
+    // Only reveal correct/incorrect overlays once the drill is resolved, so a
+    // wrong attempt with retries left does not give the answer away.
+    if (!this.resolved()) return d.boardSnippet;
 
     // Apply highlights based on correct/incorrect unit IDs
     const correctIds = d.correctAnswer.split(',').map((s) => s.trim());
@@ -528,8 +539,33 @@ export class DrillComponent {
     return this.drillIndex() < this.totalDrills() - 1;
   });
 
-  readonly isAnswered = computed<boolean>(() => {
-    return this.store.answered() || this.store.isRevealed();
+  /**
+   * True once the drill is finished: answered correctly, or revealed after the
+   * maximum number of attempts. A wrong answer with attempts remaining is NOT
+   * resolved — the user keeps trying.
+   */
+  readonly resolved = computed<boolean>(() => {
+    return this.store.lastResult()?.correct === true || this.store.isRevealed();
+  });
+
+  /** True when a result exists but the drill is not resolved (wrong, retry left). */
+  readonly canRetry = computed<boolean>(() => {
+    return this.store.answered() && !this.resolved();
+  });
+
+  /** Remaining attempts before the answer is revealed. */
+  readonly attemptsLeft = computed<number>(() => {
+    return Math.max(0, this.store.maxAttempts - this.store.attempts());
+  });
+
+  /**
+   * Choices in a stable, seed-shuffled order so the correct answer is not
+   * always in the same position. Seeded by the drill id → deterministic.
+   */
+  readonly displayChoices = computed<DrillChoice[]>(() => {
+    const d = this.drill();
+    if (!d?.choices) return [];
+    return shuffleWithSeed(d.choices, d.id);
   });
 
   readonly moduleTitle = computed<string>(() => {
@@ -579,7 +615,8 @@ export class DrillComponent {
   }
 
   selectChoice(choiceId: string): void {
-    if (!this.store.answered() && !this.store.isRevealed()) {
+    // Allow changing the selection on every attempt until the drill is resolved.
+    if (!this.resolved()) {
       this.selectedChoiceId.set(choiceId);
     }
   }
@@ -590,7 +627,7 @@ export class DrillComponent {
    * If no unit occupies the hex, the click is ignored.
    */
   onBoardHexSelected(hexId: string): void {
-    if (this.store.answered() || this.store.isRevealed()) return;
+    if (this.resolved()) return;
     const d = this.drill();
     if (!d?.boardSnippet) return;
 

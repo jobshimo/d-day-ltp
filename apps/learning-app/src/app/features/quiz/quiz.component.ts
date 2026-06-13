@@ -9,10 +9,10 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ALL_MODULES } from 'content';
-import type { QuizItem, QuizResult } from 'content-schema';
+import type { QuizItem, QuizResult, DrillChoice } from 'content-schema';
 import { PROGRESS_REPO_TOKEN_ID } from 'domain-progress';
 import type { ProgressRepository } from 'domain-progress';
-import { evaluateDrill } from 'domain-drill';
+import { evaluateDrill, shuffleWithSeed } from 'domain-drill';
 import type { DrillAnswer } from 'domain-drill';
 import { BreadcrumbComponent } from '../../shared/breadcrumb.component';
 import type { BreadcrumbItem } from '../../shared/breadcrumb.component';
@@ -98,7 +98,7 @@ interface QuizAnswer {
                 <fieldset class="quiz__choices"
                           aria-label="Opciones de respuesta">
                   <legend class="sr-only">Elige una respuesta</legend>
-                  @for (choice of currentQuestion()!.choices ?? []; track choice.id) {
+                  @for (choice of displayChoices(); track choice.id) {
                     <label class="choice-option"
                            [class.choice-option--selected]="selectedChoiceId() === choice.id">
                       <input type="radio"
@@ -506,6 +506,16 @@ export class QuizComponent implements OnInit {
 
   readonly currentQuestion = computed<QuizItem | null>(() => {
     return this.questions()[this.currentIndex()] ?? null;
+  });
+
+  /**
+   * Current question's choices in a stable, seed-shuffled order so the correct
+   * answer is not always in the same position. Seeded by the question id.
+   */
+  readonly displayChoices = computed<DrillChoice[]>(() => {
+    const q = this.currentQuestion();
+    if (!q?.choices) return [];
+    return shuffleWithSeed(q.choices, q.id);
   });
 
   readonly currentAnswer = computed<QuizAnswer | null>(() => {
