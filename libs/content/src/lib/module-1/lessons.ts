@@ -122,6 +122,9 @@ export const MODULE_1_LESSONS: Lesson[] = [
             unitFireDots: ['steady', 'sporadic'],
           },
           side: 'front',
+          // size=440: annotated viewBox is "-20 -15 160 95" (width=160).
+          // scale = 440/160 = 2.75 → counter body = 165px, label text ≈22px.
+          size: 440,
           annotated: true,
         },
       },
@@ -227,6 +230,9 @@ export const MODULE_1_LESSONS: Lesson[] = [
             unitFireDots: ['steady', 'sporadic'],
           },
           side: 'front',
+          // size=200: non-annotated viewBox is "0 0 60 60".
+          // scale = 200/60 = 3.33 → counter glyph = 200px, text at 9px → 30px.
+          size: 200,
           annotated: false,
         },
       },

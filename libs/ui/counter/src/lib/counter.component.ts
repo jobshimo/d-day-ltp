@@ -110,7 +110,7 @@ const GERMAN_SYMBOL_ES: Record<string, string> = {
           text-anchor="middle"
           dominant-baseline="middle"
           fill="#e8e8e8"
-          font-size="7"
+          font-size="9"
           font-weight="bold"
           font-family="sans-serif"
           aria-hidden="true">{{ designation() }}</text>
@@ -154,7 +154,7 @@ const GERMAN_SYMBOL_ES: Record<string, string> = {
           text-anchor="end"
           dominant-baseline="middle"
           fill="#e8e8e8"
-          font-size="6"
+          font-size="8"
           font-family="sans-serif"
           aria-hidden="true">{{ arrivalTurn() }}</text>
       }
@@ -166,7 +166,7 @@ const GERMAN_SYMBOL_ES: Record<string, string> = {
           text-anchor="middle"
           dominant-baseline="middle"
           fill="#e8e8e8"
-          font-size="7"
+          font-size="9"
           font-family="sans-serif"
           aria-hidden="true">{{ beachLandingBox() }}</text>
       }
@@ -202,43 +202,43 @@ const GERMAN_SYMBOL_ES: Record<string, string> = {
           <!-- Designación → top-center -->
           <line x1="30" y1="8" x2="70" y2="8"
                 stroke="#c8a04a" stroke-width="0.8" stroke-dasharray="3,2" />
-          <text x="72" y="10" fill="#c8a04a" font-size="7"
+          <text x="72" y="10" fill="#c8a04a" font-size="8"
                 font-family="sans-serif">Designación</text>
 
           <!-- Escalones → left dot column (point to x=9, y=26 midpoint of dots) -->
           <line x1="9" y1="26" x2="70" y2="70"
                 stroke="#c8a04a" stroke-width="0.8" stroke-dasharray="3,2" />
-          <text x="72" y="72" fill="#c8a04a" font-size="7"
+          <text x="72" y="72" fill="#c8a04a" font-size="8"
                 font-family="sans-serif">Escalones</text>
 
           <!-- Tipo de unidad → symbol top (30,18 = top of box) -->
           <line x1="30" y1="18" x2="30" y2="-2"
                 stroke="#c8a04a" stroke-width="0.8" stroke-dasharray="3,2" />
-          <text x="30" y="-5" text-anchor="middle" fill="#c8a04a" font-size="7"
+          <text x="30" y="-5" text-anchor="middle" fill="#c8a04a" font-size="8"
                 font-family="sans-serif">Tipo de unidad</text>
 
           <!-- Turno de llegada → right of symbol (y=28 = vertical center of box) -->
           <line x1="56" y1="28" x2="70" y2="28"
                 stroke="#c8a04a" stroke-width="0.8" stroke-dasharray="3,2" />
-          <text x="72" y="30" fill="#c8a04a" font-size="7"
+          <text x="72" y="30" fill="#c8a04a" font-size="8"
                 font-family="sans-serif">Turno de llegada</text>
 
           <!-- Caja de desembarco → below symbol -->
           <line x1="30" y1="42" x2="70" y2="42"
                 stroke="#c8a04a" stroke-width="0.8" stroke-dasharray="3,2" />
-          <text x="72" y="44" fill="#c8a04a" font-size="7"
+          <text x="72" y="44" fill="#c8a04a" font-size="8"
                 font-family="sans-serif">Caja de desembarco</text>
 
           <!-- Símbolo de objetivo → bottom-left -->
           <line x1="10" y1="52" x2="-5" y2="52"
                 stroke="#c8a04a" stroke-width="0.8" stroke-dasharray="3,2" />
-          <text x="-7" y="54" text-anchor="end" fill="#c8a04a" font-size="7"
+          <text x="-7" y="54" text-anchor="end" fill="#c8a04a" font-size="8"
                 font-family="sans-serif">Símbolo de objetivo</text>
 
           <!-- Fuerza de ataque → bottom-right -->
           <line x1="55" y1="55" x2="70" y2="55"
                 stroke="#c8a04a" stroke-width="0.8" stroke-dasharray="3,2" />
-          <text x="72" y="57" fill="#c8a04a" font-size="7"
+          <text x="72" y="57" fill="#c8a04a" font-size="8"
                 font-family="sans-serif">Fuerza de ataque</text>
 
         </g>
@@ -248,9 +248,15 @@ const GERMAN_SYMBOL_ES: Record<string, string> = {
   styles: [`
     :host {
       display: inline-block;
+      /* Prevent the counter from overflowing its container on narrow screens */
+      max-width: 100%;
     }
     .ddob-counter {
       display: block;
+      /* Allow the SVG to shrink on small screens while respecting the
+         explicit width/height attributes set via [attr.width]/[attr.height] */
+      max-width: 100%;
+      height: auto;
     }
   `],
 })

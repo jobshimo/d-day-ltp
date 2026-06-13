@@ -119,10 +119,16 @@ export const LESSON_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
                 }
                 @case ('counter') {
                   <figure class="lesson-block lesson-block--counter">
+                    <!--
+                      Size fallback: annotated counters use viewBox "-20 -15 160 95" (w=160),
+                      so 440px gives scale 2.75 → labels ≈22px, glyph ≈165px.
+                      Non-annotated counters use viewBox "0 0 60 60",
+                      so 200px gives scale 3.33 → text ≈30px, glyph = 200px.
+                    -->
                     <ddob-counter
                       [unit]="block.counterConfig!.unit"
                       [side]="block.counterConfig!.side"
-                      [size]="block.counterConfig!.size ?? 120"
+                      [size]="block.counterConfig!.size ?? (block.counterConfig!.annotated ? 440 : 200)"
                       [annotated]="block.counterConfig!.annotated ?? true" />
                     @if (block.altText) {
                       <figcaption>{{ block.altText }}</figcaption>
