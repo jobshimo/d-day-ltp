@@ -3,6 +3,7 @@ import { ALL_MODULES } from './lib/modules';
 import { TERMINOLOGY } from './terminology';
 import { PATCHES, applyPatches } from './patches/index';
 import { SYMBOLOGY } from './lib/symbology';
+import { SETUP_GUIDE } from './lib/setup-guide';
 
 describe('ALL_MODULES', () => {
   it('contains exactly 8 modules', () => {
@@ -227,5 +228,76 @@ describe('PATCHES', () => {
     const m1 = ALL_MODULES.find((m) => m.id === 'module-1')!;
     const result = applyPatches(m1);
     expect(result).toBe(m1); // same reference when no patches
+  });
+});
+
+describe('SETUP_GUIDE', () => {
+  it('contains exactly 5 groups', () => {
+    expect(SETUP_GUIDE).toHaveLength(5);
+  });
+
+  it('all expected group ids are present', () => {
+    const ids = SETUP_GUIDE.map((g) => g.id);
+    expect(ids).toContain('mapa');
+    expect(ids).toContain('german-wn');
+    expect(ids).toContain('german-reinforcements');
+    expect(ids).toContain('marcadores-mazo');
+    expect(ids).toContain('us-deployment');
+  });
+
+  it('every group has a non-empty titleEs', () => {
+    for (const group of SETUP_GUIDE) {
+      expect(group.titleEs, `group "${group.id}" missing titleEs`).toBeTruthy();
+    }
+  });
+
+  it('every group has at least one step', () => {
+    for (const group of SETUP_GUIDE) {
+      expect(group.steps.length, `group "${group.id}" has no steps`).toBeGreaterThan(0);
+    }
+  });
+
+  it('every step has titleEs, bodyEs, and groupId', () => {
+    for (const group of SETUP_GUIDE) {
+      for (const step of group.steps) {
+        expect(step.titleEs, `step "${step.id}" missing titleEs`).toBeTruthy();
+        expect(step.bodyEs, `step "${step.id}" missing bodyEs`).toBeTruthy();
+        expect(step.groupId, `step "${step.id}" missing groupId`).toBeTruthy();
+      }
+    }
+  });
+
+  it('every step groupId matches its parent group id', () => {
+    for (const group of SETUP_GUIDE) {
+      for (const step of group.steps) {
+        expect(step.groupId).toBe(group.id);
+      }
+    }
+  });
+
+  it('total step count is 10', () => {
+    const total = SETUP_GUIDE.reduce((sum, g) => sum + g.steps.length, 0);
+    expect(total).toBe(10);
+  });
+
+  it('all step ids are unique', () => {
+    const ids = SETUP_GUIDE.flatMap((g) => g.steps.map((s) => s.id));
+    const unique = new Set(ids);
+    expect(unique.size).toBe(ids.length);
+  });
+
+  it('german-wn group has 3 steps', () => {
+    const group = SETUP_GUIDE.find((g) => g.id === 'german-wn')!;
+    expect(group.steps).toHaveLength(3);
+  });
+
+  it('us-deployment group has a step with a pieceExample of type tank', () => {
+    const group = SETUP_GUIDE.find((g) => g.id === 'us-deployment')!;
+    const step = group.steps[0];
+    expect(step.pieceExample).toBeDefined();
+    expect(step.pieceExample!.unit.kind).toBe('us');
+    // Type assertion for narrowing
+    const u = step.pieceExample!.unit as { kind: 'us'; type: string };
+    expect(u.type).toBe('tank');
   });
 });

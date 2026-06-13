@@ -6,3 +6,5 @@ export { NARRATION, getBlockNarration } from './narration.generated';
 export { TERRAIN_COLORS, GERMAN_POS_COLORS } from './lib/terrain-palette';
 export { SYMBOLOGY } from './lib/symbology';
 export type { SimbologiaRenderAs, SimbologiaEntry, SimbologiaCategory } from './lib/symbology';
+export { SETUP_GUIDE } from './lib/setup-guide';
+export type { SetupStep, SetupStepGroup } from './lib/setup-guide';
