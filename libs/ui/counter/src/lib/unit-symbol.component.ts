@@ -202,14 +202,18 @@ export class UnitSymbolComponent {
     return !this.germanSymbol;
   }
 
-  /** Whether to render the inner bounding box (not used for general/hero which have no box) */
+  /**
+   * Whether to render the inner bounding box. The tank silhouette (US tank,
+   * German armor) and the general/hero glyphs stand alone with no NATO box,
+   * matching the real counters.
+   */
   get showBox(): boolean {
     if (!this.isUS) {
-      // German types all have box
-      return !!this.germanSymbol;
+      // German armor uses a bare silhouette; other German types keep the box.
+      return this.germanSymbol !== undefined && this.germanSymbol !== 'armor';
     }
-    // US: general and hero have no box
-    return this.type !== 'general' && this.type !== 'hero';
+    // US: tank (silhouette), general and hero have no box.
+    return this.type !== 'general' && this.type !== 'hero' && this.type !== 'tank';
   }
 
   /** Generate a 5-point star polygon centered at (cx, cy) with outer radius r and inner radius ri */
