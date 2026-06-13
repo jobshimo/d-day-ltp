@@ -49,21 +49,22 @@ const GERMAN_SYMBOL_ES: Record<string, string> = {
 };
 
 /**
- * CounterComponent (ddob-counter) — renders a complete wargame counter in SVG.
+ * CounterComponent (ddob-counter) — renders a wargame counter in SVG,
+ * matching the REAL US counter sheet anatomy (from omaha03.jpg).
  *
- * viewBox: "0 0 60 60" (standard), "0 0 120 90" when annotated=true.
+ * viewBox: "0 0 60 60" (standard), "0 0 140 80" when annotated=true.
  *
- * Layer order (z-order):
- * 1. Background rect (division color; disrupted stripe overlay)
- * 2. Fire dots (top-left)
- * 3. Target symbol (top-center)
- * 4. Designation text (below target symbol, full mode only)
- * 5. Unit symbol glyph (center)
- * 6. Attack strength text (bottom-left)
- * 7. Steps bars (top-right, full mode only)
- * 8. Arrival/beach box text (bottom-center, full mode only)
- * 9. Range text (bottom-right, full mode only)
- * 10. Annotation callouts (when annotated=true, full mode only)
+ * Layout (top → bottom, verified against real counter sheet):
+ * 1. Designation text — top, centered (e.g. "C/2R", "B/1/116")
+ * 2. Steps dots — vertical column of filled dots to the LEFT of the unit symbol
+ *    (dot count = unit.steps, 1–4)
+ * 3. Unit symbol (UnitSymbolComponent) — upper-center, white glyph
+ * 4. Arrival turn — small number to the RIGHT of the unit symbol
+ * 5. Beach landing box — just BELOW the unit symbol, centered
+ * 6. Target symbol (TargetSymbolComponent) — BOTTOM-LEFT
+ * 7. Attack strength — BOTTOM-RIGHT, large bold number
+ *
+ * compact mode: symbol only (no text), for board mini-counters.
  */
 @Component({
   standalone: true,
@@ -95,37 +96,41 @@ const GERMAN_SYMBOL_ES: Record<string, string> = {
               opacity="0.8" aria-hidden="true" />
       }
 
-      <!-- 2. Fire dots (top-left, only when present) -->
+      <!-- Fire dots (top-left, only when present) — compact also shows them -->
       @if (hasFireDots()) {
         <g transform="translate(2, 0)" aria-hidden="true">
           <ddob-fire-dots [dots]="fireDots()" />
         </g>
       }
 
-      <!-- 3. Target symbol (top-center) -->
-      @if (isUS()) {
-        <ddob-target-symbol
-          [symbol]="usUnit()!.targetSymbol"
-          [control]="targetControl()"
-          [size]="12"
-          [cx]="30"
-          [cy]="10"
-          aria-hidden="true" />
-      }
-
-      <!-- 4. Designation text (full mode only, below target symbol) -->
+      <!-- 2. Designation text (full mode only, top centered) -->
       @if (variant === 'full' && designation()) {
         <text
-          x="30" y="20"
+          x="30" y="8"
           text-anchor="middle"
           dominant-baseline="middle"
           fill="#e8e8e8"
-          font-size="6"
-          font-family="var(--font-family-mono, 'JetBrains Mono', monospace)"
+          font-size="7"
+          font-weight="bold"
+          font-family="sans-serif"
           aria-hidden="true">{{ designation() }}</text>
       }
 
-      <!-- 5. Unit symbol glyph (center, inner box x=14 y=18 w=32 h=20) -->
+      <!-- 3. Steps — vertical column of filled dots LEFT of the unit symbol (full mode only) -->
+      @if (variant === 'full' && isUS()) {
+        @for (dot of stepDots(); track $index; let i = $index) {
+          <circle
+            cx="9"
+            [attr.cy]="stepDotCy(i)"
+            r="2.8"
+            fill="#e8e8e8"
+            stroke="#1a1c1e"
+            stroke-width="0.5"
+            aria-hidden="true" />
+        }
+      }
+
+      <!-- 4. Unit symbol glyph (upper-center; inner box x=14 y=16 w=32 h=20, center 30,26) -->
       @if (isUS()) {
         <ddob-unit-symbol
           [type]="usUnit()!.type"
@@ -141,84 +146,101 @@ const GERMAN_SYMBOL_ES: Record<string, string> = {
           aria-hidden="true" />
       }
 
-      <!-- 6. Attack strength text (bottom-left) -->
-      @if (variant === 'full') {
+      <!-- 5. Arrival turn: small number to the RIGHT of the unit symbol (full mode only) -->
+      <!-- Positioned at y=28 (vertical center of the symbol box which spans y=18..38) -->
+      @if (variant === 'full' && arrivalTurn() !== null) {
         <text
-          x="6" y="55"
-          text-anchor="middle"
-          dominant-baseline="auto"
-          fill="#e8e8e8"
-          font-size="18"
-          font-weight="bold"
-          font-family="var(--font-family-mono, 'JetBrains Mono', monospace)"
-          aria-hidden="true">{{ displayStrength() }}</text>
-      }
-
-      <!-- 7. Steps bars (top-right, full mode only) -->
-      @if (variant === 'full' && isUS()) {
-        @for (bar of stepBars(); track $index; let i = $index) {
-          <rect
-            [attr.x]="54"
-            [attr.y]="4 + i * 5"
-            width="4"
-            height="3"
-            [attr.fill]="bar ? '#e8e8e8' : '#3d4147'"
-            aria-hidden="true" />
-        }
-      }
-
-      <!-- 8. Arrival/beach box text (bottom-center, full mode only) -->
-      @if (variant === 'full' && arrivalInfo()) {
-        <text
-          x="30" y="57"
-          text-anchor="middle"
-          dominant-baseline="auto"
+          x="56" y="28"
+          text-anchor="end"
+          dominant-baseline="middle"
           fill="#e8e8e8"
           font-size="6"
-          font-family="var(--font-family-mono, 'JetBrains Mono', monospace)"
-          aria-hidden="true">{{ arrivalInfo() }}</text>
+          font-family="sans-serif"
+          aria-hidden="true">{{ arrivalTurn() }}</text>
       }
 
-      <!-- 9. Range text (bottom-right, full mode only) -->
-      @if (variant === 'full' && rangeText()) {
+      <!-- 6. Beach landing box: just BELOW the unit symbol, centered (full mode only) -->
+      @if (variant === 'full' && beachLandingBox()) {
         <text
-          x="56" y="57"
+          x="30" y="42"
+          text-anchor="middle"
+          dominant-baseline="middle"
+          fill="#e8e8e8"
+          font-size="7"
+          font-family="sans-serif"
+          aria-hidden="true">{{ beachLandingBox() }}</text>
+      }
+
+      <!-- 7. Target symbol: BOTTOM-LEFT (full mode only for US) -->
+      @if (variant === 'full' && isUS()) {
+        <ddob-target-symbol
+          [symbol]="usUnit()!.targetSymbol"
+          [control]="targetControl()"
+          [size]="12"
+          [cx]="10"
+          [cy]="52"
+          aria-hidden="true" />
+      }
+
+      <!-- 8. Attack strength: BOTTOM-RIGHT, large bold (full mode only) -->
+      @if (variant === 'full') {
+        <text
+          x="55" y="59"
           text-anchor="end"
           dominant-baseline="auto"
           fill="#e8e8e8"
-          font-size="6"
-          font-family="var(--font-family-mono, 'JetBrains Mono', monospace)"
-          aria-hidden="true">{{ rangeText() }}</text>
+          font-size="20"
+          font-weight="bold"
+          font-family="sans-serif"
+          aria-hidden="true">{{ displayStrength() }}</text>
       }
 
-      <!-- 10. Annotation callouts (annotated mode, full mode only) -->
+      <!-- Annotation callouts (annotated mode, full mode only) — labels right/above the counter -->
       @if (annotated && variant === 'full') {
         <g class="counter__annotations" aria-hidden="true">
-          <!-- Attack strength callout -->
-          <line x1="6" y1="50" x2="70" y2="50"
-                stroke="#c8a04a" stroke-width="0.8" stroke-dasharray="3,2" />
-          <text x="72" y="52" fill="#c8a04a" font-size="7"
-                font-family="var(--font-family-mono, 'JetBrains Mono', monospace)">Fuerza de ataque</text>
 
-          <!-- Target symbol callout -->
-          <line x1="30" y1="10" x2="30" y2="-5"
+          <!-- Designación → top-center -->
+          <line x1="30" y1="8" x2="70" y2="8"
                 stroke="#c8a04a" stroke-width="0.8" stroke-dasharray="3,2" />
-          <text x="30" y="-8" text-anchor="middle" fill="#c8a04a" font-size="7"
-                font-family="var(--font-family-mono, 'JetBrains Mono', monospace)">Símbolo de objetivo</text>
+          <text x="72" y="10" fill="#c8a04a" font-size="7"
+                font-family="sans-serif">Designación</text>
 
-          <!-- Steps callout -->
-          <line x1="55" y1="10" x2="75" y2="10"
+          <!-- Escalones → left dot column (point to x=9, y=26 midpoint of dots) -->
+          <line x1="9" y1="26" x2="70" y2="70"
                 stroke="#c8a04a" stroke-width="0.8" stroke-dasharray="3,2" />
-          <text x="77" y="13" fill="#c8a04a" font-size="7"
-                font-family="var(--font-family-mono, 'JetBrains Mono', monospace)">Escalones</text>
+          <text x="72" y="72" fill="#c8a04a" font-size="7"
+                font-family="sans-serif">Escalones</text>
 
-          <!-- Designation callout -->
-          @if (designation()) {
-            <line x1="30" y1="20" x2="70" y2="20"
-                  stroke="#c8a04a" stroke-width="0.8" stroke-dasharray="3,2" />
-            <text x="72" y="23" fill="#c8a04a" font-size="7"
-                  font-family="var(--font-family-mono, 'JetBrains Mono', monospace)">Designación</text>
-          }
+          <!-- Tipo de unidad → symbol top (30,18 = top of box) -->
+          <line x1="30" y1="18" x2="30" y2="-2"
+                stroke="#c8a04a" stroke-width="0.8" stroke-dasharray="3,2" />
+          <text x="30" y="-5" text-anchor="middle" fill="#c8a04a" font-size="7"
+                font-family="sans-serif">Tipo de unidad</text>
+
+          <!-- Turno de llegada → right of symbol (y=28 = vertical center of box) -->
+          <line x1="56" y1="28" x2="70" y2="28"
+                stroke="#c8a04a" stroke-width="0.8" stroke-dasharray="3,2" />
+          <text x="72" y="30" fill="#c8a04a" font-size="7"
+                font-family="sans-serif">Turno de llegada</text>
+
+          <!-- Caja de desembarco → below symbol -->
+          <line x1="30" y1="42" x2="70" y2="42"
+                stroke="#c8a04a" stroke-width="0.8" stroke-dasharray="3,2" />
+          <text x="72" y="44" fill="#c8a04a" font-size="7"
+                font-family="sans-serif">Caja de desembarco</text>
+
+          <!-- Símbolo de objetivo → bottom-left -->
+          <line x1="10" y1="52" x2="-5" y2="52"
+                stroke="#c8a04a" stroke-width="0.8" stroke-dasharray="3,2" />
+          <text x="-7" y="54" text-anchor="end" fill="#c8a04a" font-size="7"
+                font-family="sans-serif">Símbolo de objetivo</text>
+
+          <!-- Fuerza de ataque → bottom-right -->
+          <line x1="55" y1="55" x2="70" y2="55"
+                stroke="#c8a04a" stroke-width="0.8" stroke-dasharray="3,2" />
+          <text x="72" y="57" fill="#c8a04a" font-size="7"
+                font-family="sans-serif">Fuerza de ataque</text>
+
         </g>
       }
     </svg>
@@ -330,32 +352,44 @@ export class CounterComponent implements OnChanges {
     return de?.germanDivision === '716th' ? '#d8c24a' : '#e8e8e8';
   });
 
-  readonly stepBars = computed(() => {
+  /** Steps as an array of length=unit.steps for @for iteration */
+  readonly stepDots = computed(() => {
     const u = this.usUnit();
     if (!u) return [];
-    const maxSteps = 4;
-    const currentSteps = u.steps;
-    // Fill bars from top: current steps filled, rest empty
-    return Array.from({ length: maxSteps }, (_, i) => i < currentSteps);
+    return Array.from({ length: u.steps });
   });
 
-  readonly arrivalInfo = computed(() => {
+  /**
+   * Y-coordinate of each step dot.
+   * UnitSymbolComponent renders its box at x=14 y=18 w=32 h=20.
+   * Dots align with this box vertically: y=18 to y=38, height=20.
+   * With up to 4 dots, evenly distribute them across the box height.
+   */
+  stepDotCy(index: number): number {
+    // Distribute dots aligned with symbol box (y=18 to y=38, height=20)
+    const boxTop = 18;
+    const boxHeight = 20;
+    const totalDots = this.stepDots().length;
+    const spacing = totalDots > 1 ? boxHeight / (totalDots - 1) : 0;
+    return totalDots === 1 ? boxTop + boxHeight / 2 : boxTop + index * spacing;
+  }
+
+  readonly arrivalTurn = computed(() => {
     const u = this.usUnit();
-    if (!u) return null;
-    const parts: string[] = [];
-    if (u.arrivalTurn != null) parts.push(`T${u.arrivalTurn}`);
-    if (u.beachLandingBox) parts.push(u.beachLandingBox);
-    return parts.length > 0 ? parts.join(' ') : null;
+    return u?.arrivalTurn ?? null;
   });
 
-  readonly rangeText = computed(() => {
+  readonly beachLandingBox = computed(() => {
     const u = this.usUnit();
-    if (!u || u.range == null) return null;
-    return String(u.range);
+    return u?.beachLandingBox ?? null;
   });
 
-  /** viewBox grows to 120x90 only in annotated mode to give callouts room */
+  /**
+   * viewBox expands in annotated mode to accommodate right-side and top/bottom callout labels.
+   * Annotated viewBox: "−20 −15 160 95" — adds negative offset for left/top labels,
+   * extends right for right-side labels (need ~140px total width, ~80px total height).
+   */
   readonly viewBox = computed(() => {
-    return this.annotated && this.variant === 'full' ? '0 0 120 90' : '0 0 60 60';
+    return this.annotated && this.variant === 'full' ? '-20 -15 160 95' : '0 0 60 60';
   });
 }
