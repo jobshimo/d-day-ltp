@@ -1,0 +1,16 @@
+[phases.setup]
+nixPkgs = ["nodejs_22", "openssl"]
+
+[phases.install]
+cmds = ["npm ci --legacy-peer-deps"]
+
+[phases.build]
+cmds = [
+  "npx prisma generate",
+  "npx prisma migrate deploy",
+  "NODE_OPTIONS=--max-old-space-size=2048 npx nx build learning-app --configuration=production",
+  "npx nx build api --configuration=production"
+]
+
+[start]
+cmd = "node dist/apps/api/main.js"
