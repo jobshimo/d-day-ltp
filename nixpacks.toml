@@ -10,11 +10,13 @@ cmds = ["npm ci --legacy-peer-deps --include=dev"]
 
 # Migrations run at deploy time (railway.json preDeployCommand), not here — the
 # build must not depend on the database being reachable.
+# NX_DAEMON=false: the Nx daemon hangs in Railway's build container ("NX [object
+# Object]"); CI works because the daemon is disabled there. Match that here.
 [phases.build]
 cmds = [
   "npx prisma generate",
-  "NODE_OPTIONS=--max-old-space-size=2048 npx nx build learning-app --configuration=production",
-  "npx nx build api"
+  "NX_DAEMON=false NODE_OPTIONS=--max-old-space-size=2048 npx nx build learning-app --configuration=production",
+  "NX_DAEMON=false npx nx build api"
 ]
 
 [start]
