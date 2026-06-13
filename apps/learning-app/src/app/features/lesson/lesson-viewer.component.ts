@@ -1,12 +1,12 @@
 import {
   Component,
-  OnInit,
   inject,
   signal,
   computed,
   ChangeDetectionStrategy,
   InjectionToken,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ALL_MODULES, getBlockNarration } from 'content';
 import type { Lesson, WorkedExampleStep } from 'content-schema';
@@ -487,7 +487,7 @@ export const LESSON_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
     .back-link:hover { text-decoration: underline; }
   `],
 })
-export class LessonViewerComponent implements OnInit {
+export class LessonViewerComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   readonly narrationStore = inject(NarrationStore);
@@ -532,7 +532,17 @@ export class LessonViewerComponent implements OnInit {
 
   private readonly progressRepo = inject<ProgressRepository>(LESSON_PROGRESS_REPO);
 
-  ngOnInit(): void {
+  constructor() {
+    // React to route param changes, not just the first load. Angular reuses this
+    // component instance when only the lessonId param changes (e.g. advancing to
+    // the next lesson), so reading params once in ngOnInit would leave the view
+    // stuck on the previous lesson.
+    this.route.paramMap
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => this.loadLesson());
+  }
+
+  private loadLesson(): void {
     const modId = this.route.parent?.snapshot.paramMap.get('moduleId') ?? '';
     const lessonId = this.route.snapshot.paramMap.get('lessonId') ?? '';
 
@@ -541,6 +551,10 @@ export class LessonViewerComponent implements OnInit {
     const mod = ALL_MODULES.find((m) => m.id === modId);
     const foundLesson = mod?.lessons.find((l) => l.id === lessonId) ?? null;
     this.lesson.set(foundLesson);
+
+    // Reset per-lesson UI state so the new lesson starts clean.
+    this.currentStep.set(0);
+    this.lessonComplete.set(false);
 
     // Check if already completed
     if (modId && lessonId) {

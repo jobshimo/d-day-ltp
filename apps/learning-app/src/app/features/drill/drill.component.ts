@@ -1,11 +1,11 @@
 import {
   Component,
-  OnInit,
   inject,
   signal,
   computed,
   ChangeDetectionStrategy,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DrillStore } from 'application-drill-store';
 import { ALL_MODULES } from 'content';
@@ -450,10 +450,20 @@ import { BoardSnippetComponent } from 'ui-board-renderer';
     .back-link:hover { text-decoration: underline; }
   `],
 })
-export class DrillComponent implements OnInit {
+export class DrillComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   readonly store = inject(DrillStore);
+
+  constructor() {
+    // React to route param changes, not just the first load. Angular reuses this
+    // component instance when only the drillIndex param changes (e.g. "Siguiente
+    // ejercicio"), so reading params once in ngOnInit would leave the view stuck
+    // on the previous drill.
+    this.route.paramMap
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => this.loadDrill());
+  }
 
   readonly moduleId = signal<string>('');
   readonly drillIndex = signal<number>(0);
@@ -547,7 +557,7 @@ export class DrillComponent implements OnInit {
     return this.selectedChoiceId() !== null;
   });
 
-  ngOnInit(): void {
+  private loadDrill(): void {
     const modId = this.route.parent?.snapshot.paramMap.get('moduleId') ?? '';
     const indexStr = this.route.snapshot.paramMap.get('drillIndex') ?? '0';
     const index = parseInt(indexStr, 10);
@@ -555,11 +565,15 @@ export class DrillComponent implements OnInit {
     this.moduleId.set(modId);
     this.drillIndex.set(index);
 
+    // Reset per-drill UI state so the new drill starts clean.
+    this.selectedChoiceId.set(null);
+    this.selectedUnitIds.set([]);
+
     const mod = ALL_MODULES.find((m) => m.id === modId);
     const drillScenario = mod?.drills[index] ?? null;
 
+    this.drill.set(drillScenario);
     if (drillScenario) {
-      this.drill.set(drillScenario);
       this.store.load(drillScenario, modId);
     }
   }

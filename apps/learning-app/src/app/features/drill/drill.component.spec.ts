@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, RouterLink, provideRouter } from '@angular/router';
 import { Component, Input } from '@angular/core';
+import { of } from 'rxjs';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { DrillComponent } from './drill.component';
 import { DrillStore, DRILL_PROGRESS_REPO } from 'application-drill-store';
@@ -51,6 +52,9 @@ const mockActivatedRoute = {
     snapshot: { paramMap: { get: vi.fn().mockReturnValue('test-module-99') } },
   },
   snapshot: { paramMap: { get: vi.fn().mockReturnValue('0') } },
+  // The component subscribes to paramMap to react to route changes; emit once so
+  // the initial load runs (it reads the values from snapshot above).
+  paramMap: of({ get: vi.fn().mockReturnValue('0') }),
 };
 
 // ---------------------------------------------------------------------------
