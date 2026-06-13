@@ -16,6 +16,7 @@ import { NarrationStore } from 'application-narration-store';
 import { BreadcrumbComponent } from '../../shared/breadcrumb.component';
 import type { BreadcrumbItem } from '../../shared/breadcrumb.component';
 import { RuleRefChipComponent } from './rule-ref-chip.component';
+import { CounterComponent } from 'counter';
 
 export const LESSON_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
   PROGRESS_REPO_TOKEN_ID,
@@ -25,7 +26,7 @@ export const LESSON_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
   standalone: true,
   selector: 'app-lesson-viewer',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, BreadcrumbComponent, RuleRefChipComponent],
+  imports: [RouterLink, BreadcrumbComponent, RuleRefChipComponent, CounterComponent],
   template: `
     <div class="lesson-viewer">
       <app-breadcrumb [items]="breadcrumbs()" />
@@ -111,6 +112,18 @@ export const LESSON_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
                          [alt]="block.altText ?? 'Ilustración del juego'"
                          loading="lazy"
                          class="lesson-block__svg" />
+                    @if (block.altText) {
+                      <figcaption>{{ block.altText }}</figcaption>
+                    }
+                  </figure>
+                }
+                @case ('counter') {
+                  <figure class="lesson-block lesson-block--counter">
+                    <ddob-counter
+                      [unit]="block.counterConfig!.unit"
+                      [side]="block.counterConfig!.side"
+                      [size]="block.counterConfig!.size ?? 120"
+                      [annotated]="block.counterConfig!.annotated ?? true" />
                     @if (block.altText) {
                       <figcaption>{{ block.altText }}</figcaption>
                     }
@@ -321,6 +334,24 @@ export const LESSON_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
         font-size: var(--font-size-sm);
         color: var(--color-text-secondary);
         font-style: italic;
+      }
+    }
+
+    .lesson-block--counter {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-6);
+
+      figcaption {
+        margin-top: var(--space-3);
+        font-size: var(--font-size-sm);
+        color: var(--color-text-secondary);
+        font-style: italic;
+        text-align: center;
       }
     }
 

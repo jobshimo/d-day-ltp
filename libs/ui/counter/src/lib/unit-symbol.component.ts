@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, NO_ERRORS_SCHEMA } from '@angular/core';
 import type { UnitType, GermanUnitSymbol } from 'content-schema';
 
 /**
@@ -20,6 +20,7 @@ import type { UnitType, GermanUnitSymbol } from 'content-schema';
   standalone: true,
   selector: 'ddob-unit-symbol',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  schemas: [NO_ERRORS_SCHEMA],
   template: `
     <!-- Inner symbol box outline (shared by infantry, ranger, tank, arty, engineer, hq) -->
     @if (showBox) {

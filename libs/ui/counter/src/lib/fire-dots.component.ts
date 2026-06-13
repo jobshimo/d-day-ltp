@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, NO_ERRORS_SCHEMA } from '@angular/core';
 import type { FireDotIntensity } from 'content-schema';
 
 /** Fire dot color map — duplicated from board-renderer to avoid circular dependency */
@@ -21,6 +21,7 @@ const FIRE_DOT_COLORS: Record<FireDotIntensity, string> = {
   standalone: true,
   selector: 'ddob-fire-dots',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  schemas: [NO_ERRORS_SCHEMA],
   template: `
     @for (dot of dots; track $index; let i = $index) {
       <g [attr.transform]="dotTransform(i)" aria-hidden="true">

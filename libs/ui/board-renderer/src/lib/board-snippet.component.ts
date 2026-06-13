@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 import type { BoardSnippet, HexState, HexHighlight } from 'content-schema';
 import type { USUnitState, GermanUnitState } from 'content-schema';
+import { UnitSymbolComponent } from 'counter';
 
 /**
  * BoardSnippetComponent — renders a compact SVG hex grid for drill scenarios.
@@ -117,6 +118,7 @@ const HIGHLIGHT_STYLES: Record<string, { fill: string; stroke: string }> = {
   standalone: true,
   selector: 'ddob-board-snippet',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [UnitSymbolComponent],
   template: `
     <div class="board-snippet"
          [style.width.px]="svgWidth()"
@@ -231,27 +233,41 @@ const HIGHLIGHT_STYLES: Record<string, { fill: string; stroke: string }> = {
 
             <!-- US unit counters -->
             @for (unit of unitsInHex(coord.hexId, 'us'); track unit.id; let ui = $index) {
+              @let usUnit = asUSUnit(unit);
               <g class="unit-counter unit-counter--us"
                  [attr.transform]="unitTransform(coord, ui, 'us')"
                  aria-hidden="true">
                 <rect x="-10" y="-8" width="20" height="16"
-                      fill="#4a7040" stroke="#e8e8e8" stroke-width="1" rx="2" />
-                <text text-anchor="middle" y="4"
-                      fill="#ffffff" font-size="7" font-weight="bold">
-                  {{ unitSymbol(unit) }}
-                </text>
+                      [attr.fill]="usDivisionFill(usUnit)"
+                      stroke="#e8e8e8" stroke-width="1" rx="2" />
+                <!-- NATO glyph via UnitSymbolComponent nested in an inner SVG viewport -->
+                <svg viewBox="0 0 60 60" width="20" height="16" x="-10" y="-8">
+                  <ddob-unit-symbol [type]="usUnit.type" color="#ffffff" [strokeWidth]="2.5" />
+                </svg>
               </g>
             }
 
             <!-- German unit counters -->
             @for (unit of unitsInHex(coord.hexId, 'german'); track unit.id; let gi = $index) {
+              @let deUnit = asGermanUnit(unit);
               <g class="unit-counter unit-counter--german"
                  [attr.transform]="unitTransform(coord, gi, 'german')"
                  aria-hidden="true">
                 <rect x="-9" y="-7" width="18" height="14"
                       fill="#5c4a30" stroke="#e8e8e8" stroke-width="1" rx="2" />
-                <text text-anchor="middle" y="3"
-                      fill="#e8e8e8" font-size="6" font-weight="bold">DE</text>
+                @if (deUnit.germanUnitSymbol) {
+                  <!-- NATO glyph available — use UnitSymbolComponent -->
+                  <svg viewBox="0 0 60 60" width="18" height="14" x="-9" y="-7">
+                    <ddob-unit-symbol
+                      [germanSymbol]="deUnit.germanUnitSymbol"
+                      [color]="germanGlyphColor(deUnit)"
+                      [strokeWidth]="2.5" />
+                  </svg>
+                } @else {
+                  <!-- Fallback text for existing drills without germanUnitSymbol -->
+                  <text text-anchor="middle" y="3"
+                        fill="#e8e8e8" font-size="6" font-weight="bold">DE</text>
+                }
               </g>
             }
 
@@ -452,6 +468,36 @@ export class BoardSnippetComponent implements AfterViewInit, OnChanges {
       arty: 'ART', hq: 'HQ', engineer: 'ENG',
     };
     return symbolMap[us.type] ?? us.type.slice(0, 3).toUpperCase();
+  }
+
+  /** Cast to USUnitState — used in template @let bindings */
+  asUSUnit(unit: USUnitState | GermanUnitState): USUnitState {
+    return unit as USUnitState;
+  }
+
+  /** Cast to GermanUnitState — used in template @let bindings */
+  asGermanUnit(unit: USUnitState | GermanUnitState): GermanUnitState {
+    return unit as GermanUnitState;
+  }
+
+  /**
+   * Division-aware fill color for US unit counters.
+   * Falls back to the default US green when division is unset (back-compat).
+   */
+  usDivisionFill(unit: USUnitState): string {
+    const FILLS: Record<string, string> = {
+      '1st':  '#2f4a28',
+      '29th': '#4f7a40',
+    };
+    return FILLS[unit.division ?? ''] ?? '#4a7040';
+  }
+
+  /**
+   * Glyph color for German unit counters.
+   * 716th Division uses yellow; all others use light grey.
+   */
+  germanGlyphColor(unit: GermanUnitState): string {
+    return unit.germanDivision === '716th' ? '#d8c24a' : '#e8e8e8';
   }
 
   hexAriaLabel(hexId: string): string {
