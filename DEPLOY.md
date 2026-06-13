@@ -55,14 +55,17 @@ openssl rand -hex 32
 ### 5. Verify build and start commands
 
 The repository includes `railway.json` and `nixpacks.toml`. Railway uses them automatically.
-The build runs in this order:
+The **build** runs in this order (it does NOT touch the database):
 1. `npm ci --legacy-peer-deps` — installs all dependencies
 2. `npx prisma generate` — generates the Prisma client for the Railway container
-3. `npx prisma migrate deploy` — runs pending SQL migrations against the Postgres database
-4. `npx nx build learning-app --configuration=production` — builds the Angular SPA
-5. `npx nx build api --configuration=production` — builds the NestJS API
+3. `npx nx build learning-app --configuration=production` — builds the Angular SPA
+4. `npx nx build api --configuration=production` — builds the NestJS API
 
-The start command is: `node dist/apps/api/main.js`
+Then, at **deploy** time (when `DATABASE_URL` is available and the database is reachable):
+- **Pre-deploy command**: `npx prisma migrate deploy` — runs pending SQL migrations against Postgres.
+- **Start command**: `node dist/apps/api/main.js`
+
+Running migrations at deploy time (not build time) keeps the build independent of the database.
 
 ### 6. First deploy
 
