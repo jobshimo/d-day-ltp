@@ -12,7 +12,7 @@ cmds = ["npm ci --legacy-peer-deps"]
 cmds = [
   "npx prisma generate",
   "NODE_OPTIONS=--max-old-space-size=2048 npx nx build learning-app --configuration=production",
-  "npx nx build api --configuration=production"
+  "npx nx build api"
 ]
 
 [start]
