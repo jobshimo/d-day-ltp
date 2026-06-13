@@ -3,8 +3,10 @@
 [phases.setup]
 nixPkgs = ["nodejs_24", "openssl"]
 
+# --include=dev is required: NODE_ENV=production (a runtime var) otherwise makes
+# npm omit devDependencies, but the build needs them (prisma CLI, Nx, webpack…).
 [phases.install]
-cmds = ["npm ci --legacy-peer-deps"]
+cmds = ["npm ci --legacy-peer-deps --include=dev"]
 
 # Migrations run at deploy time (railway.json preDeployCommand), not here — the
 # build must not depend on the database being reachable.
