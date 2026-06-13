@@ -8,10 +8,11 @@ import {
   InjectionToken,
 } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { ALL_MODULES } from 'content';
+import { ALL_MODULES, getBlockNarration } from 'content';
 import type { Lesson, WorkedExampleStep } from 'content-schema';
 import { PROGRESS_REPO_TOKEN_ID } from 'domain-progress';
 import type { ProgressRepository } from 'domain-progress';
+import { NarrationStore } from 'application-narration-store';
 import { BreadcrumbComponent } from '../../shared/breadcrumb.component';
 import type { BreadcrumbItem } from '../../shared/breadcrumb.component';
 import { RuleRefChipComponent } from './rule-ref-chip.component';
@@ -41,7 +42,30 @@ export const LESSON_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
             @for (block of lesson()!.blocks; track $index) {
               @switch (block.type) {
                 @case ('prose') {
-                  <p class="lesson-block lesson-block--prose">{{ block.content }}</p>
+                  <div class="lesson-block lesson-block--prose">
+                    <p>{{ block.content }}</p>
+                    @if (getNarrationSrc(lesson()!.id, $index); as src) {
+                      <button
+                        type="button"
+                        class="narration-btn"
+                        [class.narration-btn--playing]="isBlockPlaying(lesson()!.id, $index)"
+                        [attr.aria-pressed]="isBlockPlaying(lesson()!.id, $index)"
+                        [attr.aria-label]="isBlockPlaying(lesson()!.id, $index) ? 'Detener narración' : 'Escuchar este párrafo'"
+                        (click)="toggleNarration(lesson()!.id, $index, src)">
+                        <svg class="narration-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" width="16" height="16">
+                          @if (isBlockPlaying(lesson()!.id, $index)) {
+                            <!-- Pause icon -->
+                            <rect x="4" y="3" width="4" height="14" rx="1"/>
+                            <rect x="12" y="3" width="4" height="14" rx="1"/>
+                          } @else {
+                            <!-- Speaker icon -->
+                            <path d="M9.5 3.5a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-.8.4L5.7 13H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h2.7l3.5-3.4a.5.5 0 0 1 .8.4zM13.7 6.3a1 1 0 0 1 1.4 0 6 6 0 0 1 0 7.4 1 1 0 1 1-1.4-1.4 4 4 0 0 0 0-4.6 1 1 0 0 1 0-1.4z"/>
+                          }
+                        </svg>
+                        {{ isBlockPlaying(lesson()!.id, $index) ? 'Detener' : 'Escuchar' }}
+                      </button>
+                    }
+                  </div>
                 }
                 @case ('rule-callout') {
                   <aside class="lesson-block lesson-block--rule-callout" role="note">
@@ -49,6 +73,25 @@ export const LESSON_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
                       <app-rule-ref-chip [ruleRef]="ref" />
                     }
                     <p class="rule-callout__text">{{ block.content }}</p>
+                    @if (getNarrationSrc(lesson()!.id, $index); as src) {
+                      <button
+                        type="button"
+                        class="narration-btn narration-btn--rule"
+                        [class.narration-btn--playing]="isBlockPlaying(lesson()!.id, $index)"
+                        [attr.aria-pressed]="isBlockPlaying(lesson()!.id, $index)"
+                        [attr.aria-label]="isBlockPlaying(lesson()!.id, $index) ? 'Detener narración' : 'Escuchar este párrafo'"
+                        (click)="toggleNarration(lesson()!.id, $index, src)">
+                        <svg class="narration-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" width="16" height="16">
+                          @if (isBlockPlaying(lesson()!.id, $index)) {
+                            <rect x="4" y="3" width="4" height="14" rx="1"/>
+                            <rect x="12" y="3" width="4" height="14" rx="1"/>
+                          } @else {
+                            <path d="M9.5 3.5a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-.8.4L5.7 13H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h2.7l3.5-3.4a.5.5 0 0 1 .8.4zM13.7 6.3a1 1 0 0 1 1.4 0 6 6 0 0 1 0 7.4 1 1 0 1 1-1.4-1.4 4 4 0 0 0 0-4.6 1 1 0 0 1 0-1.4z"/>
+                          }
+                        </svg>
+                        {{ isBlockPlaying(lesson()!.id, $index) ? 'Detener' : 'Escuchar' }}
+                      </button>
+                    }
                   </aside>
                 }
                 @case ('image') {
@@ -203,9 +246,56 @@ export const LESSON_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
     }
 
     .lesson-block--prose {
-      font-size: var(--font-size-base);
-      line-height: var(--line-height-relaxed);
-      color: var(--color-text-primary);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+
+      p {
+        font-size: var(--font-size-base);
+        line-height: var(--line-height-relaxed);
+        color: var(--color-text-primary);
+        margin: 0;
+      }
+    }
+
+    /* Narration toggle button */
+    .narration-btn {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-1) var(--space-3);
+      border: 1px solid var(--color-accent);
+      border-radius: var(--radius-md);
+      background: transparent;
+      color: var(--color-accent);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      transition: background var(--transition-fast), color var(--transition-fast);
+    }
+
+    .narration-btn:hover {
+      background: var(--color-accent);
+      color: var(--color-bg);
+    }
+
+    .narration-btn--playing {
+      background: var(--color-accent);
+      color: var(--color-bg);
+    }
+
+    .narration-btn--rule {
+      margin-top: var(--space-2);
+    }
+
+    .narration-btn:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+    }
+
+    .narration-icon {
+      flex-shrink: 0;
     }
 
     .lesson-block--rule-callout {
@@ -400,6 +490,7 @@ export const LESSON_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
 export class LessonViewerComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  readonly narrationStore = inject(NarrationStore);
 
   readonly lesson = signal<Lesson | null>(null);
   readonly moduleId = signal<string>('');
@@ -497,5 +588,31 @@ export class LessonViewerComponent implements OnInit {
         }
       }
     }
+  }
+
+  // ---- Narration helpers ----
+
+  /**
+   * Returns the audio asset src for a given block, or undefined if not narratable.
+   * Called from the template to conditionally render the narration button.
+   */
+  getNarrationSrc(lessonId: string, blockIndex: number): string | undefined {
+    return getBlockNarration(lessonId, blockIndex);
+  }
+
+  /**
+   * Returns true if the given block is the currently active AND playing block.
+   */
+  isBlockPlaying(lessonId: string, blockIndex: number): boolean {
+    const key = `${lessonId}#${blockIndex}`;
+    return this.narrationStore.currentKey() === key && this.narrationStore.isPlaying();
+  }
+
+  /**
+   * Toggles playback for the given block.
+   */
+  toggleNarration(lessonId: string, blockIndex: number, src: string): void {
+    const key = `${lessonId}#${blockIndex}`;
+    this.narrationStore.toggle(key, src);
   }
 }

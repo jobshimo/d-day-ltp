@@ -6,8 +6,10 @@ import {
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { IdbProgressRepository } from 'infrastructure-idb-adapter';
+import { HtmlAudioNarrationPlayer } from 'infrastructure-audio-adapter';
 import { PROGRESS_REPO_TOKEN_ID } from 'domain-progress';
 import type { ProgressRepository } from 'domain-progress';
+import { NARRATION_PLAYER } from 'domain-narration';
 import { ALL_MODULES, applyPatches } from 'content';
 import { COURSE_CONTENT, COURSE_PROGRESS_REPO } from 'application-course-store';
 import { DRILL_PROGRESS_REPO } from 'application-drill-store';
@@ -42,6 +44,12 @@ export const appConfig: ApplicationConfig = {
     {
       provide: PROGRESS_REPO,
       useClass: IdbProgressRepository,
+    },
+
+    // Narration player: bind HTML5 Audio adapter to the domain port
+    {
+      provide: NARRATION_PLAYER,
+      useClass: HtmlAudioNarrationPlayer,
     },
 
     // Wire the same adapter instance to both store tokens
