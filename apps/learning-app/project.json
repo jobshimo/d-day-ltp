@@ -18,6 +18,11 @@
           {
             "glob": "**/*",
             "input": "apps/learning-app/public"
+          },
+          {
+            "glob": "**/*",
+            "input": "libs/content/src/assets",
+            "output": "assets"
           }
         ],
         "styles": ["apps/learning-app/src/styles.scss"]
