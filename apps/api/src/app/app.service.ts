@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { ALL_MODULES, applyPatches, PATCHES } from 'content';
+import { ALL_MODULES, applyPatches } from 'content';
 import type { CourseModule } from 'content-schema';
 
 @Injectable()
 export class AppService {
-  private readonly modules: CourseModule[] = applyPatches(ALL_MODULES, PATCHES);
+  private readonly modules: CourseModule[] = ALL_MODULES.map(applyPatches);
 
   getHealth(): { status: string } {
     return { status: 'ok' };
