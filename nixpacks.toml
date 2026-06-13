@@ -1,5 +1,7 @@
+# Node 24 matches CI and satisfies Prisma's preinstall (requires >= 22.12 / 24).
+# nodejs_22 resolved to 22.11.0 on Railway, which Prisma rejects.
 [phases.setup]
-nixPkgs = ["nodejs_22", "openssl"]
+nixPkgs = ["nodejs_24", "openssl"]
 
 [phases.install]
 cmds = ["npm ci --legacy-peer-deps"]
