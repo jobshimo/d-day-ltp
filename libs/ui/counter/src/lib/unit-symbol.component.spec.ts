@@ -49,10 +49,15 @@ describe('UnitSymbolComponent — US types', () => {
     expect(lines.length).toBeGreaterThanOrEqual(2);
   });
 
-  it('tank renders an <ellipse> element (armor oval)', () => {
+  it('tank renders a silhouette (rect elements for hull/turret/tracks, no ellipse)', () => {
     const el = setupUS('tank');
+    // Silhouette uses filled rects and circles — no NATO armor ellipse
     const ellipse = el.querySelector('[ddobUnitSymbol] ellipse');
-    expect(ellipse).toBeTruthy();
+    expect(ellipse).toBeNull();
+    // Hull, turret, tracks, barrel are all <rect> or <circle> elements
+    const rects = el.querySelectorAll('[ddobUnitSymbol] rect');
+    // At least 4 rects: outer box + track base + hull + turret + barrel
+    expect(rects.length).toBeGreaterThanOrEqual(4);
   });
 
   it('arty renders a filled <circle> (artillery dot)', () => {
@@ -105,10 +110,14 @@ describe('UnitSymbolComponent — German types', () => {
     expect(lines.length).toBeGreaterThanOrEqual(2);
   });
 
-  it('german armor renders an ellipse', () => {
+  it('german armor renders a silhouette (rect elements for hull/turret/tracks, no ellipse)', () => {
     const el = setupGerman('armor');
+    // Silhouette uses filled rects and circles — no NATO armor ellipse
     const ellipse = el.querySelector('[ddobUnitSymbol] ellipse');
-    expect(ellipse).toBeTruthy();
+    expect(ellipse).toBeNull();
+    // Hull, turret, tracks, barrel are rect/circle elements
+    const rects = el.querySelectorAll('[ddobUnitSymbol] rect');
+    expect(rects.length).toBeGreaterThanOrEqual(4);
   });
 
   it('german artillery renders a filled circle dot', () => {

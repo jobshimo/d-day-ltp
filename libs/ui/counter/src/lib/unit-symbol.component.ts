@@ -2,13 +2,18 @@ import { Component, Input, ChangeDetectionStrategy, NO_ERRORS_SCHEMA } from '@an
 import type { UnitType, GermanUnitSymbol } from 'content-schema';
 
 /**
- * UnitSymbolComponent — renders NATO APP-6 glyphs for US and German units.
+ * UnitSymbolComponent — renders glyphs for US and German units.
  *
  * All geometry is authored in a 60x60 viewBox space.
  * Inner symbol box: x=14 y=18 w=32 h=20, center 30,28.
  *
  * This component renders ONLY the glyph — no outer counter rect.
  * Callers (CounterComponent, board-renderer) provide their own background.
+ *
+ * Tank/armor glyph: side-view silhouette (hull + turret + gun barrel + tracks).
+ * The tank silhouette is the COUNTER glyph used on the real Devir board.
+ * The NATO armor oval (ellipse) is a CARD symbol only — it does not appear
+ * on unit counters.
  *
  * Board-renderer reuse contract:
  *   @Input() type: UnitType           — US glyph selector
@@ -43,12 +48,33 @@ import type { UnitType, GermanUnitSymbol } from 'content-schema';
             aria-hidden="true" />
     }
 
-    <!-- US tank (armor): horizontal ellipse -->
+    <!-- US tank: side-view silhouette (hull + turret + gun barrel + tracks).
+         This matches the real Devir counter glyph. The NATO armor oval is a
+         card symbol only — counters use this silhouette. -->
     @if (isUS && type === 'tank') {
-      <svg:ellipse cx="30" cy="28" rx="12" ry="6"
-               fill="none"
-               [attr.stroke]="color" [attr.stroke-width]="strokeWidth"
-               aria-hidden="true" />
+      <!-- Track base (thin filled rectangle along the bottom) -->
+      <svg:rect x="15" y="32" width="28" height="4" rx="2"
+                [attr.fill]="color" stroke="none"
+                aria-hidden="true" />
+      <!-- Road wheels (two circles on the track) -->
+      <svg:circle cx="20" cy="34" r="2.5"
+                  [attr.fill]="color" stroke="none"
+                  aria-hidden="true" />
+      <svg:circle cx="38" cy="34" r="2.5"
+                  [attr.fill]="color" stroke="none"
+                  aria-hidden="true" />
+      <!-- Hull body -->
+      <svg:rect x="16" y="24" width="26" height="10" rx="2"
+                [attr.fill]="color" stroke="none"
+                aria-hidden="true" />
+      <!-- Turret (smaller rounded rect on top-center of hull) -->
+      <svg:rect x="22" y="18" width="14" height="8" rx="2"
+                [attr.fill]="color" stroke="none"
+                aria-hidden="true" />
+      <!-- Gun barrel (thin rect pointing right from turret) -->
+      <svg:rect x="36" y="20" width="10" height="3" rx="1"
+                [attr.fill]="color" stroke="none"
+                aria-hidden="true" />
     }
 
     <!-- US arty (artillery): filled center dot -->
@@ -116,12 +142,32 @@ import type { UnitType, GermanUnitSymbol } from 'content-schema';
             aria-hidden="true" />
     }
 
-    <!-- German armor: box + ellipse (same as US tank) -->
+    <!-- German armor: side-view tank silhouette (same geometry as US tank).
+         The NATO armor oval is a card symbol; counters use the silhouette. -->
     @if (!isUS && germanSymbol === 'armor') {
-      <svg:ellipse cx="30" cy="28" rx="12" ry="6"
-               fill="none"
-               [attr.stroke]="color" [attr.stroke-width]="strokeWidth"
-               aria-hidden="true" />
+      <!-- Track base -->
+      <svg:rect x="15" y="32" width="28" height="4" rx="2"
+                [attr.fill]="color" stroke="none"
+                aria-hidden="true" />
+      <!-- Road wheels -->
+      <svg:circle cx="20" cy="34" r="2.5"
+                  [attr.fill]="color" stroke="none"
+                  aria-hidden="true" />
+      <svg:circle cx="38" cy="34" r="2.5"
+                  [attr.fill]="color" stroke="none"
+                  aria-hidden="true" />
+      <!-- Hull body -->
+      <svg:rect x="16" y="24" width="26" height="10" rx="2"
+                [attr.fill]="color" stroke="none"
+                aria-hidden="true" />
+      <!-- Turret -->
+      <svg:rect x="22" y="18" width="14" height="8" rx="2"
+                [attr.fill]="color" stroke="none"
+                aria-hidden="true" />
+      <!-- Gun barrel -->
+      <svg:rect x="36" y="20" width="10" height="3" rx="1"
+                [attr.fill]="color" stroke="none"
+                aria-hidden="true" />
     }
 
     <!-- German artillery: box + filled center dot -->
