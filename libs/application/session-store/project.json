@@ -1,0 +1,20 @@
+{
+  "name": "application-session-store",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/application/session-store/src",
+  "projectType": "library",
+  "tags": ["scope:application", "type:lib"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{workspaceRoot}/coverage/libs/application/session-store"],
+      "options": {
+        "configFile": "libs/application/session-store/vitest.config.mts",
+        "reportsDirectory": "../../../coverage/libs/application/session-store"
+      }
+    }
+  }
+}
