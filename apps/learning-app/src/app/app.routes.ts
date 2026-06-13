@@ -17,6 +17,11 @@ export const appRoutes: Route[] = [
     loadChildren: () => import('./features/lesson/lesson.routes').then((m) => m.lessonRoutes),
   },
   {
+    path: 'simbologia',
+    loadComponent: () =>
+      import('./features/simbologia/simbologia.component').then((m) => m.SimbologiaComponent),
+  },
+  {
     path: 'settings',
     loadComponent: () =>
       import('./features/settings/settings.component').then((m) => m.SettingsComponent),
