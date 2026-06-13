@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
+import { IdbProgressRepository } from 'infrastructure-idb-adapter';
 import {
   runFirstLoginMigration,
   isMigrated,
@@ -140,7 +141,6 @@ describe('runFirstLoginMigration', () => {
     fakeSession.setItem('auth_token', TEST_TOKEN);
 
     // Mock IdbProgressRepository to return non-empty progress for one module
-    const { IdbProgressRepository } = await import('infrastructure-idb-adapter');
     vi.spyOn(IdbProgressRepository.prototype, 'getModuleProgress').mockImplementation(
       async (moduleId: string) => ({
         moduleId,
@@ -172,7 +172,6 @@ describe('runFirstLoginMigration', () => {
   it('does NOT set migrated flag when POST fails with non-OK status', async () => {
     fakeSession.setItem('auth_token', TEST_TOKEN);
 
-    const { IdbProgressRepository } = await import('infrastructure-idb-adapter');
     vi.spyOn(IdbProgressRepository.prototype, 'getModuleProgress').mockImplementation(
       async (moduleId: string) => ({
         moduleId,
@@ -197,7 +196,6 @@ describe('runFirstLoginMigration', () => {
   it('does NOT set migrated flag and logs warn when fetch throws', async () => {
     fakeSession.setItem('auth_token', TEST_TOKEN);
 
-    const { IdbProgressRepository } = await import('infrastructure-idb-adapter');
     vi.spyOn(IdbProgressRepository.prototype, 'getModuleProgress').mockImplementation(
       async (moduleId: string) => ({
         moduleId,
@@ -223,7 +221,6 @@ describe('runFirstLoginMigration', () => {
   it('a thrown migration error does NOT throw out of runFirstLoginMigration', async () => {
     fakeSession.setItem('auth_token', TEST_TOKEN);
 
-    const { IdbProgressRepository } = await import('infrastructure-idb-adapter');
     vi.spyOn(IdbProgressRepository.prototype, 'getModuleProgress').mockRejectedValue(
       new Error('IDB read failed'),
     );
