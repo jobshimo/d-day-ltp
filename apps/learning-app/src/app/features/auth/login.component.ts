@@ -153,7 +153,7 @@ function isValidEmail(value: string): boolean {
         border-color: var(--color-accent);
       }
 
-      &--error {
+      &:is(.auth-form__input--error) {
         border-color: var(--color-error);
       }
     }

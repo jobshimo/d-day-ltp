@@ -63,7 +63,8 @@ describe('authInterceptor', () => {
     TestBed.configureTestingModule({
       providers: [
         provideZonelessChangeDetection(),
-        provideRouter([{ path: 'login', component: class {} as any }]),
+        // Stub route so Router can navigate to /login without NG04002
+        provideRouter([{ path: 'login', component: class LoginStub {} }]),
         provideHttpClient(withInterceptors([authInterceptor])),
         provideHttpClientTesting(),
         SessionStore,
@@ -137,8 +138,8 @@ describe('authInterceptor', () => {
 
     expect(sessionStore.isAuthenticated()).toBe(true);
 
-    // Subscribe and swallow the error (interceptor re-throws)
-    httpClient.get('/api/progress').subscribe({ error: () => {} });
+    // Subscribe to trigger the interceptor; error is expected (interceptor re-throws 401)
+    httpClient.get('/api/progress').subscribe({ next: () => { /* no-op */ }, error: () => { /* swallow expected 401 */ } });
 
     const req = httpController.expectOne('/api/progress');
     req.flush({ message: 'Unauthorized' }, { status: 401, statusText: 'Unauthorized' });
