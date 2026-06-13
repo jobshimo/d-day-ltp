@@ -40,7 +40,8 @@
       "infrastructure-idb-adapter": [
         "libs/infrastructure/idb-adapter/src/index.ts"
       ],
-      "ui-board-renderer": ["libs/ui/board-renderer/src/index.ts"]
+      "ui-board-renderer": ["libs/ui/board-renderer/src/index.ts"],
+      "counter": ["libs/ui/counter/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp", "d-day"]
