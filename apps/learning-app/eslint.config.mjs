@@ -20,7 +20,8 @@ export default [
         'error',
         {
           type: 'element',
-          prefix: 'app',
+          // 'ddob' allows test stubs that mirror selectors from libs/ui (e.g. ddob-board-snippet)
+          prefix: ['app', 'ddob'],
           style: 'kebab-case',
         },
       ],

@@ -39,5 +39,6 @@ desktop.ini
 
 # Test output
 test-output/
+test-results/
 
 .angular
