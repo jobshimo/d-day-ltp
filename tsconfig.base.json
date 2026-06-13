@@ -19,6 +19,9 @@
         "libs/application/course-store/src/index.ts"
       ],
       "application-drill-store": ["libs/application/drill-store/src/index.ts"],
+      "application-narration-store": [
+        "libs/application/narration-store/src/index.ts"
+      ],
       "content": ["libs/content/src/index.ts"],
       "content-schema": ["libs/shared/content-schema/src/index.ts"],
       "domain-course": ["libs/domain/course/src/index.ts"],
