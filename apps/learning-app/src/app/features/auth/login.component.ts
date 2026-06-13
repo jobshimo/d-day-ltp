@@ -1,0 +1,239 @@
+import {
+  Component,
+  inject,
+  signal,
+  ChangeDetectionStrategy,
+} from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { SessionStore } from 'application-session-store';
+
+function isValidEmail(value: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+/**
+ * LoginComponent — standalone login form.
+ *
+ * UI copy in Spanish per app convention.
+ * Client-side: validates email format + password minimum 8 chars.
+ * Server-side: displays 401 as a friendly Spanish error message.
+ * On success: full page reload so app.config re-evaluates adapter selection.
+ */
+@Component({
+  standalone: true,
+  selector: 'app-login',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [FormsModule, RouterLink],
+  template: `
+    <div class="auth-page">
+      <div class="auth-card">
+        <h1 class="auth-card__title">Iniciar sesión</h1>
+
+        <form class="auth-form" (ngSubmit)="submit()" novalidate>
+          <div class="auth-form__field">
+            <label for="login-email" class="auth-form__label">
+              Correo electrónico
+            </label>
+            <input
+              id="login-email"
+              type="email"
+              name="email"
+              class="auth-form__input"
+              [(ngModel)]="email"
+              autocomplete="email"
+              placeholder="tu@correo.com"
+              [class.auth-form__input--error]="emailError()"
+              aria-describedby="login-email-error"
+            />
+            @if (emailError()) {
+              <span id="login-email-error" class="auth-form__error" role="alert">
+                Ingresá un correo electrónico válido.
+              </span>
+            }
+          </div>
+
+          <div class="auth-form__field">
+            <label for="login-password" class="auth-form__label">
+              Contraseña
+            </label>
+            <input
+              id="login-password"
+              type="password"
+              name="password"
+              class="auth-form__input"
+              [(ngModel)]="password"
+              autocomplete="current-password"
+              placeholder="Mínimo 8 caracteres"
+              [class.auth-form__input--error]="passwordError()"
+              aria-describedby="login-password-error"
+            />
+            @if (passwordError()) {
+              <span id="login-password-error" class="auth-form__error" role="alert">
+                La contraseña debe tener al menos 8 caracteres.
+              </span>
+            }
+          </div>
+
+          @if (serverError()) {
+            <div class="auth-form__server-error" role="alert">
+              {{ serverError() }}
+            </div>
+          }
+
+          <button
+            type="submit"
+            class="auth-form__submit"
+            [disabled]="submitting()"
+            aria-label="Iniciar sesión"
+          >
+            {{ submitting() ? 'Ingresando…' : 'Iniciar sesión' }}
+          </button>
+        </form>
+
+        <p class="auth-card__footer">
+          ¿No tenés cuenta?
+          <a routerLink="/register" class="auth-card__link">Crear cuenta</a>
+        </p>
+      </div>
+    </div>
+  `,
+  styles: [`
+    .auth-page {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - var(--header-height));
+      padding: var(--space-6) var(--space-4);
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 400px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8) var(--space-6);
+    }
+
+    .auth-card__title {
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-6);
+      text-align: center;
+    }
+
+    .auth-form__field {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      margin-bottom: var(--space-4);
+    }
+
+    .auth-form__label {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text-secondary);
+    }
+
+    .auth-form__input {
+      padding: var(--space-2) var(--space-3);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-bg);
+      color: var(--color-text-primary);
+      font-size: var(--font-size-sm);
+      width: 100%;
+      box-sizing: border-box;
+      transition: border-color var(--transition-fast);
+
+      &:focus {
+        outline: none;
+        border-color: var(--color-accent);
+      }
+
+      &:is(.auth-form__input--error) {
+        border-color: var(--color-error);
+      }
+    }
+
+    .auth-form__error {
+      font-size: var(--font-size-xs);
+      color: var(--color-error);
+    }
+
+    .auth-form__server-error {
+      padding: var(--space-3) var(--space-4);
+      background: var(--color-error-bg, rgba(204,68,68,0.1));
+      border: 1px solid var(--color-error);
+      border-radius: var(--radius-md);
+      color: var(--color-error);
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--space-4);
+    }
+
+    .auth-form__submit {
+      width: 100%;
+      padding: var(--space-3);
+      background: var(--color-accent);
+      color: var(--color-bg);
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      transition: background var(--transition-fast);
+
+      &:hover:not(:disabled) { background: #d4b060; }
+      &:disabled { opacity: 0.6; cursor: not-allowed; }
+      &:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+    }
+
+    .auth-card__footer {
+      margin-top: var(--space-6);
+      text-align: center;
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .auth-card__link {
+      color: var(--color-accent);
+      text-decoration: none;
+      font-weight: var(--font-weight-medium);
+
+      &:hover { text-decoration: underline; }
+    }
+  `],
+})
+export class LoginComponent {
+  email = '';
+  password = '';
+
+  readonly submitting = signal(false);
+  readonly emailError = signal(false);
+  readonly passwordError = signal(false);
+  readonly serverError = signal<string | null>(null);
+
+  private readonly store = inject(SessionStore);
+  private readonly router = inject(Router);
+
+  async submit(): Promise<void> {
+    this.emailError.set(!isValidEmail(this.email));
+    this.passwordError.set(this.password.length < 8);
+    this.serverError.set(null);
+
+    if (this.emailError() || this.passwordError()) return;
+
+    this.submitting.set(true);
+    try {
+      await this.store.login(this.email, this.password);
+      // Full reload so app.config re-evaluates adapter selection (design D5)
+      window.location.href = '/';
+    } catch {
+      this.serverError.set('Correo electrónico o contraseña incorrectos.');
+    } finally {
+      this.submitting.set(false);
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import { Route } from '@angular/router';
+import { guestOnlyGuard } from './shared/guest-only.guard';
 
 export const appRoutes: Route[] = [
   {
@@ -19,6 +20,18 @@ export const appRoutes: Route[] = [
     path: 'settings',
     loadComponent: () =>
       import('./features/settings/settings.component').then((m) => m.SettingsComponent),
+  },
+  {
+    path: 'login',
+    canActivate: [guestOnlyGuard],
+    loadComponent: () =>
+      import('./features/auth/login.component').then((m) => m.LoginComponent),
+  },
+  {
+    path: 'register',
+    canActivate: [guestOnlyGuard],
+    loadComponent: () =>
+      import('./features/auth/register.component').then((m) => m.RegisterComponent),
   },
   {
     path: '**',

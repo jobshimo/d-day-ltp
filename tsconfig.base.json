@@ -18,6 +18,9 @@
       "application-course-store": [
         "libs/application/course-store/src/index.ts"
       ],
+      "application-session-store": [
+        "libs/application/session-store/src/index.ts"
+      ],
       "application-drill-store": ["libs/application/drill-store/src/index.ts"],
       "application-narration-store": [
         "libs/application/narration-store/src/index.ts"
