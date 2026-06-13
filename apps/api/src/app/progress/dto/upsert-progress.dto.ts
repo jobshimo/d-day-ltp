@@ -43,9 +43,11 @@ export class UpsertProgressDto {
   @IsString({ each: true })
   lessonsCompleted!: string[];
 
+  // drillResults is a dictionary (keyed by drill id), NOT an array — class-validator's
+  // @ValidateNested({ each: true }) + @Type treats it as a single DrillResultDto and
+  // rejects every payload. It is an app-generated, auth-guarded JSON blob, so validate
+  // it as a plain object only.
   @IsObject()
-  @ValidateNested({ each: true })
-  @Type(() => DrillResultDto)
   drillResults!: Record<string, DrillResultDto>;
 
   @IsOptional()
