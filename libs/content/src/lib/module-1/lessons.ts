@@ -122,6 +122,10 @@ export const MODULE_1_LESSONS: Lesson[] = [
             unitFireDots: ['steady', 'sporadic'],
           },
           side: 'front',
+          // size=720: annotated viewBox is "-95 -15 252 95" (width=252), wide enough
+          // for the Spanish labels. scale = 720/252 ≈ 2.86 → counter body ≈171px,
+          // label text ≈23px; height auto-follows the viewBox aspect.
+          size: 720,
           annotated: true,
         },
       },
@@ -227,6 +231,9 @@ export const MODULE_1_LESSONS: Lesson[] = [
             unitFireDots: ['steady', 'sporadic'],
           },
           side: 'front',
+          // size=200: non-annotated viewBox is "0 0 60 60".
+          // scale = 200/60 = 3.33 → counter glyph = 200px, text at 9px → 30px.
+          size: 200,
           annotated: false,
         },
       },

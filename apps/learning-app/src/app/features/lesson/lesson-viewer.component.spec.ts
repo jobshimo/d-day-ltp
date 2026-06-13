@@ -196,4 +196,55 @@ describe('LessonViewerComponent — counter block rendering', () => {
     const notFound = getEl('.lesson-viewer__not-found');
     expect(notFound).toBeTruthy();
   });
+
+  // ---- Counter legibility size regression ----
+
+  it('renders annotated counter with size >= 440 (legible labels)', async () => {
+    // COUNTER_LESSON has annotated=true and no explicit size (fallback path)
+    component.lesson.set(COUNTER_LESSON);
+    component.moduleId.set('module-1');
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const counter = getEl<HTMLElement>('ddob-counter');
+    expect(counter).toBeTruthy();
+
+    // The <svg> inside ddob-counter carries the rendered width
+    const svg = counter!.querySelector('svg');
+    expect(svg).toBeTruthy();
+    // Annotated fallback = 440; content-set may use same or higher value
+    const w = Number(svg!.getAttribute('width'));
+    expect(w).toBeGreaterThanOrEqual(440);
+  });
+
+  it('renders non-annotated counter with size >= 200', async () => {
+    const NON_ANNOTATED_LESSON: Lesson = {
+      ...COUNTER_LESSON,
+      id: 'lesson-1-3',
+      blocks: [
+        {
+          ...COUNTER_LESSON.blocks[0],
+          counterConfig: {
+            ...COUNTER_LESSON.blocks[0].counterConfig!,
+            annotated: false,
+          },
+        },
+      ],
+    };
+    component.lesson.set(NON_ANNOTATED_LESSON);
+    component.moduleId.set('module-1');
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const counter = getEl<HTMLElement>('ddob-counter');
+    expect(counter).toBeTruthy();
+
+    const svg = counter!.querySelector('svg');
+    expect(svg).toBeTruthy();
+    // Non-annotated fallback = 200; content-set may use same or higher value
+    const w = Number(svg!.getAttribute('width'));
+    expect(w).toBeGreaterThanOrEqual(200);
+  });
 });

@@ -8,14 +8,15 @@ import type { TargetSymbol } from 'content-schema';
  * - control='adjacent' → black fill (unit controls adjacent hexes)
  * - control='own' → white fill with black outline (controls only own hex)
  */
+/* eslint-disable @angular-eslint/component-selector -- attribute selector required: custom-element host breaks SVG render tree (getBBox=0) */
 @Component({
   standalone: true,
-  selector: 'ddob-target-symbol',
+  selector: '[ddobTargetSymbol]',
   changeDetection: ChangeDetectionStrategy.OnPush,
   schemas: [NO_ERRORS_SCHEMA],
   template: `
     @if (symbol === 'circle') {
-      <circle
+      <svg:circle
         [attr.cx]="cx"
         [attr.cy]="cy"
         [attr.r]="size / 2"
@@ -24,14 +25,14 @@ import type { TargetSymbol } from 'content-schema';
         stroke-width="1"
         aria-hidden="true" />
     } @else if (symbol === 'diamond') {
-      <polygon
+      <svg:polygon
         [attr.points]="diamondPoints"
         [attr.fill]="fill"
         stroke="#111"
         stroke-width="1"
         aria-hidden="true" />
     } @else if (symbol === 'triangle') {
-      <polygon
+      <svg:polygon
         [attr.points]="trianglePoints"
         [attr.fill]="fill"
         stroke="#111"

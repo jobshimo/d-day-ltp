@@ -17,28 +17,29 @@ const FIRE_DOT_COLORS: Record<FireDotIntensity, string> = {
  * - steady: filled disc + white center dot
  * - sporadic: dashed outer ring
  */
+/* eslint-disable @angular-eslint/component-selector -- attribute selector required: custom-element host breaks SVG render tree (getBBox=0) */
 @Component({
   standalone: true,
-  selector: 'ddob-fire-dots',
+  selector: '[ddobFireDots]',
   changeDetection: ChangeDetectionStrategy.OnPush,
   schemas: [NO_ERRORS_SCHEMA],
   template: `
     @for (dot of dots; track $index; let i = $index) {
-      <g [attr.transform]="dotTransform(i)" aria-hidden="true">
-        <circle
+      <svg:g [attr.transform]="dotTransform(i)" aria-hidden="true">
+        <svg:circle
           r="3"
           [attr.fill]="dotColor(dot)"
           stroke="#1a1c1e"
           stroke-width="0.5" />
         @if (dot === 'intense') {
-          <circle r="1.5" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.9" />
+          <svg:circle r="1.5" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.9" />
         } @else if (dot === 'steady') {
-          <circle r="1" fill="#ffffff" opacity="0.85" />
+          <svg:circle r="1" fill="#ffffff" opacity="0.85" />
         } @else {
-          <circle r="2.5" fill="none" stroke="#ffffff" stroke-width="0.6"
+          <svg:circle r="2.5" fill="none" stroke="#ffffff" stroke-width="0.6"
                   stroke-dasharray="2,1.5" opacity="0.75" />
         }
-      </g>
+      </svg:g>
     }
   `,
 })

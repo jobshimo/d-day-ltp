@@ -242,7 +242,7 @@ const HIGHLIGHT_STYLES: Record<string, { fill: string; stroke: string }> = {
                       stroke="#e8e8e8" stroke-width="1" rx="2" />
                 <!-- NATO glyph via UnitSymbolComponent nested in an inner SVG viewport -->
                 <svg viewBox="0 0 60 60" width="20" height="16" x="-10" y="-8">
-                  <ddob-unit-symbol [type]="usUnit.type" color="#ffffff" [strokeWidth]="2.5" />
+                  <svg:g ddobUnitSymbol [type]="usUnit.type" color="#ffffff" [strokeWidth]="2.5" />
                 </svg>
               </g>
             }
@@ -258,7 +258,7 @@ const HIGHLIGHT_STYLES: Record<string, { fill: string; stroke: string }> = {
                 @if (deUnit.germanUnitSymbol) {
                   <!-- NATO glyph available — use UnitSymbolComponent -->
                   <svg viewBox="0 0 60 60" width="18" height="14" x="-9" y="-7">
-                    <ddob-unit-symbol
+                    <svg:g ddobUnitSymbol
                       [germanSymbol]="deUnit.germanUnitSymbol"
                       [color]="germanGlyphColor(deUnit)"
                       [strokeWidth]="2.5" />

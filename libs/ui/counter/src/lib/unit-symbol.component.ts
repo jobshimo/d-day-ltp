@@ -16,15 +16,16 @@ import type { UnitType, GermanUnitSymbol } from 'content-schema';
  *   @Input() color: string            — stroke/fill color of the glyph
  *   @Input() strokeWidth: number      — line weight in 60x60 units
  */
+/* eslint-disable @angular-eslint/component-selector -- attribute selector required: custom-element host breaks SVG render tree (getBBox=0) */
 @Component({
   standalone: true,
-  selector: 'ddob-unit-symbol',
+  selector: '[ddobUnitSymbol]',
   changeDetection: ChangeDetectionStrategy.OnPush,
   schemas: [NO_ERRORS_SCHEMA],
   template: `
     <!-- Inner symbol box outline (shared by infantry, ranger, tank, arty, engineer, hq) -->
     @if (showBox) {
-      <rect
+      <svg:rect
         x="14" y="18" width="32" height="20"
         fill="none"
         [attr.stroke]="color"
@@ -34,17 +35,17 @@ import type { UnitType, GermanUnitSymbol } from 'content-schema';
 
     <!-- US infantry / ranger: crossed diagonals inside box -->
     @if (isUS && (type === 'infantry' || type === 'ranger')) {
-      <line x1="14" y1="18" x2="46" y2="38"
+      <svg:line x1="14" y1="18" x2="46" y2="38"
             [attr.stroke]="color" [attr.stroke-width]="strokeWidth"
             aria-hidden="true" />
-      <line x1="46" y1="18" x2="14" y2="38"
+      <svg:line x1="46" y1="18" x2="14" y2="38"
             [attr.stroke]="color" [attr.stroke-width]="strokeWidth"
             aria-hidden="true" />
     }
 
     <!-- US tank (armor): horizontal ellipse -->
     @if (isUS && type === 'tank') {
-      <ellipse cx="30" cy="28" rx="12" ry="6"
+      <svg:ellipse cx="30" cy="28" rx="12" ry="6"
                fill="none"
                [attr.stroke]="color" [attr.stroke-width]="strokeWidth"
                aria-hidden="true" />
@@ -52,7 +53,7 @@ import type { UnitType, GermanUnitSymbol } from 'content-schema';
 
     <!-- US arty (artillery): filled center dot -->
     @if (isUS && type === 'arty') {
-      <circle cx="30" cy="28" r="4"
+      <svg:circle cx="30" cy="28" r="4"
               [attr.fill]="color"
               stroke="none"
               aria-hidden="true" />
@@ -60,32 +61,32 @@ import type { UnitType, GermanUnitSymbol } from 'content-schema';
 
     <!-- US engineer: open bracket shape (APP-6 approximation) -->
     @if (isUS && type === 'engineer') {
-      <polyline
+      <svg:polyline
         points="22,34 22,22 38,22 38,34"
         fill="none"
         [attr.stroke]="color" [attr.stroke-width]="strokeWidth"
         stroke-linejoin="round"
         aria-hidden="true" />
       <!-- Center vertical tick -->
-      <line x1="30" y1="22" x2="30" y2="30"
+      <svg:line x1="30" y1="22" x2="30" y2="30"
             [attr.stroke]="color" [attr.stroke-width]="strokeWidth"
             aria-hidden="true" />
     }
 
     <!-- US hq: vertical flagstaff on left edge of box -->
     @if (isUS && type === 'hq') {
-      <line x1="14" y1="38" x2="14" y2="14"
+      <svg:line x1="14" y1="38" x2="14" y2="14"
             [attr.stroke]="color" [attr.stroke-width]="strokeWidth"
             aria-hidden="true" />
       <!-- Horizontal pennant -->
-      <line x1="14" y1="14" x2="24" y2="14"
+      <svg:line x1="14" y1="14" x2="24" y2="14"
             [attr.stroke]="color" [attr.stroke-width]="strokeWidth"
             aria-hidden="true" />
     }
 
     <!-- US general: 5-point star (no box) -->
     @if (isUS && type === 'general') {
-      <polygon
+      <svg:polygon
         [attr.points]="starPoints(30, 28, 10, 4)"
         [attr.fill]="color"
         stroke="none"
@@ -94,11 +95,11 @@ import type { UnitType, GermanUnitSymbol } from 'content-schema';
 
     <!-- US hero: circle + inner star -->
     @if (isUS && type === 'hero') {
-      <circle cx="30" cy="28" r="9"
+      <svg:circle cx="30" cy="28" r="9"
               fill="none"
               [attr.stroke]="color" [attr.stroke-width]="strokeWidth"
               aria-hidden="true" />
-      <polygon
+      <svg:polygon
         [attr.points]="starPoints(30, 28, 5, 2)"
         [attr.fill]="color"
         stroke="none"
@@ -107,17 +108,17 @@ import type { UnitType, GermanUnitSymbol } from 'content-schema';
 
     <!-- German infantry: crossed-box (same geometry as US infantry) -->
     @if (!isUS && germanSymbol === 'infantry') {
-      <line x1="14" y1="18" x2="46" y2="38"
+      <svg:line x1="14" y1="18" x2="46" y2="38"
             [attr.stroke]="color" [attr.stroke-width]="strokeWidth"
             aria-hidden="true" />
-      <line x1="46" y1="18" x2="14" y2="38"
+      <svg:line x1="46" y1="18" x2="14" y2="38"
             [attr.stroke]="color" [attr.stroke-width]="strokeWidth"
             aria-hidden="true" />
     }
 
     <!-- German armor: box + ellipse (same as US tank) -->
     @if (!isUS && germanSymbol === 'armor') {
-      <ellipse cx="30" cy="28" rx="12" ry="6"
+      <svg:ellipse cx="30" cy="28" rx="12" ry="6"
                fill="none"
                [attr.stroke]="color" [attr.stroke-width]="strokeWidth"
                aria-hidden="true" />
@@ -125,7 +126,7 @@ import type { UnitType, GermanUnitSymbol } from 'content-schema';
 
     <!-- German artillery: box + filled center dot -->
     @if (!isUS && (germanSymbol === 'artillery' || germanSymbol === 'artillery-88')) {
-      <circle cx="30" cy="28" r="4"
+      <svg:circle cx="30" cy="28" r="4"
               [attr.fill]="color"
               stroke="none"
               aria-hidden="true" />
@@ -133,7 +134,7 @@ import type { UnitType, GermanUnitSymbol } from 'content-schema';
 
     <!-- German artillery-88: additional "88" text below box -->
     @if (!isUS && germanSymbol === 'artillery-88') {
-      <text
+      <svg:text
         x="30" y="47"
         text-anchor="middle"
         dominant-baseline="middle"
@@ -141,7 +142,7 @@ import type { UnitType, GermanUnitSymbol } from 'content-schema';
         font-size="8"
         font-weight="bold"
         font-family="var(--font-family-mono, 'JetBrains Mono', monospace)"
-        aria-hidden="true">88</text>
+        aria-hidden="true">88</svg:text>
     }
   `,
 })

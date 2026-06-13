@@ -119,10 +119,16 @@ export const LESSON_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
                 }
                 @case ('counter') {
                   <figure class="lesson-block lesson-block--counter">
+                    <!--
+                      Size fallback: annotated counters use a wide viewBox ("-95 -15 252 95")
+                      that fits the Spanish labels, so ~720px keeps the glyph ≈170px and
+                      labels ≈23px; height auto-follows the aspect. Non-annotated counters
+                      use viewBox "0 0 60 60", so 200px gives a 200px square glyph.
+                    -->
                     <ddob-counter
                       [unit]="block.counterConfig!.unit"
                       [side]="block.counterConfig!.side"
-                      [size]="block.counterConfig!.size ?? 120"
+                      [size]="block.counterConfig!.size ?? (block.counterConfig!.annotated ? 720 : 200)"
                       [annotated]="block.counterConfig!.annotated ?? true" />
                     @if (block.altText) {
                       <figcaption>{{ block.altText }}</figcaption>
