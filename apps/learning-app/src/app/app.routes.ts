@@ -4,8 +4,7 @@ import { guestOnlyGuard } from './shared/guest-only.guard';
 export const appRoutes: Route[] = [
   {
     path: '',
-    redirectTo: 'modules',
-    pathMatch: 'full',
+    loadComponent: () => import('./features/home/home.component'),
   },
   {
     path: 'modules',
@@ -15,6 +14,10 @@ export const appRoutes: Route[] = [
   {
     path: 'modules/:moduleId',
     loadChildren: () => import('./features/lesson/lesson.routes').then((m) => m.lessonRoutes),
+  },
+  {
+    path: 'historia',
+    loadComponent: () => import('./features/historia/historia.component'),
   },
   {
     path: 'simbologia',
