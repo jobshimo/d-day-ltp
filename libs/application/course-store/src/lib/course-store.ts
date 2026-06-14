@@ -21,7 +21,7 @@ export interface ModuleListEntry {
   descriptionEs: string;
   isUnlocked: boolean;
   completionPercent: number;
-  isPreview: boolean; // module-4 is preview-only in v1
+  isPreview: boolean; // kept for backward compatibility; always false under free navigation
 }
 
 interface CourseState {
@@ -154,7 +154,7 @@ export class CourseStore extends SignalStore<CourseState> {
       descriptionEs: mod.descriptionEs,
       isUnlocked,
       completionPercent,
-      isPreview: mod.id === 'module-4',
+      isPreview: false,
     };
   }
 }

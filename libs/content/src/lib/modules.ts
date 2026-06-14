@@ -23,9 +23,9 @@ const MODULE_1: CourseModule = {
 };
 
 /**
- * Module 2 — Stub (v1: content deferred to v2)
+ * Module 2 — Stub (v2: content authored in modules-content-v2)
  *
- * Will cover §4 (Sequence of Play) and §5 (US Amphibious Operations).
+ * Covers §4 (Sequence of Play) and §5 (US Amphibious Operations).
  */
 const MODULE_2: CourseModule = {
   id: 'module-2',
@@ -36,13 +36,12 @@ const MODULE_2: CourseModule = {
   lessons: [],
   drills: [],
   reviewQuiz: [],
-  requiredPriorModuleId: 'module-1',
 };
 
 /**
- * Module 3 — Stub (v1: content deferred to v2)
+ * Module 3 — Stub (v2: content authored in modules-content-v2)
  *
- * Will cover §6 (German Fire) basic mechanics as a full module.
+ * Covers §6 (German Fire) basic mechanics as a full module.
  */
 const MODULE_3: CourseModule = {
   id: 'module-3',
@@ -53,31 +52,29 @@ const MODULE_3: CourseModule = {
   lessons: [],
   drills: [],
   reviewQuiz: [],
-  requiredPriorModuleId: 'module-2',
 };
 
 /**
- * Module 4 — Fire Resolution PoC (Preview mode in v1; REQ-M4-05)
+ * Module 4 — Fire Resolution worked example (§6.3)
  *
  * Contains 1 lesson + 1 worked example + 1 interactive drill.
- * Accessible directly from the module list as "Preview"; NOT in the sequential unlock chain.
+ * Free navigation: no prerequisite required.
  */
 const MODULE_4: CourseModule = {
   id: 'module-4',
   order: 4,
-  titleEs: 'Resolución de Fuego (Vista Previa)',
+  titleEs: 'Resolución de Fuego',
   descriptionEs:
-    'Vista previa: practica la resolución completa del fuego alemán con un escenario interactivo de la regla §6.3.',
+    'Practica la resolución completa del fuego alemán con un escenario interactivo de la regla §6.3.',
   lessons: MODULE_4_LESSONS,
   drills: MODULE_4_DRILLS,
   reviewQuiz: [],
-  requiredPriorModuleId: undefined, // Preview; no prerequisite (REQ-M4-05)
 };
 
 /**
- * Module 5 — Stub (v1: content deferred to v2)
+ * Module 5 — Stub (v2: content authored in modules-content-v2)
  *
- * Will cover §7 (US Actions) and §8 (US Combat Actions).
+ * Covers §7 (US Actions) and §8 (US Combat Actions).
  */
 const MODULE_5: CourseModule = {
   id: 'module-5',
@@ -88,13 +85,12 @@ const MODULE_5: CourseModule = {
   lessons: [],
   drills: [],
   reviewQuiz: [],
-  requiredPriorModuleId: 'module-3',
 };
 
 /**
- * Module 6 — Stub (v1: content deferred to v2)
+ * Module 6 — Stub (v2: content authored in modules-content-v2)
  *
- * Will cover §9 (German Reinforcements) and §10 (Engineer Operations).
+ * Covers §9 (German Reinforcements) and §10 (Engineer Operations).
  */
 const MODULE_6: CourseModule = {
   id: 'module-6',
@@ -105,13 +101,12 @@ const MODULE_6: CourseModule = {
   lessons: [],
   drills: [],
   reviewQuiz: [],
-  requiredPriorModuleId: 'module-5',
 };
 
 /**
- * Module 7 — Stub (v1: content deferred to v2)
+ * Module 7 — Stub (v2: content authored in modules-content-v2)
  *
- * Will cover §11 (Heroes, HQs, Generals), §12 (Control and Communication),
+ * Covers §11 (Heroes, HQs, Generals), §12 (Control and Communication),
  * §13 (Victory and Loss).
  */
 const MODULE_7: CourseModule = {
@@ -123,13 +118,12 @@ const MODULE_7: CourseModule = {
   lessons: [],
   drills: [],
   reviewQuiz: [],
-  requiredPriorModuleId: 'module-6',
 };
 
 /**
- * Module 8 — Stub (v1: content deferred to v2)
+ * Module 8 — Stub (v2: content authored in modules-content-v2)
  *
- * Will cover §14–§20 (Extended Game rules) and §22–§23 (Optional variants).
+ * Covers §14–§20 (Extended Game rules) and §22–§23 (Optional variants).
  */
 const MODULE_8: CourseModule = {
   id: 'module-8',
@@ -140,12 +134,11 @@ const MODULE_8: CourseModule = {
   lessons: [],
   drills: [],
   reviewQuiz: [],
-  requiredPriorModuleId: 'module-7',
 };
 
 /**
  * All 8 course modules in order.
- * Module 4 is accessible in preview mode regardless of sequential progress.
+ * Free navigation: all modules are always accessible.
  */
 export const ALL_MODULES: CourseModule[] = [
   MODULE_1,

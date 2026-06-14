@@ -9,53 +9,35 @@ import type { ModuleListEntry } from 'application-course-store';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink, NgTemplateOutlet],
   template: `
-    @if (isAccessible()) {
-      <a [routerLink]="['/modules', modState().moduleId]"
-         class="card card--link"
-         [class.card--preview]="modState().isPreview"
-         [attr.aria-label]="ariaLabel()">
-        <ng-container *ngTemplateOutlet="body" />
-      </a>
-    } @else {
-      <div class="card card--disabled"
-           [attr.aria-label]="ariaLabel()"
-           role="article"
-           aria-disabled="true">
-        <ng-container *ngTemplateOutlet="body" />
-      </div>
-    }
+    <a [routerLink]="['/modules', modState().moduleId]"
+       class="card card--link"
+       [attr.aria-label]="ariaLabel()">
+      <ng-container *ngTemplateOutlet="body" />
+    </a>
 
     <ng-template #body>
       <div class="card__header">
         <span class="card__order">Módulo {{ modState().order }}</span>
         <span class="card__icon" aria-hidden="true">
-          @if (modState().isPreview) { 👁 }
-          @else if (modState().isUnlocked && modState().completionPercent === 100) { ✓ }
-          @else if (modState().isUnlocked) { ● }
-          @else { 🔒 }
+          @if (modState().completionPercent === 100) { ✓ }
+          @else { ● }
         </span>
       </div>
 
       <h2 class="card__title">{{ modState().titleEs }}</h2>
       <p class="card__desc">{{ modState().descriptionEs }}</p>
 
-      @if (modState().isPreview) {
-        <span class="card__badge">Avance</span>
-      } @else if (!modState().isUnlocked) {
-        <p class="card__locked">Completa el módulo anterior para desbloquear</p>
-      } @else {
-        <div class="card__progress"
-             role="progressbar"
-             [attr.aria-valuenow]="modState().completionPercent"
-             aria-valuemin="0"
-             aria-valuemax="100"
-             [attr.aria-label]="'Progreso: ' + modState().completionPercent + '%'">
-          <div class="card__bar">
-            <div class="card__fill" [style.width.%]="modState().completionPercent"></div>
-          </div>
-          <span class="card__pct">{{ modState().completionPercent }}%</span>
+      <div class="card__progress"
+           role="progressbar"
+           [attr.aria-valuenow]="modState().completionPercent"
+           aria-valuemin="0"
+           aria-valuemax="100"
+           [attr.aria-label]="'Progreso: ' + modState().completionPercent + '%'">
+        <div class="card__bar">
+          <div class="card__fill" [style.width.%]="modState().completionPercent"></div>
         </div>
-      }
+        <span class="card__pct">{{ modState().completionPercent }}%</span>
+      </div>
     </ng-template>
   `,
   styles: [`
@@ -73,7 +55,6 @@ import type { ModuleListEntry } from 'application-course-store';
       text-decoration: none;
       transition: background var(--transition-fast), border-color var(--transition-fast),
                   transform var(--transition-fast), box-shadow var(--transition-fast);
-
     }
 
     .card--link:hover {
@@ -86,14 +67,6 @@ import type { ModuleListEntry } from 'application-course-store';
     .card--link:focus-visible {
       outline: 2px solid var(--color-accent);
       outline-offset: 2px;
-    }
-
-    .card--preview { border-color: var(--color-accent-dim); }
-
-    .card--disabled {
-      cursor: not-allowed;
-      opacity: 0.55;
-      border-color: var(--color-locked);
     }
 
     .card__header {
@@ -127,25 +100,6 @@ import type { ModuleListEntry } from 'application-course-store';
       color: var(--color-text-secondary);
       line-height: var(--line-height-normal);
       margin-bottom: var(--space-4);
-    }
-
-    .card__badge {
-      display: inline-block;
-      padding: var(--space-1) var(--space-3);
-      border-radius: var(--radius-full);
-      font-size: var(--font-size-xs);
-      font-weight: var(--font-weight-semibold);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      background: rgba(200, 160, 74, 0.15);
-      color: var(--color-accent);
-      border: 1px solid var(--color-accent-dim);
-    }
-
-    .card__locked {
-      font-size: var(--font-size-xs);
-      color: var(--color-text-muted);
-      font-style: italic;
     }
 
     .card__progress {
@@ -191,20 +145,14 @@ export class ModuleCardComponent {
     order: 0,
     titleEs: '',
     descriptionEs: '',
-    isUnlocked: false,
+    isUnlocked: true,
     isPreview: false,
     completionPercent: 0,
   });
 
-  isAccessible(): boolean {
-    return this.modState().isUnlocked || this.modState().isPreview;
-  }
-
   ariaLabel(): string {
     const m = this.modState();
     if (!m.moduleId) return '';
-    if (m.isPreview) return `Módulo ${m.order}: ${m.titleEs} (Avance)`;
-    if (!m.isUnlocked) return `Módulo ${m.order}: ${m.titleEs} — bloqueado`;
     return `Módulo ${m.order}: ${m.titleEs} — ${m.completionPercent}% completado`;
   }
 }
