@@ -1,8 +1,20 @@
 import type { CourseModule } from 'content-schema';
 import { MODULE_1_LESSONS } from './module-1/lessons';
 import { MODULE_1_DRILLS, MODULE_1_QUIZ } from './module-1/drills';
+import { MODULE_2_LESSONS } from './module-2/lessons';
+import { MODULE_2_DRILLS, MODULE_2_QUIZ } from './module-2/drills';
+import { MODULE_3_LESSONS } from './module-3/lessons';
+import { MODULE_3_DRILLS, MODULE_3_QUIZ } from './module-3/drills';
 import { MODULE_4_LESSONS } from './module-4/lessons';
-import { MODULE_4_DRILLS } from './module-4/drills';
+import { MODULE_4_DRILLS, MODULE_4_QUIZ } from './module-4/drills';
+import { MODULE_5_LESSONS } from './module-5/lessons';
+import { MODULE_5_DRILLS, MODULE_5_QUIZ } from './module-5/drills';
+import { MODULE_6_LESSONS } from './module-6/lessons';
+import { MODULE_6_DRILLS, MODULE_6_QUIZ } from './module-6/drills';
+import { MODULE_7_LESSONS } from './module-7/lessons';
+import { MODULE_7_DRILLS, MODULE_7_QUIZ } from './module-7/drills';
+import { MODULE_8_LESSONS } from './module-8/lessons';
+import { MODULE_8_DRILLS, MODULE_8_QUIZ } from './module-8/drills';
 
 /**
  * Module 1 — "El Juego y Sus Piezas" (The Game and Its Pieces)
@@ -23,9 +35,9 @@ const MODULE_1: CourseModule = {
 };
 
 /**
- * Module 2 — Stub (v1: content deferred to v2)
+ * Module 2 — Stub (v2: content authored in modules-content-v2)
  *
- * Will cover §4 (Sequence of Play) and §5 (US Amphibious Operations).
+ * Covers §4 (Sequence of Play) and §5 (US Amphibious Operations).
  */
 const MODULE_2: CourseModule = {
   id: 'module-2',
@@ -33,16 +45,15 @@ const MODULE_2: CourseModule = {
   titleEs: 'Secuencia de Turno y Desembarco',
   descriptionEs:
     'Aprende la secuencia de juego y cómo funcionan las operaciones anfibias de EE.UU. en la playa.',
-  lessons: [],
-  drills: [],
-  reviewQuiz: [],
-  requiredPriorModuleId: 'module-1',
+  lessons: MODULE_2_LESSONS,
+  drills: MODULE_2_DRILLS,
+  reviewQuiz: MODULE_2_QUIZ,
 };
 
 /**
- * Module 3 — Stub (v1: content deferred to v2)
+ * Module 3 — Stub (v2: content authored in modules-content-v2)
  *
- * Will cover §6 (German Fire) basic mechanics as a full module.
+ * Covers §6 (German Fire) basic mechanics as a full module.
  */
 const MODULE_3: CourseModule = {
   id: 'module-3',
@@ -50,34 +61,32 @@ const MODULE_3: CourseModule = {
   titleEs: 'Fuego Alemán: Fundamentos',
   descriptionEs:
     'Domina el sistema de fuego alemán: campos de fuego, resolución de impactos y disruption.',
-  lessons: [],
-  drills: [],
-  reviewQuiz: [],
-  requiredPriorModuleId: 'module-2',
+  lessons: MODULE_3_LESSONS,
+  drills: MODULE_3_DRILLS,
+  reviewQuiz: MODULE_3_QUIZ,
 };
 
 /**
- * Module 4 — Fire Resolution PoC (Preview mode in v1; REQ-M4-05)
+ * Module 4 — Fire Resolution worked example (§6.3)
  *
  * Contains 1 lesson + 1 worked example + 1 interactive drill.
- * Accessible directly from the module list as "Preview"; NOT in the sequential unlock chain.
+ * Free navigation: no prerequisite required.
  */
 const MODULE_4: CourseModule = {
   id: 'module-4',
   order: 4,
-  titleEs: 'Resolución de Fuego (Vista Previa)',
+  titleEs: 'Resolución de Fuego',
   descriptionEs:
-    'Vista previa: practica la resolución completa del fuego alemán con un escenario interactivo de la regla §6.3.',
+    'Practica la resolución completa del fuego alemán con un escenario interactivo de la regla §6.3.',
   lessons: MODULE_4_LESSONS,
   drills: MODULE_4_DRILLS,
-  reviewQuiz: [],
-  requiredPriorModuleId: undefined, // Preview; no prerequisite (REQ-M4-05)
+  reviewQuiz: MODULE_4_QUIZ,
 };
 
 /**
- * Module 5 — Stub (v1: content deferred to v2)
+ * Module 5 — Stub (v2: content authored in modules-content-v2)
  *
- * Will cover §7 (US Actions) and §8 (US Combat Actions).
+ * Covers §7 (US Actions) and §8 (US Combat Actions).
  */
 const MODULE_5: CourseModule = {
   id: 'module-5',
@@ -85,16 +94,15 @@ const MODULE_5: CourseModule = {
   titleEs: 'Acciones de EE.UU.',
   descriptionEs:
     'Aprende todas las acciones disponibles para tus unidades: movimiento, ataque, barrage y acciones especiales.',
-  lessons: [],
-  drills: [],
-  reviewQuiz: [],
-  requiredPriorModuleId: 'module-3',
+  lessons: MODULE_5_LESSONS,
+  drills: MODULE_5_DRILLS,
+  reviewQuiz: MODULE_5_QUIZ,
 };
 
 /**
- * Module 6 — Stub (v1: content deferred to v2)
+ * Module 6 — Stub (v2: content authored in modules-content-v2)
  *
- * Will cover §9 (German Reinforcements) and §10 (Engineer Operations).
+ * Covers §9 (German Reinforcements) and §10 (Engineer Operations).
  */
 const MODULE_6: CourseModule = {
   id: 'module-6',
@@ -102,16 +110,15 @@ const MODULE_6: CourseModule = {
   titleEs: 'Refuerzos Alemanes y Operaciones de Ingenieros',
   descriptionEs:
     'Aprende cómo llegan los refuerzos alemanes y cómo tus ingenieros limpian los obstáculos de playa.',
-  lessons: [],
-  drills: [],
-  reviewQuiz: [],
-  requiredPriorModuleId: 'module-5',
+  lessons: MODULE_6_LESSONS,
+  drills: MODULE_6_DRILLS,
+  reviewQuiz: MODULE_6_QUIZ,
 };
 
 /**
- * Module 7 — Stub (v1: content deferred to v2)
+ * Module 7 — Stub (v2: content authored in modules-content-v2)
  *
- * Will cover §11 (Heroes, HQs, Generals), §12 (Control and Communication),
+ * Covers §11 (Heroes, HQs, Generals), §12 (Control and Communication),
  * §13 (Victory and Loss).
  */
 const MODULE_7: CourseModule = {
@@ -120,16 +127,15 @@ const MODULE_7: CourseModule = {
   titleEs: 'Líderes, Control y Victoria',
   descriptionEs:
     'Conoce el papel de los Héroes, Cuarteles Generales y Generales, y cómo se determina la victoria.',
-  lessons: [],
-  drills: [],
-  reviewQuiz: [],
-  requiredPriorModuleId: 'module-6',
+  lessons: MODULE_7_LESSONS,
+  drills: MODULE_7_DRILLS,
+  reviewQuiz: MODULE_7_QUIZ,
 };
 
 /**
- * Module 8 — Stub (v1: content deferred to v2)
+ * Module 8 — Stub (v2: content authored in modules-content-v2)
  *
- * Will cover §14–§20 (Extended Game rules) and §22–§23 (Optional variants).
+ * Covers §14–§20 (Extended Game rules) and §22–§23 (Optional variants).
  */
 const MODULE_8: CourseModule = {
   id: 'module-8',
@@ -137,15 +143,14 @@ const MODULE_8: CourseModule = {
   titleEs: 'El Juego Extendido y Variantes',
   descriptionEs:
     'Domina las reglas del juego extendido: acciones alemanas, variantes opcionales e historia avanzada.',
-  lessons: [],
-  drills: [],
-  reviewQuiz: [],
-  requiredPriorModuleId: 'module-7',
+  lessons: MODULE_8_LESSONS,
+  drills: MODULE_8_DRILLS,
+  reviewQuiz: MODULE_8_QUIZ,
 };
 
 /**
  * All 8 course modules in order.
- * Module 4 is accessible in preview mode regardless of sequential progress.
+ * Free navigation: all modules are always accessible.
  */
 export const ALL_MODULES: CourseModule[] = [
   MODULE_1,

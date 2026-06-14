@@ -4,9 +4,9 @@ import AxeBuilder from '@axe-core/playwright';
 /**
  * E2E smoke tests for the learning-app.
  *
- * These tests validate the two primary flows in v1:
- *   1. Course map renders with module list; Module 1 is accessible.
- *   2. Module 4 preview is reachable from the course map with no prior unlock.
+ * These tests validate the primary flows:
+ *   1. Course map renders with module list; every module is freely accessible (any order).
+ *   2. Module 4 is a normal module (no preview/lock) reachable directly.
  *
  * Run with: npx nx run learning-app-e2e:e2e
  * Requires: `nx serve learning-app` running on port 4200 (or set BASE_URL env var).
@@ -41,10 +41,15 @@ test.describe('Course map', () => {
     await expect(module1Link).toHaveAttribute('href', /module-1/);
   });
 
-  test('Module 4 card shows preview indicator on course map', async ({ page }) => {
-    // Module 4 is a preview — its card should show the "Avance" badge in .card__badge
-    const avanceBadge = page.locator('.card__badge', { hasText: 'Avance' }).first();
-    await expect(avanceBadge).toBeVisible();
+  test('Module 4 card is linked with no preview badge (free navigation)', async ({ page }) => {
+    // Free navigation: Module 4 is a normal module — an accessible link with no "Avance" badge.
+    const module4Link = page
+      .getByRole('link')
+      .filter({ hasText: /Módulo 4/ })
+      .first();
+    await expect(module4Link).toBeVisible();
+    await expect(module4Link).toHaveAttribute('href', /module-4/);
+    await expect(page.locator('.card__badge', { hasText: 'Avance' })).toHaveCount(0);
   });
 
   test('no WCAG 2.1 AA violations on course map', async ({ page }) => {
@@ -124,15 +129,14 @@ test.describe('Module 1 — start flow', () => {
   });
 });
 
-test.describe('Module 4 — preview flow', () => {
+test.describe('Module 4 — flow', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/modules/module-4');
   });
 
-  test('Module 4 home shows preview banner', async ({ page }) => {
-    // Preview banner with "Vista previa" badge (aria-label on the badge span)
-    const previewBadge = page.locator('.module-home__preview-badge');
-    await expect(previewBadge).toBeVisible();
+  test('Module 4 home shows heading and no preview banner (free navigation)', async ({ page }) => {
+    // Free navigation: the "Vista previa" banner no longer exists.
+    await expect(page.locator('.module-home__preview-badge')).toHaveCount(0);
 
     // Module heading
     const heading = page.getByRole('heading', { level: 1 });

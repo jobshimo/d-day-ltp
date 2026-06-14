@@ -100,30 +100,19 @@ describe('CourseStore', () => {
       expect(m1?.isUnlocked).toBe(true);
     });
 
-    it('marks module-2 as locked', async () => {
+    it('marks module-2 as unlocked (free navigation)', async () => {
       await store.loadModules();
 
       const m2 = store.modules().find((m) => m.moduleId === 'module-2');
-      expect(m2?.isUnlocked).toBe(false);
+      expect(m2?.isUnlocked).toBe(true);
     });
 
-    it('marks module-4 as preview (outer store includes module-4)', async () => {
-      // The outer beforeEach includes module-1 and module-2.
-      // Preview flag is determined by moduleId === 'module-4', tested
-      // by checking that the property is set correctly on a module-4 entry.
-      // We verify the rule on a freshly-loaded store that has module-4 in content.
-      // Since we can't reconfigure TestBed mid-suite, we test the business rule directly.
-      const entry = {
-        moduleId: 'module-4',
-        order: 4,
-        titleEs: 'Módulo 4',
-        descriptionEs: 'Desc',
-        isUnlocked: false,
-        completionPercent: 0,
-        isPreview: true, // rule: module-4 is always preview
-      };
-      // Assert the business rule: module-4's isPreview flag is true
-      expect(entry.isPreview).toBe(true);
+    it('isPreview is false for all modules under free navigation', async () => {
+      await store.loadModules();
+
+      for (const mod of store.modules()) {
+        expect(mod.isPreview).toBe(false);
+      }
     });
 
     it('computes zero completionPercent for a fresh module', async () => {

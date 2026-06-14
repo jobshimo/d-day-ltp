@@ -84,13 +84,154 @@ describe('ALL_MODULES', () => {
     expect(drill.correctAnswer).toBe('unit-a,unit-b');
   });
 
-  it('stubs (modules 2,3,5,6,7,8) have empty lessons/drills/quiz', () => {
-    const stubs = ALL_MODULES.filter((m) => !['module-1', 'module-4'].includes(m.id));
-    for (const stub of stubs) {
-      expect(stub.lessons).toHaveLength(0);
-      expect(stub.drills).toHaveLength(0);
-      expect(stub.reviewQuiz).toHaveLength(0);
-    }
+  // ------------------------------------------------------------------
+  // Per-module non-empty content counts
+  // ------------------------------------------------------------------
+  const KNOWN_CHART_SRCS = new Set([
+    'assets/charts/german-fire-chart.jpg',
+    'assets/charts/amphibious-landing-table.jpg',
+    'assets/charts/us-attack-results-chart.jpg',
+    'assets/charts/us-weapons-chart.jpg',
+    'assets/charts/us-barrage-table.jpg',
+    'assets/charts/terrain-effects-chart.jpg',
+  ]);
+
+  const MODULE_COUNTS: Record<string, { lessons: number; drills: number; quiz: number }> = {
+    'module-2': { lessons: 3, drills: 3, quiz: 4 },
+    'module-3': { lessons: 3, drills: 3, quiz: 4 },
+    'module-4': { lessons: 1, drills: 1, quiz: 3 },
+    'module-5': { lessons: 4, drills: 3, quiz: 4 },
+    'module-6': { lessons: 3, drills: 2, quiz: 4 },
+    'module-7': { lessons: 3, drills: 2, quiz: 4 },
+    'module-8': { lessons: 4, drills: 2, quiz: 4 },
+  };
+
+  for (const [moduleId, counts] of Object.entries(MODULE_COUNTS)) {
+    describe(`${moduleId} content counts`, () => {
+      const mod = ALL_MODULES.find((m) => m.id === moduleId)!;
+      it(`has at least ${counts.lessons} lessons`, () => {
+        expect(mod.lessons.length).toBeGreaterThanOrEqual(counts.lessons);
+      });
+      it(`has at least ${counts.drills} drills`, () => {
+        expect(mod.drills.length).toBeGreaterThanOrEqual(counts.drills);
+      });
+      it(`has at least ${counts.quiz} quiz items`, () => {
+        expect(mod.reviewQuiz.length).toBeGreaterThanOrEqual(counts.quiz);
+      });
+    });
+  }
+
+  // ------------------------------------------------------------------
+  // Cross-cutting data integrity (ALL modules 1–8)
+  // ------------------------------------------------------------------
+  describe('cross-cutting integrity', () => {
+    it('every lesson has id, moduleId, order, titleEs and non-empty blocks', () => {
+      for (const mod of ALL_MODULES) {
+        for (const lesson of mod.lessons) {
+          expect(lesson.id, `${mod.id} lesson missing id`).toBeTruthy();
+          expect(lesson.moduleId, `${lesson.id} missing moduleId`).toBeTruthy();
+          expect(typeof lesson.order, `${lesson.id} order not number`).toBe('number');
+          expect(lesson.titleEs, `${lesson.id} missing titleEs`).toBeTruthy();
+          expect(lesson.blocks.length, `${lesson.id} has no blocks`).toBeGreaterThan(0);
+        }
+      }
+    });
+
+    it('every block has non-empty content; image/svg blocks have altText', () => {
+      for (const mod of ALL_MODULES) {
+        for (const lesson of mod.lessons) {
+          for (const block of lesson.blocks) {
+            expect(block.content, `${lesson.id} block missing content`).toBeTruthy();
+            if (block.type === 'image' || block.type === 'svg-snippet') {
+              expect(block.altText, `${lesson.id} ${block.type} block missing altText`).toBeTruthy();
+            }
+          }
+        }
+      }
+    });
+
+    it('every image block src starts with assets/charts/ or assets/svg/ (no leading slash)', () => {
+      for (const mod of ALL_MODULES) {
+        for (const lesson of mod.lessons) {
+          for (const block of lesson.blocks) {
+            if (block.type === 'image') {
+              expect(
+                block.content.startsWith('assets/charts/') || block.content.startsWith('assets/svg/'),
+                `${lesson.id} image block has invalid src: "${block.content}"`,
+              ).toBe(true);
+            }
+          }
+        }
+      }
+    });
+
+    it('every image block src is in the known chart filename allowlist', () => {
+      for (const mod of ALL_MODULES) {
+        for (const lesson of mod.lessons) {
+          for (const block of lesson.blocks) {
+            if (block.type === 'image' && block.content.startsWith('assets/charts/')) {
+              expect(
+                KNOWN_CHART_SRCS.has(block.content),
+                `${lesson.id} image src not in allowlist: "${block.content}"`,
+              ).toBe(true);
+            }
+          }
+        }
+      }
+    });
+
+    it('every drill and quiz item has ruleRefs with length >= 1', () => {
+      for (const mod of ALL_MODULES) {
+        for (const drill of mod.drills) {
+          expect(
+            drill.ruleRefs.length,
+            `${mod.id} drill ${drill.id} missing ruleRefs`,
+          ).toBeGreaterThanOrEqual(1);
+        }
+        for (const quiz of mod.reviewQuiz) {
+          expect(
+            quiz.ruleRefs.length,
+            `${mod.id} quiz ${quiz.id} missing ruleRefs`,
+          ).toBeGreaterThanOrEqual(1);
+        }
+      }
+    });
+
+    it('every multiple-choice drill/quiz has exactly one isCorrect:true choice matching correctAnswer', () => {
+      for (const mod of ALL_MODULES) {
+        const items = [...mod.drills, ...mod.reviewQuiz];
+        for (const item of items) {
+          if (item.type === 'multiple-choice' && item.choices) {
+            const correct = item.choices.filter((c) => c.isCorrect);
+            expect(
+              correct.length,
+              `${mod.id} item ${item.id} must have exactly 1 isCorrect choice`,
+            ).toBe(1);
+            expect(
+              correct[0].id,
+              `${mod.id} item ${item.id} correctAnswer must match isCorrect choice id`,
+            ).toBe(item.correctAnswer);
+          }
+        }
+      }
+    });
+
+    it('every interactive-select drill has boardSnippet defined and correctAnswer non-empty', () => {
+      for (const mod of ALL_MODULES) {
+        for (const drill of mod.drills) {
+          if (drill.type === 'interactive-select') {
+            expect(
+              drill.boardSnippet,
+              `${mod.id} drill ${drill.id} missing boardSnippet`,
+            ).toBeDefined();
+            expect(
+              drill.correctAnswer,
+              `${mod.id} drill ${drill.id} correctAnswer must be non-empty`,
+            ).toBeTruthy();
+          }
+        }
+      }
+    });
   });
 });
 
