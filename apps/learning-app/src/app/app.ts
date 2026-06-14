@@ -1,21 +1,45 @@
 import { Component, inject } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { SessionStore } from 'application-session-store';
 
 @Component({
   standalone: true,
-  imports: [RouterOutlet, RouterLink],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   selector: 'app-root',
   template: `
     <a class="skip-link" href="#main-content">Saltar al contenido</a>
     <nav class="app-nav" aria-label="Navegación principal">
-      <a routerLink="/modules" class="app-nav__brand">D-Day en Omaha Beach</a>
+      <a routerLink="/" class="app-nav__brand">D-Day en Omaha Beach</a>
 
-      <a routerLink="/simbologia" class="app-nav__simbologia" aria-label="Referencia de simbología">
+      <a
+        routerLink="/modules"
+        class="app-nav__link"
+        routerLinkActive="app-nav__active"
+        aria-label="Curso: aprende las reglas módulo a módulo">
+        Curso
+      </a>
+
+      <a
+        routerLink="/historia"
+        class="app-nav__link"
+        routerLinkActive="app-nav__active"
+        aria-label="Historia del asalto a Omaha Beach">
+        Historia
+      </a>
+
+      <a
+        routerLink="/simbologia"
+        class="app-nav__link"
+        routerLinkActive="app-nav__active"
+        aria-label="Referencia de simbología">
         Simbología
       </a>
 
-      <a routerLink="/preparacion" class="app-nav__preparacion" aria-label="Guía de preparación de la partida">
+      <a
+        routerLink="/preparacion"
+        class="app-nav__link"
+        routerLinkActive="app-nav__active"
+        aria-label="Guía de preparación de la partida">
         Preparación
       </a>
 
@@ -73,7 +97,7 @@ import { SessionStore } from 'application-session-store';
     .app-nav {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      gap: var(--space-1);
       padding: 0 var(--space-4);
       height: var(--header-height);
       background: var(--color-surface);
@@ -89,12 +113,13 @@ import { SessionStore } from 'application-session-store';
       color: var(--color-accent);
       text-decoration: none;
       letter-spacing: 0.02em;
+      margin-right: var(--space-3);
+      white-space: nowrap;
 
       &:hover { color: #d4b060; }
     }
 
-    .app-nav__simbologia,
-    .app-nav__preparacion {
+    .app-nav__link {
       font-size: var(--font-size-sm);
       font-weight: var(--font-weight-medium);
       color: var(--color-text-secondary);
@@ -105,16 +130,25 @@ import { SessionStore } from 'application-session-store';
       white-space: nowrap;
 
       &:hover { color: var(--color-text-primary); }
+
       &:focus-visible {
         outline: 2px solid var(--color-accent);
         outline-offset: 2px;
       }
     }
 
+    /* Active nav link — routerLinkActive adds this class */
+    .app-nav__active {
+      color: var(--color-text-primary);
+      border-bottom: 2px solid var(--color-accent);
+      padding-bottom: calc(var(--space-1) - 2px);
+    }
+
     .app-nav__end {
       display: flex;
       align-items: center;
       gap: var(--space-3);
+      margin-left: auto;
     }
 
     .app-nav__user {
