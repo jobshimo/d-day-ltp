@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import {
   UnitSymbolComponent,
   TargetSymbolComponent,
@@ -33,9 +34,9 @@ import type { SimbologiaCategory, SimbologiaRenderAs } from 'content';
         <!-- Section anchor navigation -->
         <nav class="simbologia__toc" aria-label="Ir a sección">
           @for (cat of categories; track cat.id) {
-            <a class="simbologia__toc-link" [href]="'#cat-' + cat.id">
+            <button type="button" class="simbologia__toc-link" (click)="scrollToCategory(cat.id)">
               {{ cat.titleEs }}
-            </a>
+            </button>
           }
         </nav>
       </header>
@@ -202,6 +203,9 @@ import type { SimbologiaCategory, SimbologiaRenderAs } from 'content';
     }
 
     .simbologia__toc-link {
+      background: none;
+      cursor: pointer;
+      font-family: inherit;
       font-size: var(--font-size-sm);
       color: var(--color-accent);
       text-decoration: none;
@@ -347,8 +351,20 @@ import type { SimbologiaCategory, SimbologiaRenderAs } from 'content';
   `],
 })
 export class SimbologiaComponent {
+  private readonly document = inject(DOCUMENT);
+
   /** All 8 symbology categories, sourced from the content lib. */
   readonly categories: SimbologiaCategory[] = SYMBOLOGY;
+
+  /**
+   * Smooth-scroll to a category section. Uses scrollIntoView instead of a bare
+   * "#cat-x" anchor: with <base href="/"> a fragment-only href resolves against
+   * the base URL and navigates to the site root (course map) instead of
+   * scrolling within the current page.
+   */
+  scrollToCategory(catId: string): void {
+    this.document.getElementById('cat-' + catId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
   /**
    * Background color for the SVG wrapper of unit-symbol entries.
