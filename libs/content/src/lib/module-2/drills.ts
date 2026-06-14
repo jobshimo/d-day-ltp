@@ -43,7 +43,7 @@ export const MODULE_2_DRILLS: DrillScenario[] = [
       { section: '5.11', note: 'Resultado por carta aplicado individualmente a cada unidad' },
     ],
     explanationEs:
-      'Según §5.1, la carta muestra un resultado distinto para cada target symbol. El resultado B (para ◆) y el resultado A (para ▲) implican deriva según la Landing Table para turnos 1–3. El resultado D (para ●) en turnos 1–3 es "Sin efecto" para infantería. Cada unidad recibe su resultado por separado según su propio target symbol (§5.1).',
+      'Según §5.1, la carta de desembarco muestra una letra de resultado distinta (A, B, C o D) para cada target symbol (◆, ▲, ●). Para determinar el efecto concreto, consulta la Landing Table (ver imagen en lección 2-2) cruzando el turno actual con el tipo de unidad y la letra obtenida. En este escenario, las letras B (para ◆) y A (para ▲) producen un resultado de deriva para infantería según la tabla; la letra D (para ●) produce sin efecto. Cada unidad recibe su resultado de forma independiente según su propio target symbol (§5.11).',
   },
 
   // ---- Drill 2-2: Beach Landing Box placement legality ----
@@ -173,15 +173,15 @@ export const MODULE_2_QUIZ: QuizItem[] = [
     questionEs:
       'Tienes una unidad programada para llegar en el turno 9. Es el turno 9 y decides demorarla voluntariamente hasta el turno 12. ¿Dónde debes colocarla cuando llegue en el turno 12?',
     choices: [
-      { id: 'a', labelEs: 'En cualquier casilla de desembarco con letras, en cualquier sector.', isCorrect: false },
-      { id: 'b', labelEs: 'En su casilla de desembarco asignada original (turno 9 ≤ 10).', isCorrect: true },
+      { id: 'a', labelEs: 'En cualquier casilla de desembarco con letras, en cualquier sector.', isCorrect: true },
+      { id: 'b', labelEs: 'En su casilla de desembarco asignada original (turno 9 ≤ 10).', isCorrect: false },
       { id: 'c', labelEs: 'En cualquier casilla, incluyendo sin letras de ID.', isCorrect: false },
       { id: 'd', labelEs: 'No se puede demorar una unidad en el turno 9; la demora voluntaria comienza en turno 10.', isCorrect: false },
     ],
-    correctAnswer: 'b',
-    ruleRefs: [{ section: '5.34', note: 'Demora voluntaria: antes del turno 10, ir a casilla asignada' }],
+    correctAnswer: 'a',
+    ruleRefs: [{ section: '5.34', note: 'Demora voluntaria: unidad que entra después del turno 10 puede ir a cualquier casilla de desembarco con letras, en cualquier sector' }],
     explanationEs:
-      'Según §5.34, una unidad demorada que entra en el turno 10 o antes debe colocarse en su casilla asignada original. Como la unidad llega en el turno 12 (posterior al 10), en realidad puede ir a cualquier casilla con letras en cualquier sector. CORRECCIÓN: La respuesta correcta sería (a), porque llega después del turno 10. Este drill evalúa la comprensión de la regla de umbral del turno 10.',
+      'Según §5.34, una unidad demorada (voluntaria o involuntariamente) que entra en el turno 10 o antes debe colocarse en su casilla asignada original. Sin embargo, si la unidad entra después del turno 10, puede colocarse en cualquier casilla de desembarco con letras, en cualquier sector. La unidad de este escenario llega en el turno 12, que es posterior al turno 10, por lo que la respuesta correcta es (a): cualquier casilla con letras, en cualquier sector.',
   },
 
   // ---- Quiz 2-4: Minas submarinas ----

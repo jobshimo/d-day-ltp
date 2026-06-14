@@ -68,7 +68,7 @@ export const MODULE_2_LESSONS: Lesson[] = [
       {
         type: 'prose',
         content:
-          'Fase V — Acción de EE.UU.: cada división puede activar dos unidades o grupos para realizar acciones (movimiento, ataque, barrage). Además, ciertas unidades actúan "de forma gratuita": infantería en movimiento de preservación, rangers, unidades con marcadores especiales (héroe, inspirado, climb, disrupción), cuarteles generales (HQ), generales, y unidades bajo su mando.',
+          'Fase V — Acción de EE.UU.: cada división puede activar dos unidades o grupos para realizar acciones (movimiento, ataque, barrage). Además, ciertas unidades actúan "de forma gratuita": infantería en movimiento de preservación, rangers, unidades con marcadores de estado especial (héroe, inspirado, climb) o con marcador de disrupción, cuarteles generales (HQ), generales, y unidades bajo su mando.',
         ruleRefs: [{ section: '4', note: 'Fase V: acciones normales y gratuitas' }],
       },
       {

@@ -138,7 +138,7 @@ export const MODULE_6_QUIZ: QuizItem[] = [
     correctAnswer: 'b',
     ruleRefs: [{ section: '9.24', note: 'Si el pool móvil está vacío cuando se necesita uno móvil, los alemanes se han quedado sin reservas — no se coloca ningún depth marker' }],
     explanationEs:
-      'Según §9.24, la cadena de sustitución es: pool WN vacío → usar posición de refuerzo; pool de edificio vacío → usar pool móvil; pool móvil vacío → no se coloca ningún depth marker. Aquí se necesita un depth marker MÓVIL (refuerzo en terreno abierto). El pool móvil está vacío y no hay sustituto disponible en esta dirección de la cadena. El pool de edificio solo se usa como sustituto cuando el pool de edificio (no el móvil) es el que se necesita originalmente.',
+      'Según §9.24, hay tres reglas independientes de sustitución, cada una aplicable solo cuando se necesita ese tipo específico de marcador: (1) Si el pool WN está vacío cuando se necesita un depth marker WN, elige en su lugar una unidad en posición de refuerzo. (2) Si el pool de edificio está vacío cuando se necesita un depth marker de edificio, toma un depth marker móvil en su lugar. (3) Si el pool móvil está vacío cuando se necesita un depth marker móvil, no se coloca ningún depth marker. En este escenario se necesita un depth marker MÓVIL (unidad de refuerzo en terreno abierto). El pool móvil está vacío y la regla (3) aplica directamente: no se coloca ningún marcador. El pool de edificio no puede sustituir al pool móvil; la sustitución en esa dirección no existe.',
   },
 
   // ---- Quiz 6-3: Restricción de ingenieros por fire card ----

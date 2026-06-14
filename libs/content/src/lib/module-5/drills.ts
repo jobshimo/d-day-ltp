@@ -135,7 +135,7 @@ export const MODULE_5_DRILLS: DrillScenario[] = [
           id: 'unit-us-x',
           type: 'infantry',
           steps: 3,
-          targetSymbol: 'square',
+          targetSymbol: 'circle',
           weapons: ['BZ', 'BG'],
           attackStrength: 3,
           isDisrupted: false,
@@ -188,7 +188,7 @@ export const MODULE_5_DRILLS: DrillScenario[] = [
       { section: '8.4', note: 'Barrage: tanque en rango no adyacente Y (en campo de fuego del objetivo OR infantería observadora en ese campo)' },
     ],
     explanationEs:
-      'Según §8.4, un tanque puede barraguear si está en rango y NO adyacente al objetivo, Y se cumple al menos una de estas dos condiciones: (1) el propio tanque ocupa un hex en el campo de fuego del objetivo, o (2) una unidad de infantería no disrupta ocupa un hex en el campo de fuego del objetivo. En este escenario, el tanque no está en el campo de fuego del WN y tampoco hay infantería observadora allí. Por lo tanto, NO puede realizar el barrage aunque esté en rango.',
+      'Según §8.4, un tanque puede barraguear si está en rango y NO adyacente al objetivo, Y se cumple al menos una de estas dos condiciones: (1) el propio tanque ocupa un hex en el campo de fuego del objetivo, o (2) una unidad de infantería no disrupta ocupa un hex en el campo de fuego del objetivo (observando para el tanque). Además, cuando una infantería observa para el tanque, ya sea el tanque o la infantería observadora debe estar bajo el mando de un HQ o General. En este escenario, el tanque no está en el campo de fuego del WN y tampoco hay infantería observadora allí. Por lo tanto, NO puede realizar el barrage aunque esté en rango.',
   },
 ];
 
