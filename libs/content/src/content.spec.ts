@@ -100,6 +100,10 @@ describe('ALL_MODULES', () => {
     'module-2': { lessons: 3, drills: 3, quiz: 4 },
     'module-3': { lessons: 3, drills: 3, quiz: 4 },
     'module-4': { lessons: 1, drills: 1, quiz: 3 },
+    'module-5': { lessons: 4, drills: 3, quiz: 4 },
+    'module-6': { lessons: 3, drills: 2, quiz: 4 },
+    'module-7': { lessons: 3, drills: 2, quiz: 4 },
+    'module-8': { lessons: 4, drills: 2, quiz: 4 },
   };
 
   for (const [moduleId, counts] of Object.entries(MODULE_COUNTS)) {

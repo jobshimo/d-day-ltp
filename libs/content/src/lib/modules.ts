@@ -7,6 +7,14 @@ import { MODULE_3_LESSONS } from './module-3/lessons';
 import { MODULE_3_DRILLS, MODULE_3_QUIZ } from './module-3/drills';
 import { MODULE_4_LESSONS } from './module-4/lessons';
 import { MODULE_4_DRILLS, MODULE_4_QUIZ } from './module-4/drills';
+import { MODULE_5_LESSONS } from './module-5/lessons';
+import { MODULE_5_DRILLS, MODULE_5_QUIZ } from './module-5/drills';
+import { MODULE_6_LESSONS } from './module-6/lessons';
+import { MODULE_6_DRILLS, MODULE_6_QUIZ } from './module-6/drills';
+import { MODULE_7_LESSONS } from './module-7/lessons';
+import { MODULE_7_DRILLS, MODULE_7_QUIZ } from './module-7/drills';
+import { MODULE_8_LESSONS } from './module-8/lessons';
+import { MODULE_8_DRILLS, MODULE_8_QUIZ } from './module-8/drills';
 
 /**
  * Module 1 — "El Juego y Sus Piezas" (The Game and Its Pieces)
@@ -86,9 +94,9 @@ const MODULE_5: CourseModule = {
   titleEs: 'Acciones de EE.UU.',
   descriptionEs:
     'Aprende todas las acciones disponibles para tus unidades: movimiento, ataque, barrage y acciones especiales.',
-  lessons: [],
-  drills: [],
-  reviewQuiz: [],
+  lessons: MODULE_5_LESSONS,
+  drills: MODULE_5_DRILLS,
+  reviewQuiz: MODULE_5_QUIZ,
 };
 
 /**
@@ -102,9 +110,9 @@ const MODULE_6: CourseModule = {
   titleEs: 'Refuerzos Alemanes y Operaciones de Ingenieros',
   descriptionEs:
     'Aprende cómo llegan los refuerzos alemanes y cómo tus ingenieros limpian los obstáculos de playa.',
-  lessons: [],
-  drills: [],
-  reviewQuiz: [],
+  lessons: MODULE_6_LESSONS,
+  drills: MODULE_6_DRILLS,
+  reviewQuiz: MODULE_6_QUIZ,
 };
 
 /**
@@ -119,9 +127,9 @@ const MODULE_7: CourseModule = {
   titleEs: 'Líderes, Control y Victoria',
   descriptionEs:
     'Conoce el papel de los Héroes, Cuarteles Generales y Generales, y cómo se determina la victoria.',
-  lessons: [],
-  drills: [],
-  reviewQuiz: [],
+  lessons: MODULE_7_LESSONS,
+  drills: MODULE_7_DRILLS,
+  reviewQuiz: MODULE_7_QUIZ,
 };
 
 /**
@@ -135,9 +143,9 @@ const MODULE_8: CourseModule = {
   titleEs: 'El Juego Extendido y Variantes',
   descriptionEs:
     'Domina las reglas del juego extendido: acciones alemanas, variantes opcionales e historia avanzada.',
-  lessons: [],
-  drills: [],
-  reviewQuiz: [],
+  lessons: MODULE_8_LESSONS,
+  drills: MODULE_8_DRILLS,
+  reviewQuiz: MODULE_8_QUIZ,
 };
 
 /**
