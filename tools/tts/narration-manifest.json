@@ -180,6 +180,456 @@
     "voice": "em_alex"
   },
   {
+    "key": "lesson-2-1#0",
+    "lessonId": "lesson-2-1",
+    "blockIndex": 0,
+    "text": "Cada turno de D-Day at Omaha Beach se divide en seis fases que siempre se ejecutan en el mismo orden. Mueve el marcador de fase a lo largo del track Card/Phase para saber en qué fase estás. A lo largo del turno extraerás varias cartas, cada una con un propósito distinto: colócalas en el recuadro correspondiente del track como referencia.",
+    "spoken": "Cada turno de Día D en la playa de Ómaja se divide en seis fases que siempre se ejecutan en el mismo orden. Mueve el marcador de fase a lo largo del track Card/Phase para saber en qué fase estás. A lo largo del turno extraerás varias cartas, cada una con un propósito distinto: colócalas en el recuadro correspondiente del track como referencia.",
+    "file": "6de011a0f4d5.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-1#1",
+    "lessonId": "lesson-2-1",
+    "blockIndex": 1,
+    "text": "§4 — Las seis fases del turno:\nI. Fase de Operaciones Anfibias de EE.UU.\nII. Fase de Eventos (omitir en turno 1)\nIII. Fase de Fuego Alemán\nIV. Fase de Ingenieros de EE.UU. (omitir en turno 1)\nV. Fase de Acción de EE.UU.\nVI. Fin de Turno",
+    "spoken": "sección 4. Las seis fases del turno:\nI. Fase de Operaciones Anfibias de Estados Unidos\nII. Fase de Eventos (omitir en turno 1)\nIII. Fase de Fuego Alemán\nIV. Fase de Ingenieros de Estados Unidos (omitir en turno 1)\nV. Fase de Acción de Estados Unidos\nVI. Fin de Turno",
+    "file": "1abd94f21f58.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-1#2",
+    "lessonId": "lesson-2-1",
+    "blockIndex": 2,
+    "text": "Fase I — Operaciones Anfibias: primero se realizan los chequeos de desembarco para las unidades en las casillas de desembarco (Beach Landing Boxes), luego se mueven esas unidades a la orilla, y finalmente se colocan las nuevas unidades que llegan ese turno en las casillas de desembarco. El detalle completo de esta fase se enseña en las lecciones 2-2 y 2-3.",
+    "spoken": "Fase I. Operaciones Anfibias: primero se realizan los chequeos de desembarco para las unidades en las casillas de desembarco (Beach Landing Boxes), luego se mueven esas unidades a la orilla, y finalmente se colocan las nuevas unidades que llegan ese turno en las casillas de desembarco. El detalle completo de esta fase se enseña en las lecciones 2-2 y 2-3.",
+    "file": "ae20737129f1.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-1#3",
+    "lessonId": "lesson-2-1",
+    "blockIndex": 3,
+    "text": "Fase II — Eventos: se extrae una carta de eventos y se aplica el evento del turno actual. Esta fase se omite en el turno 1. Los eventos generan refuerzos alemanes, marcadores navales y otros efectos que varían cada partida.",
+    "spoken": "Fase II. Eventos: se extrae una carta de eventos y se aplica el evento del turno actual. Esta fase se omite en el turno 1. Los eventos generan refuerzos alemanes, marcadores navales y otros efectos que varían cada partida.",
+    "file": "5d8c13b84b4a.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-1#4",
+    "lessonId": "lesson-2-1",
+    "blockIndex": 4,
+    "text": "Fase III — Fuego Alemán: se extraen dos cartas de fuego (una por sector) y se resuelve el fuego de todas las posiciones alemanas que aparecen en la carta. Las unidades de EE.UU. en el campo de fuego pueden recibir pérdidas de escalón (step loss) o marcadores de disrupción. También se resuelve el fuego de artillería si la carta lo indica.",
+    "spoken": "Fase III. Fuego Alemán: se extraen dos cartas de fuego (una por sector) y se resuelve el fuego de todas las posiciones alemanas que aparecen en la carta. Las unidades de Estados Unidos en el campo de fuego pueden recibir pérdidas de escalón (step loss) o marcadores de disrupción. También se resuelve el fuego de artillería si la carta lo indica.",
+    "file": "2cb8d578bb2e.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-1#5",
+    "lessonId": "lesson-2-1",
+    "blockIndex": 5,
+    "text": "Fase IV — Ingenieros: se colocan marcadores de \"Cleared\" en hexes de playa con obstáculos para mostrar que los ingenieros los han limpiado. Se omite en turno 1. Esta acción reduce el riesgo de explosiones de minas en desembarcos posteriores (§10.1).",
+    "spoken": "Fase IV. Ingenieros: se colocan marcadores de \"Cleared\" en hexes de playa con obstáculos para mostrar que los ingenieros los han limpiado. Se omite en turno 1. Esta acción reduce el riesgo de explosiones de minas en desembarcos posteriores (sección 10.1).",
+    "file": "663d11cb4dff.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-1#6",
+    "lessonId": "lesson-2-1",
+    "blockIndex": 6,
+    "text": "Fase V — Acción de EE.UU.: cada división puede activar dos unidades o grupos para realizar acciones (movimiento, ataque, barrage). Además, ciertas unidades actúan \"de forma gratuita\": infantería en movimiento de preservación, rangers, unidades con marcadores de estado especial (héroe, inspirado, climb) o con marcador de disrupción, cuarteles generales (HQ), generales, y unidades bajo su mando.",
+    "spoken": "Fase V. Acción de Estados Unidos: cada división puede activar dos unidades o grupos para realizar acciones (movimiento, ataque, barrage). Además, ciertas unidades actúan \"de forma gratuita\": infantería en movimiento de preservación, rangers, unidades con marcadores de estado especial (héroe, inspirado, climb) o con marcador de disrupción, cuarteles generales (cuartel general), generales, y unidades bajo su mando.",
+    "file": "b33bd09bec71.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-1#7",
+    "lessonId": "lesson-2-1",
+    "blockIndex": 7,
+    "text": "§4 — Fin de Turno (Fase VI): mueve todas las cartas del track al mazo de descarte. Mueve el marcador de fase al inicio del track. Si el track de turnos indica que hay que barajar, mezcla todos los descartes en la baraja. Avanza el marcador de turno un espacio.",
+    "spoken": "sección 4. Fin de Turno (Fase VI): mueve todas las cartas del track al mazo de descarte. Mueve el marcador de fase al inicio del track. Si el track de turnos indica que hay que barajar, mezcla todos los descartes en la baraja. Avanza el marcador de turno un espacio.",
+    "file": "20df2b4191f5.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-1#8",
+    "lessonId": "lesson-2-1",
+    "blockIndex": 8,
+    "text": "§4 — A partir del turno 17, la escala de tiempo cambia de 15 a 30 minutos por turno y se incorporan actividades adicionales a la secuencia (juego extendido). Esto se trata en el Módulo 8.",
+    "spoken": "sección 4. A partir del turno 17, la escala de tiempo cambia de 15 a 30 minutos por turno y se incorporan actividades adicionales a la secuencia (juego extendido). Esto se trata en el Módulo 8.",
+    "file": "400e956047fc.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-2#0",
+    "lessonId": "lesson-2-2",
+    "blockIndex": 0,
+    "text": "Al inicio de cada Fase de Operaciones Anfibias, realiza un chequeo de desembarco por sector si hay unidades en las Beach Landing Boxes. El chequeo simula las corrientes, oleaje, fallos de equipos, errores de navegación y los obstáculos minados alemanes que amenazaban a cada oleada.",
+    "spoken": "Al inicio de cada Fase de Operaciones Anfibias, realiza un chequeo de desembarco por sector si hay unidades en las Beach Landing Boxes. El chequeo simula las corrientes, oleaje, fallos de equipos, errores de navegación y los obstáculos minados alemanes que amenazaban a cada oleada.",
+    "file": "3e31d14153ab.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-2#1",
+    "lessonId": "lesson-2-2",
+    "blockIndex": 1,
+    "text": "§5.1 — Procedimiento: extrae una landing card por sector (comenzando por el este). La carta muestra los tres target symbols (◆, ▲, ●), cada uno con una letra de resultado (A, B, C o D). Para cada unidad en las Beach Landing Boxes, consulta la Landing Table con el turno actual y el tipo de unidad para determinar el resultado.",
+    "spoken": "sección 5.1. Procedimiento: extrae una landing card por sector (comenzando por el este). La carta muestra los tres target symbols (◆, ▲, ●), cada uno con una letra de resultado (A, B, C o D). Para cada unidad en las Beach Landing Boxes, consulta la Landing Table con el turno actual y el tipo de unidad para determinar el resultado.",
+    "file": "6fa525c21d02.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-2#3",
+    "lessonId": "lesson-2-2",
+    "blockIndex": 3,
+    "text": "§5.1 — Nota sobre la tabla: los resultados varían según el tramo de turno (1–3, 4–14, 15+) y el tipo de unidad. Los tanques tienen resultados diferentes a la infantería. La carta indica la letra (A–D) para cada target symbol; la tabla convierte esa letra en el efecto concreto (deriva este, demora, pérdida de escalón, eliminación o sin efecto).",
+    "spoken": "sección 5.1. Nota sobre la tabla: los resultados varían según el tramo de turno (1–3, 4–14, 15+) y el tipo de unidad. Los tanques tienen resultados diferentes a la infantería. La carta indica la letra (A–D) para cada target symbol; la tabla convierte esa letra en el efecto concreto (deriva este, demora, pérdida de escalón, eliminación o sin efecto).",
+    "file": "30ec37a6b7c2.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-2#4",
+    "lessonId": "lesson-2-2",
+    "blockIndex": 4,
+    "text": "Los resultados posibles son: deriva al este, deriva al oeste, demora (la unidad pasa al track de turnos dos turnos después), pérdida de escalón, eliminación o \"sin efecto\". El resultado se aplica inmediatamente a cada unidad según su target symbol.",
+    "spoken": "Los resultados posibles son: deriva al este, deriva al oeste, demora (la unidad pasa al track de turnos dos turnos después), pérdida de escalón, eliminación o \"sin efecto\". El resultado se aplica inmediatamente a cada unidad según su target symbol.",
+    "file": "68d0cc1b7391.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-2#5",
+    "lessonId": "lesson-2-2",
+    "blockIndex": 5,
+    "text": "Deriva (§5.11): si una unidad deriva, muévela el número de casillas indicado hacia el este (izquierda) o el oeste (derecha) a lo largo de la fila de Beach Landing Boxes. La unidad desembarcará desde la casilla a la que deriva. Si deriva más allá de la casilla más oriental o más occidental del mapa, queda demorada: colócala en el track de turnos dos turnos después del actual.",
+    "spoken": "Deriva (sección 5.11): si una unidad deriva, muévela el número de casillas indicado hacia el este (izquierda) o el oeste (derecha) a lo largo de la fila de Beach Landing Boxes. La unidad desembarcará desde la casilla a la que deriva. Si deriva más allá de la casilla más oriental o más occidental del mapa, queda demorada: colócala en el track de turnos dos turnos después del actual.",
+    "file": "34c6ec54d755.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-2#6",
+    "lessonId": "lesson-2-2",
+    "blockIndex": 6,
+    "text": "§5.11 — Caso especial de marea alta: si una unidad deriva a una casilla de desembarco durante un turno de marea alta que no apunta a un hex de playa de marea alta, queda demorada.",
+    "spoken": "sección 5.11. Caso especial de marea alta: si una unidad deriva a una casilla de desembarco durante un turno de marea alta que no apunta a un hex de playa de marea alta, queda demorada.",
+    "file": "cb8eae80132e.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-2#7",
+    "lessonId": "lesson-2-2",
+    "blockIndex": 7,
+    "text": "Los HQ y Generales no se chequean para resultados de desembarco (§5.12), aunque un HQ puede verse afectado por una explosión de mina submarina. Si un HQ o General está apilado con una unidad que deriva, puede derivar con ella o quedarse en su casilla, a tu elección.",
+    "spoken": "Los cuartel general y Generales no se chequean para resultados de desembarco (sección 5.12), aunque un cuartel general puede verse afectado por una explosión de mina submarina. Si un cuartel general o General está apilado con una unidad que deriva, puede derivar con ella o quedarse en su casilla, a tu elección.",
+    "file": "527c5221b5f2.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-2#8",
+    "lessonId": "lesson-2-2",
+    "blockIndex": 8,
+    "text": "Rangers: una unidad de infantería ranger que recibe resultado \"Sin Efecto\" en el turno 4 o posterior puede voluntariamente derivar de uno a cuatro hexes al este (§5.13). Esto no aplica a la unidad C/R2 programada para llegar en el turno 2.",
+    "spoken": "Rangers: una unidad de infantería ranger que recibe resultado \"Sin Efecto\" en el turno 4 o posterior puede voluntariamente derivar de uno a cuatro hexes al este (sección 5.13). Esto no aplica a la unidad C/R2 programada para llegar en el turno 2.",
+    "file": "86c78b70dccd.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-2#9",
+    "lessonId": "lesson-2-2",
+    "blockIndex": 9,
+    "text": "Explosión de minas submarinas (§5.14, turnos 7–22): si la landing card muestra el símbolo de Exploding Mine, aplica primero todos los resultados de desembarco. Luego comprueba si alguna unidad en una casilla de desembarco aterriza en un hex de playa con obstáculos no limpiados. En marea media (turnos 7–15) o alta (16–22), si hay obstáculos sin limpiar en el camino, debes retirar un escalón de una unidad de tu elección.",
+    "spoken": "Explosión de minas submarinas (sección 5.14, turnos 7–22): si la landing card muestra el símbolo de Exploding Mine, aplica primero todos los resultados de desembarco. Luego comprueba si alguna unidad en una casilla de desembarco aterriza en un hex de playa con obstáculos no limpiados. En marea media (turnos 7–15) o alta (16–22), si hay obstáculos sin limpiar en el camino, debes retirar un escalón de una unidad de tu elección.",
+    "file": "a8ddf6d8c875.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-2#10",
+    "lessonId": "lesson-2-2",
+    "blockIndex": 10,
+    "text": "§5.14 — Excepción para líderes: si el único disponible para sufrir una pérdida de escalón por mina es un HQ, no pierde el escalón; en su lugar queda demorado (colócalo dos turnos después en el track). Un General no es afectado por explosiones de mina.",
+    "spoken": "sección 5.14. Excepción para líderes: si el único disponible para sufrir una pérdida de escalón por mina es un cuartel general, no pierde el escalón; en su lugar queda demorado (colócalo dos turnos después en el track). Un General no es afectado por explosiones de mina.",
+    "file": "e4238cf59942.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-2#11",
+    "lessonId": "lesson-2-2",
+    "blockIndex": 11,
+    "text": "A partir del turno 15, la infantería queda exenta de los chequeos de desembarco normales (§5.15). Sin embargo, si esas unidades desembarcan en hexes con obstáculos no limpiados antes del turno 23, aún se realiza el chequeo de minas. Si no se requieren chequeos de desembarco en un sector, no se extrae carta de desembarco para ese sector.",
+    "spoken": "A partir del turno 15, la infantería queda exenta de los chequeos de desembarco normales (sección 5.15). Sin embargo, si esas unidades desembarcan en hexes con obstáculos no limpiados antes del turno 23, aún se realiza el chequeo de minas. Si no se requieren chequeos de desembarco en un sector, no se extrae carta de desembarco para ese sector.",
+    "file": "6b82682a107a.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-3#0",
+    "lessonId": "lesson-2-3",
+    "blockIndex": 0,
+    "text": "Tras determinar todos los resultados de desembarco, todas las unidades que siguen en las Beach Landing Boxes aterrizan en Omaha Beach. Mueve cada unidad desde su casilla de desembarco al hex de la línea de marea que corresponde al nivel de marea actual, en la dirección que señala la casilla.",
+    "spoken": "Tras determinar todos los resultados de desembarco, todas las unidades que siguen en las Beach Landing Boxes aterrizan en Ómaja Beach. Mueve cada unidad desde su casilla de desembarco al hex de la línea de marea que corresponde al nivel de marea actual, en la dirección que señala la casilla.",
+    "file": "4a7a173b7f0b.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-3#1",
+    "lessonId": "lesson-2-3",
+    "blockIndex": 1,
+    "text": "§5.21 — Las tres líneas de marea (waterlines): marea baja (turnos 1–6 y 28–32), marea media (turnos 7–15) y marea alta (turnos 16–22). Las unidades que quedan bajo el agua al final de un turno son eliminadas. Excepción: una unidad con marcador Climb Cliff en un hex de marea baja al final del turno 7 no es eliminada.",
+    "spoken": "sección 5.21. Las tres líneas de marea (waterlines): marea baja (turnos 1–6 y 28–32), marea media (turnos 7–15) y marea alta (turnos 16–22). Las unidades que quedan bajo el agua al final de un turno son eliminadas. Excepción: una unidad con marcador Climb Cliff en un hex de marea baja al final del turno 7 no es eliminada.",
+    "file": "b366bed8f52b.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-3#2",
+    "lessonId": "lesson-2-3",
+    "blockIndex": 2,
+    "text": "Cruce de límite de sector (§5.22): si una unidad desembarca en un hex fuera de su sector asignado, pasa al mando de la otra división por el resto de la partida. Anota la designación de la unidad o coloca un marcador de \"Command Transfer\".",
+    "spoken": "Cruce de límite de sector (sección 5.22): si una unidad desembarca en un hex fuera de su sector asignado, pasa al mando de la otra división por el resto de la partida. Anota la designación de la unidad o coloca un marcador de \"Command Transfer\".",
+    "file": "bf9dd0f64b55.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-3#3",
+    "lessonId": "lesson-2-3",
+    "blockIndex": 3,
+    "text": "Colocar nuevas llegadas (§5.3): después de que todas las unidades hayan desembarcado, toma las unidades del espacio del turno actual en el track de turnos y colócalas en sus Beach Landing Boxes. Las reglas de colocación son:\n• Si la unidad lista una casilla específica (como ER3), colócala en esa casilla.\n• Si la unidad lista una playa sin casilla específica (como ER), puedes colocarla en cualquier casilla con esas letras.\n• Si la unidad lista un número de división (1.ª o 29.ª), puedes colocarla en cualquier casilla de desembarco con letras en el sector de esa división.",
+    "spoken": "Colocar nuevas llegadas (sección 5.3): después de que todas las unidades hayan desembarcado, toma las unidades del espacio del turno actual en el track de turnos y colócalas en sus Beach Landing Boxes. Las reglas de colocación son:\n• Si la unidad lista una casilla específica (como ER3), colócala en esa casilla.\n• Si la unidad lista una playa sin casilla específica (como ER), puedes colocarla en cualquier casilla con esas letras.\n• Si la unidad lista un número de división (1.ª o 29.ª), puedes colocarla en cualquier casilla de desembarco con letras en el sector de esa división.",
+    "file": "05b1b680ce96.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-3#4",
+    "lessonId": "lesson-2-3",
+    "blockIndex": 4,
+    "text": "§5.31 — En una casilla de desembarco pueden colocarse una o dos unidades. Los Generales y los HQ no cuentan contra este límite. Un General no puede colocarse solo en una casilla si hay unidades que llegan ese mismo turno con las que podría apilarse.",
+    "spoken": "sección 5.31. En una casilla de desembarco pueden colocarse una o dos unidades. Los Generales y los cuartel general no cuentan contra este límite. Un General no puede colocarse solo en una casilla si hay unidades que llegan ese mismo turno con las que podría apilarse.",
+    "file": "a09d50743564.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-3#5",
+    "lessonId": "lesson-2-3",
+    "blockIndex": 5,
+    "text": "§5.32 — No puedes colocar una unidad en una casilla de desembarco sin letras de ID; esas casillas solo pueden alcanzarse por deriva involuntaria.",
+    "spoken": "sección 5.32. No puedes colocar una unidad en una casilla de desembarco sin letras de ID; esas casillas solo pueden alcanzarse por deriva involuntaria.",
+    "file": "c5318334cb02.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-3#6",
+    "lessonId": "lesson-2-3",
+    "blockIndex": 6,
+    "text": "§5.33 — Solo las unidades de infantería ranger pueden colocarse en las casillas de desembarco Charlie (CH), aunque otras unidades pueden llegar a ellas involuntariamente por deriva.",
+    "spoken": "sección 5.33. Solo las unidades de infantería ranger pueden colocarse en las casillas de desembarco Charlie (CH), aunque otras unidades pueden llegar a ellas involuntariamente por deriva.",
+    "file": "8f885474463d.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-2-3#7",
+    "lessonId": "lesson-2-3",
+    "blockIndex": 7,
+    "text": "Demora voluntaria (§5.34): a partir del turno 7, no estás obligado a colocar una unidad en su casilla de desembarco el turno que le corresponde. Puedes demorarla colocándola en cualquier espacio posterior del track de turnos. Reglas adicionales de demora:\n• Una unidad demorada (voluntaria o involuntariamente) que llega en el turno 10 o antes debe ir a su casilla asignada.\n• Una unidad que llega después del turno 10 puede colocarse en cualquier casilla de desembarco, en cualquier sector.\n• No puedes demorar voluntariamente la llegada de una unidad antes del turno 7.",
+    "spoken": "Demora voluntaria (sección 5.34): a partir del turno 7, no estás obligado a colocar una unidad en su casilla de desembarco el turno que le corresponde. Puedes demorarla colocándola en cualquier espacio posterior del track de turnos. Reglas adicionales de demora:\n• Una unidad demorada (voluntaria o involuntariamente) que llega en el turno 10 o antes debe ir a su casilla asignada.\n• Una unidad que llega después del turno 10 puede colocarse en cualquier casilla de desembarco, en cualquier sector.\n• No puedes demorar voluntariamente la llegada de una unidad antes del turno 7.",
+    "file": "af8ef8589dc0.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-3-1#0",
+    "lessonId": "lesson-3-1",
+    "blockIndex": 0,
+    "text": "En la Fase de Fuego Alemán se extraen dos cartas de fuego (fire cards): una para el sector este y otra para el oeste. La fire card identifica qué posiciones alemanas disparan y qué unidades de EE.UU. son más propensas a ser alcanzadas.",
+    "spoken": "En la Fase de Fuego Alemán se extraen dos cartas de fuego (fire cards): una para el sector este y otra para el oeste. La fire card identifica qué posiciones alemanas disparan y qué unidades de Estados Unidos son más propensas a ser alcanzadas.",
+    "file": "1e418409bf10.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-3-1#1",
+    "lessonId": "lesson-3-1",
+    "blockIndex": 1,
+    "text": "§6.1 — Cada fire card contiene:\n• Tres colores de posición alemana. Una posición no disrupta que coincida con un color puede disparar.\n• Un símbolo simple indica que la posición dispara si está ocupada por cualquier unidad alemana (con o sin depth marker).\n• Un símbolo doble indica que la posición solo dispara si tiene una unidad Y un depth marker.\n• Un target symbol: las unidades de EE.UU. con ese símbolo son más propensas a ser alcanzadas.\n• Opcionalmente: una estrella (★) en un color (§11.4), un símbolo de Armor Hit Bonus (§6.36), letras de acción (solo turnos 17–32, ignóralas hasta el Módulo 8).",
+    "spoken": "sección 6.1. Cada fire card contiene:\n• Tres colores de posición alemana. Una posición no disrupta que coincida con un color puede disparar.\n• Un símbolo simple indica que la posición dispara si está ocupada por cualquier unidad alemana (con o sin depth marker).\n• Un símbolo doble indica que la posición solo dispara si tiene una unidad Y un depth marker.\n• Un target symbol: las unidades de Estados Unidos con ese símbolo son más propensas a ser alcanzadas.\n• Opcionalmente: una estrella (★) en un color (sección 11.4), un símbolo de Armor Hit Bonus (sección 6.36), letras de acción (solo turnos 17–32, ignóralas hasta el Módulo 8).",
+    "file": "c978a7b4b0d5.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-3-1#2",
+    "lessonId": "lesson-3-1",
+    "blockIndex": 2,
+    "text": "La distinción entre símbolo simple y doble es fundamental. Un WN con solo una unidad y sin depth marker dispara solo si la fire card muestra su color con símbolo simple. Si aparece con símbolo doble, esa posición no dispara a menos que tenga tanto una unidad como un depth marker. Esta regla representa el nivel de dotación y despliegue de la posición.",
+    "spoken": "La distinción entre símbolo simple y doble es fundamental. Un uve doble ene con solo una unidad y sin depth marker dispara solo si la fire card muestra su color con símbolo simple. Si aparece con símbolo doble, esa posición no dispara a menos que tenga tanto una unidad como un depth marker. Esta regla representa el nivel de dotación y despliegue de la posición.",
+    "file": "b378f4e0d50e.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-3-1#3",
+    "lessonId": "lesson-3-1",
+    "blockIndex": 3,
+    "text": "§6.1 — Armor Hit Bonus: cuando el color de una posición en la fire card incluye el símbolo de armor bonus, las unidades blindadas de EE.UU. atacadas por esas posiciones son tratadas como no blindadas al determinar impactos (§6.36). En la German Fire Chart, unidades blindadas en hexes de fuego intenso son golpeadas incluso sin el armor bonus.",
+    "spoken": "sección 6.1. Armor Hit Bonus: cuando el color de una posición en la fire card incluye el símbolo de armor bonus, las unidades blindadas de Estados Unidos atacadas por esas posiciones son tratadas como no blindadas al determinar impactos (sección 6.36). En la German Fire Chart, unidades blindadas en hexes de fuego intenso son golpeadas incluso sin el armor bonus.",
+    "file": "507a1188f170.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-3-1#4",
+    "lessonId": "lesson-3-1",
+    "blockIndex": 4,
+    "text": "Campo de fuego (Field of Fire, §6.2): los hexes alrededor de cada posición alemana contienen \"fire dots\" del color de la posición. El conjunto de todos los fire dots de una posición forma su campo de fuego. Los WN tienen campos de fuego de hasta cinco hexes a lo largo de la playa; la mayoría de las posiciones de refuerzo tienen campos de uno o dos hexes en el terreno denso del interior.",
+    "spoken": "Campo de fuego (Field of Fire, sección 6.2): los hexes alrededor de cada posición alemana contienen \"fire dots\" del color de la posición. El conjunto de todos los fire dots de una posición forma su campo de fuego. Los uve doble ene tienen campos de fuego de hasta cinco hexes a lo largo de la playa; la mayoría de las posiciones de refuerzo tienen campos de uno o dos hexes en el terreno denso del interior.",
+    "file": "f00f92fb4825.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-3-1#5",
+    "lessonId": "lesson-3-1",
+    "blockIndex": 5,
+    "text": "§6.2 — Tres intensidades de fire dot:\n• Fuego Intenso (Intense): prioridad 1 — mayor riesgo para unidades de EE.UU.\n• Fuego Sostenido (Steady): prioridad 2.\n• Fuego Esporádico (Sporadic): prioridad 3 — menor riesgo.",
+    "spoken": "sección 6.2. Tres intensidades de fire dot:\n• Fuego Intenso (Intense): prioridad 1. mayor riesgo para unidades de Estados Unidos\n• Fuego Sostenido (Steady): prioridad 2.\n• Fuego Esporádico (Sporadic): prioridad 3. menor riesgo.",
+    "file": "80e8261c8a49.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-3-1#6",
+    "lessonId": "lesson-3-1",
+    "blockIndex": 6,
+    "text": "Reglas especiales de campo de fuego:\n• WN de dos hexes (§6.21): un WN como el WN62 ocupa dos hexes pero tiene un único campo de fuego, ya sea que uno o los dos hexes estén ocupados.\n• Fuego transfronterizo (§6.22): posiciones cerca del límite este/oeste pueden tener fire dots en el otro sector y disparar a esas unidades.\n• Campos adyacentes (§6.23): los campos de fuego del mismo color pueden ser contiguos pero nunca se superponen. Si hay duda sobre qué posición proyecta un fire dot en un hex, el punto aparece en el lado más cercano a la posición proyectante.",
+    "spoken": "Reglas especiales de campo de fuego:\n• uve doble ene de dos hexes (sección 6.21): un uve doble ene como el WN62 ocupa dos hexes pero tiene un único campo de fuego, ya sea que uno o los dos hexes estén ocupados.\n• Fuego transfronterizo (sección 6.22): posiciones cerca del límite este/oeste pueden tener fire dots en el otro sector y disparar a esas unidades.\n• Campos adyacentes (sección 6.23): los campos de fuego del mismo color pueden ser contiguos pero nunca se superponen. Si hay duda sobre qué posición proyecta un fire dot en un hex, el punto aparece en el lado más cercano a la posición proyectante.",
+    "file": "2a652c68af24.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-3-2#0",
+    "lessonId": "lesson-3-2",
+    "blockIndex": 0,
+    "text": "Tras extraer la fire card, resuelve el fuego de todas las posiciones que coincidan con los tres colores de la carta. Para cada posición que dispara, revisa cada hex de su campo de fuego que esté ocupado por unidades de EE.UU. y consulta la German Fire Chart.",
+    "spoken": "Tras extraer la fire card, resuelve el fuego de todas las posiciones que coincidan con los tres colores de la carta. Para cada posición que dispara, revisa cada hex de su campo de fuego que esté ocupado por unidades de Estados Unidos y consulta la German Fire Chart.",
+    "file": "ec2ae6971d59.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-3-2#1",
+    "lessonId": "lesson-3-2",
+    "blockIndex": 1,
+    "text": "§6.3 — Condiciones de disparo:\n• Una posición no disrupta ocupada por una unidad (con o sin depth marker) dispara si su color aparece como símbolo simple en la fire card.\n• Una posición no disrupta ocupada por una unidad y un depth marker dispara si su color aparece como símbolo doble.\n• En un WN de dos hexes: al menos una unidad en cualquiera de los dos hexes debe tener depth marker para que el símbolo doble active su fuego.",
+    "spoken": "sección 6.3. Condiciones de disparo:\n• Una posición no disrupta ocupada por una unidad (con o sin depth marker) dispara si su color aparece como símbolo simple en la fire card.\n• Una posición no disrupta ocupada por una unidad y un depth marker dispara si su color aparece como símbolo doble.\n• En un uve doble ene de dos hexes: al menos una unidad en cualquiera de los dos hexes debe tener depth marker para que el símbolo doble active su fuego.",
+    "file": "8e2286e359f9.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-3-2#3",
+    "lessonId": "lesson-3-2",
+    "blockIndex": 3,
+    "text": "§6.3 — Cómo leer la German Fire Chart: usa la fila correspondiente al tipo de fire dot en el hex (Intense, Steady o Sporadic). Lee en la columna correspondiente al tipo de posición que dispara: WN o refuerzo revelado, o refuerzo no revelado. El resultado del recuadro indica qué unidades de EE.UU. reciben impactos y de qué tipo (pérdida de escalón y/o disrupción).",
+    "spoken": "sección 6.3. Cómo leer la German Fire Chart: usa la fila correspondiente al tipo de fire dot en el hex (Intense, Steady o Sporadic). Lee en la columna correspondiente al tipo de posición que dispara: uve doble ene o refuerzo revelado, o refuerzo no revelado. El resultado del recuadro indica qué unidades de Estados Unidos reciben impactos y de qué tipo (pérdida de escalón y/o disrupción).",
+    "file": "85e022c41760.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-3-2#4",
+    "lessonId": "lesson-3-2",
+    "blockIndex": 4,
+    "text": "Límites de impactos (§6.31): en un turno, una posición alemana puede impactar un número de unidades de EE.UU. igual al número de unidades alemanas y depth markers en esa posición. Ejemplo: un WN con 2 unidades y 1 depth marker puede alcanzar hasta 3 unidades de EE.UU. Si hay más unidades elegibles que el límite, se elige en este orden de prioridad:\n• Prioridad 1: Unidades en hexes de fuego intenso.\n• Prioridad 2: Unidades en hexes de fuego sostenido.\n• Prioridad 3: Unidades en hexes de fuego esporádico.\nDentro de cada prioridad, elige primero la unidad más cercana a la posición que dispara; luego la que tiene más escalones. Si sigue habiendo empate, tú eliges.",
+    "spoken": "Límites de impactos (sección 6.31): en un turno, una posición alemana puede impactar un número de unidades de Estados Unidos igual al número de unidades alemanas y depth markers en esa posición. Ejemplo: un uve doble ene con 2 unidades y 1 depth marker puede alcanzar hasta 3 unidades de Estados Unidos Si hay más unidades elegibles que el límite, se elige en este orden de prioridad:\n• Prioridad 1: Unidades en hexes de fuego intenso.\n• Prioridad 2: Unidades en hexes de fuego sostenido.\n• Prioridad 3: Unidades en hexes de fuego esporádico.\nDentro de cada prioridad, elige primero la unidad más cercana a la posición que dispara; luego la que tiene más escalones. Si sigue habiendo empate, tú eliges.",
+    "file": "0b2a3ec3073f.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-3-2#5",
+    "lessonId": "lesson-3-2",
+    "blockIndex": 5,
+    "text": "Pérdida de escalón (§6.32): una unidad alcanzada por fuego puede perder un escalón según lo indicado en la chart. Gira la ficha al lado de fuerza reducida. Si la unidad vuelve a ser alcanzada, retírala del juego. Si tiene un solo escalón, retírala directamente.",
+    "spoken": "Pérdida de escalón (sección 6.32): una unidad alcanzada por fuego puede perder un escalón según lo indicado en la chart. Gira la ficha al lado de fuerza reducida. Si la unidad vuelve a ser alcanzada, retírala del juego. Si tiene un solo escalón, retírala directamente.",
+    "file": "53dad8ac45a7.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-3-2#6",
+    "lessonId": "lesson-3-2",
+    "blockIndex": 6,
+    "text": "Disrupción (§6.33): una unidad alcanzada puede quedar disrupta en lugar de, o además de, perder un escalón. Coloca un marcador de disrupción sobre la unidad. Una unidad ya disrupta que recibe otro resultado de disrupción no se ve más afectada. Una unidad puede ser disrupta por una posición y perder un escalón por otra en la misma fase de fuego.",
+    "spoken": "Disrupción (sección 6.33): una unidad alcanzada puede quedar disrupta en lugar de, o además de, perder un escalón. Coloca un marcador de disrupción sobre la unidad. Una unidad ya disrupta que recibe otro resultado de disrupción no se ve más afectada. Una unidad puede ser disrupta por una posición y perder un escalón por otra en la misma fase de fuego.",
+    "file": "9760beabe103.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-3-2#7",
+    "lessonId": "lesson-3-2",
+    "blockIndex": 7,
+    "text": "§6.34 — Limitación de pérdida de escalón: una unidad de EE.UU. no puede perder más de un escalón en una sola Fase de Fuego Alemán, aunque sea impactada por múltiples posiciones. Los impactos en exceso deben asignarse a otras unidades si están disponibles.",
+    "spoken": "sección 6.34. Limitación de pérdida de escalón: una unidad de Estados Unidos no puede perder más de un escalón en una sola Fase de Fuego Alemán, aunque sea impactada por múltiples posiciones. Los impactos en exceso deben asignarse a otras unidades si están disponibles.",
+    "file": "d1efe8bef119.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-3-2#8",
+    "lessonId": "lesson-3-2",
+    "blockIndex": 8,
+    "text": "§6.35 — Objetivo concentrado: si un hex tiene unidades con 5 o más escalones totales en total, todas las unidades allí se consideran con el target symbol de la fire card, independientemente de sus símbolos reales.",
+    "spoken": "sección 6.35. Objetivo concentrado: si un hex tiene unidades con 5 o más escalones totales en total, todas las unidades allí se consideran con el target symbol de la fire card, independientemente de sus símbolos reales.",
+    "file": "ef744de72608.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-3-2#9",
+    "lessonId": "lesson-3-2",
+    "blockIndex": 9,
+    "text": "Los impactos son contra unidades individuales, no contra apilamientos (stacks, §6.37). Dos unidades en el mismo hex pueden recibir resultados distintos: una pierde un escalón y la otra no es impactada en absoluto. Si ambas son impactadas, ambas pueden perder un escalón.",
+    "spoken": "Los impactos son contra unidades individuales, no contra apilamientos (stacks, sección 6.37). Dos unidades en el mismo hex pueden recibir resultados distintos: una pierde un escalón y la otra no es impactada en absoluto. Si ambas son impactadas, ambas pueden perder un escalón.",
+    "file": "7dc68a72b607.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-3-3#0",
+    "lessonId": "lesson-3-3",
+    "blockIndex": 0,
+    "text": "Una unidad alemana con marcador de disrupción no dispara y no proyecta campo de fuego (§6.4). La disrupción se elimina cuando el color de esa posición aparece en la siguiente fire card extraída para su sector. Tras resolver todo el fuego en la Fase de Fuego Alemán, retira los marcadores de disrupción de cada posición alemana cuyo color aparezca en la fire card (ya sea con símbolo simple o doble, independientemente de si tiene depth marker).",
+    "spoken": "Una unidad alemana con marcador de disrupción no dispara y no proyecta campo de fuego (sección 6.4). La disrupción se elimina cuando el color de esa posición aparece en la siguiente fire card extraída para su sector. Tras resolver todo el fuego en la Fase de Fuego Alemán, retira los marcadores de disrupción de cada posición alemana cuyo color aparezca en la fire card (ya sea con símbolo simple o doble, independientemente de si tiene depth marker).",
+    "file": "939b54f146a0.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-3-3#1",
+    "lessonId": "lesson-3-3",
+    "blockIndex": 1,
+    "text": "§6.41 — WN de dos hexes con disrupción parcial: si un WN de dos hexes tiene unidades en ambos hexes y una de ellas está disrupta, el hex no disrupto sigue teniendo campo de fuego y puede disparar. Sin embargo, la unidad disrupta y su depth marker no se cuentan para determinar si la posición es elegible para disparar ni cuántas unidades puede impactar.",
+    "spoken": "sección 6.41. uve doble ene de dos hexes con disrupción parcial: si un uve doble ene de dos hexes tiene unidades en ambos hexes y una de ellas está disrupta, el hex no disrupto sigue teniendo campo de fuego y puede disparar. Sin embargo, la unidad disrupta y su depth marker no se cuentan para determinar si la posición es elegible para disparar ni cuántas unidades puede impactar.",
+    "file": "358c9ab2aa27.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-3-3#2",
+    "lessonId": "lesson-3-3",
+    "blockIndex": 2,
+    "text": "Fuego de artillería alemana (§6.5, a partir del turno 4): si la fire card muestra un valor de artillería, primero resuelve todo el fuego de posiciones alemanas del sector, luego comprueba si el fuego de artillería alcanza a una unidad de EE.UU. El valor de la izquierda del resultado de artillería es el valor de artillería. Cuenta las unidades de artillería no disruptas en el sector (en posiciones WN y en la Caja de Artillería del Sector) con los calibres indicados en la carta.",
+    "spoken": "Fuego de artillería alemana (sección 6.5, a partir del turno 4): si la fire card muestra un valor de artillería, primero resuelve todo el fuego de posiciones alemanas del sector, luego comprueba si el fuego de artillería alcanza a una unidad de Estados Unidos El valor de la izquierda del resultado de artillería es el valor de artillería. Cuenta las unidades de artillería no disruptas en el sector (en posiciones uve doble ene y en la Caja de Artillería del Sector) con los calibres indicados en la carta.",
+    "file": "4a406556b5eb.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-3-3#3",
+    "lessonId": "lesson-3-3",
+    "blockIndex": 3,
+    "text": "§6.5 — Si el número de unidades de artillería alemana no disruptas con los calibres listados es IGUAL O MAYOR que el valor de artillería, una unidad de EE.UU. con el target symbol de la carta pierde un escalón. Orden de prioridad:\n1. Infantería de tu elección en una Beach Landing Box.\n2. Unidad no de infantería en un hex de playa.\n3. Unidad no de infantería en una Beach Landing Box.\n4. Infantería en un hex de playa.\nSelecciona la unidad con más escalones dentro de cada prioridad.",
+    "spoken": "sección 6.5. Si el número de unidades de artillería alemana no disruptas con los calibres listados es IGUAL O MAYOR que el valor de artillería, una unidad de Estados Unidos con el target symbol de la carta pierde un escalón. Orden de prioridad:\n1. Infantería de tu elección en una Beach Landing Box.\n2. Unidad no de infantería en un hex de playa.\n3. Unidad no de infantería en una Beach Landing Box.\n4. Infantería en un hex de playa.\nSelecciona la unidad con más escalones dentro de cada prioridad.",
+    "file": "becb728f7ec3.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-3-3#4",
+    "lessonId": "lesson-3-3",
+    "blockIndex": 4,
+    "text": "Eliminar artillería alemana (§6.51): cuando eliminas una unidad WN con artillería, deja de contribuir al fuego de artillería. Las unidades de artillería en las Cajas de Artillería del Sector no pueden eliminarse directamente, pero se inactivan si controlas todas las posiciones que sirven como observadores de esa unidad de artillería. Si cualquiera de esas posiciones vuelve a ser ocupada por unidades alemanas o recupera comunicación alemana, la unidad de artillería se reactiva.",
+    "spoken": "Eliminar artillería alemana (sección 6.51): cuando eliminas una unidad uve doble ene con artillería, deja de contribuir al fuego de artillería. Las unidades de artillería en las Cajas de Artillería del Sector no pueden eliminarse directamente, pero se inactivan si controlas todas las posiciones que sirven como observadores de esa unidad de artillería. Si cualquiera de esas posiciones vuelve a ser ocupada por unidades alemanas o recupera comunicación alemana, la unidad de artillería se reactiva.",
+    "file": "579c6e8bafc8.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-3-3#5",
+    "lessonId": "lesson-3-3",
+    "blockIndex": 5,
+    "text": "§6.53 — La batería de artillería de cohetes en WN69 no contribuye al fuego de artillería alemana (verifica las reglas de artillería de cohetes; WN69 es la excepción explícita).",
+    "spoken": "sección 6.53. La batería de artillería de cohetes en WN69 no contribuye al fuego de artillería alemana (verifica las reglas de artillería de cohetes; WN69 es la excepción explícita).",
+    "file": "3267106b7546.mp3",
+    "voice": "em_alex"
+  },
+  {
     "key": "lesson-4-1#0",
     "lessonId": "lesson-4-1",
     "blockIndex": 0,
@@ -240,6 +690,726 @@
     "text": "El \"target symbol\" en la fire card aumenta la probabilidad de impacto, pero no la determina en exclusiva. Cualquier unidad en un hex con fire dot puede ser alcanzada; el símbolo de objetivo simplemente ajusta las probabilidades según la German Fire Chart. Esta mecánica refleja que el fuego alemán era indiscriminado pero más letal contra ciertos tipos de formaciones.",
     "spoken": "El \"target symbol\" en la fire card aumenta la probabilidad de impacto, pero no la determina en exclusiva. Cualquier unidad en un hex con fire dot puede ser alcanzada; el símbolo de objetivo simplemente ajusta las probabilidades según la German Fire Chart. Esta mecánica refleja que el fuego alemán era indiscriminado pero más letal contra ciertos tipos de formaciones.",
     "file": "592a08c1c5a2.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-1#0",
+    "lessonId": "lesson-5-1",
+    "blockIndex": 0,
+    "text": "Durante la Fase de Acción de EE.UU. puedes activar unidades de cada división para realizar acciones: movimiento, escalada, eliminación de disrupción, ataque, barrage y barrage naval. Cada turno tienes una asignación de dos acciones por división.",
+    "spoken": "Durante la Fase de Acción de Estados Unidos puedes activar unidades de cada división para realizar acciones: movimiento, escalada, eliminación de disrupción, ataque, barrage y barrage naval. Cada turno tienes una asignación de dos acciones por división.",
+    "file": "cbee49edc1ba.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-1#1",
+    "lessonId": "lesson-5-1",
+    "blockIndex": 1,
+    "text": "§7 — Acciones disponibles para unidades de EE.UU.:\n• Mover un hex (todas las unidades)\n• Escalar un Bluff (solo infantería, HQ y Generales)\n• Escalar un Cliff (solo infantería)\n• Eliminar disrupción (cualquier unidad con marcador de disrupción)\n• Atacar (todas las unidades)\n• Barrage (solo unidades de tanques)\n• Barrage de artillería naval (solo marcador de fuego naval)",
+    "spoken": "sección 7. Acciones disponibles para unidades de Estados Unidos:\n• Mover un hex (todas las unidades)\n• Escalar un Bluff (solo infantería, cuartel general y Generales)\n• Escalar un Cliff (solo infantería)\n• Eliminar disrupción (cualquier unidad con marcador de disrupción)\n• Atacar (todas las unidades)\n• Barrage (solo unidades de tanques)\n• Barrage de artillería naval (solo marcador de fuego naval)",
+    "file": "4601380b73b0.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-1#2",
+    "lessonId": "lesson-5-1",
+    "blockIndex": 2,
+    "text": "Acciones gratuitas (§7.1): ciertas unidades realizan acciones sin consumir la asignación de dos. Una unidad solo puede realizar UNA acción por turno, ya sea gratuita o no. Las siguientes situaciones dan derecho a acción gratuita:\n• Unidades de infantería ranger (siempre actúan de forma gratuita).\n• Unidades con marcador de Héroe o de Inspirado.\n• Unidades con marcador de climb, climb cliff o disrupción.\n• Cuarteles Generales (HQ) y Generales.\n• Una unidad bajo el mando de un HQ o General al inicio de la Fase de Acción.\n• Una unidad de infantería en un hex de playa realizando un movimiento de autopreservación (moviéndose hacia un hexside protector más cercano).",
+    "spoken": "Acciones gratuitas (sección 7.1): ciertas unidades realizan acciones sin consumir la asignación de dos. Una unidad solo puede realizar UNA acción por turno, ya sea gratuita o no. Las siguientes situaciones dan derecho a acción gratuita:\n• Unidades de infantería ranger (siempre actúan de forma gratuita).\n• Unidades con marcador de Héroe o de Inspirado.\n• Unidades con marcador de climb, climb cliff o disrupción.\n• Cuarteles Generales (cuartel general) y Generales.\n• Una unidad bajo el mando de un cuartel general o General al inicio de la Fase de Acción.\n• Una unidad de infantería en un hex de playa realizando un movimiento de autopreservación (moviéndose hacia un hexside protector más cercano).",
+    "file": "1a7f7174c46b.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-1#3",
+    "lessonId": "lesson-5-1",
+    "blockIndex": 3,
+    "text": "§7.1 — Movimiento de autopreservación: una unidad de infantería en un hex de playa puede moverse de forma gratuita a un hex de playa adyacente que esté más cerca de un hexside protector. Los hexsides protectores son: shingle, seawall, slope, bluff y scaleable cliff. Los acantilados verticales (sheer cliffs) NO son protectores. Si el hex de destino no es un hex de playa, o está a la misma distancia o más lejos de un hexside protector, el movimiento no califica como autopreservación.",
+    "spoken": "sección 7.1. Movimiento de autopreservación: una unidad de infantería en un hex de playa puede moverse de forma gratuita a un hex de playa adyacente que esté más cerca de un hexside protector. Los hexsides protectores son: shingle, seawall, slope, bluff y scaleable cliff. Los acantilados verticales (sheer cliffs) NO son protectores. Si el hex de destino no es un hex de playa, o está a la misma distancia o más lejos de un hexside protector, el movimiento no califica como autopreservación.",
+    "file": "2616e9a5b543.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-1#4",
+    "lessonId": "lesson-5-1",
+    "blockIndex": 4,
+    "text": "Secuenciación de acciones (§7.2): puedes realizar las acciones en cualquier orden, mezclando acciones normales y gratuitas. Debes completar todas las acciones de una división antes de comenzar con la otra. Una unidad puede realizar como máximo una acción por turno, incluso si esa acción es gratuita.",
+    "spoken": "Secuenciación de acciones (sección 7.2): puedes realizar las acciones en cualquier orden, mezclando acciones normales y gratuitas. Debes completar todas las acciones de una división antes de comenzar con la otra. Una unidad puede realizar como máximo una acción por turno, incluso si esa acción es gratuita.",
+    "file": "7715e65a4c73.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-1#5",
+    "lessonId": "lesson-5-1",
+    "blockIndex": 5,
+    "text": "§7.21 — Acción de apilar (stack): dos unidades en la misma casilla pueden realizar una acción conjunta al coste de una sola acción, SIEMPRE QUE realicen EXACTAMENTE la misma acción (por ejemplo, moverse al mismo hex o atacar la misma posición alemana). Si quieres que realicen acciones distintas o se muevan en direcciones distintas, necesitas dos acciones.\n\n§7.22 — Unidades transfronterizas: una unidad que cruce el límite de sector puede contar como parte de cualquiera de las dos divisiones al realizar acciones, gastando la asignación de la división que prefieras.",
+    "spoken": "sección 7.21. Acción de apilar (stack): dos unidades en la misma casilla pueden realizar una acción conjunta al coste de una sola acción, SIEMPRE QUE realicen EXACTAMENTE la misma acción (por ejemplo, moverse al mismo hex o atacar la misma posición alemana). Si quieres que realicen acciones distintas o se muevan en direcciones distintas, necesitas dos acciones.\n\nsección 7.22. Unidades transfronterizas: una unidad que cruce el límite de sector puede contar como parte de cualquiera de las dos divisiones al realizar acciones, gastando la asignación de la división que prefieras.",
+    "file": "217c024808fa.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-2#0",
+    "lessonId": "lesson-5-2",
+    "blockIndex": 0,
+    "text": "La acción de movimiento básica (§7.3) permite mover cualquier tipo de unidad un hex en cualquier dirección. La Terrain Effects Chart lista el terreno que restringe o prohíbe el movimiento para ciertos tipos de unidad. En la práctica, los blindados, antiaéreos y artillería quedan atrapados en la playa hasta el turno 16; solo la infantería, los HQ y los Generales tienen libertad de movimiento amplia.",
+    "spoken": "La acción de movimiento básica (sección 7.3) permite mover cualquier tipo de unidad un hex en cualquier dirección. La Terrain Effects Chart lista el terreno que restringe o prohíbe el movimiento para ciertos tipos de unidad. En la práctica, los blindados, antiaéreos y artillería quedan atrapados en la playa hasta el turno 16; solo la infantería, los cuartel general y los Generales tienen libertad de movimiento amplia.",
+    "file": "b6c2c7d87277.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-2#1",
+    "lessonId": "lesson-5-2",
+    "blockIndex": 1,
+    "text": "§7.31 — No puedes mover una unidad de EE.UU. a un hex ocupado por una unidad alemana. Sin embargo, una unidad de EE.UU. puede entrar a una posición alemana VACÍA.",
+    "spoken": "sección 7.31. No puedes mover una unidad de Estados Unidos a un hex ocupado por una unidad alemana. Sin embargo, una unidad de Estados Unidos puede entrar a una posición alemana VACÍA.",
+    "file": "3a0035930a93.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-2#2",
+    "lessonId": "lesson-5-2",
+    "blockIndex": 2,
+    "text": "Movimiento de infiltración (§7.32): si una unidad de EE.UU. se mueve DESDE un hex adyacente a una posición alemana ocupada y no disrupta en cuyo campo de fuego esté, HACIA otro hex que también esté adyacente al mismo campo de fuego de esa misma posición, la unidad intenta infiltrarse. Se realiza un tiro especial de fire card: si muestra el color de la posición alemana Y el target symbol de la unidad que se infiltra, esa unidad pierde un escalón. Si la posición alemana no tiene depth marker, el símbolo del color debe ser simple para activar el fuego.",
+    "spoken": "Movimiento de infiltración (sección 7.32): si una unidad de Estados Unidos se mueve DESDE un hex adyacente a una posición alemana ocupada y no disrupta en cuyo campo de fuego esté, HACIA otro hex que también esté adyacente al mismo campo de fuego de esa misma posición, la unidad intenta infiltrarse. Se realiza un tiro especial de fire card: si muestra el color de la posición alemana Y el target symbol de la unidad que se infiltra, esa unidad pierde un escalón. Si la posición alemana no tiene depth marker, el símbolo del color debe ser simple para activar el fuego.",
+    "file": "9709fc6acaaa.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-2#3",
+    "lessonId": "lesson-5-2",
+    "blockIndex": 3,
+    "text": "§7.32 — Consecuencias de la infiltración:\n• Si la unidad pierde un escalón, puedes elegir completar el movimiento o mantenerla en el hex de partida. En cualquier caso, la unidad ha realizado una acción.\n• Una unidad que se infiltra a un hex con otra unidad de EE.UU. verifica fuego alemán, pero no se considera \"objetivo concentrado\" aunque supere los 5 escalones en el hex.\n• HQ y Generales no pueden intentar un movimiento de infiltración solos, pero pueden moverse con una unidad regular que sí lo haga.\n• Si se infiltra pasando junto a dos posiciones alemanas, se extrae una sola carta. Si el target symbol y el color de alguna de las dos posiciones aparecen, la unidad pierde un escalón. No hay penalización adicional si ambos colores aparecen.",
+    "spoken": "sección 7.32. Consecuencias de la infiltración:\n• Si la unidad pierde un escalón, puedes elegir completar el movimiento o mantenerla en el hex de partida. En cualquier caso, la unidad ha realizado una acción.\n• Una unidad que se infiltra a un hex con otra unidad de Estados Unidos verifica fuego alemán, pero no se considera \"objetivo concentrado\" aunque supere los 5 escalones en el hex.\n• cuartel general y Generales no pueden intentar un movimiento de infiltración solos, pero pueden moverse con una unidad regular que sí lo haga.\n• Si se infiltra pasando junto a dos posiciones alemanas, se extrae una sola carta. Si el target symbol y el color de alguna de las dos posiciones aparecen, la unidad pierde un escalón. No hay penalización adicional si ambos colores aparecen.",
+    "file": "eba503ba0f44.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-2#4",
+    "lessonId": "lesson-5-2",
+    "blockIndex": 4,
+    "text": "§7.33 — Una vez que mueves un HQ o General, deja de proporcionar acciones gratuitas a las unidades bajo su mando durante el resto de la Fase de Acción. Planifica la secuencia de activación con cuidado.",
+    "spoken": "sección 7.33. Una vez que mueves un cuartel general o General, deja de proporcionar acciones gratuitas a las unidades bajo su mando durante el resto de la Fase de Acción. Planifica la secuencia de activación con cuidado.",
+    "file": "5e1f533e2543.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-2#5",
+    "lessonId": "lesson-5-2",
+    "blockIndex": 5,
+    "text": "Escalar un Bluff (§7.4): solo infantería (incluida ranger), HQ y Generales pueden cruzar un hexside de bluff. Requiere dos acciones en dos turnos. En el primer turno, mueve la unidad al hex del otro lado y coloca un marcador Climb. En el segundo turno, realiza una acción gratuita para retirar el marcador. Si la unidad comienza la Fase de Acción con el marcador Climb, SOLO puede realizar esa acción gratuita de retirarlo. Si además está disrupta, puede optar por retirar la disrupción.",
+    "spoken": "Escalar un Bluff (sección 7.4): solo infantería (incluida ranger), cuartel general y Generales pueden cruzar un hexside de bluff. Requiere dos acciones en dos turnos. En el primer turno, mueve la unidad al hex del otro lado y coloca un marcador Climb. En el segundo turno, realiza una acción gratuita para retirar el marcador. Si la unidad comienza la Fase de Acción con el marcador Climb, SOLO puede realizar esa acción gratuita de retirarlo. Si además está disrupta, puede optar por retirar la disrupción.",
+    "file": "1693b9e5a1b2.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-2#6",
+    "lessonId": "lesson-5-2",
+    "blockIndex": 6,
+    "text": "§7.41 — HQ y Generales cruzan un bluff en un solo turno. No se les coloca marcador Climb.",
+    "spoken": "sección 7.41. cuartel general y Generales cruzan un bluff en un solo turno. No se les coloca marcador Climb.",
+    "file": "c5623152787b.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-2#7",
+    "lessonId": "lesson-5-2",
+    "blockIndex": 7,
+    "text": "Escalar un Cliff (§7.5): solo infantería (incluida ranger) puede cruzar un hexside de cliff escalable. Requiere tres acciones en tres turnos. Turno 1: acción para colocar el marcador Climb Cliff (la unidad no se mueve). Turno 2: acción gratuita para mover la unidad al hex al otro lado del cliff y voltear el marcador al lado \"Climb\". Turno 3: acción gratuita para retirar el marcador.",
+    "spoken": "Escalar un Cliff (sección 7.5): solo infantería (incluida ranger) puede cruzar un hexside de cliff escalable. Requiere tres acciones en tres turnos. Turno 1: acción para colocar el marcador Climb Cliff (la unidad no se mueve). Turno 2: acción gratuita para mover la unidad al hex al otro lado del cliff y voltear el marcador al lado \"Climb\". Turno 3: acción gratuita para retirar el marcador.",
+    "file": "58be87e27272.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-2#8",
+    "lessonId": "lesson-5-2",
+    "blockIndex": 8,
+    "text": "Límites de apilamiento (§7.6): al FINAL de la Fase de Acción, un hex puede contener como máximo dos unidades de EE.UU. Este límite no aplica durante la propia fase ni en otras fases del turno. HQ, Generales y Héroes no cuentan para el límite. Si al final de la fase hay violaciones del apilamiento, debes eliminar unidades hasta cumplir el límite (§7.63). Recuerda también: 5 o más escalones en un hex crean un \"objetivo concentrado\" para el fuego alemán (§6.35).",
+    "spoken": "Límites de apilamiento (sección 7.6): al FINAL de la Fase de Acción, un hex puede contener como máximo dos unidades de Estados Unidos Este límite no aplica durante la propia fase ni en otras fases del turno. cuartel general, Generales y Héroes no cuentan para el límite. Si al final de la fase hay violaciones del apilamiento, debes eliminar unidades hasta cumplir el límite (sección 7.63). Recuerda también: 5 o más escalones en un hex crean un \"objetivo concentrado\" para el fuego alemán (sección 6.35).",
+    "file": "137e07613abf.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-2#9",
+    "lessonId": "lesson-5-2",
+    "blockIndex": 9,
+    "text": "§7.7 — Unidades de EE.UU. disruptas: una unidad con marcador de disrupción solo puede realizar la acción \"gratuita\" de retirar ese marcador. No puede realizar ninguna otra acción. Es conveniente esperar al final de la fase para retirar marcadores de disrupción, para no activar accidentalmente otras unidades. Si una unidad queda disrupta DURANTE la Fase de Acción (p.ej., tras un ataque fallido), ese marcador NO puede retirarse en la misma fase. El juego incluye marcadores de disrupción en dos tonos para distinguir los previos a la fase de los generados durante ella.",
+    "spoken": "sección 7.7. Unidades de Estados Unidos disruptas: una unidad con marcador de disrupción solo puede realizar la acción \"gratuita\" de retirar ese marcador. No puede realizar ninguna otra acción. Es conveniente esperar al final de la fase para retirar marcadores de disrupción, para no activar accidentalmente otras unidades. Si una unidad queda disrupta DURANTE la Fase de Acción (p.ej., tras un ataque fallido), ese marcador NO puede retirarse en la misma fase. El juego incluye marcadores de disrupción en dos tonos para distinguir los previos a la fase de los generados durante ella.",
+    "file": "e40c09bc2f0b.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-3#0",
+    "lessonId": "lesson-5-3",
+    "blockIndex": 0,
+    "text": "Un ataque (§8.1) requiere al menos una unidad de infantería (o ranger) adyacente al hex alemán objetivo. Una vez cumplida esa condición, otras unidades pueden unirse al ataque desde hexes adyacentes o, si tienen capacidad de fuego a distancia, desde hexes no adyacentes dentro de su rango.",
+    "spoken": "Un ataque (sección 8.1) requiere al menos una unidad de infantería (o ranger) adyacente al hex alemán objetivo. Una vez cumplida esa condición, otras unidades pueden unirse al ataque desde hexes adyacentes o, si tienen capacidad de fuego a distancia, desde hexes no adyacentes dentro de su rango.",
+    "file": "b93ad8bdfd7f.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-3#1",
+    "lessonId": "lesson-5-3",
+    "blockIndex": 1,
+    "text": "§8.1 — Condiciones de elegibilidad por tipo de unidad:\n• Infantería: debe estar en un hex adyacente al objetivo.\n• Infantería pesada (rango 2): adyacente o a un hex de distancia.\n• Tanques, antitanques, antiaéreos: dentro del rango Y al menos una de las siguientes: adyacente al objetivo, adyacente a una infantería atacante, bajo mando de un HQ o General, o al menos una infantería atacante está bajo mando de HQ o General.\n• Artillería: en rango pero NO adyacente al objetivo; bajo mando de un HQ que también comanda al menos una infantería atacante; y si no es blindada, no puede estar en el campo de fuego de ningún WN no disrupto.\n• Fuego naval: se puede incluir expending un marcador naval si al menos una infantería atacante tiene radio o está bajo mando de un HQ.",
+    "spoken": "sección 8.1. Condiciones de elegibilidad por tipo de unidad:\n• Infantería: debe estar en un hex adyacente al objetivo.\n• Infantería pesada (rango 2): adyacente o a un hex de distancia.\n• Tanques, antitanques, antiaéreos: dentro del rango Y al menos una de las siguientes: adyacente al objetivo, adyacente a una infantería atacante, bajo mando de un cuartel general o General, o al menos una infantería atacante está bajo mando de cuartel general o General.\n• Artillería: en rango pero NO adyacente al objetivo; bajo mando de un cuartel general que también comanda al menos una infantería atacante; y si no es blindada, no puede estar en el campo de fuego de ningún uve doble ene no disrupto.\n• Fuego naval: se puede incluir expending un marcador naval si al menos una infantería atacante tiene radio o está bajo mando de un cuartel general.",
+    "file": "da9df6c2d37d.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-3#2",
+    "lessonId": "lesson-5-3",
+    "blockIndex": 2,
+    "text": "Restricción de fuego a distancia desde terreno bajo (§8.12): una unidad en un hex de playa o de pabellón/draw NO puede hacer fuego a distancia contra una posición alemana en terreno alto, A MENOS QUE esa posición proyecte campo de fuego al menos a un hex de playa (es decir, la posición está en el acantilado con vistas a la playa). Esta restricción aplica tanto a ataques como a barrages. El fuego naval está exento de esta restricción.",
+    "spoken": "Restricción de fuego a distancia desde terreno bajo (sección 8.12): una unidad en un hex de playa o de pabellón/draw NO puede hacer fuego a distancia contra una posición alemana en terreno alto, A MENOS QUE esa posición proyecte campo de fuego al menos a un hex de playa (es decir, la posición está en el acantilado con vistas a la playa). Esta restricción aplica tanto a ataques como a barrages. El fuego naval está exento de esta restricción.",
+    "file": "341f4df73e28.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-3#3",
+    "lessonId": "lesson-5-3",
+    "blockIndex": 3,
+    "text": "§8.13 — Cada unidad que participa en un ataque debe gastar una acción para participar. Una unidad que no pueda realizar acciones no puede atacar.\n§8.14 — Los HQ y Generales no participan directamente en un ataque y no son afectados por sus resultados.\n§8.16 — Una posición alemana solo puede ser atacada una vez en cada Fase de Acción de EE.UU.",
+    "spoken": "sección 8.13. Cada unidad que participa en un ataque debe gastar una acción para participar. Una unidad que no pueda realizar acciones no puede atacar.\nsección 8.14. Los cuartel general y Generales no participan directamente en un ataque y no son afectados por sus resultados.\nsección 8.16. Una posición alemana solo puede ser atacada una vez en cada Fase de Acción de Estados Unidos",
+    "file": "32e9db50d039.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-3#4",
+    "lessonId": "lesson-5-3",
+    "blockIndex": 4,
+    "text": "Armas (§8.2): cada unidad de EE.UU. posee una o más armas según la US Weapons Chart. Cada unidad alemana y cada depth marker lista los requisitos de armas necesarios para ser derrotados de la forma más efectiva. Si los atacantes cumplen los requisitos, el ataque se resuelve con la sección inferior (más favorable) de la US Attack Table; si no los cumplen, se usa la sección superior.",
+    "spoken": "Armas (sección 8.2): cada unidad de Estados Unidos posee una o más armas según la US Weapons Chart. Cada unidad alemana y cada depth marker lista los requisitos de armas necesarios para ser derrotados de la forma más efectiva. Si los atacantes cumplen los requisitos, el ataque se resuelve con la sección inferior (más favorable) de la US Attack Table; si no los cumplen, se usa la sección superior.",
+    "file": "21acdfee8d5f.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-3#5",
+    "lessonId": "lesson-5-3",
+    "blockIndex": 5,
+    "text": "§8.22 — Flanqueo (FL): algunos alemanes requieren FL como condición de arma. Para cumplirlo, las unidades de EE.UU. deben atacar desde al menos DOS hexes adyacentes al objetivo pero NO adyacentes entre sí. Si el unit Y su depth marker requieren FL, se necesitan tres hexes de ataque (que pueden ser adyacentes entre sí).\n\n§8.23 — Héroe comodín: un Héroe con la unidad atacante desde un hex adyacente actúa como comodín de arma: puede sustituir UN requisito de arma (no el de flanqueo). Alternativa: el Héroe puede aumentar tu fuerza de ataque en 1. Este beneficio no es acumulable; si participan varios héroes, solo cuenta uno.",
+    "spoken": "sección 8.22. Flanqueo (FL): algunos alemanes requieren FL como condición de arma. Para cumplirlo, las unidades de Estados Unidos deben atacar desde al menos DOS hexes adyacentes al objetivo pero NO adyacentes entre sí. Si el unit Y su depth marker requieren FL, se necesitan tres hexes de ataque (que pueden ser adyacentes entre sí).\n\nsección 8.23. Héroe comodín: un Héroe con la unidad atacante desde un hex adyacente actúa como comodín de arma: puede sustituir UN requisito de arma (no el de flanqueo). Alternativa: el Héroe puede aumentar tu fuerza de ataque en 1. Este beneficio no es acumulable; si participan varios héroes, solo cuenta uno.",
+    "file": "06d4f72dba7c.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-3#6",
+    "lessonId": "lesson-5-3",
+    "blockIndex": 6,
+    "text": "Procedimiento de resolución del ataque (§8.3): primero revela la unidad alemana si aún no está revelada (el depth marker permanece sin revelar por ahora). Compara la fuerza total de tus unidades atacantes con la fuerza total de las unidades y marcadores alemanes revelados en el hex (la fuerza alemana puede estar aumentada por el terreno). Verifica si tienes todos los requisitos de armas. Consulta la US Attack Table — si tienes las armas, usa la sección inferior; si no, la superior. Localiza la fila por comparación numérica de fuerzas y la columna por la situación alemana (unidad sola, con depth marker no revelado, o con depth marker revelado). El resultado puede afectar tanto al defensor como a las unidades atacantes.",
+    "spoken": "Procedimiento de resolución del ataque (sección 8.3): primero revela la unidad alemana si aún no está revelada (el depth marker permanece sin revelar por ahora). Compara la fuerza total de tus unidades atacantes con la fuerza total de las unidades y marcadores alemanes revelados en el hex (la fuerza alemana puede estar aumentada por el terreno). Verifica si tienes todos los requisitos de armas. Consulta la US Attack Table. si tienes las armas, usa la sección inferior; si no, la superior. Localiza la fila por comparación numérica de fuerzas y la columna por la situación alemana (unidad sola, con depth marker no revelado, o con depth marker revelado). El resultado puede afectar tanto al defensor como a las unidades atacantes.",
+    "file": "9d400ab5913d.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-3#8",
+    "lessonId": "lesson-5-3",
+    "blockIndex": 8,
+    "text": "§8.3 — Nota sobre la tabla: los resultados van desde \"Alemán disrupto y atricción opcional\" hasta \"Alemán derrotado\". El resultado puede obligarte a revelar el depth marker y recalcular. La \"atricción opcional\" permite eliminar el depth marker alemán a cambio de perder un escalón de EE.UU. — es una decisión táctica, no un resultado automático.",
+    "spoken": "sección 8.3. Nota sobre la tabla: los resultados van desde \"Alemán disrupto y atricción opcional\" hasta \"Alemán derrotado\". El resultado puede obligarte a revelar el depth marker y recalcular. La \"atricción opcional\" permite eliminar el depth marker alemán a cambio de perder un escalón de Estados Unidos. es una decisión táctica, no un resultado automático.",
+    "file": "7e29e4f005d1.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-3#9",
+    "lessonId": "lesson-5-3",
+    "blockIndex": 9,
+    "text": "Reglas adicionales de combate:\n§8.31 — Un ataque de varias unidades se resuelve como un único ataque. Suma todas las fuerzas. Si se ataca a través de varios hexsides, usa el hexside más desfavorable para el defensor.\n§8.32 — En un WN de dos hexes, solo se ataca un hex por vez. Las unidades en el otro hex no ayudan ni son afectadas.\n§8.33 — Retirada alemana: una unidad de refuerzo de la 352.ª División que es derrotada puede retirarse en lugar de ser eliminada, si puede trazar comunicación alemana en el momento del ataque. WN, unidades de la 716.ª y unidades sin comunicación NO pueden retirarse.\n§8.34 — No existe \"avance tras el combate\": no muevas tus unidades atacantes al hex alemán vacío.",
+    "spoken": "Reglas adicionales de combate:\nsección 8.31. Un ataque de varias unidades se resuelve como un único ataque. Suma todas las fuerzas. Si se ataca a través de varios hexsides, usa el hexside más desfavorable para el defensor.\nsección 8.32. En un uve doble ene de dos hexes, solo se ataca un hex por vez. Las unidades en el otro hex no ayudan ni son afectadas.\nsección 8.33. Retirada alemana: una unidad de refuerzo de la 352.ª División que es derrotada puede retirarse en lugar de ser eliminada, si puede trazar comunicación alemana en el momento del ataque. uve doble ene, unidades de la 716.ª y unidades sin comunicación NO pueden retirarse.\nsección 8.34. No existe \"avance tras el combate\": no muevas tus unidades atacantes al hex alemán vacío.",
+    "file": "824d7378dfa3.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-4#0",
+    "lessonId": "lesson-5-4",
+    "blockIndex": 0,
+    "text": "Barrage (§8.4): una unidad de tanque puede realizar una acción de barrage contra un hex alemán ocupado, siempre que el tanque esté en rango pero NO adyacente al objetivo y se cumpla al menos una de estas condiciones: el propio tanque ocupa un hex en el campo de fuego del objetivo, o una unidad de infantería no disrupta ocupa un hex en ese campo de fuego (actuando como observador). Si el tanque usa observador, uno de los dos (tanque u observador) debe estar bajo mando de un HQ o General.",
+    "spoken": "Barrage (sección 8.4): una unidad de tanque puede realizar una acción de barrage contra un hex alemán ocupado, siempre que el tanque esté en rango pero NO adyacente al objetivo y se cumpla al menos una de estas condiciones: el propio tanque ocupa un hex en el campo de fuego del objetivo, o una unidad de infantería no disrupta ocupa un hex en ese campo de fuego (actuando como observador). Si el tanque usa observador, uno de los dos (tanque u observador) debe estar bajo mando de un cuartel general o General.",
+    "file": "069db78fd72c.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-4#1",
+    "lessonId": "lesson-5-4",
+    "blockIndex": 1,
+    "text": "§8.4 — Procedimiento de barrage: extrae una fire card y consulta la US Barrage Table para determinar el efecto sobre la posición alemana. Si la fire card no muestra el color de la posición alemana o el target symbol de la unidad barrajeante, el barrage no tiene ningún efecto.",
+    "spoken": "sección 8.4. Procedimiento de barrage: extrae una fire card y consulta la US Barrage Table para determinar el efecto sobre la posición alemana. Si la fire card no muestra el color de la posición alemana o el target symbol de la unidad barrajeante, el barrage no tiene ningún efecto.",
+    "file": "93ef8c8d9ed4.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-4#3",
+    "lessonId": "lesson-5-4",
+    "blockIndex": 3,
+    "text": "§8.41 — Reglas específicas del barrage:\n• Solo puede barragearlo una unidad. No puedes combinar fuerzas.\n• Extrae una fire card distinta para cada barrage. No reutilices la carta de la Fase de Fuego Alemán.\n• Un hex alemán puede ser objetivo de más de un barrage en la misma Fase de Acción, pero NO puede ser atacado Y barrajeado en la misma fase.\n• Un barrage en un WN de dos hexes solo afecta a las unidades del hex objetivo.\n§8.42 — El barrage contra posiciones en terreno alto está sujeto a la restricción de fuego a distancia desde terreno bajo (§8.12). Las unidades de refuerzo no reveladas NO pueden ser objetivo de barrage.",
+    "spoken": "sección 8.41. Reglas específicas del barrage:\n• Solo puede barragearlo una unidad. No puedes combinar fuerzas.\n• Extrae una fire card distinta para cada barrage. No reutilices la carta de la Fase de Fuego Alemán.\n• Un hex alemán puede ser objetivo de más de un barrage en la misma Fase de Acción, pero NO puede ser atacado Y barrajeado en la misma fase.\n• Un barrage en un uve doble ene de dos hexes solo afecta a las unidades del hex objetivo.\nsección 8.42. El barrage contra posiciones en terreno alto está sujeto a la restricción de fuego a distancia desde terreno bajo (sección 8.12). Las unidades de refuerzo no reveladas NO pueden ser objetivo de barrage.",
+    "file": "370c1c9d3131.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-4#4",
+    "lessonId": "lesson-5-4",
+    "blockIndex": 4,
+    "text": "Marcadores de fuego naval (§8.5): los recibes como resultado de tiradas de cartas de eventos. Puedes gastar uno para incluir fuego naval en un ataque de EE.UU. o para realizar un Barrage de Artillería Naval independiente.",
+    "spoken": "Marcadores de fuego naval (sección 8.5): los recibes como resultado de tiradas de cartas de eventos. Puedes gastar uno para incluir fuego naval en un ataque de Estados Unidos o para realizar un Barrage de Artillería Naval independiente.",
+    "file": "df0707b74c61.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-5-4#5",
+    "lessonId": "lesson-5-4",
+    "blockIndex": 5,
+    "text": "§8.51 — Fuego naval en ataque: puedes gastar un marcador naval si una unidad de infantería atacante tiene radio o está bajo mando de un HQ. Si se cumple, el fuego naval aporta: la fuerza del marcador (9) se suma a tu fuerza de ataque, y se consideran cumplidos los requisitos de armas de fuego naval, artillería y demoliciones.\n\n§8.52 — Barrage de artillería naval: puedes gastar un marcador para barraguear cualquier posición WN (revelada o no) o cualquier posición de refuerzo revelada, siempre que al menos una unidad de infantería no disrupta con radio o bajo mando de un HQ esté en el campo de fuego del objetivo. Efecto: coloca un marcador de disrupción en el objetivo y retira su depth marker si tiene uno. Las unidades alemanas NO son eliminadas por barrage naval. Una posición con unidad no revelada NO puede ser objetivo de barrage naval.\n\n§8.53 — El barrage de artillería naval es una acción gratuita y puede realizarse en cualquier momento de la Fase de Acción. Sin embargo, un hex alemán ocupado no puede ser objeto de barrage Y ataque en la misma fase.\n\n§8.54 — Puedes usar el marcador en el mismo turno en que lo recibes, o guardarlo para un turno posterior.",
+    "spoken": "sección 8.51. Fuego naval en ataque: puedes gastar un marcador naval si una unidad de infantería atacante tiene radio o está bajo mando de un cuartel general. Si se cumple, el fuego naval aporta: la fuerza del marcador (9) se suma a tu fuerza de ataque, y se consideran cumplidos los requisitos de armas de fuego naval, artillería y demoliciones.\n\nsección 8.52. Barrage de artillería naval: puedes gastar un marcador para barraguear cualquier posición uve doble ene (revelada o no) o cualquier posición de refuerzo revelada, siempre que al menos una unidad de infantería no disrupta con radio o bajo mando de un cuartel general esté en el campo de fuego del objetivo. Efecto: coloca un marcador de disrupción en el objetivo y retira su depth marker si tiene uno. Las unidades alemanas NO son eliminadas por barrage naval. Una posición con unidad no revelada NO puede ser objetivo de barrage naval.\n\nsección 8.53. El barrage de artillería naval es una acción gratuita y puede realizarse en cualquier momento de la Fase de Acción. Sin embargo, un hex alemán ocupado no puede ser objeto de barrage Y ataque en la misma fase.\n\nsección 8.54. Puedes usar el marcador en el mismo turno en que lo recibes, o guardarlo para un turno posterior.",
+    "file": "19305158d902.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-6-1#0",
+    "lessonId": "lesson-6-1",
+    "blockIndex": 0,
+    "text": "Al inicio del juego, solo las unidades WN ocupan el mapa, en posiciones WN. Algunas tienen depth markers debajo; otras no. Durante la partida, unidades adicionales y depth markers entran en juego de diversas formas: a través de eventos, como resultado de ataques de EE.UU. fallidos, o mediante el mecanismo de Tactical Reinforcement de un depth marker revelado.",
+    "spoken": "Al inicio del juego, solo las unidades uve doble ene ocupan el mapa, en posiciones uve doble ene. Algunas tienen depth markers debajo; otras no. Durante la partida, unidades adicionales y depth markers entran en juego de diversas formas: a través de eventos, como resultado de ataques de Estados Unidos fallidos, o mediante el mecanismo de Tactical Reinforcement de un depth marker revelado.",
+    "file": "93c122c357b4.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-6-1#1",
+    "lessonId": "lesson-6-1",
+    "blockIndex": 1,
+    "text": "Revelar unidades alemanas (§9.1): inicialmente todas las unidades y depth markers están colocados boca abajo (no revelados). La parte trasera del counter identifica el tipo general. Un unit no revelado aún proyecta campo de fuego y puede disparar. Una unidad se revela como resultado de acciones de EE.UU., generalmente un ataque. Una vez revelada, permanece revelada hasta ser retirada o hasta que un resultado de combate lo indique.",
+    "spoken": "Revelar unidades alemanas (sección 9.1): inicialmente todas las unidades y depth markers están colocados boca abajo (no revelados). La parte trasera del counter identifica el tipo general. Un unit no revelado aún proyecta campo de fuego y puede disparar. Una unidad se revela como resultado de acciones de Estados Unidos, generalmente un ataque. Una vez revelada, permanece revelada hasta ser retirada o hasta que un resultado de combate lo indique.",
+    "file": "eb698eac30c8.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-6-1#2",
+    "lessonId": "lesson-6-1",
+    "blockIndex": 2,
+    "text": "§9.1 — El depth marker de una unidad revelada permanece sin revelar hasta que la unidad sea sometida a un ataque suficientemente fuerte. El depth marker se revela entonces para añadir fuerza a la defensa. Una vez revelado, permanece revelado hasta ser retirado o hasta que el resultado de combate lo indique de otro modo.",
+    "spoken": "sección 9.1. El depth marker de una unidad revelada permanece sin revelar hasta que la unidad sea sometida a un ataque suficientemente fuerte. El depth marker se revela entonces para añadir fuerza a la defensa. Una vez revelado, permanece revelado hasta ser retirado o hasta que el resultado de combate lo indique de otro modo.",
+    "file": "9d145647c0e4.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-6-1#3",
+    "lessonId": "lesson-6-1",
+    "blockIndex": 3,
+    "text": "Añadir depth markers (§9.2): los depth markers se añaden durante la partida como resultado de eventos y, a veces, de ataques de EE.UU. fallidos. Al colocar un depth marker por evento, elige una unidad alemana sin depth marker, siguiendo estas prioridades:\n1. La unidad alemana más cercana (en hexes) a una unidad de EE.UU.\n2. En caso de empate: unidad en WN de un hex > WN de dos hexes > posición de refuerzo.\n3. Si sigue el empate: posición con el número de ID más bajo; si mismo número, la letra más baja.\nLa unidad debe estar en comunicación alemana para recibir un depth marker. Las unidades disruptas pueden recibirlo (§9.21).",
+    "spoken": "Añadir depth markers (sección 9.2): los depth markers se añaden durante la partida como resultado de eventos y, a veces, de ataques de Estados Unidos fallidos. Al colocar un depth marker por evento, elige una unidad alemana sin depth marker, siguiendo estas prioridades:\n1. La unidad alemana más cercana (en hexes) a una unidad de Estados Unidos\n2. En caso de empate: unidad en uve doble ene de un hex > uve doble ene de dos hexes > posición de refuerzo.\n3. Si sigue el empate: posición con el número de ID más bajo; si mismo número, la letra más baja.\nLa unidad debe estar en comunicación alemana para recibir un depth marker. Las unidades disruptas pueden recibirlo (sección 9.21).",
+    "file": "49b6e2248e7e.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-6-1#4",
+    "lessonId": "lesson-6-1",
+    "blockIndex": 4,
+    "text": "§9.21 — Tipo de depth marker: al seleccionar una unidad para recibir el marcador, extrae aleatoriamente del pool correspondiente:\n• Unidad WN: extrae del pool de depth markers WN.\n• Unidad de refuerzo en hex de edificio: extrae del pool de edificio.\n• Unidad de refuerzo en cualquier otro tipo de hex: extrae del pool móvil.",
+    "spoken": "sección 9.21. Tipo de depth marker: al seleccionar una unidad para recibir el marcador, extrae aleatoriamente del pool correspondiente:\n• Unidad uve doble ene: extrae del pool de depth markers uve doble ene.\n• Unidad de refuerzo en hex de edificio: extrae del pool de edificio.\n• Unidad de refuerzo en cualquier otro tipo de hex: extrae del pool móvil.",
+    "file": "7d83719ef72d.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-6-1#5",
+    "lessonId": "lesson-6-1",
+    "blockIndex": 5,
+    "text": "Agotamiento de pools (§9.24): a medida que avanza la partida, uno o más pools de depth markers pueden vaciarse:\n• Si el pool WN está vacío cuando se necesita un depth marker WN, colócalo en una posición de refuerzo en su lugar.\n• Si el pool de edificio está vacío, toma uno del pool móvil en su lugar.\n• Si el pool móvil está vacío, los alemanes han agotado sus reservas; no se coloca ningún depth marker.",
+    "spoken": "Agotamiento de pools (sección 9.24): a medida que avanza la partida, uno o más pools de depth markers pueden vaciarse:\n• Si el pool uve doble ene está vacío cuando se necesita un depth marker uve doble ene, colócalo en una posición de refuerzo en su lugar.\n• Si el pool de edificio está vacío, toma uno del pool móvil en su lugar.\n• Si el pool móvil está vacío, los alemanes han agotado sus reservas; no se coloca ningún depth marker.",
+    "file": "d136b03b7069.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-6-2#0",
+    "lessonId": "lesson-6-2",
+    "blockIndex": 0,
+    "text": "Refuerzos desencadenados por eventos (§9.3): cuando un evento ordena colocar refuerzos alemanes, extrae aleatoriamente del Tactical Reinforcement Pool. Coloca la unidad boca abajo y SIN depth marker en una posición de refuerzo alemana VACÍA que esté en comunicación alemana y en la zona indicada por el evento. Si hay varias posiciones elegibles, selecciona según estas prioridades:\n1. Posición adyacente a una unidad de EE.UU. (la de número más bajo si varias).\n2. Posición a dos hexes de una unidad de EE.UU. (la de número más bajo si varias).\n3. La posición con el número más bajo.",
+    "spoken": "Refuerzos desencadenados por eventos (sección 9.3): cuando un evento ordena colocar refuerzos alemanes, extrae aleatoriamente del Tactical Reinforcement Pool. Coloca la unidad boca abajo y SIN depth marker en una posición de refuerzo alemana VACÍA que esté en comunicación alemana y en la zona indicada por el evento. Si hay varias posiciones elegibles, selecciona según estas prioridades:\n1. Posición adyacente a una unidad de Estados Unidos (la de número más bajo si varias).\n2. Posición a dos hexes de una unidad de Estados Unidos (la de número más bajo si varias).\n3. La posición con el número más bajo.",
+    "file": "5cee7e65d668.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-6-2#1",
+    "lessonId": "lesson-6-2",
+    "blockIndex": 1,
+    "text": "§9.31 — Si el Tactical Pool está vacío, extrae del Division Reinforcement Pool. Las unidades del Division Pool entran CON un depth marker. Selecciona la posición según las mismas prioridades del §9.3 y extrae un depth marker del pool correspondiente.\n\n§9.32 — Las unidades que entran por evento NO pueden colocarse en posiciones de refuerzo alemanas sin número de ID. Las posiciones WN no reciben unidades de refuerzo.\n\n§9.33 — La posición debe estar en comunicación alemana para recibir un refuerzo. Una posición no ocupada puede estar adyacente a unidades de EE.UU. y aún así estar en comunicación.",
+    "spoken": "sección 9.31. Si el Tactical Pool está vacío, extrae del Division Reinforcement Pool. Las unidades del Division Pool entran CON un depth marker. Selecciona la posición según las mismas prioridades del sección 9.3 y extrae un depth marker del pool correspondiente.\n\nsección 9.32. Las unidades que entran por evento NO pueden colocarse en posiciones de refuerzo alemanas sin número de ID. Las posiciones uve doble ene no reciben unidades de refuerzo.\n\nsección 9.33. La posición debe estar en comunicación alemana para recibir un refuerzo. Una posición no ocupada puede estar adyacente a unidades de Estados Unidos y aún así estar en comunicación.",
+    "file": "c9ad81a3717f.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-6-2#2",
+    "lessonId": "lesson-6-2",
+    "blockIndex": 2,
+    "text": "Refuerzos tácticos activados por depth marker WN (§9.4): cuando revelas un depth marker WN que dice \"Tactical Reinforcement\", inmediatamente:\n1. Retira el depth marker del juego.\n2. Extrae una unidad del Tactical Reinforcement Pool y colócala en la posición de refuerzo no ocupada MÁS CERCANA a la posición WN de la que retiraste el marcador, incluso si esa posición de refuerzo no tiene número de ID.\n3. Si hay un empate de distancia, prioriza la posición más cercana a una unidad de EE.UU.; luego la de número más bajo.",
+    "spoken": "Refuerzos tácticos activados por depth marker uve doble ene (sección 9.4): cuando revelas un depth marker uve doble ene que dice \"Tactical Reinforcement\", inmediatamente:\n1. Retira el depth marker del juego.\n2. Extrae una unidad del Tactical Reinforcement Pool y colócala en la posición de refuerzo no ocupada MÁS CERCANA a la posición uve doble ene de la que retiraste el marcador, incluso si esa posición de refuerzo no tiene número de ID.\n3. Si hay un empate de distancia, prioriza la posición más cercana a una unidad de Estados Unidos; luego la de número más bajo.",
+    "file": "f31c206b8cb2.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-6-2#3",
+    "lessonId": "lesson-6-2",
+    "blockIndex": 3,
+    "text": "§9.41 — Para este tipo de refuerzo, una posición sin número de ID se considera como si tuviera el número 0. Las restricciones de comunicación del §9.33 aplican igualmente.\n\n§9.42 — Este tipo de refuerzo solo puede provenir del Tactical Reinforcement Pool y se coloca SIN depth marker. Si el pool está vacío, el refuerzo no aparece.",
+    "spoken": "sección 9.41. Para este tipo de refuerzo, una posición sin número de ID se considera como si tuviera el número 0. Las restricciones de comunicación del sección 9.33 aplican igualmente.\n\nsección 9.42. Este tipo de refuerzo solo puede provenir del Tactical Reinforcement Pool y se coloca SIN depth marker. Si el pool está vacío, el refuerzo no aparece.",
+    "file": "4bc729dfa4b2.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-6-2#4",
+    "lessonId": "lesson-6-2",
+    "blockIndex": 4,
+    "text": "Kampfgruppe Meyer (§9.5): la caja de KG Meyer contiene unidades históricamente disponibles para Omaha pero desviadas. Solo se liberan al extraer el evento KG Meyer. Cada vez que se extrae, selecciona aleatoriamente 4 unidades y 2 depth markers de KG Meyer. Traslada las unidades al Division Reinforcement Pool y los depth markers a la Mobile Depth Box. Quedan disponibles para entrar en juego mediante los mecanismos normales. Si las 8 unidades de KG Meyer ya han sido liberadas, los eventos KG Meyer subsiguientes se ignoran.",
+    "spoken": "Kampfgruppe Meyer (sección 9.5): la caja de KG Meyer contiene unidades históricamente disponibles para Ómaja pero desviadas. Solo se liberan al extraer el evento KG Meyer. Cada vez que se extrae, selecciona aleatoriamente 4 unidades y 2 depth markers de KG Meyer. Traslada las unidades al Division Reinforcement Pool y los depth markers a la Mobile Depth Box. Quedan disponibles para entrar en juego mediante los mecanismos normales. Si las 8 unidades de KG Meyer ya han sido liberadas, los eventos KG Meyer subsiguientes se ignoran.",
+    "file": "5baf5b41fc91.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-6-3#0",
+    "lessonId": "lesson-6-3",
+    "blockIndex": 0,
+    "text": "Los equipos de demolición de ingenieros desembarcaron con las primeras oleadas para destruir los obstáculos de playa y minas alemanas. No están representados por fichas propias, pero su misión vital sí lo está. La mayoría de los hexes de playa en la línea de marea media tienen símbolos de obstáculos. Hasta que los ingenieros los eliminen, las unidades que desembarquen en esos hexes durante la marea media y alta pueden sufrir pérdidas por explosiones de minas (§5.14).",
+    "spoken": "Los equipos de demolición de ingenieros desembarcaron con las primeras oleadas para destruir los obstáculos de playa y minas alemanas. No están representados por fichas propias, pero su misión vital sí lo está. La mayoría de los hexes de playa en la línea de marea media tienen símbolos de obstáculos. Hasta que los ingenieros los eliminen, las unidades que desembarquen en esos hexes durante la marea media y alta pueden sufrir pérdidas por explosiones de minas (sección 5.14).",
+    "file": "4386f7de99a5.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-6-3#2",
+    "lessonId": "lesson-6-3",
+    "blockIndex": 2,
+    "text": "§10.1 — Limpiar obstáculos: durante la Fase de Ingenieros de cada turno a partir del turno 2, puedes limpiar obstáculos en uno o dos hexes de playa por sector. PERO solo en hexes que NO estén en el campo de fuego de ninguna posición alemana no disrupta cuyo color aparezca en la fire card extraída para ese sector en el turno actual.",
+    "spoken": "sección 10.1. Limpiar obstáculos: durante la Fase de Ingenieros de cada turno a partir del turno 2, puedes limpiar obstáculos en uno o dos hexes de playa por sector. PERO solo en hexes que NO estén en el campo de fuego de ninguna posición alemana no disrupta cuyo color aparezca en la fire card extraída para ese sector en el turno actual.",
+    "file": "f802ebc10a80.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-6-3#3",
+    "lessonId": "lesson-6-3",
+    "blockIndex": 3,
+    "text": "Ejemplo (§10.1): si los colores de la fire card del sector este son rojo, morado y azul, y ninguna posición WN está eliminada o disrupta, solo puedes limpiar hexes que no estén en el campo de fuego de ninguna posición roja, morada o azul activa. Si el WN de color morado está eliminado o disrupto, sus hexes de campo de fuego quedan disponibles para ser limpiados ese turno.",
+    "spoken": "Ejemplo (sección 10.1): si los colores de la fire card del sector este son rojo, morado y azul, y ninguna posición uve doble ene está eliminada o disrupta, solo puedes limpiar hexes que no estén en el campo de fuego de ninguna posición roja, morada o azul activa. Si el uve doble ene de color morado está eliminado o disrupto, sus hexes de campo de fuego quedan disponibles para ser limpiados ese turno.",
+    "file": "3b2494e10403.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-6-3#4",
+    "lessonId": "lesson-6-3",
+    "blockIndex": 4,
+    "text": "§10.11 — Marcadores \"Cleared\": coloca un marcador Cleared para indicar que los obstáculos de un hex han sido limpiados. Para evitar la acumulación de fichas al limpiar varios hexes seguidos, puedes usar solo dos marcadores: colócalos en los hexes de los extremos de la fila limpia, orientados con sus flechas apuntando el uno hacia el otro. Esto indica que esos dos hexes y todos los que hay entre ellos están limpios.",
+    "spoken": "sección 10.11. Marcadores \"Cleared\": coloca un marcador Cleared para indicar que los obstáculos de un hex han sido limpiados. Para evitar la acumulación de fichas al limpiar varios hexes seguidos, puedes usar solo dos marcadores: colócalos en los hexes de los extremos de la fila limpia, orientados con sus flechas apuntando el uno hacia el otro. Esto indica que esos dos hexes y todos los que hay entre ellos están limpios.",
+    "file": "09c6dec7e73b.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-6-3#5",
+    "lessonId": "lesson-6-3",
+    "blockIndex": 5,
+    "text": "§10.12 — Límites de marea:\n• Marea baja (turnos 2–6): hasta dos hexes por sector por turno.\n• Marea media (turnos 7–15): solo un hex por sector por turno.\n• Marea alta (turnos 16–22): no se pueden limpiar hexes.",
+    "spoken": "sección 10.12. Límites de marea:\n• Marea baja (turnos 2–6): hasta dos hexes por sector por turno.\n• Marea media (turnos 7–15): solo un hex por sector por turno.\n• Marea alta (turnos 16–22): no se pueden limpiar hexes.",
+    "file": "abdcd37f25ae.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-7-1#0",
+    "lessonId": "lesson-7-1",
+    "blockIndex": 0,
+    "text": "Los Héroes, HQ y Generales son líderes: no cuentan para los límites de apilamiento, no poseen escalones y cualquier número puede ocupar el mismo hex. Los Héroes son individuos que sobresalen en el combate; los HQ representan estados mayores de regimientos; los Generales son Cota (29.ª División) y Wyman (1.ª División).",
+    "spoken": "Los Héroes, cuartel general y Generales son líderes: no cuentan para los límites de apilamiento, no poseen escalones y cualquier número puede ocupar el mismo hex. Los Héroes son individuos que sobresalen en el combate; los cuartel general representan estados mayores de regimientos; los Generales son Cota (29.ª División) y Wyman (1.ª División).",
+    "file": "e648ce3ab12b.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-7-1#1",
+    "lessonId": "lesson-7-1",
+    "blockIndex": 1,
+    "text": "§11.1 — Héroes:\n• Entrada: aparecen por el evento Héroe. Se asignan a una unidad de EE.UU. de tu elección en la división indicada. No pueden transferirse a otra unidad y no pueden estar solos en un hex.\n• Acción gratuita: la unidad con el Héroe puede realizar una acción gratuita por turno.\n• Comodín de ataque (§8.23): cuando atacan desde un hex adyacente, el Héroe puede sustituir UN requisito de arma (no flanqueo) o aumentar la fuerza de ataque en 1. Este beneficio no es acumulable.\n• Sacrificio voluntario (§11.14): si una unidad de un escalón con Héroe debe perder un escalón por fuego alemán, puedes sacrificar al Héroe para salvar la unidad. La ficha del Héroe se gira al lado \"Inspirado\".\n• Inspirado (§11.15): cuando un Héroe es matado (por fuego alemán o sacrificio), su marcador se gira al lado inspirado y permanece con la unidad. La unidad con Inspirado sigue teniendo acción gratuita, pero ya no recibe el beneficio de comodín de ataque.",
+    "spoken": "sección 11.1. Héroes:\n• Entrada: aparecen por el evento Héroe. Se asignan a una unidad de Estados Unidos de tu elección en la división indicada. No pueden transferirse a otra unidad y no pueden estar solos en un hex.\n• Acción gratuita: la unidad con el Héroe puede realizar una acción gratuita por turno.\n• Comodín de ataque (sección 8.23): cuando atacan desde un hex adyacente, el Héroe puede sustituir UN requisito de arma (no flanqueo) o aumentar la fuerza de ataque en 1. Este beneficio no es acumulable.\n• Sacrificio voluntario (sección 11.14): si una unidad de un escalón con Héroe debe perder un escalón por fuego alemán, puedes sacrificar al Héroe para salvar la unidad. La ficha del Héroe se gira al lado \"Inspirado\".\n• Inspirado (sección 11.15): cuando un Héroe es matado (por fuego alemán o sacrificio), su marcador se gira al lado inspirado y permanece con la unidad. La unidad con Inspirado sigue teniendo acción gratuita, pero ya no recibe el beneficio de comodín de ataque.",
+    "file": "ad39e1d0d16c.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-7-1#2",
+    "lessonId": "lesson-7-1",
+    "blockIndex": 2,
+    "text": "Headquarters — HQ (§11.2): hay cuatro HQ de infantería, uno por regimiento. Capacidades:\n• Puede moverse un hex de forma gratuita durante la Fase de Acción.\n• Manda a todas las unidades en su propio hex y en los hexes adyacentes al inicio de la Fase de Acción.\n• Las unidades bajo su mando reciben acción gratuita.\n• Una unidad que ataca desde un hex adyacente cuando está bajo mando de un HQ se considera que posee una radio.\n• Un HQ puede habilitar a los tanques, antitanques, antiaéreos y artillería bajo su mando a realizar fuego a distancia.\n• A partir del turno 17, un HQ puede establecer un puesto de mando (Command Post) para aumentar su radio de mando.",
+    "spoken": "Headquarters. cuartel general (sección 11.2): hay cuatro cuartel general de infantería, uno por regimiento. Capacidades:\n• Puede moverse un hex de forma gratuita durante la Fase de Acción.\n• Manda a todas las unidades en su propio hex y en los hexes adyacentes al inicio de la Fase de Acción.\n• Las unidades bajo su mando reciben acción gratuita.\n• Una unidad que ataca desde un hex adyacente cuando está bajo mando de un cuartel general se considera que posee una radio.\n• Un cuartel general puede habilitar a los tanques, antitanques, antiaéreos y artillería bajo su mando a realizar fuego a distancia.\n• A partir del turno 17, un cuartel general puede establecer un puesto de mando (Command Post) para aumentar su radio de mando.",
+    "file": "1b67e3c1637d.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-7-1#3",
+    "lessonId": "lesson-7-1",
+    "blockIndex": 3,
+    "text": "§11.3 — Generales (Cota y Wyman):\n• Pueden moverse un hex de forma gratuita durante la Fase de Acción.\n• Mandan a todas las unidades en su propio hex y en hexes adyacentes al inicio de la Fase de Acción.\n• Las unidades bajo su mando reciben acción gratuita.\n• Un General puede habilitar a los tanques, antitanques y antiaéreos bajo su mando a realizar fuego a distancia (NO habilita a la artillería).\n§11.31 — Si un General es el único ocupante de una posición alemana cuando una unidad alemana debe colocarse allí, el General es retirado del juego (capturado). Un General en un hex no inhibe en absoluto el fuego ni la comunicación alemana.",
+    "spoken": "sección 11.3. Generales (Cota y Wyman):\n• Pueden moverse un hex de forma gratuita durante la Fase de Acción.\n• Mandan a todas las unidades en su propio hex y en hexes adyacentes al inicio de la Fase de Acción.\n• Las unidades bajo su mando reciben acción gratuita.\n• Un General puede habilitar a los tanques, antitanques y antiaéreos bajo su mando a realizar fuego a distancia (NO habilita a la artillería).\nsección 11.31. Si un General es el único ocupante de una posición alemana cuando una unidad alemana debe colocarse allí, el General es retirado del juego (capturado). Un General en un hex no inhibe en absoluto el fuego ni la comunicación alemana.",
+    "file": "df6805c74eb2.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-7-1#4",
+    "lessonId": "lesson-7-1",
+    "blockIndex": 4,
+    "text": "Fuego alemán contra líderes (§11.4): si la fire card incluye el color de una posición alemana CON una estrella (★), esa posición puede alcanzar a un líder en su campo de fuego intenso o sostenido. Efectos:\n• Héroe alcanzado: muere; gira su marcador al lado Inspirado.\n• HQ alcanzado: queda desorganizado. Retíralo del mapa y colócalo dos turnos después en el track de turnos (vuelve a entrar por desembarco).\n• General alcanzado: está ligeramente herido; gira su ficha al reverso. Continúa con sus capacidades normales.\n• General ligeramente herido alcanzado de nuevo: muerto; retíralo del juego.",
+    "spoken": "Fuego alemán contra líderes (sección 11.4): si la fire card incluye el color de una posición alemana CON una estrella (★), esa posición puede alcanzar a un líder en su campo de fuego intenso o sostenido. Efectos:\n• Héroe alcanzado: muere; gira su marcador al lado Inspirado.\n• cuartel general alcanzado: queda desorganizado. Retíralo del mapa y colócalo dos turnos después en el track de turnos (vuelve a entrar por desembarco).\n• General alcanzado: está ligeramente herido; gira su ficha al reverso. Continúa con sus capacidades normales.\n• General ligeramente herido alcanzado de nuevo: muerto; retíralo del juego.",
+    "file": "514ad2022ca3.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-7-1#5",
+    "lessonId": "lesson-7-1",
+    "blockIndex": 5,
+    "text": "§11.41 — Los líderes solo reciben impactos DESPUÉS de asignar impactos a otras unidades elegibles. Si el número de otras unidades elegibles es mayor o igual al límite de impactos de la posición, el líder no es alcanzado.\n\n§11.42 — Los líderes NO quedan disruptos por el fuego alemán, aunque las unidades con las que están apilados sí puedan quedar disruptas.",
+    "spoken": "sección 11.41. Los líderes solo reciben impactos DESPUÉS de asignar impactos a otras unidades elegibles. Si el número de otras unidades elegibles es mayor o igual al límite de impactos de la posición, el líder no es alcanzado.\n\nsección 11.42. Los líderes NO quedan disruptos por el fuego alemán, aunque las unidades con las que están apilados sí puedan quedar disruptas.",
+    "file": "1b005e0b028c.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-7-2#0",
+    "lessonId": "lesson-7-2",
+    "blockIndex": 0,
+    "text": "Control de EE.UU. (§12.1): las unidades de EE.UU. controlan el hex que ocupan. Algunos tipos controlan además los hexes adyacentes. Los Generales y Héroes NO controlan hexes.",
+    "spoken": "Control de Estados Unidos (sección 12.1): las unidades de Estados Unidos controlan el hex que ocupan. Algunos tipos controlan además los hexes adyacentes. Los Generales y Héroes NO controlan hexes.",
+    "file": "13e57323be6f.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-7-2#1",
+    "lessonId": "lesson-7-2",
+    "blockIndex": 1,
+    "text": "§12.1 — Tipos de control:\n• Controla SOLO el hex que ocupa: infantería con un escalón, artillería, antitanque, antiaéreo, HQ.\n• Controla el hex que ocupa Y todos los hexes adyacentes (incluso si está disrupta): infantería con dos o tres escalones, blindados (de cualquier nivel de escalón).\n§12.11 — Una unidad de EE.UU. en un hex de playa, pabellón o draw NO controla hexes adyacentes en el terreno alto. Sin embargo, una unidad en el terreno alto que pueda controlar hexes adyacentes SÍ controla los hexes de playa, pabellón y draw adyacentes.",
+    "spoken": "sección 12.1. Tipos de control:\n• Controla SOLO el hex que ocupa: infantería con un escalón, artillería, antitanque, antiaéreo, cuartel general.\n• Controla el hex que ocupa Y todos los hexes adyacentes (incluso si está disrupta): infantería con dos o tres escalones, blindados (de cualquier nivel de escalón).\nsección 12.11. Una unidad de Estados Unidos en un hex de playa, pabellón o draw NO controla hexes adyacentes en el terreno alto. Sin embargo, una unidad en el terreno alto que pueda controlar hexes adyacentes SÍ controla los hexes de playa, pabellón y draw adyacentes.",
+    "file": "2d633def5e00.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-7-2#2",
+    "lessonId": "lesson-7-2",
+    "blockIndex": 2,
+    "text": "Comunicación alemana (§12.2): una posición alemana está en comunicación si puede trazar un camino de hexes de cualquier longitud desde la posición hasta cualquier hex de salida (de la A a la G). El camino NO puede pasar por hexes ocupados o controlados por unidades de EE.UU. Además, no puede pasar por hexes de terreno accidentado (rough), hexes de playa, ni hexes de pabellón adyacentes a la playa.",
+    "spoken": "Comunicación alemana (sección 12.2): una posición alemana está en comunicación si puede trazar un camino de hexes de cualquier longitud desde la posición hasta cualquier hex de salida (de la A a la G). El camino NO puede pasar por hexes ocupados o controlados por unidades de Estados Unidos Además, no puede pasar por hexes de terreno accidentado (rough), hexes de playa, ni hexes de pabellón adyacentes a la playa.",
+    "file": "e0bdecc08921.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-7-2#3",
+    "lessonId": "lesson-7-2",
+    "blockIndex": 3,
+    "text": "§12.21 — Una unidad alemana en un hex adyacente a una unidad de EE.UU. niega el control de EE.UU. sobre ese hex a efectos de trazar comunicación alemana, incluso para la propia unidad que niega el control.\n\n§12.22 — Al trazar comunicación hacia una posición alemana NO ocupada, el propio hex de la posición puede estar en control de EE.UU. y aún así recibir la traza de comunicación si el camino puede llegar hasta ella.\n\n§12.23 — Excepción de bocage: una posición de refuerzo ocupada por una unidad alemana puede trazar comunicación a través de UN hex de bocage adyacente a la posición, aunque ese hex esté controlado (pero no ocupado) por EE.UU. Esta capacidad aplica solo a un hex de bocage inmediatamente adyacente a la posición; la comunicación posterior debe trazarse normalmente.",
+    "spoken": "sección 12.21. Una unidad alemana en un hex adyacente a una unidad de Estados Unidos niega el control de Estados Unidos sobre ese hex a efectos de trazar comunicación alemana, incluso para la propia unidad que niega el control.\n\nsección 12.22. Al trazar comunicación hacia una posición alemana NO ocupada, el propio hex de la posición puede estar en control de Estados Unidos y aún así recibir la traza de comunicación si el camino puede llegar hasta ella.\n\nsección 12.23. Excepción de bocage: una posición de refuerzo ocupada por una unidad alemana puede trazar comunicación a través de UN hex de bocage adyacente a la posición, aunque ese hex esté controlado (pero no ocupado) por Estados Unidos Esta capacidad aplica solo a un hex de bocage inmediatamente adyacente a la posición; la comunicación posterior debe trazarse normalmente.",
+    "file": "8d393a3966bd.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-7-2#4",
+    "lessonId": "lesson-7-2",
+    "blockIndex": 4,
+    "text": "§12.24 — El estado de comunicación de las posiciones alemanas se establece al INICIO de la Fase de Fuego Alemán y no cambia durante toda la fase. Una posición sin comunicación al inicio de la fase permanece sin comunicación durante toda la fase, incluso si el fuego alemán reduce o elimina unidades de EE.UU. que bloqueaban la comunicación. Durante un ataque de EE.UU., la comunicación alemana se determina en el momento del ataque.",
+    "spoken": "sección 12.24. El estado de comunicación de las posiciones alemanas se establece al INICIO de la Fase de Fuego Alemán y no cambia durante toda la fase. Una posición sin comunicación al inicio de la fase permanece sin comunicación durante toda la fase, incluso si el fuego alemán reduce o elimina unidades de Estados Unidos que bloqueaban la comunicación. Durante un ataque de Estados Unidos, la comunicación alemana se determina en el momento del ataque.",
+    "file": "7904f481fa8e.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-7-2#5",
+    "lessonId": "lesson-7-2",
+    "blockIndex": 5,
+    "text": "Comunicación de EE.UU. (§12.3): un hex está en comunicación de EE.UU. si puedes trazar un camino de hexes de cualquier longitud desde ese hex hasta cualquier hex de playa. El camino no puede pasar por hexes ocupados por o en el campo de fuego de unidades alemanas. El camino tampoco puede trazarse a través de hexes de terreno accidentado (rough) ni a través de hexsides de bluff o cliff.",
+    "spoken": "Comunicación de Estados Unidos (sección 12.3): un hex está en comunicación de Estados Unidos si puedes trazar un camino de hexes de cualquier longitud desde ese hex hasta cualquier hex de playa. El camino no puede pasar por hexes ocupados por o en el campo de fuego de unidades alemanas. El camino tampoco puede trazarse a través de hexes de terreno accidentado (rough) ni a través de hexsides de bluff o cliff.",
+    "file": "6eb50da4230d.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-7-3#0",
+    "lessonId": "lesson-7-3",
+    "blockIndex": 0,
+    "text": "Pérdida catastrófica (§13.1): si alguna de las divisiones de EE.UU. sufre una pérdida catastrófica, pierdes la partida inmediatamente. La pérdida catastrófica se define como OCHO unidades de infantería regular de una misma división que hayan sido reducidas a un escalón o eliminadas.",
+    "spoken": "Pérdida catastrófica (sección 13.1): si alguna de las divisiones de Estados Unidos sufre una pérdida catastrófica, pierdes la partida inmediatamente. La pérdida catastrófica se define como OCHO unidades de infantería regular de una misma división que hayan sido reducidas a un escalón o eliminadas.",
+    "file": "616f38161945.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-7-3#1",
+    "lessonId": "lesson-7-3",
+    "blockIndex": 1,
+    "text": "§13.1 — Seguimiento: durante la partida, cada vez que una unidad de infantería regular pierde su segundo escalón (y se reemplaza por la ficha de un escalón), coloca la ficha de fuerza completa en la \"Infantry Loss Box\" de la división correspondiente. Si el número de fichas en una Loss Box llega a 8, esa división sufre pérdida catastrófica.\n\n§13.11 — Las unidades de infantería ranger eliminadas y las unidades no de infantería (blindados, artillería, etc.) NO van a la Loss Box y NO cuentan para la pérdida catastrófica.\n\n§13.12 — Algunos eventos permiten recuperar escalones de unidades reducidas en el juego tomando una ficha de la Loss Box. Esto reduce tu cuenta hacia la pérdida catastrófica.",
+    "spoken": "sección 13.1. Seguimiento: durante la partida, cada vez que una unidad de infantería regular pierde su segundo escalón (y se reemplaza por la ficha de un escalón), coloca la ficha de fuerza completa en la \"Infantry Loss Box\" de la división correspondiente. Si el número de fichas en una Loss Box llega a 8, esa división sufre pérdida catastrófica.\n\nsección 13.11. Las unidades de infantería ranger eliminadas y las unidades no de infantería (blindados, artillería, etc.) NO van a la Loss Box y NO cuentan para la pérdida catastrófica.\n\nsección 13.12. Algunos eventos permiten recuperar escalones de unidades reducidas en el juego tomando una ficha de la Loss Box. Esto reduce tu cuenta hacia la pérdida catastrófica.",
+    "file": "03462676e0a2.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-7-3#2",
+    "lessonId": "lesson-7-3",
+    "blockIndex": 2,
+    "text": "Determinar la victoria (§13.2): si ninguna división ha sufrido pérdida catastrófica al final del turno 16, cuenta los Puntos de Victoria (VP) para determinar si has ganado la escenario \"The First Waves\". Puntos de Victoria:\n• 1 VP por cada posición WN que controles. Un WN de dos hexes vale 2 VP (pero solo cuando controlas AMBOS hexes).\n• 1 VP por cada posición de refuerzo alemana que controles (incluidas las posiciones sin etiqueta \"VP\").\n• 5 VP por cada draw bajo tu control.\nGanas si tienes 19 o más VP.",
+    "spoken": "Determinar la victoria (sección 13.2): si ninguna división ha sufrido pérdida catastrófica al final del turno 16, cuenta los Puntos de Victoria (VP) para determinar si has ganado la escenario \"The First Waves\". Puntos de Victoria:\n• 1 VP por cada posición uve doble ene que controles. Un uve doble ene de dos hexes vale 2 VP (pero solo cuando controlas AMBOS hexes).\n• 1 VP por cada posición de refuerzo alemana que controles (incluidas las posiciones sin etiqueta \"VP\").\n• 5 VP por cada draw bajo tu control.\nGanas si tienes 19 o más VP.",
+    "file": "63768ed380ba.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-7-3#3",
+    "lessonId": "lesson-7-3",
+    "blockIndex": 3,
+    "text": "§13.21 — Control de draws: hay cuatro draws (pequeños valles que comunican con el interior). Controlas un draw si TODOS sus hexes al sur (interior) de la barrera antitanque en la boca del draw están en control de EE.UU.",
+    "spoken": "sección 13.21. Control de draws: hay cuatro draws (pequeños valles que comunican con el interior). Controlas un draw si TODOS sus hexes al sur (interior) de la barrera antitanque en la boca del draw están en control de Estados Unidos",
+    "file": "0421931343e8.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-7-3#4",
+    "lessonId": "lesson-7-3",
+    "blockIndex": 4,
+    "text": "§13.22 — Un hex se considera en control de EE.UU. a efectos de VP si cumple TODAS estas condiciones:\n1. El hex está ocupado o controlado por una unidad de EE.UU.\n2. El hex está en comunicación de EE.UU. (§12.3).\n3. El hex NO está en el campo de fuego de ninguna unidad alemana, incluyendo las disruptas.\nAlternativa: un hex también cuenta si la comunicación de EE.UU. puede trazarse hasta él Y la comunicación alemana no puede trazarse hasta él Y el hex no está en campo de fuego alemán.",
+    "spoken": "sección 13.22. Un hex se considera en control de Estados Unidos a efectos de VP si cumple TODAS estas condiciones:\n1. El hex está ocupado o controlado por una unidad de Estados Unidos\n2. El hex está en comunicación de Estados Unidos (sección 12.3).\n3. El hex NO está en el campo de fuego de ninguna unidad alemana, incluyendo las disruptas.\nAlternativa: un hex también cuenta si la comunicación de Estados Unidos puede trazarse hasta él Y la comunicación alemana no puede trazarse hasta él Y el hex no está en campo de fuego alemán.",
+    "file": "1224006a50ab.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-8-1#0",
+    "lessonId": "lesson-8-1",
+    "blockIndex": 0,
+    "text": "El juego extendido (§14) se activa a partir del turno 17 si estás jugando la escenario \"D-Day at Omaha Beach\" o \"Beyond the Beach\". Las reglas de los §1–§13 siguen en vigor salvo que sean específicamente reemplazadas por las del juego extendido.",
+    "spoken": "El juego extendido (sección 14) se activa a partir del turno 17 si estás jugando la escenario \"Día D en la playa de Ómaja\" o \"Beyond the Beach\". Las reglas de los sección 1–sección 13 siguen en vigor salvo que sean específicamente reemplazadas por las del juego extendido.",
+    "file": "9ea66ceaa0bd.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-8-1#1",
+    "lessonId": "lesson-8-1",
+    "blockIndex": 1,
+    "text": "§14 — Cambios principales en el juego extendido:\n• Se extraen DOS cartas de evento por turno.\n• El límite de impactos alemán se DUPLICA (§14.11): un WN con una sola unidad sin depth marker puede impactar a dos unidades de EE.UU. en lugar de una.\n• Ya NO existe límite de pérdida de escalón por fase para las unidades de EE.UU. (§14.12): una unidad puede perder más de un escalón en una Fase de Fuego Alemán si es impactada por varias posiciones. Sin embargo, sigue perdiendo como máximo un escalón por impacto de una sola posición.\n• Cada división tiene TRES acciones por turno en lugar de dos.\n• La infantería y los blindados de EE.UU. pueden moverse más de un hex en una sola acción de movimiento.\n• Puedes eliminar una unidad alemana y su depth marker en un único ataque.",
+    "spoken": "sección 14. Cambios principales en el juego extendido:\n• Se extraen DOS cartas de evento por turno.\n• El límite de impactos alemán se DUPLICA (sección 14.11): un uve doble ene con una sola unidad sin depth marker puede impactar a dos unidades de Estados Unidos en lugar de una.\n• Ya NO existe límite de pérdida de escalón por fase para las unidades de Estados Unidos (sección 14.12): una unidad puede perder más de un escalón en una Fase de Fuego Alemán si es impactada por varias posiciones. Sin embargo, sigue perdiendo como máximo un escalón por impacto de una sola posición.\n• Cada división tiene TRES acciones por turno en lugar de dos.\n• La infantería y los blindados de Estados Unidos pueden moverse más de un hex en una sola acción de movimiento.\n• Puedes eliminar una unidad alemana y su depth marker en un único ataque.",
+    "file": "bbd6965710ea.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-8-1#2",
+    "lessonId": "lesson-8-1",
+    "blockIndex": 2,
+    "text": "El juego extendido modifica la secuencia de juego añadiendo fases nuevas (§15). El esquema completo:\nI. Fase de Operaciones Anfibias de EE.UU. (igual que el básico).\nII. Primera Fase de Eventos: extrae una carta de evento.\nIII. Fase de Fuego Alemán: igual que el básico, más la posibilidad de acciones alemanas (§16).\nIV. Segunda Fase de Eventos: extrae otra carta de evento.\nV. Fase de Ingenieros de EE.UU. y HQ: coloca bases de ingenieros y aumenta su rango operativo (§19); convierte HQ en Command Posts y amplía su rango de mando (§18).\nVI. Fase de Acción de EE.UU.: tres acciones por división; situaciones adicionales de acción gratuita (unidades en rango de un CP, unidades moviendo en terreno de playa/pabellón/draw dentro del rango de una base de ingenieros).\nVII. Fin de Turno (igual que el básico).",
+    "spoken": "El juego extendido modifica la secuencia de juego añadiendo fases nuevas (sección 15). El esquema completo:\nI. Fase de Operaciones Anfibias de Estados Unidos (igual que el básico).\nII. Primera Fase de Eventos: extrae una carta de evento.\nIII. Fase de Fuego Alemán: igual que el básico, más la posibilidad de acciones alemanas (sección 16).\nIV. Segunda Fase de Eventos: extrae otra carta de evento.\nV. Fase de Ingenieros de Estados Unidos y cuartel general: coloca bases de ingenieros y aumenta su rango operativo (sección 19); convierte cuartel general en Command Posts y amplía su rango de mando (sección 18).\nVI. Fase de Acción de Estados Unidos: tres acciones por división; situaciones adicionales de acción gratuita (unidades en rango de un CP, unidades moviendo en terreno de playa/pabellón/draw dentro del rango de una base de ingenieros).\nVII. Fin de Turno (igual que el básico).",
+    "file": "788c09b3c63b.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-8-1#3",
+    "lessonId": "lesson-8-1",
+    "blockIndex": 3,
+    "text": "§14.2 — Opción avanzada: Implementación anticipada de acciones alemanas. Los jugadores con experiencia pueden implementar las reglas de acciones alemanas (§16) a partir del turno 12 para mayor realismo y dificultad. Esta opción se recomienda solo para jugadores que ya hayan ganado en el juego extendido. Todas las demás reglas del juego extendido siguen comenzando en el turno 17.",
+    "spoken": "sección 14.2. Opción avanzada: Implementación anticipada de acciones alemanas. Los jugadores con experiencia pueden implementar las reglas de acciones alemanas (sección 16) a partir del turno 12 para mayor realismo y dificultad. Esta opción se recomienda solo para jugadores que ya hayan ganado en el juego extendido. Todas las demás reglas del juego extendido siguen comenzando en el turno 17.",
+    "file": "227169e70eec.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-8-2#0",
+    "lessonId": "lesson-8-2",
+    "blockIndex": 0,
+    "text": "En el juego extendido (§16), las posiciones alemanas pueden realizar ACCIONES además de disparar, según las letras de acción que aparecen junto a los colores de posición en las fire cards. Estas letras (R, A, P, M, F) indican qué hace la posición en lugar de o en vez de disparar, dependiendo de su situación.",
+    "spoken": "En el juego extendido (sección 16), las posiciones alemanas pueden realizar ACCIONES además de disparar, según las letras de acción que aparecen junto a los colores de posición en las fire cards. Estas letras (R, A, P, M, F) indican qué hace la posición en lugar de o en vez de disparar, dependiendo de su situación.",
+    "file": "626244a2b185.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-8-2#1",
+    "lessonId": "lesson-8-2",
+    "blockIndex": 1,
+    "text": "§16 — Procedimiento de acciones alemanas: al extraer la fire card, comprueba TODAS las posiciones cuyo color coincide con la carta:\n• Todas las posiciones WN y de refuerzo ocupadas.\n• Todas las posiciones WN no ocupadas en comunicación alemana.\n• Todas las posiciones de refuerzo no ocupadas a dos hexes o menos de una unidad de EE.UU. y en comunicación alemana.\nPara cada posición, consulta el Resumen de Acciones Alemanas: cruza el tipo de posición con la letra/símbolo en la fire card para determinar si la posición dispara normalmente, realiza una acción, o no hace nada. Las posiciones con unidades disruptas NO realizan ninguna acción; la disrupción se elimina al final de la fase.",
+    "spoken": "sección 16. Procedimiento de acciones alemanas: al extraer la fire card, comprueba TODAS las posiciones cuyo color coincide con la carta:\n• Todas las posiciones uve doble ene y de refuerzo ocupadas.\n• Todas las posiciones uve doble ene no ocupadas en comunicación alemana.\n• Todas las posiciones de refuerzo no ocupadas a dos hexes o menos de una unidad de Estados Unidos y en comunicación alemana.\nPara cada posición, consulta el Resumen de Acciones Alemanas: cruza el tipo de posición con la letra/símbolo en la fire card para determinar si la posición dispara normalmente, realiza una acción, o no hace nada. Las posiciones con unidades disruptas NO realizan ninguna acción; la disrupción se elimina al final de la fase.",
+    "file": "de9ef0f7be16.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-8-2#2",
+    "lessonId": "lesson-8-2",
+    "blockIndex": 2,
+    "text": "Las acciones alemanas son:\n• R — Re-Occupy (WN no ocupado en comunicación): restaura una unidad WN eliminada sin artillería en la posición. Si no hay unidades disponibles, no ocurre nada. R en posición de refuerzo no ocupada en comunicación y a ≤2 hexes de EE.UU.: coloca refuerzo con depth marker (Reinforce, §16.4) si la posición es VP o tiene US en campo de fuego intenso/sostenido.\n• R en posición de refuerzo OCUPADA en comunicación con US en campo de fuego: Re-Supply (§16.2) — si no tiene depth marker, extrae uno y luego dispara.\n• R en posición OCUPADA sin US en campo de fuego: Redeploy (§16.3) — mueve la unidad a una posición vacía en el mismo sector que tenga US en campo de fuego y esté en comunicación.\n• A — Advance (§16.8): posición de refuerzo ocupada con flecha de avance. La unidad 352.ª revelada con depth marker o cualquier unidad no revelada con depth marker intenta moverse a la posición indicada por la flecha. Si EE.UU. resiste (fuerza ≥7), el avance es repulsado. Si no, la unidad avanza y EE.UU. pierde un escalón.\n• A — Ambush (§16.9): posición de refuerzo NO ocupada con US en campo de fuego intenso. Disparo con la columna Ambush de la German Fire Chart.\n• P — Patrol (§16.6): posición de refuerzo ocupada. Disrúpte todas las unidades de EE.UU. en campo de fuego intenso y sostenido, o la más cercana si ninguna está en ese campo.\n• M — Mortar (§16.5): posición ocupada sin US en campo de fuego. Dispara a unidades de EE.UU. dentro del rango de mortero (refuerzo: 3 hexes; WN: 5 hexes en playa, 2 hexes en terreno alto).\n• F (o símbolo de fuego): disparo normal.\n• WN ocupado sin US en campo de fuego: Artillery Fire Action (§16.7) si tiene artillería (88 o 75 mm), impactando una unidad de EE.UU. según la lista de prioridades.",
+    "spoken": "Las acciones alemanas son:\n• R. Re-Occupy (uve doble ene no ocupado en comunicación): restaura una unidad uve doble ene eliminada sin artillería en la posición. Si no hay unidades disponibles, no ocurre nada. R en posición de refuerzo no ocupada en comunicación y a ≤2 hexes de Estados Unidos: coloca refuerzo con depth marker (Reinforce, sección 16.4) si la posición es VP o tiene US en campo de fuego intenso/sostenido.\n• R en posición de refuerzo OCUPADA en comunicación con US en campo de fuego: Re-Supply (sección 16.2). si no tiene depth marker, extrae uno y luego dispara.\n• R en posición OCUPADA sin US en campo de fuego: Redeploy (sección 16.3). mueve la unidad a una posición vacía en el mismo sector que tenga US en campo de fuego y esté en comunicación.\n• A. Advance (sección 16.8): posición de refuerzo ocupada con flecha de avance. La unidad 352.ª revelada con depth marker o cualquier unidad no revelada con depth marker intenta moverse a la posición indicada por la flecha. Si Estados Unidos resiste (fuerza ≥7), el avance es repulsado. Si no, la unidad avanza y Estados Unidos pierde un escalón.\n• A. Ambush (sección 16.9): posición de refuerzo NO ocupada con US en campo de fuego intenso. Disparo con la columna Ambush de la German Fire Chart.\n• P. Patrol (sección 16.6): posición de refuerzo ocupada. Disrúpte todas las unidades de Estados Unidos en campo de fuego intenso y sostenido, o la más cercana si ninguna está en ese campo.\n• M. Mortar (sección 16.5): posición ocupada sin US en campo de fuego. Dispara a unidades de Estados Unidos dentro del rango de mortero (refuerzo: 3 hexes; uve doble ene: 5 hexes en playa, 2 hexes en terreno alto).\n• F (o símbolo de fuego): disparo normal.\n• uve doble ene ocupado sin US en campo de fuego: Artillery Fire Action (sección 16.7) si tiene artillería (88 o 75 mm), impactando una unidad de Estados Unidos según la lista de prioridades.",
+    "file": "422167f94bdd.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-8-2#3",
+    "lessonId": "lesson-8-2",
+    "blockIndex": 3,
+    "text": "§16.8 — Procedimiento de Avance:\n1. Determina la ruta de avance según el diagrama correspondiente.\n2. Si no hay unidades de EE.UU. en la ruta: el alemán avanza directamente.\n3. Si hay unidades de EE.UU. en la ruta: disrupta las unidades que no sean infantería ni tanques, y las de infantería/tanques con el target symbol de la carta.\n4. Suma la fuerza de las unidades no disruptas en la ruta; dobla la fuerza en bocage/edificio.\n   • Si la fuerza de EE.UU. es 7 o más: avance repulsado; el alemán no se mueve ni dispara.\n   • Si la fuerza es menos de 7: el alemán avanza; EE.UU. pierde un escalón (a tu elección) de una unidad en la ruta.",
+    "spoken": "sección 16.8. Procedimiento de Avance:\n1. Determina la ruta de avance según el diagrama correspondiente.\n2. Si no hay unidades de Estados Unidos en la ruta: el alemán avanza directamente.\n3. Si hay unidades de Estados Unidos en la ruta: disrupta las unidades que no sean infantería ni tanques, y las de infantería/tanques con el target symbol de la carta.\n4. Suma la fuerza de las unidades no disruptas en la ruta; dobla la fuerza en bocage/edificio.\n   • Si la fuerza de Estados Unidos es 7 o más: avance repulsado; el alemán no se mueve ni dispara.\n   • Si la fuerza es menos de 7: el alemán avanza; Estados Unidos pierde un escalón (a tu elección) de una unidad en la ruta.",
+    "file": "ac1523eb774c.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-8-3#0",
+    "lessonId": "lesson-8-3",
+    "blockIndex": 0,
+    "text": "El juego extendido introduce mejoras significativas a las capacidades de EE.UU. (§17): tres acciones por división, movimiento multi-hex de infantería y tanques, y la posibilidad de que la artillería realice barrages.",
+    "spoken": "El juego extendido introduce mejoras significativas a las capacidades de Estados Unidos (sección 17): tres acciones por división, movimiento multi-hex de infantería y tanques, y la posibilidad de que la artillería realice barrages.",
+    "file": "cdbc79dc26f2.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-8-3#1",
+    "lessonId": "lesson-8-3",
+    "blockIndex": 1,
+    "text": "§17.1 — Movimiento de dos hexes para infantería y líderes: la infantería (incluida ranger), los HQ y los Generales pueden moverse dos hexes en una acción de movimiento. La infantería NO puede moverse dos hexes si el segundo hex es un hex de bocage (salvo que entre por carretera o sendero) o está en campo de fuego intenso o sostenido de una posición alemana ocupada y no disrupta.\n\n§17.2 — Movimiento de carretera para tanques: los tanques pueden moverse más de un hex si se mueven por carreteras. Desde una carretera secundaria: hasta 2 hexes por carreteras secundarias y principales. Desde una carretera principal: hasta 4 hexes por carreteras principales. El tanque se detiene al entrar en un hex en el campo de fuego intenso de una posición alemana ocupada.\n\n§17.3 — Barrage de artillería: la artillería puede realizar barrages (similar al tanque en el juego básico) si está en rango no adyacente al objetivo, bajo mando de un HQ o CP, y el artillero o una infantería observadora está en el campo de fuego del objetivo.",
+    "spoken": "sección 17.1. Movimiento de dos hexes para infantería y líderes: la infantería (incluida ranger), los cuartel general y los Generales pueden moverse dos hexes en una acción de movimiento. La infantería NO puede moverse dos hexes si el segundo hex es un hex de bocage (salvo que entre por carretera o sendero) o está en campo de fuego intenso o sostenido de una posición alemana ocupada y no disrupta.\n\nsección 17.2. Movimiento de carretera para tanques: los tanques pueden moverse más de un hex si se mueven por carreteras. Desde una carretera secundaria: hasta 2 hexes por carreteras secundarias y principales. Desde una carretera principal: hasta 4 hexes por carreteras principales. El tanque se detiene al entrar en un hex en el campo de fuego intenso de una posición alemana ocupada.\n\nsección 17.3. Barrage de artillería: la artillería puede realizar barrages (similar al tanque en el juego básico) si está en rango no adyacente al objetivo, bajo mando de un cuartel general o CP, y el artillero o una infantería observadora está en el campo de fuego del objetivo.",
+    "file": "4cf05c04f8f7.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-8-3#2",
+    "lessonId": "lesson-8-3",
+    "blockIndex": 2,
+    "text": "Puestos de Mando — Command Posts (§18): a partir del turno 17, puedes convertir unidades HQ en CP durante la Fase de Ingenieros y HQ. Un CP no puede moverse, pero su radio de mando aumenta con el tiempo, permitiéndole mandar unidades a hasta cuatro hexes de distancia. Las unidades dentro del radio de mando de un CP reciben los mismos beneficios que las unidades bajo mando de un HQ (acción gratuita, radio, fuego a distancia de blindados y artillería).",
+    "spoken": "Puestos de Mando. Command Posts (sección 18): a partir del turno 17, puedes convertir unidades cuartel general en CP durante la Fase de Ingenieros y cuartel general. Un CP no puede moverse, pero su radio de mando aumenta con el tiempo, permitiéndole mandar unidades a hasta cuatro hexes de distancia. Las unidades dentro del radio de mando de un CP reciben los mismos beneficios que las unidades bajo mando de un cuartel general (acción gratuita, radio, fuego a distancia de blindados y artillería).",
+    "file": "b00e200a7a53.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-8-3#3",
+    "lessonId": "lesson-8-3",
+    "blockIndex": 3,
+    "text": "§18.1 — Establecer un CP: un HQ puede convertirse en CP en cualquier hex que no esté en el campo de fuego potencial de ninguna posición alemana (incluidas posiciones vacías en comunicación alemana). La conversión se realiza volteando la ficha al lado de CP y colocando el marcador de rango de mando en el primer espacio del track. Esto NO se considera una acción.\n\n§18.3 — Capacidades del CP: manda a todas las unidades de EE.UU. dentro de su rango actual (contando el hex de la unidad mandada, no el del CP). El rango puede contarse a través de hexes en campo de fuego alemán, pero no a través de hexes ocupados por unidades alemanas.\n\n§18.32 — Un CP en el campo de fuego de una posición alemana ocupada NO puede mandar unidades; su rango tampoco puede aumentarse mientras esté en esa situación.\n\n§18.33 — Un CP puede ser alcanzado por fuego alemán. Si es impactado, revierte inmediatamente a unidad HQ (gira la ficha y retira el marcador del track). El CP no es eliminado.",
+    "spoken": "sección 18.1. Establecer un CP: un cuartel general puede convertirse en CP en cualquier hex que no esté en el campo de fuego potencial de ninguna posición alemana (incluidas posiciones vacías en comunicación alemana). La conversión se realiza volteando la ficha al lado de CP y colocando el marcador de rango de mando en el primer espacio del track. Esto NO se considera una acción.\n\nsección 18.3. Capacidades del CP: manda a todas las unidades de Estados Unidos dentro de su rango actual (contando el hex de la unidad mandada, no el del CP). El rango puede contarse a través de hexes en campo de fuego alemán, pero no a través de hexes ocupados por unidades alemanas.\n\nsección 18.32. Un CP en el campo de fuego de una posición alemana ocupada NO puede mandar unidades; su rango tampoco puede aumentarse mientras esté en esa situación.\n\nsección 18.33. Un CP puede ser alcanzado por fuego alemán. Si es impactado, revierte inmediatamente a unidad cuartel general (gira la ficha y retira el marcador del track). El CP no es eliminado.",
+    "file": "c211609a5ea0.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-8-3#4",
+    "lessonId": "lesson-8-3",
+    "blockIndex": 4,
+    "text": "Bases de ingenieros (§19): a partir del turno 17, dispones de cuatro bases de ingenieros (dos por división). Representan ingenieros de combate que facilitan el movimiento de unidades fuera de la playa y por los draws. Una base de ingenieros colocada en un hex de playa aumenta gradualmente su radio operativo. Las unidades que realicen acciones de movimiento en hexes de playa, pabellón o draw dentro del radio operativo de una base actúan de forma gratuita.",
+    "spoken": "Bases de ingenieros (sección 19): a partir del turno 17, dispones de cuatro bases de ingenieros (dos por división). Representan ingenieros de combate que facilitan el movimiento de unidades fuera de la playa y por los draws. Una base de ingenieros colocada en un hex de playa aumenta gradualmente su radio operativo. Las unidades que realicen acciones de movimiento en hexes de playa, pabellón o draw dentro del radio operativo de una base actúan de forma gratuita.",
+    "file": "878ca4a029c7.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-8-4#0",
+    "lessonId": "lesson-8-4",
+    "blockIndex": 0,
+    "text": "Victoria en el juego extendido (§20): la condición de pérdida catastrófica sigue igual que en el juego básico. La victoria se determina en dos comprobaciones: una comprobación a mitad del escenario y una al final. El escenario \"Beyond the Beach\" (§21) tiene setup y condiciones de victoria distintos, diseñados para simular los combates más allá de la playa de Omaha.",
+    "spoken": "Victoria en el juego extendido (sección 20): la condición de pérdida catastrófica sigue igual que en el juego básico. La victoria se determina en dos comprobaciones: una comprobación a mitad del escenario y una al final. El escenario \"Beyond the Beach\" (sección 21) tiene setup y condiciones de victoria distintos, diseñados para simular los combates más allá de la playa de Ómaja.",
+    "file": "5d4181bd854d.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-8-4#1",
+    "lessonId": "lesson-8-4",
+    "blockIndex": 1,
+    "text": "§22 — Variantes opcionales: el juego incluye cuatro variantes que modifican condiciones históricas:\n• §22.1 — Bombardeo Aliado Efectivo: reduce algunas capacidades alemanas al inicio.\n• §22.2 — Primer Oleaje de Tanques Aterriza Sano: permite a los tanques iniciales llegar con menos riesgos.\n• §22.3 — Rangers refuerzan Pointe du Hoc: redistribuye unidades ranger.\n• §22.4 — Reacción Alemana Mejorada: aumenta la dificultad de la respuesta alemana.\nEstas variantes pueden combinarse entre sí y con el juego básico o extendido según las instrucciones del escenario elegido.",
+    "spoken": "sección 22. Variantes opcionales: el juego incluye cuatro variantes que modifican condiciones históricas:\n• sección 22.1. Bombardeo Aliado Efectivo: reduce algunas capacidades alemanas al inicio.\n• sección 22.2. Primer Oleaje de Tanques Aterriza Sano: permite a los tanques iniciales llegar con menos riesgos.\n• sección 22.3. Rangers refuerzan Pointe du Hoc: redistribuye unidades ranger.\n• sección 22.4. Reacción Alemana Mejorada: aumenta la dificultad de la respuesta alemana.\nEstas variantes pueden combinarse entre sí y con el juego básico o extendido según las instrucciones del escenario elegido.",
+    "file": "87a79ad06251.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-8-4#2",
+    "lessonId": "lesson-8-4",
+    "blockIndex": 2,
+    "text": "Variante de Blindados Alemanes (§23): esta variante añade unidades de blindados alemanes que representan los refuerzos de panzer que históricamente podrían haber llegado a Omaha Beach. Los blindados alemanes tienen reglas de setup (§23.1), aparición (§23.2), campo de fuego (§23.3), acciones (§23.4), movimiento (§23.5), y reglas especiales para que EE.UU. los combata (§23.6) y ajustes de VP (§23.7).",
+    "spoken": "Variante de Blindados Alemanes (sección 23): esta variante añade unidades de blindados alemanes que representan los refuerzos de panzer que históricamente podrían haber llegado a Ómaja Beach. Los blindados alemanes tienen reglas de setup (sección 23.1), aparición (sección 23.2), campo de fuego (sección 23.3), acciones (sección 23.4), movimiento (sección 23.5), y reglas especiales para que Estados Unidos los combata (sección 23.6) y ajustes de VP (sección 23.7).",
+    "file": "f23e85e75e75.mp3",
+    "voice": "em_alex"
+  },
+  {
+    "key": "lesson-8-4#3",
+    "lessonId": "lesson-8-4",
+    "blockIndex": 3,
+    "text": "§23.5 — Movimiento de blindados alemanes: los blindados se mueven por rutas predeterminadas impresas en el mapa de movimiento de blindados alemanes (mapa impreso separado). Este mapa no se reproduce en las reglas escritas; es una referencia visual imprescindible para jugar la variante. Las rutas de movimiento están fijadas y las reglas describen las condiciones de entrada, los hexes de inicio y las restricciones de parada.\nNota: este mapa es material físico del juego y no está disponible en estas lecciones. Para jugar la variante §23, necesitas el mapa impreso incluido en la caja del juego.",
+    "spoken": "sección 23.5. Movimiento de blindados alemanes: los blindados se mueven por rutas predeterminadas impresas en el mapa de movimiento de blindados alemanes (mapa impreso separado). Este mapa no se reproduce en las reglas escritas; es una referencia visual imprescindible para jugar la variante. Las rutas de movimiento están fijadas y las reglas describen las condiciones de entrada, los hexes de inicio y las restricciones de parada.\nNota: este mapa es material físico del juego y no está disponible en estas lecciones. Para jugar la variante sección 23, necesitas el mapa impreso incluido en la caja del juego.",
+    "file": "5b7ed4add337.mp3",
     "voice": "em_alex"
   }
 ]
