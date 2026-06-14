@@ -8,3 +8,5 @@ export { SYMBOLOGY } from './lib/symbology';
 export type { SimbologiaRenderAs, SimbologiaEntry, SimbologiaCategory } from './lib/symbology';
 export { SETUP_GUIDE } from './lib/setup-guide';
 export type { SetupStep, SetupStepGroup } from './lib/setup-guide';
+export { HISTORY } from './lib/history';
+export type { HistoriaBlock, HistoriaSection } from './lib/history';

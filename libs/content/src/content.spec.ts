@@ -4,6 +4,7 @@ import { TERMINOLOGY } from './terminology';
 import { PATCHES, applyPatches } from './patches/index';
 import { SYMBOLOGY } from './lib/symbology';
 import { SETUP_GUIDE } from './lib/setup-guide';
+import { HISTORY } from './lib/history';
 
 describe('ALL_MODULES', () => {
   it('contains exactly 8 modules', () => {
@@ -369,6 +370,90 @@ describe('PATCHES', () => {
     const m1 = ALL_MODULES.find((m) => m.id === 'module-1')!;
     const result = applyPatches(m1);
     expect(result).toBe(m1); // same reference when no patches
+  });
+});
+
+describe('HISTORY', () => {
+  it('contains exactly 6 sections', () => {
+    expect(HISTORY).toHaveLength(6);
+  });
+
+  it('all expected section ids are present', () => {
+    const ids = HISTORY.map((s) => s.id);
+    expect(ids).toContain('el-plan');
+    expect(ids).toContain('el-asalto');
+    expect(ids).toContain('las-defensas');
+    expect(ids).toContain('la-crisis');
+    expect(ids).toContain('el-avance');
+    expect(ids).toContain('en-el-juego');
+  });
+
+  it('every section has a non-empty id and titleEs', () => {
+    for (const section of HISTORY) {
+      expect(section.id, `section missing id`).toBeTruthy();
+      expect(section.titleEs, `section "${section.id}" missing titleEs`).toBeTruthy();
+    }
+  });
+
+  it('every section has at least one block', () => {
+    for (const section of HISTORY) {
+      expect(section.blocks.length, `section "${section.id}" has no blocks`).toBeGreaterThan(0);
+    }
+  });
+
+  it('every image block content starts with assets/images/ and has altText', () => {
+    for (const section of HISTORY) {
+      for (const block of section.blocks) {
+        if (block.type === 'image') {
+          expect(
+            block.content.startsWith('assets/images/'),
+            `section "${section.id}" image block has invalid src: "${block.content}"`,
+          ).toBe(true);
+          expect(
+            block.altText,
+            `section "${section.id}" image block missing altText`,
+          ).toBeTruthy();
+        }
+      }
+    }
+  });
+
+  it('every prose block has a sourceRef', () => {
+    for (const section of HISTORY) {
+      for (const block of section.blocks) {
+        if (block.type === 'prose') {
+          expect(
+            block.sourceRef,
+            `section "${section.id}" prose block missing sourceRef`,
+          ).toBeTruthy();
+        }
+      }
+    }
+  });
+
+  it('every pull-quote block has non-empty content', () => {
+    for (const section of HISTORY) {
+      for (const block of section.blocks) {
+        if (block.type === 'pull-quote') {
+          expect(block.content, `section "${section.id}" pull-quote has empty content`).toBeTruthy();
+        }
+      }
+    }
+  });
+
+  it('each section has at least one pull-quote block', () => {
+    for (const section of HISTORY) {
+      const hasPullQuote = section.blocks.some((b) => b.type === 'pull-quote');
+      expect(hasPullQuote, `section "${section.id}" has no pull-quote`).toBe(true);
+    }
+  });
+
+  it('every block has non-empty content', () => {
+    for (const section of HISTORY) {
+      for (const block of section.blocks) {
+        expect(block.content, `section "${section.id}" block has empty content`).toBeTruthy();
+      }
+    }
   });
 });
 
