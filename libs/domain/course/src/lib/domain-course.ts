@@ -7,24 +7,15 @@ export const QUIZ_PASS_THRESHOLD = 0.7;
  * Determines whether a module is unlocked given an array of all course modules
  * and the current progress map.
  *
- * Module 1 is always unlocked (no requiredPriorModuleId).
- * Subsequent modules unlock when the previous module's quiz has been passed.
+ * Free navigation: every known module is always accessible regardless of prior
+ * module completion. Returns false only for an unknown moduleId.
  */
 export function isModuleUnlocked(
   modules: CourseModule[],
   moduleId: string,
-  progressByModule: Record<string, ModuleProgress>,
+  _progressByModule: Record<string, ModuleProgress>,
 ): boolean {
-  const target = modules.find((m) => m.id === moduleId);
-  if (!target) return false;
-
-  // No prerequisite — always unlocked (e.g., Module 1)
-  if (!target.requiredPriorModuleId) return true;
-
-  const priorProgress = progressByModule[target.requiredPriorModuleId];
-  if (!priorProgress) return false;
-
-  return quizPassed(priorProgress.quizResult?.score);
+  return modules.some((m) => m.id === moduleId);
 }
 
 /**

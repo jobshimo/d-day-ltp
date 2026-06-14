@@ -61,78 +61,14 @@ describe('quizPassed', () => {
 
 describe('isModuleUnlocked', () => {
   const module1 = makeModule({ id: 'module-1', order: 1 });
-  const module2 = makeModule({
-    id: 'module-2',
-    order: 2,
-    requiredPriorModuleId: 'module-1',
-  });
-  const module3 = makeModule({
-    id: 'module-3',
-    order: 3,
-    requiredPriorModuleId: 'module-2',
-  });
+  const module2 = makeModule({ id: 'module-2', order: 2 });
+  const module3 = makeModule({ id: 'module-3', order: 3 });
   const modules = [module1, module2, module3];
 
-  it('unlocks Module 1 (no requiredPriorModuleId) regardless of progress', () => {
+  it('unlocks any known module regardless of progress', () => {
     expect(isModuleUnlocked(modules, 'module-1', {})).toBe(true);
-  });
-
-  it('locks Module 2 when Module 1 quiz has no progress', () => {
-    expect(isModuleUnlocked(modules, 'module-2', {})).toBe(false);
-  });
-
-  it('locks Module 2 when Module 1 quiz is not passed (score 0.69)', () => {
-    const progress = {
-      'module-1': makeProgress({
-        moduleId: 'module-1',
-        quizResult: { score: 0.69, passed: false, completedAt: '' },
-      }),
-    };
-    expect(isModuleUnlocked(modules, 'module-2', progress)).toBe(false);
-  });
-
-  it('unlocks Module 2 when Module 1 quiz is passed (score 0.70)', () => {
-    const progress = {
-      'module-1': makeProgress({
-        moduleId: 'module-1',
-        quizResult: { score: 0.7, passed: true, completedAt: '' },
-      }),
-    };
-    expect(isModuleUnlocked(modules, 'module-2', progress)).toBe(true);
-  });
-
-  it('unlocks Module 2 when Module 1 quiz score is above threshold', () => {
-    const progress = {
-      'module-1': makeProgress({
-        moduleId: 'module-1',
-        quizResult: { score: 1.0, passed: true, completedAt: '' },
-      }),
-    };
-    expect(isModuleUnlocked(modules, 'module-2', progress)).toBe(true);
-  });
-
-  it('locks Module 3 even when Module 2 has no progress (chain)', () => {
-    const progress = {
-      'module-1': makeProgress({
-        moduleId: 'module-1',
-        quizResult: { score: 1.0, passed: true, completedAt: '' },
-      }),
-    };
-    expect(isModuleUnlocked(modules, 'module-3', progress)).toBe(false);
-  });
-
-  it('unlocks Module 3 when Module 2 quiz is passed', () => {
-    const progress = {
-      'module-1': makeProgress({
-        moduleId: 'module-1',
-        quizResult: { score: 1.0, passed: true, completedAt: '' },
-      }),
-      'module-2': makeProgress({
-        moduleId: 'module-2',
-        quizResult: { score: 0.8, passed: true, completedAt: '' },
-      }),
-    };
-    expect(isModuleUnlocked(modules, 'module-3', progress)).toBe(true);
+    expect(isModuleUnlocked(modules, 'module-2', {})).toBe(true);
+    expect(isModuleUnlocked(modules, 'module-3', {})).toBe(true);
   });
 
   it('returns false for an unknown moduleId', () => {
