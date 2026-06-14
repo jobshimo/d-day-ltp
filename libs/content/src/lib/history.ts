@@ -118,7 +118,7 @@ export const HISTORY: HistoriaSection[] = [
       {
         type: 'prose',
         content:
-          'A finales de 1943, bajo el mando del mariscal de campo Erwin Rommel, las dos divisiones del Grupo de Ejércitos B intensificaron las mejoras en las defensas de la costa norte de Francia. Rommel creía que la invasión debía ser derrotada en la playa misma, y abogó por colocar reservas en zonas operativas cercanas a los probables puntos de desembarco para poder contraatacar en cuestión de horas. Su convicción: "El enemigo es más débil justo después de desembarcar. Ese es el momento de golpearlo."',
+          'A finales de 1943, bajo el mando del mariscal de campo Erwin Rommel, los dos ejércitos del Grupo de Ejércitos B intensificaron las mejoras en las defensas de la costa norte de Francia. Rommel creía que la invasión debía ser derrotada en la playa misma, y abogó por colocar reservas en zonas operativas cercanas a los probables puntos de desembarco para poder contraatacar en cuestión de horas. Su convicción: "El enemigo es más débil justo después de desembarcar. Ese es el momento de golpearlo."',
         sourceRef: 'Análisis de campaña DDOB (Butterfield)',
       },
       {
@@ -234,7 +234,7 @@ export const HISTORY: HistoriaSection[] = [
       {
         type: 'pull-quote',
         content:
-          'El diseño de Butterfield logra que el jugador aliado experimente la misma tensión que sufrió Bradley: la información es incompleta, los refuerzos llegan tarde y la victoria depende de la iniciativa individual.',
+          'Lo que salvó el día fue que los soldados estadounidenses, ante el fracaso del plan, evaluaron el terreno y al enemigo e improvisaron la victoria.',
         sourceRef: 'Análisis de campaña DDOB (Butterfield)',
       },
       {
