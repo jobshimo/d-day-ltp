@@ -222,8 +222,8 @@ import type { SetupStep, SetupStepGroup } from 'content';
 
     .preparacion__intro {
       font-size: var(--font-size-base);
-      color: var(--color-text-secondary);
-      line-height: var(--line-height-normal);
+      color: var(--color-text-primary);
+      line-height: var(--line-height-relaxed);
       max-width: 68ch;
       margin-bottom: var(--space-6);
     }
