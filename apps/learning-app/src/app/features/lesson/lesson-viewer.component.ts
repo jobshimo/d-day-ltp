@@ -99,7 +99,7 @@ export const LESSON_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
                   <figure class="lesson-block lesson-block--image">
                     <img [src]="block.content"
                          [alt]="block.altText ?? ''"
-                         loading="lazy"
+                         loading="eager"
                          class="lesson-block__img" />
                     @if (block.altText) {
                       <figcaption>{{ block.altText }}</figcaption>
@@ -110,7 +110,7 @@ export const LESSON_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
                   <figure class="lesson-block lesson-block--svg" aria-label="Ilustración del tablero">
                     <img [src]="block.content"
                          [alt]="block.altText ?? 'Ilustración del juego'"
-                         loading="lazy"
+                         loading="eager"
                          class="lesson-block__svg" />
                     @if (block.altText) {
                       <figcaption>{{ block.altText }}</figcaption>
