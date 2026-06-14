@@ -1,8 +1,12 @@
 import type { CourseModule } from 'content-schema';
 import { MODULE_1_LESSONS } from './module-1/lessons';
 import { MODULE_1_DRILLS, MODULE_1_QUIZ } from './module-1/drills';
+import { MODULE_2_LESSONS } from './module-2/lessons';
+import { MODULE_2_DRILLS, MODULE_2_QUIZ } from './module-2/drills';
+import { MODULE_3_LESSONS } from './module-3/lessons';
+import { MODULE_3_DRILLS, MODULE_3_QUIZ } from './module-3/drills';
 import { MODULE_4_LESSONS } from './module-4/lessons';
-import { MODULE_4_DRILLS } from './module-4/drills';
+import { MODULE_4_DRILLS, MODULE_4_QUIZ } from './module-4/drills';
 
 /**
  * Module 1 — "El Juego y Sus Piezas" (The Game and Its Pieces)
@@ -33,9 +37,9 @@ const MODULE_2: CourseModule = {
   titleEs: 'Secuencia de Turno y Desembarco',
   descriptionEs:
     'Aprende la secuencia de juego y cómo funcionan las operaciones anfibias de EE.UU. en la playa.',
-  lessons: [],
-  drills: [],
-  reviewQuiz: [],
+  lessons: MODULE_2_LESSONS,
+  drills: MODULE_2_DRILLS,
+  reviewQuiz: MODULE_2_QUIZ,
 };
 
 /**
@@ -49,9 +53,9 @@ const MODULE_3: CourseModule = {
   titleEs: 'Fuego Alemán: Fundamentos',
   descriptionEs:
     'Domina el sistema de fuego alemán: campos de fuego, resolución de impactos y disruption.',
-  lessons: [],
-  drills: [],
-  reviewQuiz: [],
+  lessons: MODULE_3_LESSONS,
+  drills: MODULE_3_DRILLS,
+  reviewQuiz: MODULE_3_QUIZ,
 };
 
 /**
@@ -68,7 +72,7 @@ const MODULE_4: CourseModule = {
     'Practica la resolución completa del fuego alemán con un escenario interactivo de la regla §6.3.',
   lessons: MODULE_4_LESSONS,
   drills: MODULE_4_DRILLS,
-  reviewQuiz: [],
+  reviewQuiz: MODULE_4_QUIZ,
 };
 
 /**
