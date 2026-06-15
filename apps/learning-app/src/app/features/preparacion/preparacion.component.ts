@@ -38,7 +38,7 @@ import type { SetupStep, SetupStepGroup } from 'content';
           <span class="eyebrow">Orden de operaciones</span>
           <h1 class="sechead__t preparacion__title">Preparación del tablero</h1>
         </div>
-        <div class="sechead__meta">
+        <div class="sechead__meta prep-meta">
           <span class="kicker">ANTES DEL TURNO 1</span>
           <span class="kicker">{{ checkedCount() }}/{{ totalSteps() }} PASOS</span>
         </div>
@@ -188,7 +188,7 @@ import type { SetupStep, SetupStepGroup } from 'content';
               <!-- Group heading row -->
               <div class="prep-group__head">
                 <div class="prep-group__letter display">
-                  {{ group.id.toUpperCase() }}
+                  {{ groupLetter($index) }}
                 </div>
                 <h2 class="display prep-group__title checklist__group-title"
                     [id]="'group-heading-' + group.id">
@@ -251,6 +251,9 @@ import type { SetupStep, SetupStepGroup } from 'content';
       margin-top: 20px;
       margin-bottom: 32px;
     }
+
+    /* Stack the two header meta lines (override inline .kicker) */
+    .prep-meta .kicker { display: block; }
 
     /* ---- Mode toggle ---- */
     .prep-toggle {
@@ -538,6 +541,11 @@ export class PreparacionComponent {
       ? 0
       : Math.round((this.checkedCount() / this.totalSteps()) * 100),
   );
+
+  /** Operations-order letter (A–E) for a group, derived from its position. */
+  groupLetter(index: number): string {
+    return String.fromCharCode(65 + index);
+  }
 
   // ---- Mode toggle ----
 
