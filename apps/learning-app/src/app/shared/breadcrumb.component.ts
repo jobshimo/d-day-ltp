@@ -30,46 +30,48 @@ export interface BreadcrumbItem {
   `,
   styles: [`
     .breadcrumb {
-      padding: var(--space-3) 0;
+      padding: 6px 0;
     }
 
     .breadcrumb__list {
       display: flex;
       align-items: center;
       flex-wrap: wrap;
-      gap: var(--space-1);
+      gap: 4px;
       list-style: none;
       margin: 0;
       padding: 0;
-      font-size: var(--font-size-sm);
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
     }
 
     .breadcrumb__item {
       display: flex;
       align-items: center;
-      gap: var(--space-1);
-      color: var(--color-text-secondary);
+      gap: 4px;
+      color: var(--muted);
     }
 
     .breadcrumb__item--current {
-      color: var(--color-text-primary);
-      font-weight: var(--font-weight-medium);
+      color: var(--muted);
     }
 
     .breadcrumb__link {
-      color: var(--color-accent);
+      color: var(--sand);
       text-decoration: none;
-      transition: color var(--transition-fast);
+      transition: color 120ms ease;
     }
 
     .breadcrumb__link:hover {
-      color: #d4b060;
-      text-decoration: underline;
+      color: var(--accent);
     }
 
     .breadcrumb__sep {
-      color: var(--color-border);
-      font-size: var(--font-size-xs);
+      color: var(--faint);
+      font-size: 11px;
+      line-height: 1;
     }
   `],
 })

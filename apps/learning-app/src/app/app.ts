@@ -8,61 +8,75 @@ import { SessionStore } from 'application-session-store';
   selector: 'app-root',
   template: `
     <a class="skip-link" href="#main-content">Saltar al contenido</a>
-    <nav class="app-nav" aria-label="Navegación principal">
-      <a routerLink="/" class="app-nav__brand">D-Day en Omaha Beach</a>
-
-      <a
-        routerLink="/modules"
-        class="app-nav__link"
-        routerLinkActive="app-nav__active"
-        aria-label="Curso: aprende las reglas módulo a módulo">
-        Curso
+    <nav class="nav" aria-label="Navegación principal">
+      <a routerLink="/" class="nav__brand" aria-label="Inicio — D-Day en Omaha Beach">
+        <span class="nav__mark" aria-hidden="true">D</span>
+        <span class="nav__brandtext">
+          <span class="nav__title">Omaha Beach</span>
+          <span class="nav__sub">Manual de campaña</span>
+        </span>
       </a>
 
-      <a
-        routerLink="/historia"
-        class="app-nav__link"
-        routerLinkActive="app-nav__active"
-        aria-label="Historia del asalto a Omaha Beach">
-        Historia
-      </a>
+      <div class="nav__links">
+        <a
+          routerLink="/"
+          class="nav__link"
+          routerLinkActive="nav__link--active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          aria-label="Inicio">
+          Inicio
+        </a>
+        <a
+          routerLink="/modules"
+          class="nav__link"
+          routerLinkActive="nav__link--active"
+          aria-label="Curso: aprende las reglas módulo a módulo">
+          Curso
+        </a>
+        <a
+          routerLink="/historia"
+          class="nav__link"
+          routerLinkActive="nav__link--active"
+          aria-label="Historia del asalto a Omaha Beach">
+          Historia
+        </a>
+        <a
+          routerLink="/simbologia"
+          class="nav__link"
+          routerLinkActive="nav__link--active"
+          aria-label="Referencia de simbología">
+          Simbología
+        </a>
+        <a
+          routerLink="/preparacion"
+          class="nav__link"
+          routerLinkActive="nav__link--active"
+          aria-label="Guía de preparación de la partida">
+          Preparación
+        </a>
+      </div>
 
-      <a
-        routerLink="/simbologia"
-        class="app-nav__link"
-        routerLinkActive="app-nav__active"
-        aria-label="Referencia de simbología">
-        Simbología
-      </a>
+      <div class="nav__end">
+        <span class="nav__date" aria-hidden="true">6 · JUN · 1944</span>
 
-      <a
-        routerLink="/preparacion"
-        class="app-nav__link"
-        routerLinkActive="app-nav__active"
-        aria-label="Guía de preparación de la partida">
-        Preparación
-      </a>
-
-      <div class="app-nav__end">
         @if (session.isAuthenticated()) {
-          <span class="app-nav__user" aria-label="Usuario autenticado: {{ session.email() }}">
+          <span class="nav__user" aria-label="Usuario autenticado: {{ session.email() }}">
             {{ session.email() }}
           </span>
           <button
             type="button"
-            class="app-nav__logout"
+            class="nav__logout"
             (click)="logout()"
-            aria-label="Cerrar sesión"
-          >
-            Cerrar sesión
+            aria-label="Cerrar sesión">
+            Salir
           </button>
         } @else {
-          <a routerLink="/login" class="app-nav__login" aria-label="Iniciar sesión">
-            Iniciar sesión
+          <a routerLink="/login" class="nav__login" aria-label="Iniciar sesión">
+            Entrar
           </a>
         }
 
-        <a routerLink="/settings" class="app-nav__settings" aria-label="Configuración">
+        <a routerLink="/settings" class="nav__settings" aria-label="Configuración">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
             <path d="M9 11.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z" stroke="currentColor" stroke-width="1.5"/>
             <path d="M14.4 11.1l.9.9-1.5 1.5-.9-.9a5.96 5.96 0 0 1-1.5.6v1.3h-2.1v-1.3a5.96 5.96 0 0 1-1.5-.6l-.9.9-1.5-1.5.9-.9a5.95 5.95 0 0 1-.6-1.5H4.5V7.5h1.2a5.95 5.95 0 0 1 .6-1.5l-.9-.9L7 3.6l.9.9a5.96 5.96 0 0 1 1.5-.6V2.6h2.1v1.3a5.96 5.96 0 0 1 1.5.6l.9-.9 1.5 1.5-.9.9a5.95 5.95 0 0 1 .6 1.5h1.3v2.1h-1.3a5.95 5.95 0 0 1-.7 1.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
@@ -84,142 +98,212 @@ import { SessionStore } from 'application-session-store';
       position: absolute;
       top: -100%;
       left: 0;
-      background: var(--color-accent);
-      color: var(--color-bg);
+      background: var(--accent);
+      color: #190f02;
       padding: var(--space-2) var(--space-4);
-      font-weight: var(--font-weight-semibold);
+      font-family: var(--font-stencil);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 13px;
+      font-weight: 600;
       z-index: 9999;
       transition: top var(--transition-fast);
 
       &:focus { top: 0; }
     }
 
-    .app-nav {
-      display: flex;
-      align-items: center;
-      gap: var(--space-1);
-      padding: 0 var(--space-4);
-      height: var(--header-height);
-      background: var(--color-surface);
-      border-bottom: 1px solid var(--color-border);
+    .nav {
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 200;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      padding: 0 28px;
+      background: rgba(10, 12, 13, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
     }
 
-    .app-nav__brand {
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-accent);
-      text-decoration: none;
-      letter-spacing: 0.02em;
-      margin-right: var(--space-3);
-      white-space: nowrap;
-
-      &:hover { color: #d4b060; }
+    .nav__brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-right: 6px;
     }
 
-    .app-nav__link {
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-medium);
-      color: var(--color-text-secondary);
-      text-decoration: none;
-      padding: var(--space-1) var(--space-2);
-      border-radius: var(--radius-sm);
-      transition: color var(--transition-fast);
-      white-space: nowrap;
+    .nav__mark {
+      width: 34px;
+      height: 34px;
+      flex: none;
+      border: 1.5px solid var(--accent);
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 19px;
+      line-height: 1;
+      position: relative;
 
-      &:hover { color: var(--color-text-primary); }
-
-      &:focus-visible {
-        outline: 2px solid var(--color-accent);
-        outline-offset: 2px;
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 3px;
+        border: 1px solid var(--accent);
+        opacity: 0.35;
       }
     }
 
-    /* Active nav link — routerLinkActive adds this class */
-    .app-nav__active {
-      color: var(--color-text-primary);
-      border-bottom: 2px solid var(--color-accent);
-      padding-bottom: calc(var(--space-1) - 2px);
+    .nav__brandtext {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
     }
 
-    .app-nav__end {
+    .nav__title {
+      font-family: var(--font-stencil);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 13px;
+      color: var(--bone);
+    }
+
+    .nav__sub {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-top: 3px;
+      text-transform: uppercase;
+    }
+
+    .nav__links {
+      display: flex;
+      gap: 2px;
+    }
+
+    .nav__link {
+      font-family: var(--font-stencil);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--sand);
+      padding: 9px 14px;
+      border-radius: 2px;
+      transition: color var(--transition-fast), background var(--transition-fast);
+      position: relative;
+      white-space: nowrap;
+
+      &:hover { color: var(--bone); background: rgba(255, 255, 255, 0.04); }
+
+      &:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: -2px;
+      }
+    }
+
+    .nav__link--active {
+      color: var(--accent);
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 14px;
+        right: 14px;
+        bottom: 2px;
+        height: 2px;
+        background: var(--accent);
+      }
+    }
+
+    .nav__end {
       display: flex;
       align-items: center;
-      gap: var(--space-3);
+      gap: 16px;
       margin-left: auto;
     }
 
-    .app-nav__user {
-      font-size: var(--font-size-sm);
-      color: var(--color-text-secondary);
-      max-width: 200px;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    .nav__date {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
       white-space: nowrap;
     }
 
-    .app-nav__logout {
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-medium);
-      color: var(--color-text-secondary);
-      background: none;
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-sm);
-      padding: var(--space-1) var(--space-3);
+    .nav__user {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--sand);
+      max-width: 180px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding-left: 16px;
+      border-left: 1px solid var(--line);
+    }
+
+    .nav__logout,
+    .nav__login {
+      font-family: var(--font-stencil);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 6px 13px;
+      border-radius: 2px;
       cursor: pointer;
-      transition: color var(--transition-fast), border-color var(--transition-fast);
-
-      &:hover {
-        color: var(--color-text-primary);
-        border-color: var(--color-text-secondary);
-      }
-
-      &:focus-visible {
-        outline: 2px solid var(--color-accent);
-        outline-offset: 2px;
-      }
+      transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
     }
 
-    .app-nav__login {
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-medium);
-      color: var(--color-accent);
-      text-decoration: none;
-      padding: var(--space-1) var(--space-3);
-      border: 1px solid var(--color-accent);
-      border-radius: var(--radius-sm);
-      transition: background var(--transition-fast), color var(--transition-fast);
+    .nav__logout {
+      color: var(--sand);
+      background: none;
+      border: 1px solid var(--line-strong);
 
-      &:hover {
-        background: var(--color-accent);
-        color: var(--color-bg);
-      }
-
-      &:focus-visible {
-        outline: 2px solid var(--color-accent);
-        outline-offset: 2px;
-      }
+      &:hover { color: var(--bone); border-color: var(--sand); }
     }
 
-    .app-nav__settings {
+    .nav__login {
+      color: var(--accent);
+      border: 1px solid var(--accent);
+
+      &:hover { background: var(--accent); color: #190f02; }
+    }
+
+    .nav__logout:focus-visible,
+    .nav__login:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .nav__settings {
       display: flex;
       align-items: center;
-      color: var(--color-text-secondary);
+      color: var(--muted);
       padding: var(--space-2);
-      border-radius: var(--radius-sm);
+      border-radius: 2px;
       transition: color var(--transition-fast);
 
-      &:hover { color: var(--color-text-primary); }
-      &:focus-visible {
-        outline: 2px solid var(--color-accent);
-        outline-offset: 2px;
-      }
+      &:hover { color: var(--accent); }
+      &:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     }
 
     main {
-      min-height: calc(100vh - var(--header-height));
+      min-height: calc(100vh - var(--nav-h));
+    }
+
+    @media (max-width: 880px) {
+      .nav { gap: 14px; padding: 0 16px; overflow-x: auto; }
+      .nav__sub { display: none; }
+      .nav__date { display: none; }
+      .nav__user { display: none; }
     }
   `],
 })

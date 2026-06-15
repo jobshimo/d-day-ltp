@@ -25,17 +25,18 @@ export const MODULE_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink, BreadcrumbComponent],
   template: `
-    <div class="module-home">
+    <div class="module-home screen wrap">
       <app-breadcrumb [items]="breadcrumbs()" />
 
       @if (module()) {
         <header class="module-home__header">
-          <span class="module-home__label">Módulo {{ module()!.order }}</span>
-          <h1 class="module-home__title">{{ module()!.titleEs }}</h1>
-          <p class="module-home__desc">{{ module()!.descriptionEs }}</p>
+          <span class="module-home__label eyebrow">Módulo {{ module()!.order }}</span>
+          <h1 class="module-home__title display">{{ module()!.titleEs }}</h1>
+          <p class="module-home__desc lede">{{ module()!.descriptionEs }}</p>
         </header>
 
         <section class="module-home__section" aria-labelledby="lessons-heading">
+          <p class="module-home__section-kicker" aria-hidden="true">Contenido</p>
           <h2 id="lessons-heading" class="module-home__section-title">Lecciones</h2>
           <ol class="lesson-list" aria-label="Lista de lecciones">
             @for (lesson of module()!.lessons; track lesson.id; let i = $index) {
@@ -57,6 +58,7 @@ export const MODULE_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
 
         @if (module()!.drills.length > 0) {
           <section class="module-home__section" aria-labelledby="drills-heading">
+            <p class="module-home__section-kicker" aria-hidden="true">Práctica</p>
             <h2 id="drills-heading" class="module-home__section-title">Ejercicios</h2>
             <a [routerLink]="['drills', 0]"
                class="module-home__action-link"
@@ -69,6 +71,7 @@ export const MODULE_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
 
         @if (module()!.reviewQuiz.length > 0) {
           <section class="module-home__section" aria-labelledby="quiz-heading">
+            <p class="module-home__section-kicker" aria-hidden="true">Evaluación</p>
             <h2 id="quiz-heading" class="module-home__section-title">Examen de repaso</h2>
             @if (allDrillsDone()) {
               <a [routerLink]="['quiz']"
@@ -97,49 +100,61 @@ export const MODULE_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
   `,
   styles: [`
     .module-home {
-      max-width: var(--max-content-width);
-      margin: 0 auto;
-      padding: var(--space-6) var(--space-4);
+      padding: 60px 0 90px;
     }
 
     .module-home__header {
-      margin-bottom: var(--space-8);
+      margin-bottom: 56px;
     }
 
     .module-home__label {
       display: block;
-      font-size: var(--font-size-xs);
-      font-weight: var(--font-weight-semibold);
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--color-accent);
-      margin-bottom: var(--space-2);
+      letter-spacing: .14em;
+      color: var(--accent);
+      margin-bottom: 10px;
     }
 
     .module-home__title {
-      font-size: var(--font-size-2xl);
-      font-weight: var(--font-weight-bold);
-      color: var(--color-text-primary);
-      margin-bottom: var(--space-3);
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 900;
+      color: var(--bone);
+      line-height: 1.1;
+      margin: 0 0 18px;
     }
 
     .module-home__desc {
-      font-size: var(--font-size-base);
-      color: var(--color-text-secondary);
-      line-height: var(--line-height-normal);
+      font-size: 18px;
+      color: var(--sand);
+      line-height: 1.7;
+      max-width: 640px;
+      margin: 0;
     }
 
     .module-home__section {
-      margin-bottom: var(--space-8);
+      margin-bottom: 56px;
+    }
+
+    .module-home__section-kicker {
+      font-family: 'Oswald', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--faint);
+      margin: 0 0 6px;
     }
 
     .module-home__section-title {
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-semibold);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--color-text-muted);
-      margin-bottom: var(--space-3);
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 700;
+      color: var(--bone);
+      margin: 0 0 20px;
     }
 
     .lesson-list {
@@ -148,114 +163,108 @@ export const MODULE_PROGRESS_REPO = new InjectionToken<ProgressRepository>(
       margin: 0;
       display: flex;
       flex-direction: column;
-      gap: var(--space-2);
+      gap: 6px;
     }
 
     .lesson-item {
       display: flex;
       align-items: center;
-      gap: var(--space-3);
-      padding: var(--space-3) var(--space-4);
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
+      gap: 16px;
+      padding: 18px 22px;
+      background: var(--char);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       text-decoration: none;
-      color: var(--color-text-primary);
-      transition: background var(--transition-fast), border-color var(--transition-fast);
+      color: var(--sand);
+      transition: background 120ms ease, border-color 120ms ease;
     }
 
     .lesson-item:hover {
-      background: var(--color-surface-alt);
-      border-color: var(--color-accent-dim);
+      background: var(--char-2);
+      border-color: var(--line-strong);
     }
 
     .lesson-item:focus-visible {
-      outline: 2px solid var(--color-accent);
+      outline: 2px solid var(--accent);
       outline-offset: 2px;
     }
 
     .lesson-item--done {
-      border-left: 3px solid var(--color-success);
+      border-left: 2px solid var(--accent);
     }
 
     .lesson-item__num {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--color-surface-alt);
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-accent);
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: var(--faint);
       flex-shrink: 0;
+      min-width: 20px;
     }
 
     .lesson-item__title {
       flex: 1;
-      font-size: var(--font-size-base);
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      color: var(--sand);
     }
 
     .lesson-item__check {
-      color: var(--color-success);
-      font-weight: var(--font-weight-bold);
+      color: var(--accent);
+      font-size: 13px;
     }
 
     .module-home__action-link {
       display: inline-flex;
       align-items: center;
-      padding: var(--space-3) var(--space-5);
-      background: var(--color-accent);
-      color: var(--color-bg);
-      border-radius: var(--radius-md);
-      font-weight: var(--font-weight-semibold);
+      padding: 11px 24px;
+      background: var(--accent);
+      color: var(--ink);
+      border-radius: var(--radius);
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
       text-decoration: none;
-      transition: background var(--transition-fast), transform var(--transition-fast);
+      transition: opacity 120ms ease, transform 120ms ease;
     }
 
     .module-home__action-link:hover {
-      background: #d4b060;
+      opacity: .88;
       transform: translateY(-1px);
     }
 
     .module-home__action-link:focus-visible {
-      outline: 2px solid var(--color-accent);
+      outline: 2px solid var(--accent);
       outline-offset: 3px;
     }
 
     .module-home__action-link--done {
-      background: var(--color-success);
-      color: white;
+      background: var(--steel-2);
+      color: var(--muted);
     }
 
     .module-home__locked-msg {
-      font-size: var(--font-size-sm);
-      color: var(--color-text-muted);
-      padding: var(--space-3) var(--space-4);
-      background: var(--color-surface);
-      border: 1px dashed var(--color-border);
-      border-radius: var(--radius-md);
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: var(--faint);
+      letter-spacing: .04em;
+      padding: 14px 18px;
+      background: var(--char);
+      border: 1px dashed var(--line);
+      border-radius: var(--radius);
     }
 
     .module-home__back {
-      margin-top: var(--space-8);
-      padding-top: var(--space-6);
-      border-top: 1px solid var(--color-border);
+      margin-top: 56px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
     }
 
     .module-home__not-found {
-      color: var(--color-text-secondary);
-      margin-bottom: var(--space-4);
+      color: var(--muted);
+      margin-bottom: 16px;
     }
-
-    .back-link {
-      color: var(--color-accent);
-      text-decoration: none;
-      font-size: var(--font-size-sm);
-    }
-
-    .back-link:hover { text-decoration: underline; }
   `],
 })
 export class ModuleHomeComponent implements OnInit {

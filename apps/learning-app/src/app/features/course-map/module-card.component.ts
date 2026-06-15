@@ -1,134 +1,165 @@
-import { Component, Input, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, signal, computed, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { NgTemplateOutlet } from '@angular/common';
 import type { ModuleListEntry } from 'application-course-store';
+import { ALL_MODULES } from 'content';
+
+/** Rule-section range per module — documented in libs/content modules.ts. */
+const SECTION_REFS: Record<string, string> = {
+  'module-1': '§1–§3',
+  'module-2': '§4–§5',
+  'module-3': '§6',
+  'module-4': '§6.3',
+  'module-5': '§7–§8',
+  'module-6': '§9–§10',
+  'module-7': '§11–§13',
+  'module-8': '§14–§23',
+};
+
+interface ModuleDetail {
+  sectionRef: string;
+  lessons: number;
+  drills: number;
+  quiz: number;
+}
 
 @Component({
   standalone: true,
   selector: 'app-module-card',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, NgTemplateOutlet],
+  imports: [RouterLink],
   template: `
     <a [routerLink]="['/modules', modState().moduleId]"
-       class="card card--link"
+       class="card card--hov mod-card"
        [attr.aria-label]="ariaLabel()">
-      <ng-container *ngTemplateOutlet="body" />
-    </a>
 
-    <ng-template #body>
-      <div class="card__header">
-        <span class="card__order">Módulo {{ modState().order }}</span>
-        <span class="card__icon" aria-hidden="true">
-          @if (modState().completionPercent === 100) { ✓ }
-          @else { ● }
-        </span>
-      </div>
+      <div class="display mod-card__num" aria-hidden="true">{{ orderPadded() }}</div>
 
-      <h2 class="card__title">{{ modState().titleEs }}</h2>
-      <p class="card__desc">{{ modState().descriptionEs }}</p>
-
-      <div class="card__progress"
-           role="progressbar"
-           [attr.aria-valuenow]="modState().completionPercent"
-           aria-valuemin="0"
-           aria-valuemax="100"
-           [attr.aria-label]="'Progreso: ' + modState().completionPercent + '%'">
-        <div class="card__bar">
-          <div class="card__fill" [style.width.%]="modState().completionPercent"></div>
+      <div class="mod-card__body">
+        <div class="mod-card__titlerow">
+          <h2 class="serif mod-card__title">{{ modState().titleEs }}</h2>
+          <span class="rule-chip">{{ detail().sectionRef }}</span>
         </div>
-        <span class="card__pct">{{ modState().completionPercent }}%</span>
+        <p class="mod-card__desc">{{ modState().descriptionEs }}</p>
+        <div class="mod-card__meta">
+          <span class="kicker">{{ detail().lessons }} {{ detail().lessons === 1 ? 'lección' : 'lecciones' }}</span>
+          @if (detail().drills > 0) {
+            <span class="kicker">{{ detail().drills }} {{ detail().drills === 1 ? 'ejercicio' : 'ejercicios' }}</span>
+          }
+          @if (detail().quiz > 0) {
+            <span class="kicker">examen · {{ detail().quiz }}</span>
+          }
+        </div>
       </div>
-    </ng-template>
+
+      <div class="mod-card__status">
+        <span class="stencil mod-card__statuslabel">
+          @if (modState().completionPercent >= 100) {
+            <span class="mod-card__check" aria-hidden="true">✓</span> Completado · 100%
+          } @else if (modState().completionPercent > 0) {
+            <span class="mod-card__dot" aria-hidden="true">●</span> En curso · {{ modState().completionPercent }}%
+          } @else {
+            <span class="mod-card__dot" aria-hidden="true">●</span> Disponible
+          }
+        </span>
+        @if (modState().order === 1) {
+          <span class="stamp mod-card__stamp">Empieza aquí</span>
+        }
+        <span class="stencil mod-card__open" aria-hidden="true">Abrir →</span>
+        @if (modState().completionPercent > 0 && modState().completionPercent < 100) {
+          <div class="mod-card__bar" aria-hidden="true">
+            <div class="mod-card__fill" [style.width.%]="modState().completionPercent"></div>
+          </div>
+        }
+      </div>
+    </a>
   `,
   styles: [`
-    :host { display: block; height: 100%; }
+    :host { display: block; }
 
-    .card {
+    .mod-card {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      align-items: center;
+      gap: 28px;
+      padding: 24px 30px;
+      border-left: 2px solid var(--accent);
+      text-decoration: none;
+    }
+
+    .mod-card__num {
+      font-size: 54px;
+      color: var(--steel-2);
+      line-height: 0.8;
+      -webkit-text-stroke: 1px var(--line-strong);
+    }
+
+    .mod-card__titlerow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 7px;
+      flex-wrap: wrap;
+    }
+    .mod-card__title { font-size: 23px; }
+    .mod-card__desc {
+      color: var(--muted);
+      font-size: 15px;
+      margin: 0;
+      line-height: 1.55;
+      max-width: 62ch;
+    }
+    .mod-card__meta { display: flex; gap: 16px; margin-top: 12px; flex-wrap: wrap; }
+
+    .mod-card__status {
+      text-align: right;
       display: flex;
       flex-direction: column;
-      padding: var(--space-5);
-      height: 100%;
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      color: inherit;
-      text-decoration: none;
-      transition: background var(--transition-fast), border-color var(--transition-fast),
-                  transform var(--transition-fast), box-shadow var(--transition-fast);
+      align-items: flex-end;
+      gap: 12px;
+      min-width: 120px;
     }
-
-    .card--link:hover {
-      background: var(--color-surface-alt);
-      border-color: var(--color-accent-dim);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .card--link:focus-visible {
-      outline: 2px solid var(--color-accent);
-      outline-offset: 2px;
-    }
-
-    .card__header {
-      display: flex;
+    .mod-card__statuslabel {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
-      margin-bottom: var(--space-3);
+      gap: 7px;
     }
-
-    .card__order {
-      font-size: var(--font-size-xs);
-      font-weight: var(--font-weight-semibold);
-      text-transform: uppercase;
+    .mod-card__dot { font-size: 9px; }
+    .mod-card__check { font-size: 12px; }
+    .mod-card__stamp { transform: rotate(-2deg); }
+    .mod-card__open {
+      font-size: 13px;
+      color: var(--accent);
       letter-spacing: 0.08em;
-      color: var(--color-accent);
     }
-
-    .card__icon { font-size: var(--font-size-base); }
-
-    .card__title {
-      font-size: var(--font-size-lg);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-text-primary);
-      margin-bottom: var(--space-2);
-      line-height: var(--line-height-tight);
-    }
-
-    .card__desc {
-      flex: 1;
-      font-size: var(--font-size-sm);
-      color: var(--color-text-secondary);
-      line-height: var(--line-height-normal);
-      margin-bottom: var(--space-4);
-    }
-
-    .card__progress {
-      display: flex;
-      align-items: center;
-      gap: var(--space-3);
-    }
-
-    .card__bar {
-      flex: 1;
-      height: 6px;
-      background: var(--color-progress-track);
+    .mod-card__bar {
+      width: 110px;
+      height: 4px;
+      background: var(--steel);
       border-radius: var(--radius-full);
       overflow: hidden;
     }
-
-    .card__fill {
+    .mod-card__fill {
       height: 100%;
-      background: var(--color-progress-fill);
+      background: var(--accent);
       border-radius: var(--radius-full);
       transition: width var(--transition-slow);
     }
 
-    .card__pct {
-      font-size: var(--font-size-xs);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-text-secondary);
-      min-width: 2.5rem;
-      text-align: right;
+    @media (max-width: 680px) {
+      .mod-card { grid-template-columns: 56px 1fr; gap: 16px; padding: 20px 22px; }
+      .mod-card__num { font-size: 40px; }
+      .mod-card__status {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+      .mod-card__stamp { display: none; }
     }
   `],
 })
@@ -149,6 +180,21 @@ export class ModuleCardComponent {
     isPreview: false,
     completionPercent: 0,
   });
+
+  readonly detail = computed<ModuleDetail>(() => {
+    const id = this.modState().moduleId;
+    const mod = ALL_MODULES.find((m) => m.id === id);
+    return {
+      sectionRef: SECTION_REFS[id] ?? '',
+      lessons: mod?.lessons.length ?? 0,
+      drills: mod?.drills.length ?? 0,
+      quiz: mod?.reviewQuiz.length ?? 0,
+    };
+  });
+
+  orderPadded(): string {
+    return String(this.modState().order).padStart(2, '0');
+  }
 
   ariaLabel(): string {
     const m = this.modState();

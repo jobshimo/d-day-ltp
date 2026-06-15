@@ -40,7 +40,7 @@ interface QuizAnswer {
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink, BreadcrumbComponent, RuleRefChipComponent],
   template: `
-    <div class="quiz">
+    <div class="screen wrap" style="padding-bottom:90px">
       <app-breadcrumb [items]="breadcrumbs()" />
 
       @switch (phase()) {
@@ -49,7 +49,7 @@ interface QuizAnswer {
           @if (currentQuestion()) {
             <article class="quiz__article" aria-labelledby="quiz-question">
               <header class="quiz__header">
-                <span class="quiz__progress-label" aria-live="polite">
+                <span class="kicker quiz__progress-label" aria-live="polite">
                   Pregunta {{ currentIndex() + 1 }} de {{ total() }}
                 </span>
                 <div class="quiz__progress-bar"
@@ -60,11 +60,66 @@ interface QuizAnswer {
                   <div class="quiz__progress-fill"
                        [style.width.%]="progressPercent()"></div>
                 </div>
+                <span class="kicker quiz__score-label">
+                  {{ correctCount() }}/{{ currentIndex() }}
+                </span>
               </header>
 
-              <p id="quiz-question" class="quiz__question">
-                {{ currentQuestion()!.questionEs }}
-              </p>
+              <div class="card quiz__question-card">
+                <p id="quiz-question" class="serif quiz__question">
+                  {{ currentQuestion()!.questionEs }}
+                </p>
+
+                <!-- Choice selection (before answering) -->
+                @if (!currentAnswer()) {
+                  <fieldset class="quiz__choices"
+                            aria-label="Opciones de respuesta">
+                    <legend class="sr-only">Elige una respuesta</legend>
+                    @for (choice of displayChoices(); track choice.id; let i = $index) {
+                      <button type="button"
+                              class="choice-option"
+                              [class.choice-option--selected]="selectedChoiceId() === choice.id"
+                              (click)="selectChoice(choice.id)"
+                              [attr.aria-pressed]="selectedChoiceId() === choice.id">
+                        <span class="choice-option__badge mono">{{ ['A','B','C','D','E'][i] }}</span>
+                        <span class="choice-option__label">{{ choice.labelEs }}</span>
+                      </button>
+                    }
+                  </fieldset>
+
+                  <button type="button"
+                          class="btn btn--primary quiz__submit"
+                          [disabled]="!selectedChoiceId()"
+                          (click)="submitCurrentAnswer()"
+                          aria-label="Comprobar respuesta">
+                    Comprobar respuesta
+                  </button>
+                }
+
+                <!-- Post-answer: choices locked with correct/incorrect state -->
+                @if (currentAnswer()) {
+                  <fieldset class="quiz__choices"
+                            disabled
+                            aria-label="Opciones de respuesta">
+                    <legend class="sr-only">Elige una respuesta</legend>
+                    @for (choice of displayChoices(); track choice.id; let i = $index) {
+                      <button type="button"
+                              class="choice-option"
+                              [class.choice-option--correct]="choice.isCorrect"
+                              [class.choice-option--incorrect]="selectedChoiceId() === choice.id && !choice.isCorrect"
+                              [class.choice-option--faded]="!choice.isCorrect && selectedChoiceId() !== choice.id"
+                              disabled>
+                        <span class="choice-option__badge mono">
+                          @if (choice.isCorrect) { ✓ }
+                          @else if (selectedChoiceId() === choice.id && !choice.isCorrect) { ✕ }
+                          @else { {{ ['A','B','C','D','E'][i] }} }
+                        </span>
+                        <span class="choice-option__label">{{ choice.labelEs }}</span>
+                      </button>
+                    }
+                  </fieldset>
+                }
+              </div>
 
               <!-- Question-level feedback (after answering current question) -->
               @if (currentAnswer()) {
@@ -73,50 +128,27 @@ interface QuizAnswer {
                      [class.feedback--incorrect]="!currentAnswer()!.correct"
                      role="alert"
                      aria-live="polite">
-                  <p class="feedback__verdict">
-                    @if (currentAnswer()!.correct) { ✓ Correcto }
-                    @else { ✗ Incorrecto — Respuesta correcta: "{{ currentAnswer()!.correctChoiceLabel }}" }
-                  </p>
+                  <div class="feedback__top-row">
+                    <span class="stencil feedback__verdict">
+                      @if (currentAnswer()!.correct) { Correcto }
+                      @else { Incorrecto }
+                    </span>
+                    <div class="feedback__rules">
+                      @for (ref of currentQuestion()!.ruleRefs; track ref.section) {
+                        <app-rule-ref-chip [ruleRef]="ref" />
+                      }
+                    </div>
+                  </div>
                   <p class="feedback__explanation">
                     {{ currentAnswer()!.explanationEs }}
                   </p>
-                  <div class="feedback__rules">
-                    @for (ref of currentQuestion()!.ruleRefs; track ref.section) {
-                      <app-rule-ref-chip [ruleRef]="ref" />
-                    }
-                  </div>
                 </div>
 
                 <button type="button"
                         class="btn btn--primary"
                         (click)="advanceOrFinish()"
                         aria-label="{{ isLastQuestion() ? 'Ver resultados' : 'Siguiente pregunta' }}">
-                  {{ isLastQuestion() ? 'Ver resultados →' : 'Siguiente pregunta →' }}
-                </button>
-              } @else {
-                <!-- Choice selection -->
-                <fieldset class="quiz__choices"
-                          aria-label="Opciones de respuesta">
-                  <legend class="sr-only">Elige una respuesta</legend>
-                  @for (choice of displayChoices(); track choice.id) {
-                    <label class="choice-option"
-                           [class.choice-option--selected]="selectedChoiceId() === choice.id">
-                      <input type="radio"
-                             name="quiz-answer"
-                             [value]="choice.id"
-                             [checked]="selectedChoiceId() === choice.id"
-                             (change)="selectChoice(choice.id)" />
-                      <span class="choice-option__label">{{ choice.labelEs }}</span>
-                    </label>
-                  }
-                </fieldset>
-
-                <button type="button"
-                        class="btn btn--primary"
-                        [disabled]="!selectedChoiceId()"
-                        (click)="submitCurrentAnswer()"
-                        aria-label="Comprobar respuesta">
-                  Comprobar respuesta
+                  {{ isLastQuestion() ? 'Ver resultado →' : 'Siguiente →' }}
                 </button>
               }
             </article>
@@ -126,31 +158,39 @@ interface QuizAnswer {
         <!-- ── Result phase ── -->
         @case ('result') {
           <div class="quiz-result" role="main" aria-labelledby="result-heading">
-            <div class="quiz-result__score-circle"
-                 [class.quiz-result__score-circle--pass]="quizPassed()"
-                 [class.quiz-result__score-circle--fail]="!quizPassed()"
-                 aria-hidden="true">
-              <span class="quiz-result__score-num">{{ scorePercent() }}%</span>
-            </div>
+            <div class="card quiz-result__card"
+                 [class.quiz-result__card--pass]="quizPassed()"
+                 [class.quiz-result__card--fail]="!quizPassed()">
 
-            <h1 id="result-heading" class="quiz-result__heading">
-              @if (quizPassed()) {
-                ¡Módulo completado!
-              } @else {
-                No aprobado
+              <p class="eyebrow quiz-result__eyebrow">
+                @if (quizPassed()) { Examen superado } @else { Sigue entrenando }
+              </p>
+
+              <h1 id="result-heading" class="quiz-result__heading">
+                @if (quizPassed()) {
+                  Módulo completado
+                } @else {
+                  No aprobado
+                }
+              </h1>
+
+              <p class="display quiz-result__score"
+                 [class.quiz-result__score--pass]="quizPassed()"
+                 [class.quiz-result__score--fail]="!quizPassed()">
+                {{ correctCount() }}/{{ total() }}
+              </p>
+
+              <p class="quiz-result__summary">
+                Respondiste correctamente {{ correctCount() }} de {{ total() }} preguntas
+                (mínimo requerido: {{ minCorrectCount() }}).
+              </p>
+
+              @if (quizPassed() && unlockedModuleTitle()) {
+                <div class="quiz-result__unlock" role="status">
+                  🔓 Has desbloqueado: <strong>{{ unlockedModuleTitle() }}</strong>
+                </div>
               }
-            </h1>
-
-            <p class="quiz-result__summary">
-              Respondiste correctamente {{ correctCount() }} de {{ total() }} preguntas
-              (mínimo requerido: {{ minCorrectCount() }}).
-            </p>
-
-            @if (quizPassed() && unlockedModuleTitle()) {
-              <div class="quiz-result__unlock" role="status">
-                🔓 Has desbloqueado: <strong>{{ unlockedModuleTitle() }}</strong>
-              </div>
-            }
+            </div>
 
             @if (!quizPassed()) {
               <!-- Review incorrect items -->
@@ -159,7 +199,7 @@ interface QuizAnswer {
                   Preguntas incorrectas
                 </h2>
                 @for (ans of incorrectAnswers(); track ans.questionIndex) {
-                  <div class="review-item">
+                  <div class="card review-item">
                     <p class="review-item__q">
                       {{ questions()[ans.questionIndex].questionEs }}
                     </p>
@@ -171,7 +211,7 @@ interface QuizAnswer {
               </section>
 
               <button type="button"
-                      class="btn btn--primary"
+                      class="btn btn--ghost"
                       (click)="retryQuiz()"
                       aria-label="Reintentar el examen">
                 Reintentar
@@ -180,12 +220,12 @@ interface QuizAnswer {
 
             <div class="quiz-result__nav">
               <a [routerLink]="['/modules', moduleId()]"
-                 class="btn btn--secondary"
+                 class="btn btn--primary"
                  aria-label="Volver al módulo">
                 Volver al módulo
               </a>
               <a [routerLink]="['/modules']"
-                 class="btn btn--secondary"
+                 class="btn btn--ghost"
                  aria-label="Ir al mapa del curso">
                 Ver todos los módulos
               </a>
@@ -196,276 +236,276 @@ interface QuizAnswer {
     </div>
   `,
   styles: [`
-    .quiz {
-      max-width: var(--max-content-width);
-      margin: 0 auto;
-      padding: var(--space-6) var(--space-4);
-    }
-
+    /* Answering phase header */
     .quiz__header {
-      margin-bottom: var(--space-6);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
     }
 
     .quiz__progress-label {
-      display: block;
-      font-size: var(--font-size-xs);
-      font-weight: var(--font-weight-semibold);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--color-accent);
-      margin-bottom: var(--space-2);
+      white-space: nowrap;
+    }
+
+    .quiz__score-label {
+      white-space: nowrap;
     }
 
     .quiz__progress-bar {
-      height: 4px;
-      background: var(--color-progress-track);
-      border-radius: var(--radius-full);
+      flex: 1;
+      height: 3px;
+      background: var(--steel);
+      border-radius: var(--radius);
       overflow: hidden;
     }
 
     .quiz__progress-fill {
       height: 100%;
-      background: var(--color-accent);
-      border-radius: var(--radius-full);
-      transition: width var(--transition-slow);
+      background: var(--accent);
+      border-radius: var(--radius);
+      transition: width 0.4s ease;
+    }
+
+    /* Question card */
+    .quiz__question-card {
+      padding: 26px 28px;
+      margin-bottom: 20px;
     }
 
     .quiz__question {
-      font-size: var(--font-size-xl);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-text-primary);
-      line-height: var(--line-height-tight);
-      margin-bottom: var(--space-6);
+      font-size: 18px;
+      color: var(--bone);
+      line-height: 1.5;
+      margin-bottom: 20px;
     }
 
+    /* Choice options */
     .quiz__choices {
       border: none;
       padding: 0;
       margin: 0;
       display: flex;
       flex-direction: column;
-      gap: var(--space-3);
-      margin-bottom: var(--space-5);
+      gap: 10px;
+      margin-bottom: 20px;
     }
 
     .choice-option {
       display: flex;
       align-items: center;
-      gap: var(--space-3);
-      padding: var(--space-3) var(--space-4);
-      background: var(--color-surface);
-      border: 2px solid var(--color-border);
-      border-radius: var(--radius-md);
+      gap: 12px;
+      padding: 12px 15px;
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: 2px;
       cursor: pointer;
-      transition: border-color var(--transition-fast), background var(--transition-fast);
+      text-align: left;
+      color: var(--sand);
+      font-family: var(--font-body);
+      font-size: 15.5px;
+      transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+      width: 100%;
     }
 
-    .choice-option:hover {
-      border-color: var(--color-accent-dim);
-      background: var(--color-surface-alt);
+    .choice-option:hover:not(:disabled):not(.choice-option--correct):not(.choice-option--incorrect) {
+      border-color: var(--line-strong);
     }
 
     .choice-option--selected {
-      border-color: var(--color-accent);
-      background: rgba(200, 160, 74, 0.08);
+      border-color: var(--accent);
     }
 
-    .choice-option input[type="radio"] {
-      width: 18px;
-      height: 18px;
-      accent-color: var(--color-accent);
+    .choice-option--correct {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--bone);
+    }
+
+    .choice-option--incorrect {
+      border-color: var(--blood);
+      background: var(--blood-soft);
+      color: var(--bone);
+    }
+
+    .choice-option--faded {
+      color: var(--faint);
+    }
+
+    .choice-option:disabled {
+      cursor: default;
+    }
+
+    .choice-option__badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
       flex-shrink: 0;
+      border: 1px solid currentColor;
+      border-radius: 2px;
+      font-size: 12px;
+      line-height: 1;
+    }
+
+    .choice-option--correct .choice-option__badge {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .choice-option--incorrect .choice-option__badge {
+      color: var(--blood);
+      border-color: var(--blood);
     }
 
     .choice-option__label {
       flex: 1;
-      font-size: var(--font-size-base);
-      color: var(--color-text-primary);
+      line-height: 1.45;
+    }
+
+    .quiz__submit {
+      margin-top: 4px;
     }
 
     /* Feedback */
     .feedback {
-      padding: var(--space-4) var(--space-5);
-      border-radius: var(--radius-md);
-      margin-bottom: var(--space-5);
+      padding: 18px 20px;
+      border-radius: var(--radius);
+      margin-bottom: 18px;
+      background: var(--char-2);
     }
 
     .feedback--correct {
-      background: var(--color-success-bg);
-      border: 1px solid var(--color-success);
+      border-left: 2px solid var(--accent);
     }
-
-    .feedback--correct .feedback__verdict { color: var(--color-success); }
 
     .feedback--incorrect {
-      background: var(--color-error-bg);
-      border: 1px solid var(--color-error);
+      border-left: 2px solid var(--blood);
     }
 
-    .feedback--incorrect .feedback__verdict { color: var(--color-error); }
+    .feedback__top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
 
     .feedback__verdict {
-      font-size: var(--font-size-base);
-      font-weight: var(--font-weight-bold);
-      margin-bottom: var(--space-2);
+      display: block;
     }
 
+    .feedback--correct .feedback__verdict { color: var(--accent); }
+    .feedback--incorrect .feedback__verdict { color: var(--blood); }
+
     .feedback__explanation {
-      font-size: var(--font-size-sm);
-      color: var(--color-text-primary);
-      line-height: var(--line-height-relaxed);
-      margin-bottom: var(--space-3);
+      font-size: 14.5px;
+      color: var(--sand);
+      line-height: 1.6;
     }
 
     .feedback__rules {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--space-2);
+      gap: 6px;
     }
 
     /* Result screen */
     .quiz-result {
+      max-width: 560px;
+      margin: 0 auto;
+      padding-top: 32px;
+    }
+
+    .quiz-result__card {
+      padding: 44px 36px;
       text-align: center;
-      padding: var(--space-8) var(--space-4);
+      margin-bottom: 32px;
     }
 
-    .quiz-result__score-circle {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 4px solid;
-      margin: 0 auto var(--space-6);
+    .quiz-result__card--pass {
+      border-color: var(--accent);
     }
 
-    .quiz-result__score-circle--pass {
-      border-color: var(--color-success);
-      background: var(--color-success-bg);
+    .quiz-result__card--fail {
+      border-color: var(--blood);
     }
 
-    .quiz-result__score-circle--pass .quiz-result__score-num { color: var(--color-success); }
-
-    .quiz-result__score-circle--fail {
-      border-color: var(--color-error);
-      background: var(--color-error-bg);
-    }
-
-    .quiz-result__score-circle--fail .quiz-result__score-num { color: var(--color-error); }
-
-    .quiz-result__score-num {
-      font-size: var(--font-size-2xl);
-      font-weight: var(--font-weight-bold);
+    .quiz-result__eyebrow {
+      margin-bottom: 6px;
     }
 
     .quiz-result__heading {
-      font-size: var(--font-size-2xl);
-      font-weight: var(--font-weight-bold);
-      color: var(--color-text-primary);
-      margin-bottom: var(--space-3);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--bone);
+      margin-bottom: 20px;
     }
 
+    .quiz-result__score {
+      font-size: 74px;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .quiz-result__score--pass { color: var(--accent); }
+    .quiz-result__score--fail { color: var(--blood); }
+
     .quiz-result__summary {
-      font-size: var(--font-size-base);
-      color: var(--color-text-secondary);
-      margin-bottom: var(--space-6);
+      font-size: 14px;
+      color: var(--sand);
+      line-height: 1.55;
     }
 
     .quiz-result__unlock {
-      padding: var(--space-4) var(--space-5);
-      background: rgba(76, 175, 120, 0.1);
-      border: 1px solid var(--color-success);
-      border-radius: var(--radius-md);
-      color: var(--color-success);
-      font-weight: var(--font-weight-semibold);
-      margin-bottom: var(--space-6);
+      margin-top: 20px;
+      padding: 14px 18px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius);
+      color: var(--bone);
+      font-size: 14px;
     }
 
     .quiz-result__review {
-      text-align: left;
-      margin-bottom: var(--space-6);
+      margin-bottom: 20px;
     }
 
     .quiz-result__review-title {
-      font-size: var(--font-size-lg);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-text-primary);
-      margin-bottom: var(--space-4);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 14px;
     }
 
     .review-item {
-      padding: var(--space-4);
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      margin-bottom: var(--space-3);
+      padding: 16px;
+      margin-bottom: 10px;
     }
 
     .review-item__q {
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-text-primary);
-      margin-bottom: var(--space-2);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--bone);
+      margin-bottom: 6px;
     }
 
     .review-item__explanation {
-      font-size: var(--font-size-sm);
-      color: var(--color-text-secondary);
-      line-height: var(--line-height-normal);
+      font-size: 13px;
+      color: var(--sand);
+      line-height: 1.5;
     }
 
     .quiz-result__nav {
       display: flex;
       justify-content: center;
-      gap: var(--space-3);
+      gap: 12px;
       flex-wrap: wrap;
-      margin-top: var(--space-6);
-    }
-
-    /* Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      padding: var(--space-3) var(--space-5);
-      border: none;
-      border-radius: var(--radius-md);
-      font-size: var(--font-size-base);
-      font-weight: var(--font-weight-semibold);
-      cursor: pointer;
-      text-decoration: none;
-      transition: background var(--transition-fast), transform var(--transition-fast);
-    }
-
-    .btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none !important;
-    }
-
-    .btn:focus-visible {
-      outline: 2px solid var(--color-accent);
-      outline-offset: 3px;
-    }
-
-    .btn--primary {
-      background: var(--color-accent);
-      color: var(--color-bg);
-    }
-
-    .btn--primary:hover:not(:disabled) {
-      background: #d4b060;
-      transform: translateY(-1px);
-    }
-
-    .btn--secondary {
-      background: var(--color-surface-alt);
-      color: var(--color-text-primary);
-      border: 1px solid var(--color-border);
-    }
-
-    .btn--secondary:hover:not(:disabled) {
-      background: var(--color-border);
+      margin-top: 24px;
     }
 
     .sr-only {
