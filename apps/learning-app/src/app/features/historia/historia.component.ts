@@ -1,7 +1,70 @@
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { HISTORY } from 'content';
 import type { HistoriaSection } from 'content';
+
+/** Per-chapter presentation metadata (numeral, time kicker, archival photo).
+ *  Sourced from the design handoff — historically grounded labels and the
+ *  five public-domain U.S. federal photographs. Prose & quotes still come
+ *  from the HISTORY content lib; this only governs presentation. */
+interface ChapterMeta {
+  num: string;
+  time: string;
+  photo?: string;
+  alt?: string;
+  cred?: string;
+  caption?: string;
+}
+
+const CHAPTER_META: Record<string, ChapterMeta> = {
+  'el-plan': {
+    num: 'I',
+    time: 'Enero 1944',
+    photo: 'photos/approaching.jpg',
+    alt: 'Lanchas de desembarco aliadas aproximándose a Omaha Beach',
+    cred: 'U.S. Army Signal Corps · Dominio público',
+    caption: 'Las primeras oleadas se acercaban a la costa normanda en la madrugada del 6 de junio de 1944.',
+  },
+  'el-asalto': {
+    num: 'II',
+    time: '06:30 — H-Hora',
+    photo: 'photos/jaws.jpg',
+    alt: 'Tropas de asalto estadounidenses desembarcando bajo fuego en Omaha Beach',
+    cred: 'U.S. Coast Guard — R. F. Sargent · Dominio público',
+    caption: 'Los primeros soldados se enfrentaron a un fuego devastador sin cobertura de blindados ni apoyo aéreo.',
+  },
+  'las-defensas': {
+    num: 'III',
+    time: 'Otoño 1943',
+  },
+  'la-crisis': {
+    num: 'IV',
+    time: '08:00 — 10:00',
+    photo: 'photos/burning.jpg',
+    alt: 'Defensas alemanas en llamas sobre Omaha Beach',
+    cred: 'DPLA / U.S. Army · Dominio público',
+    caption: 'Los cinco barrancos eran las únicas vías de acceso al interior; el humo cubría la playa.',
+  },
+  'el-avance': {
+    num: 'V',
+    time: '09:30 — Anochecer',
+    photo: 'photos/assault02.jpg',
+    alt: 'Tropas de asalto estadounidenses avanzando desde la playa hacia el terreno elevado',
+    cred: 'U.S. National Archives · Dominio público',
+    caption: 'Al caer la tarde, cuatro regimientos dominaban el terreno elevado a lo largo de toda la playa.',
+  },
+  'en-el-juego': {
+    num: 'VI',
+    time: 'El diseño',
+    photo: 'photos/assault01.jpg',
+    alt: 'Gran grupo de tropas de asalto estadounidenses en Omaha Beach',
+    cred: 'U.S. National Archives · Dominio público',
+    caption: 'El juego reproduce las unidades históricas y la incertidumbre del desembarco.',
+  },
+};
+
+const FALLBACK_META: ChapterMeta = { num: '·', time: '' };
 
 /**
  * HistoriaComponent — narrative history of the Omaha Beach assault.
@@ -18,214 +81,226 @@ import type { HistoriaSection } from 'content';
   standalone: true,
   selector: 'app-historia',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [],
+  imports: [RouterLink],
   template: `
-    <div class="historia">
-      <header class="historia__header">
-        <h1 class="historia__title">Historia: El asalto a Omaha Beach</h1>
-        <p class="historia__intro">
-          El 6 de junio de 1944, las fuerzas estadounidenses asaltaron una franja de arena
-          en la costa del Calvados que desde entonces lleva su nombre en clave: Omaha Beach.
-          Esta página narra los hechos del día D según el análisis de campaña del diseñador
-          del juego, John H. Butterfield.
-        </p>
+    <div class="screen historia">
+      <!-- HEADER BAND -->
+      <header class="historia__hero">
+        <div class="photo historia__hero-photo">
+          <img
+            src="photos/burning.jpg"
+            alt="Defensas alemanas en llamas sobre Omaha Beach el día D"
+            loading="eager"
+          />
+          <span class="photo__cred">DPLA / U.S. Army · Dominio público</span>
+        </div>
+        <div class="historia__hero-grad" aria-hidden="true"></div>
+        <div class="wrap historia__hero-content">
+          <span class="eyebrow">El relato de la batalla</span>
+          <h1 class="display historia__title">El asalto a<br />Omaha Beach</h1>
+          <p class="lede historia__intro">
+            El 6 de junio de 1944, las fuerzas estadounidenses asaltaron una franja de arena de
+            la costa del Calvados. Esta es la crónica del día D según el análisis de campaña de
+            John H. Butterfield, diseñador del juego.
+          </p>
 
-        <!-- Section TOC — buttons with scrollIntoView, not bare href anchors -->
-        <nav class="historia__toc" aria-label="Ir a sección">
-          @for (section of sections; track section.id) {
-            <button
-              type="button"
-              class="historia__toc-link"
-              (click)="scrollToSection(section.id)">
-              {{ section.titleEs }}
-            </button>
-          }
-        </nav>
+          <!-- Section TOC — buttons with scrollIntoView, not bare href anchors -->
+          <nav class="historia__toc" aria-label="Ir a sección">
+            @for (section of sections; track section.id) {
+              <button
+                type="button"
+                class="tag historia__toc-link"
+                (click)="scrollToSection(section.id)">
+                <span class="historia__toc-num" aria-hidden="true">{{ meta(section.id).num }}</span>
+                {{ section.titleEs }}
+              </button>
+            }
+          </nav>
+        </div>
       </header>
 
-      @for (section of sections; track section.id) {
-        <section
-          class="historia__section"
-          [id]="'historia-' + section.id"
-          [attr.aria-labelledby]="'historia-heading-' + section.id">
+      <!-- SECTIONS -->
+      <div class="wrap historia__body">
+        @for (section of sections; track section.id) {
+          <section
+            class="historia__section"
+            [id]="'historia-' + section.id"
+            [attr.aria-labelledby]="'historia-heading-' + section.id">
 
-          <h2
-            class="historia__section-title"
-            [id]="'historia-heading-' + section.id">
-            {{ section.titleEs }}
-          </h2>
+            <div class="historia__sechead">
+              <span class="display historia__num" aria-hidden="true">{{ meta(section.id).num }}</span>
+              <div>
+                @if (meta(section.id).time) {
+                  <div class="kicker historia__time">{{ meta(section.id).time }}</div>
+                }
+                <h2 class="display historia__section-title" [id]="'historia-heading-' + section.id">
+                  {{ section.titleEs }}
+                </h2>
+              </div>
+            </div>
 
-          @for (block of section.blocks; track $index) {
-            @switch (block.type) {
-              @case ('image') {
-                <figure class="historia__figure">
-                  <img
-                    [src]="block.content"
-                    [alt]="block.altText ?? ''"
-                    class="historia__image"
-                    loading="eager"
-                  />
-                  @if (block.caption) {
-                    <figcaption class="historia__figcaption">{{ block.caption }}</figcaption>
+            <div class="historia__grid" [class.historia__grid--solo]="!meta(section.id).photo">
+              <div class="historia__col">
+                @for (block of section.blocks; track $index) {
+                  @switch (block.type) {
+                    @case ('pull-quote') {
+                      <blockquote class="historia__pull-quote">
+                        <p>{{ block.content }}</p>
+                        @if (block.sourceRef) {
+                          <footer class="historia__pull-quote-source">
+                            <cite>{{ block.sourceRef }}</cite>
+                          </footer>
+                        }
+                      </blockquote>
+                    }
+                    @case ('image') {
+                      <!-- inline content images are replaced by the chapter's sticky archival photo -->
+                    }
+                    @default {
+                      <p class="historia__prose">{{ block.content }}</p>
+                    }
                   }
+                }
+              </div>
+
+              @if (meta(section.id).photo) {
+                <figure class="historia__figure">
+                  <div class="photo historia__figure-photo">
+                    <img [src]="meta(section.id).photo" [alt]="meta(section.id).alt ?? ''" loading="lazy" />
+                    <div class="photo__grad" aria-hidden="true"></div>
+                    <span class="photo__cred">{{ meta(section.id).cred }}</span>
+                  </div>
+                  <figcaption class="historia__figcaption">↳ {{ meta(section.id).caption }}</figcaption>
                 </figure>
               }
-              @case ('pull-quote') {
-                <blockquote class="historia__pull-quote">
-                  <p>{{ block.content }}</p>
-                  @if (block.sourceRef) {
-                    <footer class="historia__pull-quote-source">
-                      <cite>{{ block.sourceRef }}</cite>
-                    </footer>
-                  }
-                </blockquote>
-              }
-              @default {
-                <p class="historia__prose">{{ block.content }}</p>
-              }
-            }
-          }
-        </section>
-      }
+            </div>
+          </section>
+        }
+
+        <div class="historia__cta">
+          <span class="eyebrow eyebrow--plain">Continúa</span>
+          <h3 class="display historia__cta-title">Lleva la historia al tablero</h3>
+          <a class="btn btn--primary" routerLink="/modules/module-1">
+            Empezar el curso <span class="btn__arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
     </div>
   `,
   styles: [`
-    .historia {
-      max-width: var(--max-content-width);
-      margin: 0 auto;
-      padding: var(--space-8) var(--space-4);
+    /* ---- HEADER BAND ---- */
+    .historia__hero {
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
     }
-
-    /* ---- Header ---- */
-    .historia__header {
-      margin-bottom: var(--space-10);
+    .historia__hero-photo { position: absolute; inset: 0; height: 100%; }
+    .historia__hero-grad {
+      position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(180deg, rgba(8,10,11,0.7), rgba(8,10,11,0.86) 70%, var(--ink));
     }
-
+    .historia__hero-content { position: relative; padding: 110px 28px 56px; }
     .historia__title {
-      font-size: var(--font-size-3xl);
-      font-weight: var(--font-weight-bold);
-      color: var(--color-text-primary);
+      font-size: clamp(40px, 6vw, 84px);
+      line-height: 0.92;
+      margin: 20px 0 24px;
       letter-spacing: -0.02em;
-      margin-bottom: var(--space-3);
     }
+    .historia__intro { max-width: 64ch; }
 
-    .historia__intro {
-      font-size: var(--font-size-base);
-      color: var(--color-text-primary);
-      line-height: var(--line-height-relaxed);
-      max-width: 68ch;
-      margin-bottom: var(--space-6);
-    }
+    /* ---- TOC ---- */
+    .historia__toc { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 34px; }
+    .historia__toc-link { background: rgba(0,0,0,0.25); }
+    .historia__toc-num { color: var(--accent); margin-right: 7px; }
 
-    /* ---- TOC nav ---- */
-    .historia__toc {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-2);
-    }
-
-    .historia__toc-link {
-      background: none;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: var(--font-size-sm);
-      color: var(--color-accent);
-      text-decoration: none;
-      border: 1px solid var(--color-accent);
-      border-radius: var(--radius-sm);
-      padding: var(--space-1) var(--space-2);
-      transition: background var(--transition-fast), color var(--transition-fast);
-
-      &:hover {
-        background: var(--color-accent);
-        color: var(--color-bg);
-      }
-
-      &:focus-visible {
-        outline: 2px solid var(--color-accent);
-        outline-offset: 2px;
-      }
-    }
-
-    /* ---- Sections ---- */
+    /* ---- BODY / SECTIONS ---- */
+    .historia__body { padding-top: 20px; }
     .historia__section {
-      margin-bottom: var(--space-12);
-      scroll-margin-top: calc(var(--header-height) + var(--space-4));
+      padding: 66px 0;
+      border-bottom: 1px solid var(--line);
+      scroll-margin-top: 80px;
     }
+    .historia__section:last-of-type { border-bottom: none; }
 
-    .historia__section-title {
-      font-size: var(--font-size-2xl);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-text-primary);
-      border-bottom: 1px solid var(--color-border);
-      padding-bottom: var(--space-2);
-      margin-bottom: var(--space-5);
+    .historia__sechead { display: flex; align-items: baseline; gap: 20px; margin-bottom: 8px; }
+    .historia__num {
+      font-size: 64px;
+      color: var(--steel-2);
+      line-height: 0.8;
+      -webkit-text-stroke: 1px var(--line-strong);
+      flex: none;
     }
+    .historia__time { color: var(--accent); }
+    .historia__section-title { font-size: clamp(28px, 3.4vw, 44px); margin-top: 6px; }
 
-    /* ---- Prose blocks ---- */
+    .historia__grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 40px;
+      align-items: start;
+      margin-top: 30px;
+    }
+    .historia__grid--solo { grid-template-columns: 1fr; }
+
+    /* ---- PROSE ---- */
     .historia__prose {
-      font-size: var(--font-size-base);
-      color: var(--color-text-primary);
-      line-height: var(--line-height-relaxed);
-      max-width: 68ch;
-      margin-bottom: var(--space-4);
+      font-size: 18px;
+      line-height: 1.72;
+      color: var(--sand);
+      max-width: 66ch;
+      margin: 0 0 22px;
     }
 
-    /* ---- Images ---- */
-    .historia__figure {
-      margin: var(--space-6) 0;
-    }
-
-    .historia__image {
-      width: 100%;
-      height: auto;
-      max-height: 400px;
-      object-fit: cover;
-      border-radius: var(--radius-md);
-      display: block;
-    }
-
-    .historia__figcaption {
-      font-size: var(--font-size-xs);
-      color: var(--color-text-muted);
-      font-family: var(--font-family-mono, monospace);
-      text-align: center;
-      margin-top: var(--space-2);
-      line-height: var(--line-height-normal);
-    }
-
-    /* ---- Pull quotes ---- */
+    /* ---- PULL QUOTES ---- */
     .historia__pull-quote {
-      border-left: 3px solid var(--color-accent);
-      background: var(--color-surface-alt);
-      border-radius: 0 var(--radius-md) var(--radius-md) 0;
-      padding: var(--space-4) var(--space-5);
-      margin: var(--space-5) 0;
-
-      p {
-        font-size: var(--font-size-lg);
-        font-style: italic;
-        color: var(--color-text-primary);
-        line-height: var(--line-height-relaxed);
-      }
+      margin: 36px 0;
+      padding: 4px 0 4px 30px;
+      border-left: 3px solid var(--accent);
+    }
+    .historia__pull-quote p {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 2.6vw, 32px);
+      font-weight: 700;
+      font-style: italic;
+      line-height: 1.25;
+      color: var(--bone);
+    }
+    .historia__pull-quote-source { margin-top: 10px; }
+    .historia__pull-quote-source cite {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      color: var(--muted);
+      font-style: normal;
+      letter-spacing: 0.06em;
     }
 
-    .historia__pull-quote-source {
-      margin-top: var(--space-2);
-
-      cite {
-        font-size: var(--font-size-xs);
-        color: var(--color-text-muted);
-        font-style: normal;
-      }
+    /* ---- STICKY ARCHIVAL PHOTO ---- */
+    .historia__figure { margin: 0; position: sticky; top: 88px; }
+    .historia__figure-photo {
+      height: min(64vh, 520px);
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+    }
+    .historia__figcaption {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      color: var(--muted);
+      margin-top: 12px;
+      line-height: 1.5;
+      padding-left: 2px;
     }
 
-    /* ---- Responsive ---- */
-    @media (max-width: 480px) {
-      .historia__toc {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+    /* ---- CTA ---- */
+    .historia__cta { padding: 56px 0 80px; text-align: center; }
+    .historia__cta-title { font-size: 32px; margin: 14px 0 24px; }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 820px) {
+      .historia__grid { grid-template-columns: 1fr; gap: 24px; }
+      .historia__figure { position: static; }
+      .historia__figure-photo { height: clamp(280px, 50vh, 420px); }
+      .historia__hero-content { padding: 84px 16px 44px; }
+      .historia__num { font-size: 46px; }
     }
   `],
 })
@@ -234,6 +309,11 @@ export default class HistoriaComponent {
 
   /** All 6 history sections from the content lib. */
   readonly sections: HistoriaSection[] = HISTORY;
+
+  /** Presentation metadata (numeral, time kicker, archival photo) for a chapter. */
+  meta(sectionId: string): ChapterMeta {
+    return CHAPTER_META[sectionId] ?? FALLBACK_META;
+  }
 
   /**
    * Smooth-scroll to a history section. Uses scrollIntoView instead of bare

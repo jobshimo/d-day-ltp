@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 import { describe, it, expect, beforeEach } from 'vitest';
 import HistoriaComponent from './historia.component';
 import { HISTORY } from 'content';
@@ -7,7 +8,7 @@ import { HISTORY } from 'content';
 describe('HistoriaComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HistoriaComponent],
+      imports: [HistoriaComponent, RouterTestingModule],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
@@ -69,13 +70,13 @@ describe('HistoriaComponent', () => {
     }
   });
 
-  it('all images use loading="eager" attribute', () => {
+  it('chapter figures lazy-load (below-the-fold archival photos)', () => {
     const fixture = TestBed.createComponent(HistoriaComponent);
     fixture.detectChanges();
     const imgs = fixture.nativeElement.querySelectorAll('.historia__figure img');
     expect(imgs.length).toBeGreaterThan(0);
     for (const img of Array.from(imgs)) {
-      expect((img as Element).getAttribute('loading')).toBe('eager');
+      expect((img as Element).getAttribute('loading')).toBe('lazy');
     }
   });
 

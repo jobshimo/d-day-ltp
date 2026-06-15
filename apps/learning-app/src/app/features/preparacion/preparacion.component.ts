@@ -28,75 +28,90 @@ import type { SetupStep, SetupStepGroup } from 'content';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CounterComponent],
   template: `
-    <div class="preparacion">
-      <header class="preparacion__header">
-        <h1 class="preparacion__title">Preparación de la partida</h1>
-        <p class="preparacion__intro">
-          Guía paso a paso para preparar <em>D-Day en Omaha Beach</em>
-          antes de tu primera tirada. Basada en la sección §3 del reglamento.
-        </p>
+    <div class="screen wrap section">
 
-        <!-- Mode toggle -->
-        <div class="preparacion__mode-toggle" role="group" aria-label="Modo de visualización">
-          <button
-            type="button"
-            class="mode-btn"
-            [class.mode-btn--active]="mode() === 'learn'"
-            [attr.aria-pressed]="mode() === 'learn'"
-            (click)="setMode('learn')">
-            Aprender
-          </button>
-          <button
-            type="button"
-            class="mode-btn"
-            [class.mode-btn--active]="mode() === 'play'"
-            [attr.aria-pressed]="mode() === 'play'"
-            (click)="setMode('play')">
-            Preparar
-          </button>
+      <!-- ------------------------------------------------------------------ -->
+      <!-- HEADER                                                               -->
+      <!-- ------------------------------------------------------------------ -->
+      <div class="sechead">
+        <div class="sechead__body">
+          <span class="eyebrow">Orden de operaciones</span>
+          <h1 class="sechead__t preparacion__title">Preparación del tablero</h1>
         </div>
-      </header>
+        <div class="sechead__meta">
+          <span class="kicker">ANTES DEL TURNO 1</span>
+          <span class="kicker">{{ checkedCount() }}/{{ totalSteps() }} PASOS</span>
+        </div>
+      </div>
+
+      <p class="lede prep-lede">
+        Sigue la secuencia para dejar la partida lista. Primero se configuran
+        los alemanes —de forma aleatoria, para que nunca sepas qué WN es más
+        fuerte— y después se despliega EE.UU. en el registro de turnos.
+      </p>
+
+      <!-- Mode toggle -->
+      <div class="prep-toggle" role="group" aria-label="Modo de visualización">
+        <button
+          type="button"
+          class="btn btn--sm mode-btn"
+          [class.btn--primary]="mode() === 'learn'"
+          [class.btn--secondary]="mode() !== 'learn'"
+          [class.mode-btn--active]="mode() === 'learn'"
+          [attr.aria-pressed]="mode() === 'learn'"
+          (click)="setMode('learn')">
+          Aprender
+        </button>
+        <button
+          type="button"
+          class="btn btn--sm mode-btn"
+          [class.btn--primary]="mode() === 'play'"
+          [class.btn--secondary]="mode() !== 'play'"
+          [class.mode-btn--active]="mode() === 'play'"
+          [attr.aria-pressed]="mode() === 'play'"
+          (click)="setMode('play')">
+          Preparar
+        </button>
+      </div>
 
       <!-- ------------------------------------------------------------------ -->
       <!-- LEARN MODE: step-by-step stepper                                    -->
       <!-- ------------------------------------------------------------------ -->
       @if (mode() === 'learn') {
-        <section class="preparacion__stepper" aria-label="Guía paso a paso">
+        <section class="prep-stepper preparacion__stepper" aria-label="Guía paso a paso">
 
           <!-- Group context label -->
-          <div class="stepper__group-label" aria-live="polite">
-            {{ currentGroupTitle() }}
-          </div>
+          <span class="eyebrow" aria-live="polite">{{ currentGroupTitle() }}</span>
 
           <!-- Step card -->
           <div
-            class="stepper__step"
+            class="card prep-step-card"
             role="region"
             [attr.aria-label]="'Paso ' + (currentStepIndex() + 1) + ' de ' + totalSteps()">
 
             <!-- Progress header -->
-            <div class="step-header">
-              <span class="step-label">
+            <div class="prep-step-header">
+              <span class="kicker step-label" style="color:var(--accent)">
                 Paso {{ currentStepIndex() + 1 }} de {{ totalSteps() }}
               </span>
-              <div class="step-progress" aria-hidden="true">
+              <div class="prep-dots" aria-hidden="true">
                 @for (i of stepRange(); track i) {
                   <div
-                    class="step-dot"
-                    [class.step-dot--active]="i === currentStepIndex()"
-                    [class.step-dot--done]="i < currentStepIndex()">
+                    class="prep-dot step-dot"
+                    [class.prep-dot--active]="i === currentStepIndex()"
+                    [class.prep-dot--done]="i < currentStepIndex()">
                   </div>
                 }
               </div>
             </div>
 
             <!-- Step content -->
-            <h2 class="step-title">{{ currentStep()?.titleEs }}</h2>
+            <h2 class="serif prep-step-title step-title">{{ currentStep()?.titleEs }}</h2>
             <p class="step-body">{{ currentStep()?.bodyEs }}</p>
 
             <!-- Optional counter visual -->
             @if (currentStep()?.pieceExample; as ex) {
-              <figure class="step-counter" aria-label="Ejemplo de ficha">
+              <figure class="prep-counter" aria-label="Ejemplo de ficha">
                 <ddob-counter
                   [unit]="ex.unit"
                   [side]="ex.side"
@@ -107,17 +122,17 @@ import type { SetupStep, SetupStepGroup } from 'content';
 
             <!-- Optional rule reference chip -->
             @if (currentStep()?.ruleRef; as ref) {
-              <span class="step-rule-ref" [attr.aria-label]="'Referencia de regla ' + ref">
+              <span class="rule-chip" [attr.aria-label]="'Referencia de regla ' + ref">
                 {{ ref }}
               </span>
             }
           </div>
 
           <!-- Navigation -->
-          <div class="stepper__nav">
+          <div class="prep-stepper-nav">
             <button
               type="button"
-              class="btn btn--secondary"
+              class="btn btn--ghost"
               [disabled]="currentStepIndex() === 0"
               (click)="prevStep()"
               aria-label="Paso anterior">
@@ -140,57 +155,85 @@ import type { SetupStep, SetupStepGroup } from 'content';
       <!-- PLAY MODE: grouped checklist                                         -->
       <!-- ------------------------------------------------------------------ -->
       @if (mode() === 'play') {
-        <section class="preparacion__checklist" aria-label="Lista de preparación">
+        <section class="prep-checklist preparacion__checklist" aria-label="Lista de preparación">
 
-          <div class="checklist__actions">
-            <span class="checklist__progress" aria-live="polite">
-              {{ checkedCount() }} / {{ totalSteps() }} pasos completados
-            </span>
-            <button
-              type="button"
-              class="btn btn--secondary btn--sm"
-              (click)="resetChecklist()"
-              aria-label="Reiniciar lista de preparación">
-              Reiniciar
-            </button>
+          <!-- Sticky progress bar -->
+          <div class="prep-progress-bar">
+            <div class="prep-progress-bar__top">
+              <span class="stencil prep-pct">{{ checkedPct() }}% LISTO</span>
+              @if (checkedCount() > 0) {
+                <span
+                  class="kicker prep-reset"
+                  role="button"
+                  tabindex="0"
+                  (click)="resetChecklist()"
+                  (keydown.enter)="resetChecklist()"
+                  (keydown.space)="resetChecklist()"
+                  aria-label="Reiniciar lista de preparación">
+                  Reiniciar
+                </span>
+              }
+            </div>
+            <div class="prep-track">
+              <div class="prep-track__fill" [style.width.%]="checkedPct()"></div>
+            </div>
           </div>
 
           @for (group of groups; track group.id) {
             <section
-              class="checklist__group"
+              class="prep-group"
               [id]="'group-' + group.id"
               [attr.aria-labelledby]="'group-heading-' + group.id">
 
-              <h2
-                class="checklist__group-title"
-                [id]="'group-heading-' + group.id">
-                {{ group.titleEs }}
-              </h2>
+              <!-- Group heading row -->
+              <div class="prep-group__head">
+                <div class="prep-group__letter display">
+                  {{ group.id.toUpperCase() }}
+                </div>
+                <h2 class="display prep-group__title checklist__group-title"
+                    [id]="'group-heading-' + group.id">
+                  {{ group.titleEs }}
+                </h2>
+              </div>
 
-              <ul class="checklist__steps" role="list">
+              <!-- Steps -->
+              <ul class="prep-steps" role="list">
                 @for (step of group.steps; track step.id) {
-                  <li class="checklist__item">
-                    <label
-                      class="checklist__label"
-                      [for]="'step-' + step.id"
-                      [class.checklist__label--checked]="isChecked(step.id)">
-                      <input
-                        type="checkbox"
-                        class="checklist__checkbox"
-                        [id]="'step-' + step.id"
-                        [checked]="isChecked(step.id)"
-                        (change)="toggleStep(step.id)"
-                        [attr.aria-label]="step.checklistLabelEs ?? step.titleEs" />
-                      <span class="checklist__text">
-                        {{ step.checklistLabelEs ?? step.titleEs }}
-                      </span>
-                    </label>
+                  <li
+                    class="card prep-item"
+                    [class.prep-item--checked]="isChecked(step.id)"
+                    role="checkbox"
+                    [attr.aria-checked]="isChecked(step.id)"
+                    [attr.aria-label]="step.checklistLabelEs ?? step.titleEs"
+                    tabindex="0"
+                    (click)="toggleStep(step.id)"
+                    (keydown.enter)="toggleStep(step.id)"
+                    (keydown.space)="toggleStep(step.id)">
 
-                    @if (step.ruleRef) {
-                      <span class="checklist__rule-ref" aria-hidden="true">
-                        {{ step.ruleRef }}
-                      </span>
-                    }
+                    <!-- Custom checkbox box -->
+                    <div
+                      class="prep-checkbox checklist__checkbox"
+                      [class.prep-checkbox--checked]="isChecked(step.id)"
+                      aria-hidden="true">
+                      @if (isChecked(step.id)) { ✓ }
+                    </div>
+
+                    <!-- Step body -->
+                    <div class="prep-item__body">
+                      <div class="prep-item__top">
+                        <span class="serif prep-item__title">
+                          {{ step.checklistLabelEs ?? step.titleEs }}
+                        </span>
+                        @if (step.ruleRef) {
+                          <span class="rule-chip" aria-hidden="true">
+                            {{ step.ruleRef }}
+                          </span>
+                        }
+                      </div>
+                      @if (step.bodyEs) {
+                        <p class="step-body prep-item__desc">{{ step.bodyEs }}</p>
+                      }
+                    </div>
                   </li>
                 }
               </ul>
@@ -198,320 +241,253 @@ import type { SetupStep, SetupStepGroup } from 'content';
           }
         </section>
       }
+
     </div>
   `,
   styles: [`
-    .preparacion {
-      max-width: var(--max-content-width);
-      margin: 0 auto;
-      padding: var(--space-8) var(--space-4);
-    }
-
-    /* ---- Header ---- */
-    .preparacion__header {
-      margin-bottom: var(--space-8);
-    }
-
-    .preparacion__title {
-      font-size: var(--font-size-3xl);
-      font-weight: var(--font-weight-bold);
-      color: var(--color-text-primary);
-      letter-spacing: -0.02em;
-      margin-bottom: var(--space-3);
-    }
-
-    .preparacion__intro {
-      font-size: var(--font-size-base);
-      color: var(--color-text-primary);
-      line-height: var(--line-height-relaxed);
-      max-width: 68ch;
-      margin-bottom: var(--space-6);
+    /* ---- Layout ---- */
+    .prep-lede {
+      max-width: 60ch;
+      margin-top: 20px;
+      margin-bottom: 32px;
     }
 
     /* ---- Mode toggle ---- */
-    .preparacion__mode-toggle {
+    .prep-toggle {
       display: inline-flex;
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      overflow: hidden;
+      gap: 8px;
+      margin-bottom: 40px;
     }
 
-    .mode-btn {
-      padding: var(--space-2) var(--space-5);
-      border: none;
-      background: transparent;
-      color: var(--color-text-secondary);
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-medium);
-      cursor: pointer;
-      transition: background var(--transition-fast), color var(--transition-fast);
-
-      &:hover:not(.mode-btn--active) {
-        background: var(--color-surface-alt);
-        color: var(--color-text-primary);
-      }
-
-      &:focus-visible {
-        outline: 2px solid var(--color-accent);
-        outline-offset: -2px;
-      }
-    }
-
-    .mode-btn--active {
-      background: var(--color-accent);
-      color: var(--color-bg);
-    }
-
-    /* ---- Stepper ---- */
-    .preparacion__stepper {
+    /* ---- LEARN MODE ---- */
+    .prep-stepper {
       display: flex;
       flex-direction: column;
-      gap: var(--space-5);
+      gap: 20px;
     }
 
-    .stepper__group-label {
-      font-size: var(--font-size-xs);
-      font-weight: var(--font-weight-semibold);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--color-accent);
+    .prep-step-card {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
-    .stepper__step {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      padding: var(--space-6);
-    }
-
-    .step-header {
+    .prep-step-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: var(--space-4);
     }
 
-    .step-label {
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-accent);
-    }
-
-    .step-progress {
+    .prep-dots {
       display: flex;
-      gap: var(--space-1);
+      gap: 6px;
       align-items: center;
     }
 
-    .step-dot {
+    .prep-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--color-border);
-      transition: background var(--transition-fast);
+      background: var(--steel);
+      transition: background 150ms;
     }
 
-    .step-dot--active { background: var(--color-accent); }
-    .step-dot--done   { background: var(--color-success); }
+    .prep-dot--active { background: var(--accent); }
+    .prep-dot--done   { background: var(--accent); opacity: .5; }
 
-    .step-title {
-      font-size: var(--font-size-xl);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-text-primary);
-      margin-bottom: var(--space-3);
-    }
-
-    .step-body {
-      font-size: var(--font-size-base);
-      color: var(--color-text-primary);
-      line-height: var(--line-height-relaxed);
-      margin-bottom: var(--space-4);
-    }
-
-    .step-counter {
-      display: flex;
-      justify-content: center;
-      margin-bottom: var(--space-4);
-    }
-
-    .step-rule-ref {
-      display: inline-block;
-      font-size: var(--font-size-xs, 0.75rem);
-      color: var(--color-accent);
-      border: 1px solid var(--color-accent);
-      border-radius: var(--radius-sm);
-      padding: 0 var(--space-1);
-      font-family: var(--font-family-mono, monospace);
-      opacity: 0.8;
-    }
-
-    .stepper__nav {
-      display: flex;
-      gap: var(--space-3);
-      justify-content: space-between;
-    }
-
-    /* ---- Checklist ---- */
-    .preparacion__checklist {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-8);
-    }
-
-    .checklist__actions {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: var(--space-2);
-    }
-
-    .checklist__progress {
-      font-size: var(--font-size-sm);
-      color: var(--color-text-secondary);
-    }
-
-    .checklist__group {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-3);
-    }
-
-    .checklist__group-title {
-      font-size: var(--font-size-lg);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-text-primary);
-      border-bottom: 1px solid var(--color-border);
-      padding-bottom: var(--space-2);
-    }
-
-    .checklist__steps {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-2);
-      list-style: none;
-      padding: 0;
+    .prep-step-title {
+      font-size: 22px;
+      color: var(--bone);
       margin: 0;
     }
 
-    .checklist__item {
-      display: flex;
-      align-items: center;
-      gap: var(--space-2);
+    .step-body {
+      font-size: 14.5px;
+      color: var(--sand);
+      line-height: 1.65;
+      margin: 0;
     }
 
-    .checklist__label {
+    .prep-counter {
+      display: flex;
+      justify-content: center;
+      margin: 4px 0;
+    }
+
+    .prep-stepper-nav {
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+    }
+
+    /* ---- PLAY MODE: sticky progress bar ---- */
+    .prep-progress-bar {
+      position: sticky;
+      top: var(--nav-h);
+      z-index: 50;
+      background: var(--ink);
+      padding: 14px 0 16px;
+      margin-bottom: 32px;
+    }
+
+    .prep-progress-bar__top {
       display: flex;
       align-items: center;
-      gap: var(--space-3);
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .prep-pct {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .prep-reset {
       cursor: pointer;
-      flex: 1;
-      padding: var(--space-3) var(--space-4);
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      transition: background var(--transition-fast), border-color var(--transition-fast);
-
-      &:hover {
-        background: var(--color-surface-alt);
-      }
+      color: var(--muted);
+      transition: color 150ms;
     }
 
-    .checklist__label--checked {
-      background: var(--color-surface-alt);
-      border-color: var(--color-success);
-      opacity: 0.75;
+    .prep-reset:hover { color: var(--bone); }
 
-      .checklist__text {
-        text-decoration: line-through;
-        color: var(--color-text-secondary);
-      }
+    .prep-track {
+      height: 4px;
+      background: var(--steel);
+      border-radius: 2px;
+      overflow: hidden;
     }
 
-    .checklist__checkbox {
+    .prep-track__fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width 250ms ease;
+    }
+
+    /* ---- PLAY MODE: groups ---- */
+    .prep-checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .prep-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .prep-group__head {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 4px;
+    }
+
+    .prep-group__letter {
+      width: 46px;
+      height: 46px;
+      border: 1.5px solid var(--accent);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      font-size: 30px;
       flex-shrink: 0;
-      width: 18px;
-      height: 18px;
-      accent-color: var(--color-success);
+    }
+
+    .prep-group__title {
+      font-size: 24px;
+      color: var(--bone);
+      margin: 0;
+    }
+
+    /* ---- PLAY MODE: step items ---- */
+    .prep-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      list-style: none;
+      padding-left: 62px;
+      margin: 0;
+    }
+
+    .prep-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 18px 20px;
       cursor: pointer;
+      transition: border-color 150ms, background 150ms;
     }
 
-    .checklist__text {
-      font-size: var(--font-size-base);
-      color: var(--color-text-primary);
-      line-height: var(--line-height-normal);
+    .prep-item--checked {
+      border-color: rgba(226, 163, 61, .4);
+      background: var(--char-2);
     }
 
-    .checklist__rule-ref {
-      font-size: var(--font-size-xs, 0.75rem);
-      color: var(--color-accent);
-      border: 1px solid var(--color-accent);
-      border-radius: var(--radius-sm);
-      padding: 0 var(--space-1);
-      font-family: var(--font-family-mono, monospace);
-      opacity: 0.8;
-      white-space: nowrap;
+    .prep-item--checked .prep-item__title {
+      color: var(--muted);
+      text-decoration: line-through;
     }
 
-    /* ---- Shared buttons ---- */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      padding: var(--space-2) var(--space-5);
-      border: none;
-      border-radius: var(--radius-md);
-      font-size: var(--font-size-base);
-      font-weight: var(--font-weight-semibold);
-      cursor: pointer;
-      transition: background var(--transition-fast), transform var(--transition-fast);
-
-      &:disabled {
-        opacity: 0.4;
-        cursor: not-allowed;
-        transform: none !important;
-      }
-
-      &:focus-visible {
-        outline: 2px solid var(--color-accent);
-        outline-offset: 3px;
-      }
+    .prep-item--checked .prep-item__desc {
+      opacity: .6;
     }
 
-    .btn--primary {
-      background: var(--color-accent);
-      color: var(--color-bg);
-
-      &:hover:not(:disabled) {
-        background: #d4b060;
-        transform: translateY(-1px);
-      }
+    /* Custom checkbox */
+    .prep-checkbox {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border: 1.5px solid var(--line-strong);
+      border-radius: 3px;
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      color: #190f02;
+      transition: background 150ms, border-color 150ms;
     }
 
-    .btn--secondary {
-      background: var(--color-surface-alt);
-      color: var(--color-text-primary);
-      border: 1px solid var(--color-border);
-
-      &:hover:not(:disabled) {
-        background: var(--color-border);
-      }
+    .prep-checkbox--checked {
+      background: var(--accent);
+      border-color: var(--accent);
     }
 
-    .btn--sm {
-      padding: var(--space-1) var(--space-3);
-      font-size: var(--font-size-sm);
+    /* Item body */
+    .prep-item__body {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .prep-item__top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .prep-item__title {
+      font-size: 18px;
+      color: var(--bone);
+    }
+
+    .prep-item__desc {
+      font-size: 14.5px;
+      color: var(--muted);
+      margin: 0;
     }
 
     /* ---- Responsive ---- */
     @media (max-width: 480px) {
-      .step-progress {
-        display: none;
-      }
+      .prep-dots { display: none; }
 
-      .checklist__actions {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--space-2);
-      }
+      .prep-steps { padding-left: 0; }
+
+      .prep-group__head { flex-wrap: wrap; }
     }
   `],
 })
@@ -555,6 +531,13 @@ export class PreparacionComponent {
 
   /** Number of checked steps. */
   readonly checkedCount = computed<number>(() => this.checkedSteps().size);
+
+  /** Percentage of checked steps (0–100, integer). */
+  readonly checkedPct = computed<number>(() =>
+    this.totalSteps() === 0
+      ? 0
+      : Math.round((this.checkedCount() / this.totalSteps()) * 100),
+  );
 
   // ---- Mode toggle ----
 

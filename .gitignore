@@ -43,6 +43,9 @@ test-results/
 
 .angular
 
+# Design handoff (visual reference only — not part of the repo)
+design/
+
 # TTS tooling (local Python venv + scratch audio); generated narration assets
 # live under libs/content/src/assets/audio and ARE committed.
 tools/tts/.venv/

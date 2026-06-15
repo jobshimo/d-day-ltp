@@ -24,13 +24,13 @@ import { BoardSnippetComponent } from 'ui-board-renderer';
   imports: [RouterLink, BreadcrumbComponent, RuleRefChipComponent, BoardSnippetComponent],
   providers: [DrillStore],
   template: `
-    <div class="drill">
+    <div class="screen wrap" style="padding-bottom:90px">
       <app-breadcrumb [items]="breadcrumbs()" />
 
       @if (drill()) {
         <article class="drill__article" aria-labelledby="drill-question">
           <header class="drill__header">
-            <span class="drill__progress-label">
+            <span class="kicker drill__progress-label">
               Ejercicio {{ drillIndex() + 1 }} de {{ totalDrills() }}
             </span>
             <div class="drill__progress-bar"
@@ -45,13 +45,13 @@ import { BoardSnippetComponent } from 'ui-board-renderer';
 
           <!-- Question -->
           <div class="drill__question-section">
-            <p id="drill-question" class="drill__question">
+            <p id="drill-question" class="serif drill__question">
               {{ drill()!.questionEs }}
             </p>
 
             <!-- Attempt indicator -->
             @if (store.attempts() > 0 && !resolved()) {
-              <p class="drill__attempts"
+              <p class="kicker drill__attempts"
                  role="status"
                  aria-live="polite">
                 Intento {{ store.attempts() }} de {{ store.maxAttempts }}
@@ -64,7 +64,7 @@ import { BoardSnippetComponent } from 'ui-board-renderer';
 
           <!-- Board snippet (shown for interactive-select drills) -->
           @if (drill()!.boardSnippet) {
-            <div class="drill__board-section">
+            <div class="card drill__board-section">
               <ddob-board-snippet
                 [snippet]="boardSnippetWithHighlights()"
                 [interactive]="drill()!.type === 'interactive-select' && !resolved()"
@@ -90,29 +90,25 @@ import { BoardSnippetComponent } from 'ui-board-renderer';
                       [disabled]="resolved()"
                       aria-label="Opciones de respuesta">
               <legend class="sr-only">Elige una respuesta</legend>
-              @for (choice of displayChoices(); track choice.id) {
-                <label class="choice-option"
-                       [class.choice-option--selected]="selectedChoiceId() === choice.id"
-                       [class.choice-option--correct]="resolved() && choice.isCorrect"
-                       [class.choice-option--incorrect]="resolved() && selectedChoiceId() === choice.id && !choice.isCorrect">
-                  <input type="radio"
-                         name="drill-answer"
-                         [value]="choice.id"
-                         [checked]="selectedChoiceId() === choice.id"
-                         [disabled]="resolved()"
-                         (change)="selectChoice(choice.id)"
-                         [attr.aria-describedby]="'choice-desc-' + choice.id" />
-                  <span class="choice-option__label">{{ choice.labelEs }}</span>
-                  @if (resolved() && choice.isCorrect) {
-                    <span class="choice-option__indicator choice-option__indicator--correct"
-                          [id]="'choice-desc-' + choice.id"
-                          aria-label="Respuesta correcta">✓</span>
-                  } @else if (resolved() && selectedChoiceId() === choice.id && !choice.isCorrect) {
-                    <span class="choice-option__indicator choice-option__indicator--incorrect"
-                          [id]="'choice-desc-' + choice.id"
-                          aria-label="Respuesta incorrecta">✗</span>
-                  }
-                </label>
+              @for (choice of displayChoices(); track choice.id; let i = $index) {
+                <button type="button"
+                        class="choice-option"
+                        [class.choice-option--selected]="selectedChoiceId() === choice.id"
+                        [class.choice-option--correct]="resolved() && choice.isCorrect"
+                        [class.choice-option--incorrect]="resolved() && selectedChoiceId() === choice.id && !choice.isCorrect"
+                        [class.choice-option--faded]="resolved() && !choice.isCorrect && selectedChoiceId() !== choice.id"
+                        [disabled]="resolved()"
+                        (click)="selectChoice(choice.id)"
+                        [attr.aria-describedby]="'choice-desc-' + choice.id"
+                        [attr.aria-pressed]="selectedChoiceId() === choice.id">
+                  <span class="choice-option__badge mono">
+                    @if (resolved() && choice.isCorrect) { ✓ }
+                    @else if (resolved() && selectedChoiceId() === choice.id && !choice.isCorrect) { ✕ }
+                    @else { {{ ['A','B','C','D','E'][i] }} }
+                  </span>
+                  <span class="choice-option__label"
+                        [id]="'choice-desc-' + choice.id">{{ choice.labelEs }}</span>
+                </button>
               }
             </fieldset>
           }
@@ -120,7 +116,7 @@ import { BoardSnippetComponent } from 'ui-board-renderer';
           <!-- Submit button (shown until the drill is resolved; stays available to retry) -->
           @if (!resolved()) {
             <button type="button"
-                    class="btn btn--primary"
+                    class="btn btn--primary drill__submit"
                     [disabled]="!canSubmit() || store.submitting()"
                     (click)="submitAnswer()"
                     aria-label="Comprobar respuesta">
@@ -135,27 +131,34 @@ import { BoardSnippetComponent } from 'ui-board-renderer';
                  [class.feedback--incorrect]="!store.lastResult()!.correct"
                  role="alert"
                  aria-live="polite">
-              <p class="feedback__verdict">
-                @if (store.lastResult()!.correct) {
-                  ✓ Correcto
-                } @else if (store.isRevealed()) {
-                  Respuesta revelada — superaste el límite de intentos
-                } @else {
-                  ✗ Incorrecto
+              <div class="feedback__top-row">
+                <span class="stencil feedback__verdict">
+                  @if (store.lastResult()!.correct) {
+                    Correcto
+                  } @else if (store.isRevealed()) {
+                    Respuesta revelada
+                  } @else {
+                    Incorrecto
+                  }
+                </span>
+                @if (resolved()) {
+                  <div class="feedback__rules" aria-label="Referencias de reglas">
+                    @for (ref of store.lastResult()!.ruleRefs; track ref.section) {
+                      <app-rule-ref-chip [ruleRef]="ref" />
+                    }
+                  </div>
                 }
-              </p>
+              </div>
+
+              @if (store.isRevealed() && resolved()) {
+                <p class="feedback__revealed-header">¿Cuál es la respuesta correcta?</p>
+              }
 
               @if (resolved()) {
                 <!-- Full explanation only once the drill is resolved -->
                 <p class="feedback__explanation">
                   {{ store.lastResult()!.explanationEs }}
                 </p>
-
-                <div class="feedback__rules" aria-label="Referencias de reglas">
-                  @for (ref of store.lastResult()!.ruleRefs; track ref.section) {
-                    <app-rule-ref-chip [ruleRef]="ref" />
-                  }
-                </div>
               } @else {
                 <!-- Wrong but attempts remain: encourage a retry without revealing the answer -->
                 <p class="feedback__explanation">
@@ -178,7 +181,7 @@ import { BoardSnippetComponent } from 'ui-board-renderer';
                 </button>
               } @else {
                 <button type="button"
-                        class="btn btn--success"
+                        class="btn btn--primary"
                         (click)="goToQuiz()"
                         aria-label="Ir al examen de repaso">
                   Ir al examen →
@@ -203,55 +206,44 @@ import { BoardSnippetComponent } from 'ui-board-renderer';
     </div>
   `,
   styles: [`
-    .drill {
-      max-width: var(--max-content-width);
-      margin: 0 auto;
-      padding: var(--space-6) var(--space-4);
-    }
-
     .drill__header {
-      margin-bottom: var(--space-6);
+      margin-bottom: 24px;
     }
 
     .drill__progress-label {
       display: block;
-      font-size: var(--font-size-xs);
-      font-weight: var(--font-weight-semibold);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--color-accent);
-      margin-bottom: var(--space-2);
+      margin-bottom: 8px;
     }
 
     .drill__progress-bar {
-      height: 4px;
-      background: var(--color-progress-track);
-      border-radius: var(--radius-full);
+      height: 3px;
+      background: var(--steel);
+      border-radius: var(--radius);
       overflow: hidden;
     }
 
     .drill__progress-fill {
       height: 100%;
-      background: var(--color-accent);
-      border-radius: var(--radius-full);
-      transition: width var(--transition-slow);
+      background: var(--accent);
+      border-radius: var(--radius);
+      transition: width 0.4s ease;
     }
 
     .drill__question-section {
-      margin-bottom: var(--space-6);
+      margin-bottom: 28px;
     }
 
     .drill__question {
-      font-size: var(--font-size-xl);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-text-primary);
-      line-height: var(--line-height-tight);
-      margin-bottom: var(--space-3);
+      font-size: 18px;
+      color: var(--bone);
+      line-height: 1.5;
+      margin-bottom: 10px;
     }
 
     .drill__attempts {
-      font-size: var(--font-size-sm);
-      color: var(--color-warning);
+      display: block;
+      margin-top: 8px;
+      color: var(--amber);
     }
 
     /* Choice options */
@@ -261,182 +253,172 @@ import { BoardSnippetComponent } from 'ui-board-renderer';
       margin: 0;
       display: flex;
       flex-direction: column;
-      gap: var(--space-3);
-      margin-bottom: var(--space-5);
+      gap: 10px;
+      margin-bottom: 22px;
     }
 
     .choice-option {
       display: flex;
       align-items: center;
-      gap: var(--space-3);
-      padding: var(--space-3) var(--space-4);
-      background: var(--color-surface);
-      border: 2px solid var(--color-border);
-      border-radius: var(--radius-md);
+      gap: 12px;
+      padding: 12px 15px;
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: 2px;
       cursor: pointer;
-      transition: border-color var(--transition-fast), background var(--transition-fast);
+      text-align: left;
+      color: var(--sand);
+      font-family: var(--font-body);
+      font-size: 15.5px;
+      transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+      width: 100%;
     }
 
-    .choice-option:hover {
-      border-color: var(--color-accent-dim);
-      background: var(--color-surface-alt);
+    .choice-option:hover:not(:disabled):not(.choice-option--correct):not(.choice-option--incorrect) {
+      border-color: var(--line-strong);
     }
 
     .choice-option--selected {
-      border-color: var(--color-accent);
-      background: rgba(200, 160, 74, 0.08);
+      border-color: var(--accent);
     }
 
     .choice-option--correct {
-      border-color: var(--color-success);
-      background: var(--color-success-bg);
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--bone);
     }
 
     .choice-option--incorrect {
-      border-color: var(--color-error);
-      background: var(--color-error-bg);
+      border-color: var(--blood);
+      background: var(--blood-soft);
+      color: var(--bone);
     }
 
-    .choice-option input[type="radio"] {
-      width: 18px;
-      height: 18px;
-      accent-color: var(--color-accent);
+    .choice-option--faded {
+      color: var(--faint);
+    }
+
+    .choice-option:disabled {
+      cursor: default;
+    }
+
+    .choice-option__badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
       flex-shrink: 0;
+      border: 1px solid currentColor;
+      border-radius: 2px;
+      font-size: 12px;
+      line-height: 1;
+    }
+
+    .choice-option--correct .choice-option__badge {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .choice-option--incorrect .choice-option__badge {
+      color: var(--blood);
+      border-color: var(--blood);
     }
 
     .choice-option__label {
       flex: 1;
-      font-size: var(--font-size-base);
-      color: var(--color-text-primary);
-      line-height: var(--line-height-normal);
+      line-height: 1.45;
     }
 
-    .choice-option__indicator {
-      font-weight: var(--font-weight-bold);
-      font-size: var(--font-size-lg);
+    /* Submit */
+    .drill__submit {
+      margin-bottom: 24px;
     }
-
-    .choice-option__indicator--correct { color: var(--color-success); }
-    .choice-option__indicator--incorrect { color: var(--color-error); }
 
     /* Feedback */
     .feedback {
-      padding: var(--space-5);
-      border-radius: var(--radius-md);
-      margin-bottom: var(--space-5);
+      padding: 18px 20px;
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+      background: var(--char-2);
     }
 
     .feedback--correct {
-      background: var(--color-success-bg);
-      border: 1px solid var(--color-success);
+      border-left: 2px solid var(--accent);
     }
-
-    .feedback--correct .feedback__verdict { color: var(--color-success); }
 
     .feedback--incorrect {
-      background: var(--color-error-bg);
-      border: 1px solid var(--color-error);
+      border-left: 2px solid var(--blood);
     }
 
-    .feedback--incorrect .feedback__verdict { color: var(--color-error); }
+    .feedback__top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
 
     .feedback__verdict {
-      font-size: var(--font-size-lg);
-      font-weight: var(--font-weight-bold);
-      margin-bottom: var(--space-3);
+      display: block;
+    }
+
+    .feedback--correct .feedback__verdict { color: var(--accent); }
+    .feedback--incorrect .feedback__verdict { color: var(--blood); }
+
+    .feedback__revealed-header {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 6px;
     }
 
     .feedback__explanation {
-      font-size: var(--font-size-base);
-      color: var(--color-text-primary);
-      line-height: var(--line-height-relaxed);
-      margin-bottom: var(--space-3);
+      font-size: 14.5px;
+      color: var(--sand);
+      line-height: 1.6;
     }
 
     .feedback__rules {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--space-2);
+      gap: 6px;
     }
 
     /* Navigation */
     .drill__nav {
-      margin-bottom: var(--space-5);
+      margin-bottom: 20px;
     }
 
     .drill__back {
-      padding-top: var(--space-6);
-      border-top: 1px solid var(--color-border);
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
     }
 
     /* Board section for interactive-select drills */
     .drill__board-section {
-      margin-bottom: var(--space-6);
+      margin-bottom: 24px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: var(--space-3);
+      gap: 12px;
     }
 
     .drill__board-hint {
-      font-size: var(--font-size-sm);
-      color: var(--color-text-secondary);
+      font-size: 13px;
+      color: var(--muted);
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: var(--space-2);
+      gap: 8px;
     }
 
     .drill__selected-count {
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-accent);
-      background: rgba(200, 160, 74, 0.1);
-      padding: 2px var(--space-2);
-      border-radius: var(--radius-sm);
-    }
-
-    /* Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      padding: var(--space-3) var(--space-5);
-      border: none;
-      border-radius: var(--radius-md);
-      font-size: var(--font-size-base);
-      font-weight: var(--font-weight-semibold);
-      cursor: pointer;
-      transition: background var(--transition-fast), transform var(--transition-fast);
-    }
-
-    .btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none !important;
-    }
-
-    .btn:focus-visible {
-      outline: 2px solid var(--color-accent);
-      outline-offset: 3px;
-    }
-
-    .btn--primary {
-      background: var(--color-accent);
-      color: var(--color-bg);
-    }
-
-    .btn--primary:hover:not(:disabled) {
-      background: #d4b060;
-      transform: translateY(-1px);
-    }
-
-    .btn--success {
-      background: var(--color-success);
-      color: white;
-    }
-
-    .btn--success:hover:not(:disabled) {
-      background: #3d9963;
-      transform: translateY(-1px);
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 2px 6px;
+      border-radius: var(--radius);
+      font-size: 12px;
     }
 
     .sr-only {
@@ -450,14 +432,6 @@ import { BoardSnippetComponent } from 'ui-board-renderer';
       white-space: nowrap;
       border-width: 0;
     }
-
-    .back-link {
-      color: var(--color-accent);
-      text-decoration: none;
-      font-size: var(--font-size-sm);
-    }
-
-    .back-link:hover { text-decoration: underline; }
   `],
 })
 export class DrillComponent {

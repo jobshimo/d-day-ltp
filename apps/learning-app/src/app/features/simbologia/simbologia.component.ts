@@ -21,41 +21,60 @@ import type { SimbologiaCategory, SimbologiaRenderAs } from 'content';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [UnitSymbolComponent, TargetSymbolComponent, FireDotsComponent],
   template: `
-    <div class="simbologia">
-      <header class="simbologia__header">
-        <h1 class="simbologia__title">Simbología del juego</h1>
-        <p class="simbologia__intro">
-          Las fichas y marcadores de <em>D-Day en Omaha Beach</em> utilizan
-          símbolos militares estándar (OTAN/APP-6) combinados con símbolos
-          propios del sistema de juego. Esta página es una referencia rápida
-          de todos los símbolos, agrupados por categoría.
-        </p>
+    <div class="screen wrap section">
 
-        <!-- Section anchor navigation -->
-        <nav class="simbologia__toc" aria-label="Ir a sección">
-          @for (cat of categories; track cat.id) {
-            <button type="button" class="simbologia__toc-link" (click)="scrollToCategory(cat.id)">
-              {{ cat.titleEs }}
-            </button>
-          }
-        </nav>
+      <!-- ── Header ── -->
+      <header class="sechead" style="margin-bottom:48px">
+        <div>
+          <p class="eyebrow">Referencia de fichas</p>
+          <h1 class="sechead__t">Simbología del juego</h1>
+        </div>
+        <div class="sechead__meta">
+          <span>OTAN / APP-6</span>
+          <span>+ SISTEMA PROPIO</span>
+        </div>
       </header>
 
+      <p class="lede" style="max-width:62ch;margin-bottom:40px">
+        Las fichas y marcadores usan símbolos militares estándar combinados
+        con la simbología propia del sistema. Esta es la referencia rápida,
+        agrupada por categoría.
+      </p>
+
+      <!-- ── Category TOC ── -->
+      <nav class="simbologia__toc" aria-label="Ir a sección" style="margin-bottom:64px">
+        @for (cat of categories; track cat.id) {
+          <button type="button" class="tag" (click)="scrollToCategory(cat.id)">
+            {{ cat.titleEs }}
+          </button>
+        }
+      </nav>
+
+      <!-- ── Categories ── -->
       @for (cat of categories; track cat.id) {
         <section
           class="simbologia__category"
           [id]="'cat-' + cat.id"
           [attr.aria-labelledby]="'cat-heading-' + cat.id">
 
-          <h2 class="simbologia__category-title" [id]="'cat-heading-' + cat.id">
-            {{ cat.titleEs }}
-          </h2>
+          <!-- Category header row -->
+          <div class="simbologia__cat-header">
+            <h2 class="display simbologia__category-title" [id]="'cat-heading-' + cat.id" style="font-size:26px;margin:0">
+              {{ cat.titleEs }}
+            </h2>
+            <span class="kicker">{{ cat.entries.length }} entradas</span>
+          </div>
 
+          @if (cat.descriptionEs) {
+            <p class="mono simbologia__cat-desc">↳ {{ cat.descriptionEs }}</p>
+          }
+
+          <!-- Entries grid -->
           <div class="simbologia__entries">
             @for (entry of cat.entries; track entry.key) {
-              <article class="simbologia__entry" [attr.aria-label]="entry.nameEs">
+              <article class="card simbologia__entry" [attr.aria-label]="entry.nameEs">
 
-                <!-- Symbol renderer -->
+                <!-- Symbol cell -->
                 <div class="simbologia__symbol" [attr.aria-label]="'Símbolo: ' + entry.nameEs">
                   @switch (entry.render.kind) {
 
@@ -142,21 +161,19 @@ import type { SimbologiaCategory, SimbologiaRenderAs } from 'content';
                   }
                 </div>
 
-                <!-- Entry metadata -->
+                <!-- Entry body -->
                 <div class="simbologia__entry-body">
-                  <p class="simbologia__entry-name">{{ entry.nameEs }}</p>
+                  <div class="simbologia__entry-name-row">
+                    <span class="serif" style="font-size:17px">{{ entry.nameEs }}</span>
+                    @if (entry.ruleRef) {
+                      <span class="rule-chip" aria-label="Referencia de regla {{ entry.ruleRef }}">
+                        {{ entry.ruleRef }}
+                      </span>
+                    }
+                  </div>
                   <p class="simbologia__entry-meaning">{{ entry.meaningEs }}</p>
-
-                  @if (entry.ruleRef) {
-                    <span class="simbologia__rule-ref" aria-label="Referencia de regla {{ entry.ruleRef }}">
-                      {{ entry.ruleRef }}
-                    </span>
-                  }
-
                   @if (entry.note) {
-                    <p class="simbologia__entry-note" role="note">
-                      {{ entry.note }}
-                    </p>
+                    <p class="simbologia__entry-note" role="note">{{ entry.note }}</p>
                   }
                 </div>
 
@@ -168,185 +185,111 @@ import type { SimbologiaCategory, SimbologiaRenderAs } from 'content';
     </div>
   `,
   styles: [`
-    .simbologia {
-      max-width: var(--max-content-width);
-      margin: 0 auto;
-      padding: var(--space-8) var(--space-4);
-    }
-
-    /* ---- Header ---- */
-    .simbologia__header {
-      margin-bottom: var(--space-10);
-    }
-
-    .simbologia__title {
-      font-size: var(--font-size-3xl);
-      font-weight: var(--font-weight-bold);
-      color: var(--color-text-primary);
-      letter-spacing: -0.02em;
-      margin-bottom: var(--space-3);
-    }
-
-    .simbologia__intro {
-      font-size: var(--font-size-base);
-      color: var(--color-text-primary);
-      line-height: var(--line-height-relaxed);
-      max-width: 68ch;
-      margin-bottom: var(--space-6);
-    }
-
-    /* ---- Section anchor nav ---- */
+    /* ── TOC nav ── */
     .simbologia__toc {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--space-2);
+      gap: 9px;
     }
 
-    .simbologia__toc-link {
-      background: none;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: var(--font-size-sm);
-      color: var(--color-accent);
-      text-decoration: none;
-      border: 1px solid var(--color-accent);
-      border-radius: var(--radius-sm);
-      padding: var(--space-1) var(--space-2);
-      transition: background var(--transition-fast), color var(--transition-fast);
-
-      &:hover {
-        background: var(--color-accent);
-        color: var(--color-bg);
-      }
-
-      &:focus-visible {
-        outline: 2px solid var(--color-accent);
-        outline-offset: 2px;
-      }
-    }
-
-    /* ---- Category sections ---- */
+    /* ── Category section ── */
     .simbologia__category {
-      margin-bottom: var(--space-12);
-      scroll-margin-top: calc(var(--header-height) + var(--space-4));
+      margin-bottom: 64px;
+      scroll-margin-top: 80px;
     }
 
-    .simbologia__category-title {
-      font-size: var(--font-size-xl);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-text-primary);
-      border-bottom: 1px solid var(--color-border);
-      padding-bottom: var(--space-2);
-      margin-bottom: var(--space-5);
+    .simbologia__cat-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
     }
 
-    /* ---- Entry grid ---- */
+    .simbologia__cat-desc {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-bottom: 20px;
+      margin-top: 0;
+    }
+
+    /* ── Entries grid ── */
     .simbologia__entries {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: var(--space-4);
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 14px;
     }
 
     .simbologia__entry {
+      padding: 18px;
       display: flex;
-      gap: var(--space-3);
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      padding: var(--space-4);
+      gap: 16px;
       align-items: flex-start;
     }
 
-    /* ---- Symbol cell ---- */
+    /* ── Symbol cell ── */
     .simbologia__symbol {
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      /* 68px to hold the 64px SVG with a 2px breathing margin each side */
-      width: 68px;
-      min-height: 68px;
-      background: transparent; /* SVG wrapper carries its own bg rect */
-      border-radius: var(--radius-sm);
+      flex: none;
+      width: 64px;
+      display: grid;
+      place-items: center;
     }
 
     .simbologia__swatch {
       display: block;
-      width: 32px;
-      height: 32px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       border: 2px solid rgba(255, 255, 255, 0.2);
-      flex-shrink: 0;
     }
 
     .simbologia__chip {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: var(--space-1) var(--space-2);
-      background: var(--color-accent);
-      color: var(--color-bg);
-      border-radius: var(--radius-sm);
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-bold);
-      font-family: var(--font-family-mono, monospace);
+      padding: 4px 10px;
+      background: var(--accent);
+      color: var(--ink);
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 700;
+      font-family: var(--font-mono);
       letter-spacing: 0.05em;
-      min-width: 36px;
+      min-width: 48px;
       text-align: center;
     }
 
-    /* ---- Entry body ---- */
+    /* ── Entry body ── */
     .simbologia__entry-body {
       flex: 1;
       min-width: 0;
     }
 
-    .simbologia__entry-name {
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-text-primary);
-      margin-bottom: var(--space-1);
+    .simbologia__entry-name-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     .simbologia__entry-meaning {
-      font-size: var(--font-size-xs, 0.75rem);
-      color: var(--color-text-secondary);
-      line-height: var(--line-height-normal);
-      margin-bottom: var(--space-2);
-    }
-
-    .simbologia__rule-ref {
-      display: inline-block;
-      font-size: var(--font-size-xs, 0.75rem);
-      color: var(--color-accent);
-      border: 1px solid var(--color-accent);
-      border-radius: var(--radius-sm);
-      padding: 0 var(--space-1);
-      font-family: var(--font-family-mono, monospace);
-      opacity: 0.8;
-      margin-bottom: var(--space-2);
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-top: 6px;
+      margin-bottom: 0;
     }
 
     .simbologia__entry-note {
-      font-size: var(--font-size-xs, 0.75rem);
-      color: var(--color-text-secondary);
-      border-left: 2px solid var(--color-border);
-      padding-left: var(--space-2);
+      font-size: 12px;
+      color: var(--faint);
+      border-left: 2px solid var(--line-strong);
+      padding-left: 8px;
       font-style: italic;
-      margin-top: var(--space-1);
-      line-height: var(--line-height-normal);
-    }
-
-    /* ---- Responsive ---- */
-    @media (max-width: 480px) {
-      .simbologia__toc {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .simbologia__entries {
-        grid-template-columns: 1fr;
-      }
+      margin-top: 8px;
+      line-height: 1.5;
     }
   `],
 })

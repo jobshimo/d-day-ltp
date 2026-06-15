@@ -38,58 +38,60 @@ import type { RuleRef } from 'content-schema';
     .rule-chip {
       display: inline-flex;
       align-items: center;
-      padding: 2px var(--space-2);
-      background: rgba(200, 160, 74, 0.15);
-      color: var(--color-accent);
-      border: 1px solid var(--color-accent-dim);
-      border-radius: var(--radius-sm);
-      font-size: var(--font-size-xs);
-      font-weight: var(--font-weight-semibold);
+      padding: 2px 7px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius);
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .06em;
       cursor: pointer;
-      transition: background var(--transition-fast);
-      letter-spacing: 0.03em;
+      outline: none;
+      transition: background 120ms ease;
 
       &:hover {
-        background: rgba(200, 160, 74, 0.25);
+        background: rgba(226, 163, 61, .22);
       }
 
       &:focus-visible {
-        outline: 2px solid var(--color-accent);
+        outline: 2px solid var(--accent);
         outline-offset: 2px;
       }
     }
 
     .rule-chip__tooltip {
       position: absolute;
-      top: calc(100% + var(--space-1));
+      top: calc(100% + 6px);
       left: 0;
       z-index: 10;
       display: flex;
       flex-direction: column;
-      gap: 2px;
-      width: max-content;
+      gap: 4px;
       max-width: 260px;
-      background: var(--color-surface-alt);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      padding: var(--space-2) var(--space-3);
-      font-size: var(--font-size-sm);
-      color: var(--color-text-primary);
-      white-space: normal;
-      box-shadow: var(--shadow-md);
+      background: var(--char-2);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      padding: 10px 14px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, .55);
       pointer-events: none;
+      white-space: normal;
     }
 
     .rule-chip__tooltip-head {
-      font-size: var(--font-size-xs);
-      font-weight: var(--font-weight-bold);
+      font-family: 'Oswald', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--color-accent);
+      letter-spacing: .14em;
+      color: var(--accent);
     }
 
     .rule-chip__tooltip-body {
-      line-height: var(--line-height-normal);
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      color: var(--bone);
+      line-height: 1.5;
     }
   `],
 })
